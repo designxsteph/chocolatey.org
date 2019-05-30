@@ -10,15 +10,19 @@
     var moderationRole = User != null && User.IsInAnyModerationRole();
     Bundles.Reference("Content/dist/chocolatey.slim.css");
     Bundles.Reference("Content/packages.css");
+    Bundles.Reference("Content/prism/prism.css");
     Bundles.Reference("Scripts");
     Bundles.Reference("Scripts/package-list");
+    Bundles.Reference("Scripts/prism");
+    Bundles.Reference("Scripts/install-steps");
+    Bundles.Reference("Scripts/add-to-builder");
     Bundles.Reference("Scripts/closeable");
 
     var currentUrl = Request.Url.AbsoluteUri;
     var FullHref = Request.Url.GetLeftPart(UriPartial.Path);
     var packageWarning = Request.Cookies["chocolatey_hide_packages_warning"] == null;
 }
-
+@Html.Partial("~/Views/Packages/_AddToBuilder.cshtml")
 <section id="secondaryNav">
     <div class="bg-primary">
         <div class="container py-2">
@@ -220,7 +224,7 @@
                 <div class="row pt-3 package-grid-view">
                     @foreach (var package in Model.Items)
                     {
-                        <div class="col-lg-6 col-xl-4 mb-4">
+                        <div class="col-lg-6 col-xl-4 mb-4 package-item">
                             <div class="card h-100">
                                 @Html.Partial(MVC.Packages.Views._ListPackage, package)
                             </div>
@@ -233,7 +237,7 @@
                 <ul class="list-unstyled pt-3 package-list-view">
                     @foreach (var package in Model.Items)
                     {
-                        <li>
+                        <li class="package-item">
                             @Html.Partial(MVC.Packages.Views._ListPackage, package)
                         </li>
                     }
@@ -254,5 +258,695 @@
             room: 'chocolatey/chocolatey.org'
         };
     </script>
+    @*<script>
+        $(function () {
+            var
+                packages = localStorage.packageList === undefined ? new Array() : JSON.parse(localStorage.packageList),
+                getStorage,
+                packageTitle,
+                packageVersion,
+                packageImage,
+                packageValue,
+                packageButton,
+                packageId,
+                imagePath,
+                builderNextStep,
+                builderPrevStep,
+                internalRepoUrl;
+
+            const
+                builderStep1 = $('#builder-step-1-tab'),
+                builderStep3 = $('#builder-step-3-tab'),
+                builderStep4 = $('.builder-step-4-tab'),
+                builderStep5 = $('.builder-step-5-tab'),
+                builderIndividual = $('.builder-individual'),
+                builderOrganization = $('.builder-organization'),
+                builderModal = $('#build-script'),
+                builderScriptInput = $('.internalRepoUrlInput'),
+                builderStorage = $('.storage'),
+                builderViewBtn = $('.btn-view-builder'),
+                builderNextBtn = $('.btn-next-step'),
+                builderPrevBtn = $('.btn-prev-step');
+
+
+            // Find Url on Display Image & Add Class
+            if ($('.package-logo').hasClass('package-image')) {
+                if ($('.btn-builder').attr('value').indexOf("--") >= 0) {
+                    $current = $('.btn-builder').attr('value').substr(0, $('.btn-builder').attr('value').indexOf('--')).trim();
+                }
+                else {
+                    $current = $('.btn-builder').attr('value');
+                }
+                if (window.location.href.indexOf($current) > -1) {
+                    $('.package-image').addClass($('.btn-builder').attr('title').replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, ''));
+                }
+            }
+
+            if (packages.length != 0) {
+                builderViewBtn.show();
+
+                for (var i in packages) {
+                    getStorage = packages[i].split(" , ");
+                    packageTitle = getStorage[0];
+                    packageVersion = getStorage[1];
+                    packageImage = getStorage[2];
+                    packageValue = getStorage[3];
+                    packageButton = $('.btn-builder[value="' + packageValue + '"]');
+                    packageId = packageTitle.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+
+                    // Url
+                    if (packageValue.indexOf("--") >= 0) {
+                        $url = packageValue.substr(0, packageValue.indexOf('--')).trim();
+                    }
+                    else {
+                        $url = packageValue;
+                    }
+
+                    // Image Path
+                    if (packageImage == "packageDefaultIcon-50x50.png") {
+                        imagePath = "/Content/Images/";
+                    } else {
+                        imagePath = "/content/packageimages/";
+                    }
+
+                    if ((packageButton).length > 0) {
+                        $class = packageButton.attr('title').replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+
+                        // Update main list buttons
+                        packageButton.html('<span class="fas fa-minus-circle" alt="Collapse Files"></span>');
+                        packageButton.removeClass('btn-success').addClass('btn-danger').addClass($class);
+                    }
+
+                    // Generate Package List
+                    builderStorage.append('<hr /><div id="' + packageId + '" class="row storage-row ' + packageId + '"><div class="col-2"><img class="package-image" src="' + imagePath + '' + packageImage + '" height="30" width="30"></div><div class="col-8 pl-0"><a class="text-dark btn-link mb-0 h5 text-break" href="/packages/' + $url + '/' + packageVersion + '">' + packageTitle + '</a><p class="mb-0"><small>' + packageVersion + '</small></p></div><div class="col-2 text-right pl-0"><button class="btn btn-sm btn-builder-remove btn-danger" value="' + packageValue + '" title="' + packageTitle + '" version="' + packageVersion + '"><span class="fas fa-minus-circle"></span></button></div></div>');
+                }
+
+                // Count items
+                countPackages();
+            }
+            else {
+                builderViewBtn.hide();
+            }
+
+            // Button click inside of builder list
+            removePackages();
+
+
+            $('.btn-builder').each(function () {
+                $(this).click(function () {
+                    $this = $(this);
+                    $title = $this.attr('title');
+                    $value = $this.attr('value');
+                    $id = $title.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+                    $class = $title.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+                    $version = $this.attr('version');
+                    $button = $('.btn-builder[value="' + $value + '"]');
+
+                    // Find Url
+                    if ($value.indexOf("--") >= 0) {
+                        $url = $value.substr(0, $value.indexOf('--')).trim();
+                    }
+                    else {
+                        $url = $value;
+                    }
+
+                    // Find Image
+                    if (window.location.href.indexOf($url) > -1) {
+                        $image = /[^/]*$/.exec($this.parentsUntil('body').parent().find('.package-image.' + $class).attr('src'))[0];
+                    } else {
+                        $image = /[^/]*$/.exec($this.parentsUntil('.package-item').parent().find(".package-image").attr('src'))[0];
+                    }
+
+                    if ($image.indexOf("packageDefaultIcon") >= 0) {
+                        $image = "packageDefaultIcon-50x50.png";
+                    }
+
+                    // Determine if there is already a version of the package in their list
+                    for (var i in packages) {
+                        if (packages.length != 0 && $this.hasClass('btn-success')) {
+                            getStorage = packages[i].split(" , ");
+                            packageTitle = getStorage[0];
+                            packageVersion = getStorage[1];
+                            packageImage = getStorage[2];
+                            packageValue = getStorage[3];
+                            if (packageTitle == $title) {
+                                $this.addClass('active'); // Prevents from continueing on through the funtion and adding to builder
+                                $('.btn-version').attr('title', packageTitle).attr('image', packageImage).attr('version', packageVersion).attr('value', packageValue);
+                                $('.current-version').text(packageVersion);
+                                $('.new-version').text($version);
+                                $('#warning-version').modal('show');
+                            }
+                        }
+                    }
+
+                    // If no value matching found, add or delete item
+                    // Delete items
+                    if ($this.hasClass('btn-danger') && !$this.hasClass('active')) {
+                        // Change button state
+                        $button.html('<span class="fas fa-plus-circle" alt="Add to Builder"></span>');
+                        $button.removeClass('btn-danger').addClass('btn-success').removeClass($class);
+
+                        // Remove package from list
+                        $this.parentsUntil('body').parent().find('.storage').find($('.' + $class)).prev().remove();
+                        $this.parentsUntil('body').parent().find('.storage').find($('.' + $class)).remove();
+
+                        // Delete & Update TitleVersion from Storage
+                        for (var i in packages) {
+                            if (packages[i] == $title + " , " + $version + " , " + $image + " , " + $value) {
+                                packages.splice(i, 1);
+                            }
+                        }
+                        localStorage.packageList = JSON.stringify(packages);
+
+                        // Storage
+                        removeStorage();
+
+                        // Count items
+                        countPackages();
+                    }
+
+                    // Add items
+                    else if ($this.hasClass('btn-success') && !$this.hasClass('active')) {
+                        // Save Title & Version to Storage
+                        packages.push($title + " , " + $version + " , " + $image + " , " + $value);
+                        localStorage.packageList = JSON.stringify(packages);
+
+                        // Change button state
+                        $button.html('<span class="fas fa-minus-circle" alt="Collapse Files"></span>');
+                        $button.removeClass('btn-success').addClass('btn-danger').addClass($class);
+
+                        // Show builder tab
+                        builderViewBtn.show();
+
+                        // Count items
+                        countPackages();
+
+                        // Find Image Path
+                        if ($image == "packageDefaultIcon-50x50.png") {
+                            imagePath = "/Content/Images/";
+                        } else {
+                            imagePath = "/content/packageimages/";
+                        }
+
+                        // Add package to list
+                        builderStorage.append('<div id="' + $id + '" class="row storage-row ' + $class + '"><div class="col-2"><img class="package-image" src="' + imagePath + '' + $image + '" height="30" width="30"></div><div class="col-8 pl-0"><a class="text-dark btn-link mb-0 h5 text-break" href="/packages/' + $url + '/' + $version + '">' + $title + '</a><p class="mb-0"><small>' + $version + '</small></p></div><div class="col-2 text-right pl-0"><button class="btn btn-sm btn-builder-remove btn-danger" value="' + $value + '" title="' + $title + '" version="' + $version + '"><span class="fas fa-minus-circle"></span></button></div></div>');
+                        $('<hr />').insertBefore('.storage #' + $id + '');
+
+                        // Button click inside of builder list
+                        removePackages();
+                    }
+                });
+            });
+
+            // Clicked to remove version and add new version
+            $('.btn-version').click(function () {
+                for (var i in packages) {
+                    getStorage = packages[i].split(" , ");
+                    packageTitle = getStorage[0];
+
+                    // Delete current version
+                    if (packageTitle == $title) {
+                        packages.splice(i, 1);
+                    }
+                }
+
+                // Add new version to storage
+                packages.push($title + " , " + $version + " , " + $image + " , " + $value);
+                localStorage.packageList = JSON.stringify(packages);
+
+                // Change button state on main page
+                $(".btn-builder." + $class).html('<span class="fas fa-plus-circle" alt="Add to Builder"></span>');
+                $(".btn-builder." + $class).removeClass('btn-danger').addClass('btn-success').removeClass($class);
+                $button.html('<span class="fas fa-minus-circle" alt="Collapse Files"></span>');
+                $button.removeClass('btn-success').addClass('btn-danger').addClass($class);
+
+                // Package List
+                // Remove old version
+                $this.parentsUntil('body').parent().find('.storage').find($('.' + $class)).prev().remove();
+                $this.parentsUntil('body').parent().find('.storage').find($('.' + $class)).remove();
+
+                // Add new version
+                builderStorage.append('<div id="' + $id + '" class="row storage-row ' + $class + '"><div class="col-2"><img class="package-image" src="' + imagePath + '' + $image + '" height="30" width="30"></div><div class="col-8 pl-0"><a class="text-dark btn-link mb-0 h5 text-break" href="/packages/' + $url + '/' + $version + '">' + $title + '</a><p class="mb-0"><small>' + $version + '</small></p></div><div class="col-2 text-right pl-0"><button class="btn btn-sm btn-builder-remove btn-danger" value="' + $value + '" title="' + $title + '" version="' + $version + '"><span class="fas fa-minus-circle"></span></button></div></div>');
+                $('<hr />').insertBefore('.storage #' + $id + '');
+
+                removePackages();
+            });
+
+            $('#warning-version').on('hidden.bs.modal', function (e) {
+                $('.btn-builder.active').removeClass('active');
+            });
+
+            // Build Command Scripts
+            builderModal.on('shown.bs.modal', function (e) {
+                $('code[class^="command-"]').empty();
+                builderIndividualScript();
+                builderOrganizationScript();
+                builderEnvironmentScript();
+                $('.toolbar a').each(function () {
+                    var copyCommand = $(this).parentsUntil('.code-toolbar').parent().find('code').attr('class').split(" ");
+                    $(this).addClass('btn-copy').attr('data-clipboard-target', '.' + copyCommand[0]);
+                });
+            });
+
+            builderStep3.on('shown.bs.tab', function () {
+                $('code.command-individual').empty();
+                builderIndividualScript();
+            });
+            
+            builderStep4.find('a[data-toggle="pill"]').on('shown.bs.tab', function () {
+                $('code[class^="command-environment"]').empty()
+                builderEnvironmentScript();
+            });
+
+            builderStep5.find('a[data-toggle="pill"]').on('shown.bs.tab', function () {
+                $('code[class^="command-organization"]').empty();
+                builderOrganizationScript();
+            });
+
+            $('.btn-bulk-package-download').click(function (e) {
+                e.preventDefault();
+                for (var i in packages) {
+                    getStorage = packages[i].split(" , ");
+                    packageVersion = getStorage[1];
+                    packageValue = getStorage[3];
+
+                    window.open('https://chocolatey.org/api/v2/package/' + packageValue + '/' + packageVersion);
+                }
+            });
+
+            // Build new xml doc based on local storage package values
+            $('.btn-xml').click(function () {
+                var xmlDoc = document.implementation.createDocument(null, "packages");
+                (new XMLSerializer()).serializeToString(xmlDoc);
+
+                var parser = new DOMParser();
+                prolog = '<?xml version="1.0" encoding="utf-8"?>';
+
+                // Add prolog
+                newXmlStr = prolog + (new XMLSerializer()).serializeToString(xmlDoc);
+                var xml = parser.parseFromString(newXmlStr, "application/xml");
+
+                // Build xml & add each package node
+                var packagesObject = xml.getElementsByTagName("packages");
+
+                for (var i in packages) {
+                    getStorage = packages[i].split(" , ");
+                    packageVersion = getStorage[1];
+                    packageValue = getStorage[3];
+                    // Creates a new package entry for each item in builder
+                    var packageNode = xml.createElement("package");
+                    packagesObject[0].appendChild(packageNode);
+
+                    // Determine attributes if either version or pre-release was specified
+                    if (packageValue.indexOf("--") >= 0) {
+                        if (packageValue.indexOf("--pre") >= 0) { // If a pre-release
+                            packageVersion = packageValue.substr(packageValue.indexOf('--version') + 9).trim();
+                            packageVersion = packageVersion.substr(0, packageVersion.indexOf('--')).trim();
+                            packageValue = packageValue.substr(0, packageValue.indexOf('--')).trim();
+                        } else { // If version was specified and is not a pre-release
+                            packageValue = packageValue.substr(0, packageValue.indexOf('--')).trim();
+                        }
+                        // Set attributes
+                        packageNode.setAttribute("id", packageValue);
+                        packageNode.setAttribute("version", packageVersion);
+                    } else { // No version specified and not a pre-release
+                        packageNode.setAttribute("id", packageValue);
+                    }
+                }
+
+                // Get xml doc as string
+                var text = (new XMLSerializer()).serializeToString(xml);
+
+                // Send off to beautify
+                formatXml(text);
+            });
+
+            // Optimize for mobile
+            $(window)
+                .on("load", function () {
+                    if ($(this).width() < 567) {
+                        builderViewBtn.addClass('d-none');
+                    }
+                })
+                .on("resize", function () {
+                    if ($(this).width() < 567) {
+                        builderViewBtn.addClass('d-none');
+                    }
+                    else {
+                        builderViewBtn.removeClass('d-none');
+                    }
+                });
+
+            // Adjust page when builder activated
+            $('#addToBuilder')
+                .on('show.bs.collapse', function () {
+                    $("main, header, footer").addClass("active");
+                    $("body").css("overflow-x", "hidden");
+
+                })
+                .on('hidden.bs.collapse', function () {
+                    $("main, header, footer").removeClass("active");
+                    $("body").css("overflow", "visible");
+                });
+
+            function builderEnvironmentScript() {
+                internalRepoUrl = builderScriptInput.val() || "http://internal/odata/repo";
+                var commandEnvironmentOne = $('.command-environment-one');
+                var commandEnvironmentTwo = $('.command-environment-two');
+
+                commandEnvironmentOne.append("choco download <span></span>--internalize --source=https://chocolatey.org/api/v2");
+                commandEnvironmentTwo.append("choco push --source =\"'" + internalRepoUrl + "'\"");
+
+                for (var i in packages) {
+                    getStorage = packages[i].split(" , ");
+                    packageValue = getStorage[3];
+
+                    // Command Environment One
+                    commandEnvironmentOne.find('span').append(packageValue + " ");
+                }
+
+                // Highlight Command Environment One & Two
+                commandEnvironmentOne.add(commandEnvironmentTwo).addClass('language-powershell');
+                Prism.highlightElement(commandEnvironmentOne[0]);
+                Prism.highlightElement(commandEnvironmentTwo[0]);
+            }
+
+            function builderOrganizationScript() {
+                internalRepoUrl = builderScriptInput.val() || "http://internal/odata/repo";
+                var commandGenericOne = $('.command-organization-generic-one');
+                var commandGenericTwo = $('.command-organization-generic-two');
+                var commandAnsible = $('.command-organization-ansible');
+                var commandChef = $('.command-organization-chef');
+                var commandOtter = $('.command-organization-otter');
+                var commandPSDSC = $('.command-organization-psdsc');
+                var commandPuppet = $('.command-organization-puppet');
+                var commandSalt = $('.command-organization-salt');
+
+                for (var i in packages) {
+                    getStorage = packages[i].split(" , ");
+                    packageVersion = getStorage[1];
+                    packageValue = getStorage[3];
+
+                    // Command Generic One
+                    commandGenericOne.append(
+                        "choco upgrade " + packageValue + " -y --source=\"'" + internalRepoUrl + "'\" [other options]\n"
+                    )
+
+                    // Command Generic Two
+                    commandGenericTwo.append(
+                        "choco upgrade " + packageValue + " -y --source=\"'" + internalRepoUrl + "'\" [other options]\n" +
+                        "$exitCode = $LASTEXITCODE\n\n" +
+                        "Write-Verbose \"Exit code was $exitCode\"\n" +
+                        "$validExitCodes = @@(0, 1605, 1614, 1641, 3010)\n" +
+                        "if ($validExitCodes -contains $exitCode) {\n" +
+                        "  Exit 0\n" +
+                        "}\n\n" +
+                        "Exit $exitCode\n\n"
+                    )
+
+                    // Command Ansible
+                    commandAnsible.append(
+                        "- name: Ensure " + packageValue + " installed\n" +
+                        "  win_chocolatey:\n" +
+                        "    name: " + packageValue + "\n" +
+                        "    state: present\n" +
+                        "    version: " + packageVersion + "\n" +
+                        "    source: " + internalRepoUrl + "\n\n"
+                    )
+
+                    // Command Chef
+                    commandChef.append(
+                        "chocolatey_package '" + packageValue + "' do\n" +
+                        "  action    :install\n" +
+                        "  version   '" + packageVersion + "'\n" +
+                        "  source    '" + internalRepoUrl + "'\n" +
+                        "end\n\n"
+                    )
+
+                    // Command Otter
+                    commandOtter.append(
+                        "Chocolatey::Ensure-Package\n" +
+                        "(\n" +
+                        "    Name: " + packageValue + "\n" +
+                        "    Version: " + packageVersion + "\n" +
+                        "    Source: " + internalRepoUrl + "\n" +
+                        ");\n\n"
+                    )
+
+                    // Command PS DSC
+                    commandPSDSC.append(
+                        "cChocoPackageInstaller " + packageValue + "{\n" +
+                        "   Name    = '" + packageValue + "'\n" +
+                        "   Ensure  = 'Present'\n" +
+                        "   Version = '" + packageVersion + "'\n" +
+                        "   Source  = '" + internalRepoUrl + "'\n" +
+                        "}\n\n"
+                    )
+
+                    // Command Puppet
+                    commandPuppet.append(
+                        "package { '" + packageValue + "':\n" +
+                        "  provider => '" + packageValue + "',\n" +
+                        "  ensure   => '" + packageVersion + "',\n" +
+                        "  source   => '" + internalRepoUrl + "',\n" +
+                        "}\n\n"
+                    )
+
+                    // Command Salt
+                    commandSalt.append(
+                        "salt '*' chocolatey.install " + packageValue + " version=\"" + packageVersion + "\" source=\"" + internalRepoUrl + "\"\n"
+                    )
+                }
+
+                // Highlight Command Generic One
+                commandGenericOne.addClass('language-powershell');
+                Prism.highlightElement(commandGenericOne[0]);
+
+                // Highlight Command Generic Two
+                commandGenericTwo.addClass('language-powershell');
+                Prism.highlightElement(commandGenericTwo[0]);
+
+                // Highlight Command Ansible
+                commandAnsible.addClass('language-yaml');
+                Prism.highlightElement(commandAnsible[0]);
+
+                // Highlight Command Chef
+                commandChef.addClass('language-ruby');
+                Prism.highlightElement(commandChef[0]);
+
+                // Highlight Command Otter
+                commandOtter.addClass('language-powershell');
+                Prism.highlightElement(commandOtter[0]);
+
+                // Highlight Command PS DSC
+                commandPSDSC.addClass('language-powershell');
+                Prism.highlightElement(commandPSDSC[0]);
+
+                // Highlight Command Puppet
+                commandPuppet.addClass('language-puppet');
+                Prism.highlightElement(commandPuppet[0]);
+
+                // Highlight Command Salt
+                commandSalt.addClass('language-powershell');
+                Prism.highlightElement(commandSalt[0]);
+            }
+
+            function builderIndividualScript() {
+                var commandIndividual = $('.command-individual');
+
+                for (var i in packages) {
+                    getStorage = packages[i].split(" , ");
+                    packageValue = getStorage[3];
+
+                    // Command Individual
+                    commandIndividual.append('choco install ' + packageValue + ' -y\n');
+                }
+
+                // Highlight Command Individual
+                commandIndividual.addClass('language-poweshell');
+                Prism.highlightElement(commandIndividual[0]);
+            }
+
+            // Storage
+            function removeStorage() {
+                if (packages.length < 1) {
+                    localStorage.removeItem('packageList');
+                    builderStorage.empty();
+                    $('#addToBuilder').collapse('hide');
+                    builderViewBtn.hide();
+                    builderModal.modal('hide');
+                    removeBuilderInputError();
+                }
+            }
+
+            // Count items
+            function countPackages() {
+                $('.builder-count').empty(); // First delete value there
+                if (packages.length > 0) {
+                    $('.builder-count').append(JSON.parse(localStorage.packageList).length); // Add in new value
+                }
+            }
+
+            // Button click inside of builder list
+            function removePackages() {
+                $('.btn-builder-remove').click(function () {
+                    $this = $(this);
+                    $title = $this.attr('title');
+                    $class = $title.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+                    $value = $this.attr('value');
+                    $version = $this.attr('version');
+                    $image = /[^/]*$/.exec($this.parent().parent().find(".package-image").attr('src'))[0];
+
+                    // Delete & Update Title & Version from Storage
+                    for (var i in packages) {
+                        if (packages[i] == $title + " , " + $version + " , " + $image + " , " + $value) {
+                            packages.splice(i, 1);
+                        }
+                    }
+                    localStorage.packageList = JSON.stringify(packages);
+
+                    //Change button state back to green on main page
+                    $this.parentsUntil('body').parent().find(".btn-danger." + $class).html('<span class="fas fa-plus-circle" alt="Add to Builder"></span>');
+                    $this.parentsUntil('body').parent().find(".btn-danger." + $class).removeClass('btn-danger').addClass('btn-success').removeClass($class);
+
+                    // Remove from builder list
+                    $this.parentsUntil('body').parent().find('.storage').find($('.' + $class)).prev().remove();
+                    $this.parentsUntil('body').parent().find('.storage').find($('.' + $class)).remove();
+
+                    // Storage
+                    removeStorage();
+
+                    // Count items
+                    countPackages();
+                });
+            }
+
+            // Download xml file
+            function download(filename, text) {
+                var element = document.createElement('a');
+                element.setAttribute('href', 'data:text/xml;charset=utf-8,' + encodeURIComponent(text));
+                element.setAttribute('download', filename);
+                element.style.display = 'none';
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+            }
+
+            // Beautify xml document
+            function formatXml(text) {
+                var filename = "packages.config"
+                    formatted = '', indent = '',
+                    tab = '\t';
+
+                text.split(/>\s*</).forEach(function (node) {
+                    if (node.match(/^\/\w/)) indent = indent.substring(tab.length); // decrease indent by one 'tab'
+                    formatted += indent + '<' + node + '>\r\n';
+                    if (node.match(/^<?\w[^>]*[^\/]$/)) indent += tab;              // increase indent
+                });
+                text = formatted.substring(1, formatted.length - 3);
+
+                // Send to download
+                download(filename, text);
+            }
+
+            builderModal.on('shown.bs.modal', function () {
+                builderScriptType();
+                builderTabs();
+                builderNavButtons();
+
+                builderModal.find('.nav-tabs-install a[data-toggle="tab"]').on('shown.bs.tab', function () {
+                    builderScriptType();
+                    builderTabs();
+                });
+
+                builderScriptInput.keyup(function () {
+                    builderTabs();
+                    builderNavButtons();
+                }).keyup();
+
+                builderModal.find('.nav-item.disabled').click(function () {
+                    builderInputError();
+                    builderNavButtons();
+                });
+
+                builderModal.find('#builder-steps a[data-toggle="pill"]').on('shown.bs.tab', function () {
+                    builderNavButtons();
+                });
+
+                builderNextBtn.click(function () {
+                    if (builderNextStep.hasClass('disabled') && builderOrganization.hasClass('active')) {
+                        builderInputError();
+                    } else if (!builderStep3.hasClass('active') || !builderIndividual.hasClass('active')) {
+                        builderNextStep.tab('show');
+                    }
+
+                    builderNavButtons();
+                });
+
+                builderPrevBtn.click(function () {
+                    builderPrevStep.tab('show');
+                    builderNavButtons();
+                });
+            });
+            function builderNavButtons() {
+                builderNextStep = $('#builder-steps').find('.active').parent().next().children();
+                builderPrevStep = $('#builder-steps').find('.active').parent().prev().children();
+
+                // Next Button
+                if (builderNextStep.hasClass('disabled') || builderStep5.children().hasClass('active') || builderStep3.hasClass('active') && builderIndividual.hasClass('active')) {
+                    builderNextBtn.addClass('disabled');
+                } else {
+                    builderNextBtn.removeClass('disabled');
+                }
+
+                // Prev Button
+                if (builderStep1.hasClass('active')) {
+                    builderPrevBtn.addClass('disabled');
+                } else {
+                    builderPrevBtn.removeClass('disabled');
+                }
+            }
+
+            function builderScriptType() {
+                if ($('#builder-individual-tab').hasClass('active')) {
+                    builderStep3.html('<strong><span class="d-none d-sm-inline-block mr-1">STEP</span><span>3</span></strong><p class="mb-0 d-none d-lg-block">Install Script / Config</p>').removeClass('error');
+                    builderStep4.add(builderStep5).add(builderOrganization).addClass('d-none').children();
+                    builderIndividual.removeClass('d-none').addClass('active');
+                    builderOrganization.removeClass('active');
+                } else {
+                    builderStep3.html('<strong><span class="d-none d-sm-inline-block mr-1">STEP</span><span>3</span></strong><p class="mb-0 d-none d-lg-block">Internal Repo Url</p>');
+                    builderStep4.add(builderStep5).add(builderOrganization).removeClass('d-none').children();
+                    builderIndividual.addClass('d-none').removeClass('active');
+                    builderOrganization.addClass('active');
+                }
+            }
+
+            function builderTabs() {
+                if (builderScriptInput.val() == 0) {
+                    builderStep4.add(builderStep5).addClass('disabled').children().addClass('disabled');
+                } else {
+                    removeBuilderInputError();
+                }
+            }
+
+            function builderInputError() {
+                if (builderScriptInput.val() == 0) {
+                    builderStep3.addClass('error');
+                    builderStep3.tab('show');
+                    if (!builderScriptInput.hasClass('is-invalid')) {
+                        builderModal.find(builderScriptInput).addClass('is-invalid');
+                        $('<div class="invalid-feedback">You must enter your internal repository url to continue.</div>').insertAfter(builderModal.find(builderScriptInput));
+                    }
+                }
+            }
+
+            function removeBuilderInputError() {
+                builderStep4.add(builderStep5).removeClass('disabled').children().removeClass('disabled');
+                builderStep3.removeClass('error');
+                builderModal.find(builderScriptInput).removeClass('is-invalid');
+                builderModal.find('.invalid-feedback').remove();
+            }
+        });
+    </script>*@
     <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 }

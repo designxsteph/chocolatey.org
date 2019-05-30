@@ -11,20 +11,20 @@
 <div class="@if (gridView){<text>card-body pb-2</text>}">
     <div class="media">
         <div class="mx-auto package-image-header">
-            <a href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" title="Learn more about @Model.Title" aria-label="Learn more about @Model.Title">
-                <img class="align-self-start img-fluid" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_50x50_png))" alt="@Model.Id icon" onerror="this.src='@Links.Content.Images.packageDefaultIcon_50x50_png';">
+            <a href="@Url.Package(Model.Id.ToLower(), Model.UseVersion ? Model.Version : null)" title="Learn more about @Model.Title" aria-label="Learn more about @Model.Title">
+                <img class="align-self-start img-fluid package-image" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_50x50_png))" alt="@Model.Id icon" onerror="this.src='@Links.Content.Images.packageDefaultIcon_50x50_png';">
             </a>
         </div>
         <div class="media-body ml-3">
             @*Title and Type*@
             <div class="d-flex @if(!gridView){<text>align-items-sm-center</text>}">
                 <div class="d-flex mt-1 @if(!gridView){<text>mt-sm-0</text>}">
-                    <a class="status status-sm @if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>bg-success</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing){<text>bg-danger</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending){<text>bg-warning</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown){<text>bg-secondary</text>}" href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)#status" title="Click to view test results">
+                    <a class="status status-sm @if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>bg-success</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing){<text>bg-danger</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending){<text>bg-warning</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown){<text>bg-secondary</text>}" href="@Url.Package(Model.Id.ToLower(), Model.UseVersion ? Model.Version : null)#status" title="Click to view test results">
                         <span class="@Model.PackageValidationResultStatus"></span>
                     	<span class="@Model.PackageTestResultsStatus"></span>
                     </a>
                 </div>
-                <a href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" title="Learn more about @Model.Title" aria-label="Learn more about @Model.Title" class="h5 font-weight-bold text-dark mb-0 btn-link text-break">@Model.Title <span class="@if(gridView){<text>d-block small</text>}">@Model.Version</span></a>
+                <a href="@Url.Package(Model.Id.ToLower(), Model.UseVersion ? Model.Version : null)" title="Learn more about @Model.Title" aria-label="Learn more about @Model.Title" class="h5 font-weight-bold text-dark mb-0 btn-link text-break">@Model.Title <span class="@if(gridView){<text>d-block small</text>}">@Model.Version</span></a>
             </div>
             @*Badges*@
             <div class="@if(gridView){<text>mt-1</text>} d-flex align-items-center">
@@ -77,7 +77,7 @@
             }
             else
             {
-                @Model.Summary.Substring(0, 138)<text>... </text><a class="font-weight-normal" href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" aria-label="Continue reading about @Model.Title">Keep Reading</a>
+                @Model.Summary.Substring(0, 138)<text>... </text><a class="font-weight-normal" href="@Url.Package(Model.Id.ToLower(), Model.UseVersion ? Model.Version : null)" aria-label="Continue reading about @Model.Title">Keep Reading</a>
             }
         </p>
     }
@@ -122,9 +122,9 @@
                         <div class="input-group-text">></div>
                     </div>
                     <input type="text" class="form-control"
-                            value="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version @Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                            aria-label="Install @Model.Title command"
-                            readonly>
+                           value="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version @Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
+                           aria-label="Install @Model.Title command"
+                           readonly>
                     <div class="input-group-append">
                         <button class="btn btn-primary tt"
                                 aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version @Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
@@ -133,12 +133,19 @@
                                 data-clipboard-text="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version @Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
                             <i class="fas fa-clipboard" aria-hidden="true">
                                 <span class="sr-only">Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                {<text> --version @Model.Version</text>} @if (Model.Prerelease)
-                                {<text> --pre </text>} to Clipboard</span>
+                                    {<text> --version @Model.Version</text>} @if (Model.Prerelease)
+                                    {<text> --pre </text>} to Clipboard
+                                </span>
                             </i>
                         </button>
                     </div>
                 </div>
+                @if (Model.Title != "Chocolatey")
+                {
+                    <button class="btn btn-success btn-builder d-none d-sm-inline-block ml-2" aria-label="Add to Builder" value="@Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
+                    {<text> --version @Model.Version</text>} @if (Model.Prerelease)
+                    {<text> --pre </text>}" title="@Model.Title" version="@Model.Version"><span class="fas fa-plus-circle"></span></button>
+                }
             </div>
         }
         else if (Model.Title == "Chocolatey")

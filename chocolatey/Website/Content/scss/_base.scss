@@ -185,7 +185,7 @@ select:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-input[type="text"]:disabled, .video-story div[data-toggle]:hover {
+input[type="text"]:disabled, .video-story div[data-toggle]:hover, span.dropdown-item {
     cursor: pointer;
 }
 
@@ -390,6 +390,11 @@ a + .collapse.show, a + .collapsing {
     width: 30px;
 }
 
+/*Utilities*/
+.ml-30 {
+    margin-left: 30px;
+}
+
 /*z-index*/
 .z-index-1 {
     z-index: 1;
@@ -430,10 +435,6 @@ footer {
 @include media-breakpoint-up(lg) {
     .copyBox {
         max-width: 550px;
-    }
-
-    .modal.fade .modal-dialog:not(.modal-dialog-centered) {
-        transform: translate(0,50%);
     }
 
     .divider-row [class*=col-]:not(:last-child) {

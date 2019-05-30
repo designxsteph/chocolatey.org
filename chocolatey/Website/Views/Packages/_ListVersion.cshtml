@@ -7,6 +7,8 @@
     var divVersionId = "divVersion-" + Model.Package.Version.Replace(".", "-");
     var maintainer = User != null && Model.Package.Owners.Any(u => u.Username == User.Identity.Name);
     var moderator = User != null && User.IsModerator() && !maintainer;
+    var moderationRole = User != null && User.IsInAnyModerationRole() && !maintainer;
+    var anyPackageRole = User != null && (moderationRole || maintainer);
     
     var MarkdownPipeline = new MarkdownPipelineBuilder()
                  .UseSoftlineBreakAsHardlineBreak()
@@ -24,31 +26,50 @@
 @if (Model.Package.Listed || Model.Package.IsOwner(User) || Model.Package.Status == PackageStatusType.Submitted)
 {
     <tr class="versionTableRow @htmlClass @if (Model.Package.LatestStableVersion){<text>recommended </text>}" style="display: @style">
-        <td class="version" @if (Model.Package.LatestStableVersion){<text>title="Latest Version"</text>}>
-            @if (!Model.Package.IsCurrent(Model.CurrentPackageVersion))
+    @if (Model.Package.Title != "Chocolatey")
+    {
+
+        <td>
+            @if (Model.Package.Listed || anyPackageRole && Model.Package.Status != PackageStatusType.Rejected)
             {
-                <a href="@Url.Package(Model.Package)">@Model.Package.Title @Model.Package.Version</a>
+                <button class="btn btn-success btn-builder d-none d-sm-inline-block" aria-label="Add to Builder" value="@Model.Package.Id.ToLower() @if ((!Model.Package.LatestVersion && !Model.Package.LatestStableVersion) || !Model.Package.Listed)
+                    {<text> --version @Model.Package.Version</text>} @if (Model.Package.Prerelease)
+                    {<text> --pre </text>}" title="@Model.Package.Title" version="@Model.Package.Version">
+                    <span class="fas fa-plus-circle"></span>
+                </button>
             }
-            else
+            else 
             {
-                <span>@Model.Package.Title @Model.Package.Version</span>
+                <span class="fas fa-ban text-danger px-3" data-toggle="tooltip" data-placement="top" title="This version has not yet been approved and can not be added to your builder at this time."></span>
             }
         </td>
-        <td>@Model.Package.DownloadCount</td>
-        <td>@Model.Package.PublishedDate.ToString("D")</td>
+        
+    }
+    <td class="version" @if (Model.Package.LatestStableVersion) { <text> title="Latest Version" </text> }>
+        @if (!Model.Package.IsCurrent(Model.CurrentPackageVersion))
+        {
+            <a href="@Url.Package(Model.Package)">@Model.Package.Title @Model.Package.Version</a>
+        }
+        else
+        {
+            <span>@Model.Package.Title @Model.Package.Version</span>
+        }
+    </td>
+    <td>@Model.Package.DownloadCount</td>
+    <td>@Model.Package.PublishedDate.ToString("D")</td>
         @if (Model.Package.IsOwner(User))
         {
             <td>
                 <a href="@Url.DeletePackage(Model.Package)" class="delete">@(Model.Package.Listed ? "yes" : "no")</a>
             </td>
         }
-    
+
         @switch (Model.Package.Status)
         {
             case PackageStatusType.Submitted:
             switch (Model.Package.SubmittedStatus)
             {
-                case PackageSubmittedStatusType.Pending:
+                case PackageSubmittedStatusType.Waiting:
                     <td><span class="badge badge-pill badge-warning">Pending Automated Review</span></td>
                     break;
                 case PackageSubmittedStatusType.Ready:
@@ -90,13 +111,14 @@
                 <td><span class="fas fa-question text-secondary"></span> Unknown</td>
                 break;
         }
-    
+
         @if (Model.ModerationRole)
         {
             <td>
                 @if (!string.IsNullOrWhiteSpace(Model.Package.ReviewComments))
                 {
                     <button type="button" data-toggle="collapse" data-target="#@divVersionId" aria-expanded="false" aria-controls="@divVersionId" class="btn btn-sm btn-secondary mr-2 ">Show</button>
+
                 }
             </td>
         }

@@ -1108,6 +1108,7 @@
     <Content Include="Content\Images\businesses\Boxstarter-sm.png" />
     <Content Include="Content\Images\businesses\Buyitdirect-sm.jpg" />
     <Content Include="Content\Images\businesses\Chef-Dark.png" />
+    <Content Include="Content\Images\businesses\Chef-Icon.jpg" />
     <Content Include="Content\Images\businesses\Docker-sm.png" />
     <Content Include="Content\Images\businesses\ECEC-sm.png" />
     <Content Include="Content\Images\businesses\EastCentralCollege-sm.png" />
@@ -1130,11 +1131,14 @@
     <Content Include="Content\Images\businesses\NuGet-sm.png" />
     <Content Include="Content\Images\businesses\OctopusDeploy-Dark-sm.png" />
     <Content Include="Content\Images\businesses\OctopusDeploy-Dark.png" />
+    <Content Include="Content\Images\businesses\Otter-Icon.jpg" />
     <Content Include="Content\Images\businesses\Otter-sm.png" />
     <Content Include="Content\Images\businesses\PCM-sm.png" />
     <Content Include="Content\Images\businesses\Powershell-sm.png" />
     <Content Include="Content\Images\businesses\PRIDE-sm.jpg" />
     <Content Include="Content\Images\businesses\Puppet-Dark.png" />
+    <Content Include="Content\Images\businesses\Puppet-Icon.jpg" />
+    <Content Include="Content\Images\businesses\Salt-Icon.jpg" />
     <Content Include="Content\Images\businesses\Saltstack-sm.png" />
     <Content Include="Content\Images\businesses\Shadowsoft-sm.png" />
     <Content Include="Content\Images\businesses\SHI-sm.png" />
@@ -1460,6 +1464,7 @@
     <Content Include="Content\scss\_cards.scss" />
     <Content Include="Content\scss\_tabs.scss" />
     <Content Include="Content\scss\_status-icons.scss" />
+    <Content Include="Content\scss\_add-to-builder.scss" />
     <Content Include="Content\fonts\fa-brands-400.eot" />
     <Content Include="Content\fonts\fa-brands-400.ttf" />
     <Content Include="Content\fonts\fa-brands-400.woff" />
@@ -1490,6 +1495,7 @@
     </None>
     <Content Include="opensearch.xml" />
     <Content Include="Scripts\anchorjs\anchor.min.js" />
+    <Content Include="Scripts\add-to-builder\add-to-builder.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bundle.txt" />
     <Content Include="Scripts\clipboard.js" />
@@ -1649,6 +1655,7 @@
     <Content Include="Views\Pages\ContactBlocked.cshtml" />
     <Content Include="Views\Pages\Careers.cshtml" />
     <Content Include="Views\Shared\_SearchBox.cshtml" />
+    <Content Include="Views\Packages\_AddToBuilder.cshtml" />
     <Content Include="Views\Shared\_Loader.cshtml" />
     <Content Include="Views\Pages\_WrittenTestimonials.cshtml" />
     <Content Include="Views\Resources\Testimonials.cshtml" />
@@ -1695,6 +1702,7 @@
     <Content Include="Views\Events\Files\01-04-TheBusinessValueOfModernizingYourWindowsInfrastructure.md" />
     <Content Include="Views\Pages\_CollapsingRightSidebarContent.cshtml" />
     <Content Include="Views\Events\Files\01-03-OperationsAutomationWithOctopusRunbooksAndChocolatey.md" />
+    <Content Include="Views\Packages\_RepositoryUrlInput.cshtml" />
     <Content Include="Views\Resources\Files\04-06-C4BPackageSynchronizer.md" />
     <Content Include="Views\Resources\Files\04-07-C4BChocolateyCentralManagement.md" />
     <Content Include="Views\Events\Files\02-01-OSAD2020.md" />
