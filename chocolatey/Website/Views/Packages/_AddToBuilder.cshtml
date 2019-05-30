@@ -1,0 +1,282 @@
+﻿<a class="btn btn-secondary btn-view-builder btn-collapsing-left-sidebar collapsed py-3 d-hash-none d-none shadow" data-toggle="collapse" href="#addToBuilder" role="button" aria-expanded="false" aria-controls="addToBuilder"><span class="notification-badge"></span>Builder</a>
+<nav id="addToBuilder" class="collapse collapsing-sidebar shadow pt-3 px-3 builder-tab">
+    <div class="text-right"><a class="h3 mt-3 collapsed text-secondary d-hash-none" data-toggle="collapse" href="#addToBuilder" role="button" aria-expanded="false" aria-controls="addToBuilder"><span class="fas fa-times"></span></a></div>
+    @*Generate Button*@
+    <div class="text-center mt-3">
+        <button type="button" class="btn btn-success btn-script" data-toggle="modal" data-target="#build-script"><span class="fas fa-sync"></span> Generate Script</button>
+    </div>
+    <div class="storage"></div>
+</nav>
+@*Script Builder*@
+<div class="modal fade" id="build-script" tabindex="-1" role="dialog" aria-labelledby="Build Script" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close h3" data-dismiss="modal" aria-label="Close">
+                    <span class="fas fa-times"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="wizard">
+                    <ul class="nav nav-pills mb-3" id="builder-steps" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="builder-step-1-tab" data-toggle="pill" href="#builder-step-1" role="tab" aria-controls="builder-step-1" aria-selected="true"><strong><span class="d-none d-sm-inline-block mr-1">STEP</span><span>1</span></strong><p class="mb-0 d-none d-lg-block">Package Review</p></a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="builder-step-2-tab" data-toggle="pill" href="#builder-step-2" role="tab" aria-controls="builder-step-2" aria-selected="false"><strong><span class="d-none d-sm-inline-block mr-1">STEP</span><span>2</span></strong><p class="mb-0 d-none d-lg-block">Integration Method</p></a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="builder-step-3-tab" data-toggle="pill" href="#builder-step-3" role="tab" aria-controls="builder-step-3" aria-selected="false"><strong><span class="d-none d-sm-inline-block mr-1">STEP</span><span>3</span></strong><p class="mb-0 d-none d-lg-block">Internal Repo Url</p></a>
+                        </li>
+                        <li class="nav-item builder-step-4-tab" role="presentation">
+                            <a class="nav-link" id="builder-step-4-tab" data-toggle="pill" href="#builder-step-4" role="tab" aria-controls="builder-step-4" aria-selected="false"><strong><span class="d-none d-sm-inline-block mr-1">STEP</span><span>4</span></strong><p class="mb-0 d-none d-lg-block">Environment Setup</p></a>
+                        </li>
+                        <li class="nav-item builder-step-5-tab" role="presentation">
+                            <a class="nav-link" id="builder-step-5-tab" data-toggle="pill" href="#builder-step-5" role="tab" aria-controls="builder-step-3" aria-selected="false"><strong><span class="d-none d-sm-inline-block mr-1">STEP</span><span>5</span></strong><p class="mb-0 d-none d-lg-block">Intall Script</p></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="builder-steps-content">
+                        <div class="text-right">
+                            <button class="btn btn-sm btn-outline-primary btn-prev-step">Previous</button>
+                            <button class="btn btn-sm btn-outline-primary btn-next-step">Next</button>
+                        </div>
+                        <div class="tab-pane fade my-3 show active" id="builder-step-1" role="tabpanel" aria-labelledby="builder-step-1-tab">
+                            <h3 class="text-center mb-4">Step 1: Review Your Packages</h3>
+                            <div class="storage storage-builder"></div>
+                        </div>
+                        <div class="tab-pane fade my-3" id="builder-step-2" role="tabpanel" aria-labelledby="builder-step-2-tab">
+                            <h3 class="text-center mb-4">Step 2: Choose Your Integration Method</h3>
+                            <ul class="nav nav-tabs nav-tabs-install" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="builder-generic-tab" data-toggle="tab" href="#builder-generic" role="tab" aria-controls="builder-generic" aria-selected="false" data-deployment-method="Generic">Generic</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="builder-individual-tab" data-toggle="tab" href="#builder-individual" role="tab" aria-controls="builder-individual" aria-selected="true" data-deployment-method="Individual">Individual</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="builder-ansible-tab" data-toggle="tab" href="#builder-ansible" role="tab" aria-controls="builder-ansible" aria-selected="false" data-deployment-method="Ansible">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Ansible-red-sm.png")" alt="Ansible" title="Ansible" />
+                                        Ansible
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="builder-ccm-tab" data-toggle="tab" href="#builder-ccm" role="tab" aria-controls="builder-ccm" aria-selected="false" data-deployment-method="Chocolatey Central Management">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/logo_small.svg")" alt="Central Management" title="Central Management" />
+                                        Central Management
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="builder-chef-tab" data-toggle="tab" href="#builder-chef" role="tab" aria-controls="builder-chef" aria-selected="false" data-deployment-method="Chef">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Chef" title="Chef" />
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="builder-otter-tab" data-toggle="tab" href="#builder-otter" role="tab" aria-controls="builder-otter" aria-selected="false" data-deployment-method="Otter">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Otter-sm.png")" alt="Otter" title="Otter" />
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="builder-psdsc-tab" data-toggle="tab" href="#builder-psdsc" role="tab" aria-controls="builder-psdsc" aria-selected="false" data-deployment-method="PS DSC">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Powershell-sm.png")" alt="PS DSC" title="PS DSC" />
+                                        PS DSC
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="builder-puppet-tab" data-toggle="tab" href="#builder-puppet" role="tab" aria-controls="builder-puppet" aria-selected="false" data-deployment-method="Puppet">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Puppet" title="Puppet" />
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="builder-salt-tab" data-toggle="tab" href="#builder-salt" role="tab" aria-controls="builder-salt" aria-selected="false" data-deployment-method="Salt">
+                                        <img class="img-fluid" width="140" src="@Url.Content("~/content/images/businesses/Saltstack-sm.png")" alt="SaltStack" title="SaltStack" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane fade my-3" id="builder-step-3" role="tabpanel" aria-labelledby="builder-step-3-tab">
+                            <div class="text-center builder-organization d-none">
+                                <h3 class="mb-4">Step 3: Enter Your Internal Repository Url</h3>
+                                @Html.Partial("~/Views/Packages/_RepositoryUrlInput.cshtml")
+                            </div>
+                            <div class="builder-individual d-none">
+                                <h3 class="text-center mb-4">Step 3: Copy Your Script or Download Config</h3>
+                                <h4 class="mb-3">Option 1: Copy Script</h4>
+                                <div class="copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-individual"></code></pre>
+                                </div>
+                                <h4 class="mt-4 mb-3">Option 2: Download Config</h4>
+                                <button type="button" class="btn btn-success btn-xml"><i class="fas fa-file-code"></i> Save as .config File</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade my-3" id="builder-step-4" role="tabpanel" aria-labelledby="builder-step-4-tab">
+                            <h3 class="text-center mb-4">Step 4: Setup Your Environment</h3>
+                            @*Step 1*@
+                            <h4>1. Ensure you are set for organizational deployment</h4>
+                            <p>Please see the <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "how-to-setup-offline-installation" })">organizational deployment guide</a></p>
+                            @*Step 2*@
+                            <h4 class="mt-4">2. Get the package into your environment</h4>
+                            @*Option 1*@
+                            <a class="h5 collapsed d-block" data-toggle="collapse" href="#builder-step-4-option-1" role="button" aria-expanded="false" aria-controls="builder-step-4-option-1" title="Get packages into your environment: Option 1">Option 1: Cached Package (Unreliable, Requires Internet - Same As Community)</a>
+                            <div class="collapse" id="builder-step-4-option-1">
+                                <ul>
+                                    <li>
+                                        Open Source or Commercial:
+                                        <ul>
+                                            <li>Proxy Repository - Create a proxy nuget repository on Nexus, Artifactory Pro, or a proxy Chocolatey repository on ProGet. Point your upstream to <strong>https://chocolatey.org/api/v2</strong>. Packages cache on first access automatically. Make sure your choco clients are using your proxy repository as a source and NOT the default community repository. See <a href="@Url.RouteUrl(RouteName.Docs, new {docName = "commands-sources"})">source command</a> for more information.</li>
+                                            <li>
+                                                <p>You can also just download the packages and push them to a repository</p>
+                                                <a class="btn btn-secondary btn-bulk-package-download" href="#"><i class="fas fa-download" alt="Download"></i> Download Packages</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            @*Option 2*@
+                            <a class="h5 mt-3 collapsed d-block" data-toggle="collapse" href="#builder-step-4-option-2" role="button" aria-expanded="false" aria-controls="builder-step-4-option-2" title="Get packages into your environment: Option 2">Option 2: Internalized Package (Reliable, Scalable)</a>
+                            <div class="collapse" id="builder-step-4-option-2">
+                                <ul>
+                                    <li>
+                                        Open Source
+                                        <ul>
+                                            <li class="mb-3">
+                                                <p>Download the packages:</p>
+                                                <a class="btn btn-secondary btn-bulk-package-download" href="#"><i class="fas fa-download" alt="Download"></i> Download Packages</a>
+                                            </li>
+                                            <li><a href="@Url.RouteUrl(RouteName.Docs, new {docName = "how-to-recompile-packages"})">Follow manual internalization instructions</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Package Internalizer (C4B)
+                                        <ul>
+                                            <li>
+                                                Run: <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-download" })">(additional options)</a>
+                                                <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-environment-one"></code></pre>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                For package and dependencies run:
+                                                <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-environment-two"></code></pre>
+                                                </div>
+                                            </li>
+                                            <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "how-to-setup-internal-package-repository" })">Automate package internalization</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade my-3" id="builder-step-5" role="tabpanel" aria-labelledby="builder-step-5-tab">
+                            <h3 class="text-center mb-4">Step 5: Copy Your Script</h3>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="builder-generic" role="tabpanel" aria-labelledby="builder-generic-tab">
+                                    <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-organization-generic-one"></code></pre>
+                                    </div>
+                                    <p class="mt-3">See <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-upgrade" })#options-and-switches">options you can pass to upgrade.</a></p>
+                                    <p>See <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-reference" })#scripting-integration-best-practices-style-guide">best practices for scripting.</a></p>
+                                    <p>Add this to a PowerShell script or use a Batch script with tools and in places where you are calling directly to Chocolatey. If you are integrating, keep in mind enhanced exit codes.</p>
+                                    <p>If you do use a PowerShell script, use the following to ensure bad exit codes are shown as failures:</p>
+                                    <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-organization-generic-two"></code></pre>
+                                    </div>
+                                    <a class="h4 collapsed d-block mt-4" data-toggle="collapse" href="#builder-generic-chocolatey-configuration" role="button" aria-expanded="false" aria-controls="builder-generic-chocolatey-configuration" title="If Applicable - Chocolatey Configuration/Installation">If Applicable - Chocolatey Configuration/Installation</a>
+                                    <div class="collapse" id="builder-generic-chocolatey-configuration">
+<pre class="line-numbers border py-3"><code class="command-chocolatey-configuration-generic"></code></pre>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="builder-individual" role="tabpanel" aria-labelledby="builder-individual-tab"></div>
+                                <div class="tab-pane fade" id="builder-ansible" role="tabpanel" aria-labelledby="builder-ansible-tab">
+                                    <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-organization-ansible"></code></pre>
+                                    </div>
+                                    <p>See docs at <a href="https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html" target="_blank" rel="noreferrer">https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html</a>.</p>
+                                    <a class="h4 collapsed d-block mt-4" data-toggle="collapse" href="#builder-ansible-chocolatey-configuration" role="button" aria-expanded="false" aria-controls="builder-ansible-chocolatey-configuration" title="If Applicable - Chocolatey Configuration/Installation">If Applicable - Chocolatey Configuration/Installation</a>
+                                    <div class="collapse" id="builder-ansible-chocolatey-configuration">
+<pre class="line-numbers border py-3"><code class="command-chocolatey-configuration-ansible"></code></pre>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="builder-ccm" role="tabpanel" aria-labelledby="builder-ccm-tab">
+                                    <p>Coming early 2020! Central Managment Reporting available now! <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "features-chocolatey-central-management" })">More information...</a></p>
+                                </div>
+                                <div class="tab-pane fade" id="builder-chef" role="tabpanel" aria-labelledby="builder-chef-tab">
+                                    <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-organization-chef"></code></pre>
+                                    </div>
+                                    <p>See docs at <a href="https://docs.chef.io/resource_chocolatey_package.html" target="_blank" rel="noreferrer">https://docs.chef.io/resource_chocolatey_package.html</a>.</p>
+                                    <a class="h4 collapsed d-block mt-4" data-toggle="collapse" href="#builder-chef-chocolatey-configuration" role="button" aria-expanded="false" aria-controls="builder-chef-chocolatey-configuration" title="If Applicable - Chocolatey Configuration/Installation">If Applicable - Chocolatey Configuration/Installation</a>
+                                    <div class="collapse" id="builder-chef-chocolatey-configuration">
+<pre class="line-numbers border py-3"><code class="command-chocolatey-configuration-chef"></code></pre>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="builder-otter" role="tabpanel" aria-labelledby="builder-otter-tab">
+                                    <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-organization-otter"></code></pre>
+                                    </div>
+                                    <p>Requires Otter Chocolatey Extension. See docs at <a href="https://inedo.com/den/otter/chocolatey" target="_blank" rel="noreferrer">https://inedo.com/den/otter/chocolatey</a>.</p>
+                                    <a class="h4 collapsed d-block mt-4" data-toggle="collapse" href="#builder-otter-chocolatey-configuration" role="button" aria-expanded="false" aria-controls="builder-otter-chocolatey-configuration" title="If Applicable - Chocolatey Configuration/Installation">If Applicable - Chocolatey Configuration/Installation</a>
+                                    <div class="collapse" id="builder-otter-chocolatey-configuration">
+<pre class="line-numbers border py-3"><code class="command-chocolatey-configuration-otter"></code></pre>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="builder-psdsc" role="tabpanel" aria-labelledby="builder-psdsc-tab">
+                                    <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-organization-psdsc"></code></pre>
+                                    </div>
+                                    <p>Requires cChoco DSC Resource. See docs at <a href="https://github.com/chocolatey/cChoco" target="_blank" rel="noreferrer">https://github.com/chocolatey/cChoco</a>.</p>
+                                    <a class="h4 collapsed d-block mt-4" data-toggle="collapse" href="#builder-psdsc-chocolatey-configuration" role="button" aria-expanded="false" aria-controls="builder-psdsc-chocolatey-configuration" title="If Applicable - Chocolatey Configuration/Installation">If Applicable - Chocolatey Configuration/Installation</a>
+                                    <div class="collapse" id="builder-psdsc-chocolatey-configuration">
+<pre class="line-numbers border py-3"><code class="command-chocolatey-configuration-psdsc"></code></pre>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="builder-puppet" role="tabpanel" aria-labelledby="builder-puppet-tab">
+                                    <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-organization-puppet"></code></pre>
+                                    </div>
+                                    <p>Requires Puppet Chocolatey Provider module. See docs at <a href="https://forge.puppet.com/puppetlabs/chocolatey" target="_blank" rel="noreferrer">https://forge.puppet.com/puppetlabs/chocolatey</a>.</p>
+                                    <a class="h4 collapsed d-block mt-4" data-toggle="collapse" href="#builder-puppet-chocolatey-configuration" role="button" aria-expanded="false" aria-controls="builder-puppet-chocolatey-configuration" title="If Applicable - Chocolatey Configuration/Installation">If Applicable - Chocolatey Configuration/Installation</a>
+                                    <div class="collapse" id="builder-puppet-chocolatey-configuration">
+<pre class="line-numbers border py-3"><code class="command-chocolatey-configuration-puppet"></code></pre>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="builder-salt" role="tabpanel" aria-labelledby="builder-salt-tab">
+                                    <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers border py-3"><code class="command-builder-organization-salt"></code></pre>
+                                    </div>
+                                    <p>See docs at <a href="https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html" target="_blank" rel="noreferrer">https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html</a>.</p>
+                                    <a class="h4 collapsed d-block mt-4" data-toggle="collapse" href="#builder-salt-chocolatey-configuration" role="button" aria-expanded="false" aria-controls="builder-salt-chocolatey-configuration" title="If Applicable - Chocolatey Configuration/Installation">If Applicable - Chocolatey Configuration/Installation</a>
+                                    <div class="collapse" id="builder-salt-chocolatey-configuration">
+<pre class="line-numbers border py-3"><code class="command-chocolatey-configuration-salt"></code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button class="btn btn-sm btn-outline-primary btn-prev-step">Previous</button>
+                            <button class="btn btn-sm btn-outline-primary btn-next-step">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*Version Warning*@
+<div class="modal fade" id="warning-version" tabindex="-1" role="dialog" aria-labelledby="Warning Version" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <i class="fas fa-times-circle-o display-1 text-danger" alt="Version Error"></i>
+                <h5 class="text-danger mb-4">There is already a version of this package in your Script Builder</h5>
+                <p class="mb-0">Current Version in Builder:</p>
+                <p class="current-version font-weight-bold"></p>
+                <p class="mb-0">New Version:</p>
+                <p class="new-version font-weight-bold"></p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-danger btn-version text-white" data-dismiss="modal">Delete and Add New Version</button>
+                <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

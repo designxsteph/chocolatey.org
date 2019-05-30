@@ -1,4 +1,8 @@
 /*Tooltips*/
+.tooltip {
+    z-index: 9999;
+}
+
 .bs-tooltip-top {
     top: -8px !important;
     left: 4px !important;

@@ -15,7 +15,7 @@
     font-weight: 900;
 }
 
-a[data-toggle="collapse"]:not(.collapse-nav), .docs-left button.navbar-toggler[data-toggle="collapse"], .module-left button.navbar-toggler[data-toggle="collapse"] {
+a:not(.btn-view-builder)[data-toggle="collapse"], .docs-left button.navbar-toggler[data-toggle="collapse"], .module-left button.navbar-toggler[data-toggle="collapse"] {
     &::before {
         @extend %fa-icon;
         @extend .fas;
@@ -24,7 +24,7 @@ a[data-toggle="collapse"]:not(.collapse-nav), .docs-left button.navbar-toggler[d
     }
 }
 
-a[data-toggle="collapse"].collapsed:not(.collapse-nav), .docs-left button.navbar-toggler[data-toggle="collapse"].collapsed, .module-left button.navbar-toggler[data-toggle="collapse"].collapsed {
+a:not(.btn-view-builder)[data-toggle="collapse"].collapsed, .docs-left button.navbar-toggler[data-toggle="collapse"].collapsed, .module-left button.navbar-toggler[data-toggle="collapse"].collapsed {
     &::before {
         @extend %fa-icon;
         @extend .fas;

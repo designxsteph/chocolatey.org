@@ -20,6 +20,34 @@
     }
 }
 
+.btn-collapsing-left-sidebar {
+    position: fixed;
+    top: 34%;
+    left: 0;
+    width: auto !important;
+    border-radius: 0 .25rem .25rem 0;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    z-index: 9999;
+
+    &:before {
+        content: none !important;
+    }
+
+    .notification-badge {
+        top: -10px;
+        left: 35px;
+        height: 25px;
+        width: 25px;
+        line-height: 24px;
+        font-size: 80%;
+    }
+}
+
 #collapsing-right-sidebar {
     position: absolute;
     top: 0;
@@ -33,6 +61,26 @@
     margin-left: 0;
     overflow: auto;
     border-left: 3px solid $primary;
+    padding-bottom: 150px;
+
+    a[data-toggle=collapse]:before {
+        content: none !important;
+    }
+}
+
+#addToBuilder {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: 99999;
+    background: #fff;
+    transition: none;
+    margin-left: 0;
+    overflow: auto;
+    border-right: 3px solid $secondary;
     padding-bottom: 150px;
 
     a[data-toggle=collapse]:before {
@@ -70,6 +118,21 @@
         position: fixed;
         width: 350px;
         left: auto;
+        padding-bottom: 1rem;
+    }
+
+    .btn-collapsing-left-sidebar {
+        left: 350px;
+
+        &.collapsed {
+            left: 0;
+        }
+    }
+
+    #addToBuilder {
+        position: fixed;
+        width: 350px;
+        right: auto;
         padding-bottom: 1rem;
     }
 }

@@ -15,6 +15,7 @@
     Bundles.Reference("Scripts/prism");
     Bundles.Reference("Scripts/install-steps");
     Bundles.Reference("Scripts/easymde");
+    Bundles.Reference("Scripts/add-to-builder");
     Bundles.Reference("Scripts/closeable");
 
     var markdownPipelineBuilder = new MarkdownPipelineBuilder()
@@ -118,6 +119,7 @@
 {
     @Html.Partial("~/Views/Packages/_CommunityInfoDisclaimer.cshtml")
 }
+@Html.Partial("~/Views/Packages/_AddToBuilder.cshtml")
 <section id="secondaryNav">
     @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
     @Html.Partial("~/Views/Shared/_PackageStatusSubNavigation.cshtml")
@@ -126,7 +128,7 @@
     <div id="package-sidebar" class="row">
         @*Desktop Sidebar*@
         <div class="col-md-3 col-xl-2 d-none d-md-block">
-            <img class="package-logo img-fluid" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_png))" alt="Icon for package @Model.Id" title="Icon for package @Model.Id | Nuspec reference: &lt;iconUrl&gt;@Model.IconUrl&lt;/iconurl&gt;" onerror="this.src='@Links.Content.Images.packageDefaultIcon_png';" />
+            <img class="package-logo img-fluid @if (Model.Title != "Chocolatey"){if (Model.Listed || anyPackageRole && Model.Status != PackageStatusType.Rejected){<text>package-image</text>}}" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_png))" alt="Icon for package @Model.Id" title="Icon for package @Model.Id | Nuspec reference: &lt;iconUrl&gt;@Model.IconUrl&lt;/iconurl&gt;" onerror="this.src='@Links.Content.Images.packageDefaultIcon_png';" />
             <p class="mb-0"><strong>Downloads:</strong></p>
             <h3 class="mb-3">@Model.TotalDownloadCount.ToString("n0")</h3>
             <p class="mb-0"><strong>Downloads of v @Model.Version:</strong></p>
@@ -222,7 +224,7 @@
         @*Mobile Sidebar*@
         <div class="col-12 d-md-none">
             <div class="justify-content-center align-items-center d-flex">
-                <img class="package-logo img-fluid mr-2" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_png))" alt="Icon for package @Model.Id" title="Icon for package @Model.Id | Nuspec reference: &lt;iconUrl&gt;@Model.IconUrl&lt;/iconurl&gt;" onerror="this.src='@Links.Content.Images.packageDefaultIcon_png';" />
+                <img class="package-logo img-fluid @if (Model.Title != "Chocolatey"){if (Model.Listed || anyPackageRole && Model.Status != PackageStatusType.Rejected){<text>package-image</text>}} mr-2" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_png))" alt="Icon for package @Model.Id" title="Icon for package @Model.Id | Nuspec reference: &lt;iconUrl&gt;@Model.IconUrl&lt;/iconurl&gt;" onerror="this.src='@Links.Content.Images.packageDefaultIcon_png';" />
                 <h4 class="mb-0" title="Nuspec reference: &lt;title&gt;@Model.Title&lt;/title&gt;">@Model.Title</h4>
             </div>
             @if (Model.Status == PackageStatusType.Submitted)
@@ -492,17 +494,21 @@
                         </div>
                     </div>
                     <div class="d-none d-xl-block">
-                        <a class="@if(!testingStatusPassing){<text>collapse show</text>}else{<text>collapsed</text>} btn btn-sm btn-secondary" data-toggle="collapse" href="#testingResults" role="button" aria-expanded="true" aria-controls="testing results" title="Testing Results">@if (!testingStatusPassing)
-                        {<text>Hide Checks</text>}
-                            else
-                        {<text>Show Checks</text>}</a>
+                        <a class="@if(!testingStatusPassing){<text>collapse show</text>}else{<text>collapsed</text>} btn btn-sm btn-secondary" data-toggle="collapse" href="#testingResults" role="button" aria-expanded="true" aria-controls="testing results" title="Testing Results">
+                            @if (!testingStatusPassing)
+                            {<text>Hide Checks</text>}
+                        else
+                        {<text>Show Checks</text>}
+                        </a>
                     </div>
                 </div>
                 <div class="px-3 pb-3 d-xl-none">
-                    <a class="@if(!testingStatusPassing){<text>collapse show</text>}else{<text>collapsed</text>} btn btn-sm btn-secondary" data-toggle="collapse" href="#testingResults" role="button" aria-expanded="true" aria-controls="testing results" title="Testing Results">@if (!testingStatusPassing)
-                    {<text>Hide Checks</text>}
+                    <a class="@if(!testingStatusPassing){<text>collapse show</text>}else{<text>collapsed</text>} btn btn-sm btn-secondary" data-toggle="collapse" href="#testingResults" role="button" aria-expanded="true" aria-controls="testing results" title="Testing Results">
+                        @if (!testingStatusPassing)
+                        {<text>Hide Checks</text>}
                     else
-                    {<text>Show Checks</text>}</a>
+                    {<text>Show Checks</text>}
+                    </a>
                 </div>
                 <div class="collapse @if(!testingStatusPassing){<text>show</text>}" id="testingResults">
                     <hr class="mt-0" />
@@ -566,201 +572,239 @@
             {
                 if (Model.Listed || anyPackageRole && Model.Status != PackageStatusType.Rejected)
                 {
-                    <ul class="nav card-tabs nav-tabs border-bottom-0" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="individual-tab" data-toggle="tab" href="#individual" role="tab" aria-controls="individual" aria-selected="true">Individual</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="organization-tab" data-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Organization</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content bg-white p-3 shadow-sm mb-3 position-relative">
-                        @*Individual*@
-                        <div class="tab-pane fade show active" id="individual" role="tabpanel" aria-labelledby="individual-tab">
-                            <ul class="nav nav-tabs" role="tablist">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs d-none" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="install-tab" data-toggle="tab" href="#install" role="tab" aria-controls="install" aria-selected="true">Install</a>
+                                    <a class="nav-link" id="organization-method-tab" data-toggle="tab" href="#organization-method" role="tab" aria-controls="organization-method" aria-selected="false"></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="upgrade-tab" data-toggle="tab" href="#upgrade" role="tab" aria-controls="upgrade" aria-selected="false">Upgrade</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="uninstall-tab" data-toggle="tab" href="#uninstall" role="tab" aria-controls="uninstall" aria-selected="false">Uninstall</a>
+                                    <a class="nav-link active" id="individual-method-tab" data-toggle="tab" href="#individual-method" role="tab" aria-controls="individual-method" aria-selected="true"></a>
                                 </li>
                             </ul>
-                            <div class="tab-content p-3">
-                                <div class="tab-pane fade show active" id="install" role="tabpanel" aria-labelledby="install-tab">
-                                    <p class="mb-3">To install @Model.Title, run the following command from the command line or from PowerShell:</p>
-                                    <div class="input-group copyBox">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">></div>
-                                        </div>
-                                        <input type="text" class="form-control"
-                                                value="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                                                aria-label="Install @Model.Title command"
-                                                readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary tt"
-                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                                    data-toggle="tooltip"
-                                                    title="Copy to Clipboard"
-                                                    data-clipboard-text="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                                                <i class="fas fa-clipboard" aria-hidden="true">
-                                                    <span class="sr-only">
-                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
-                                                        {<text> --pre </text>} to Clipboard
-                                                    </span>
-                                                </i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="upgrade" role="tabpanel" aria-labelledby="upgrade-tab">
-                                    <p class="mb-3">To upgrade @Model.Title, run the following command from the command line or from PowerShell:</p>
-                                    <div class="input-group copyBox">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">></div>
-                                        </div>
-                                        <input type="text" class="form-control"
-                                                value="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                                                aria-label="Upgrade @Model.Title command"
-                                                readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary tt"
-                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                                    data-toggle="tooltip"
-                                                    title="Copy to Clipboard"
-                                                    data-clipboard-text="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                                                <i class="fas fa-clipboard" aria-hidden="true">
-                                                    <span class="sr-only">
-                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
-                                                        {<text> --pre </text>} to Clipboard
-                                                    </span>
-                                                </i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="uninstall" role="tabpanel" aria-labelledby="uninstall-tab">
-                                    <p class="mb-3">To uninstall @Model.Title, run the following command from the command line or from PowerShell:</p>
-                                    <div class="input-group copyBox">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">></div>
-                                        </div>
-                                        <input type="text" class="form-control"
-                                                value="choco uninstall @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                                                aria-label="Uninstall @Model.Title command"
-                                                readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary tt"
-                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                                    data-toggle="tooltip"
-                                                    title="Copy to Clipboard"
-                                                    data-clipboard-text="choco uninstall @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                                                <i class="fas fa-clipboard" aria-hidden="true">
-                                                    <span class="sr-only">
-                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
-                                                        {<text> --pre </text>} to Clipboard
-                                                    </span>
-                                                </i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @*Organizational*@
-                        <div class="tab-pane fade" id="organization" role="tabpanel" aria-labelledby="organization-tab">
-                            <p class="small font-weight-bold">NOTE: This applies to both open source and commercial editions of Chocolatey.</p>
-                            @*Step 1*@
-                            <h4>1. Ensure you are set for organizational deployment</h4>
-                            <p>Please see the <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "how-to-setup-offline-installation" })">organizational deployment guide</a></p>
-                            @*Step 2*@
-                            <a class="h4 collapsed d-block" data-toggle="collapse" href="#install-step2" role="button" aria-expanded="false" aria-controls="install-step2" title="Install Step 2">2. Get the package into your environment</a>
-                            <div class="collapse" id="install-step2">
-                                <div class="p-3">
-                                    @*Option 1*@
-                                    <a class="h5 collapsed d-block" data-toggle="collapse" href="#install-step2-option1" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 1">Option 1: Cached Package (Unreliable, Requires Internet - Same As Community)</a>
-                                    <div class="collapse" id="install-step2-option1">
-                                        <ul>
-                                            <li>
-                                                Open Source or Commercial:
-                                                <ul>
-                                                    <li>Proxy Repository - Create a proxy nuget repository on Nexus, Artifactory Pro, or a proxy Chocolatey repository on ProGet. Point your upstream to <strong>https://chocolatey.org/api/v2</strong>. Packages cache on first access automatically. Make sure your choco clients are using your proxy repository as a source and NOT the default community repository. See <a href="@Url.RouteUrl(RouteName.Docs, new {docName = "commands-sources"})">source command</a> for more information.</li>
-                                                    <li>You can also just download the package and push it to a repository <a class="btn btn-secondary btn-sm" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    @*Option 2*@
-                                    <a class="h5 mt-3 collapsed d-block" data-toggle="collapse" href="#install-step2-option2" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 2">Option 2: Internalized Package (Reliable, Scalable)</a>
-                                    <div class="collapse" id="install-step2-option2">
-                                        <ul>
-                                            <li>
-                                                Open Source
-                                                <ul>
-                                                    <li>Download the Package <a class="btn btn-secondary btn-sm" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
-                                                    <li><a href="@Url.RouteUrl(RouteName.Docs, new {docName = "how-to-recompile-packages"})">Follow manual internalization instructions</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                Package Internalizer (C4B)
-                                                <ul>
-                                                    <li>Run <code>choco download @Model.Id.ToLower() --internalize @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed){<text> --version=@Model.Version</text>} --source=https://chocolatey.org/api/v2</code> <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-download" })">(additional options)</a></li>
-                                                    <li>Run <code>choco push --source=&quot;'http://internal/odata/repo'&quot;</code> for package and dependencies</li>
-                                                    <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "how-to-setup-internal-package-repository" })">Automate package internalization</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            @*Step 3*@
-                            <h4 class="mt-4">3. Enter your internal repository url</h4>
-                            <input class="form-control w-50" id="stepThreeUrl" type="text" placeholder="http://internal/odata/repo" />
-                            <p><small>(this should look similar to <a href="https://chocolatey.org/api/v2">https://chocolatey.org/api/v2</a>)</small></p>
-                            @*Step 4*@
-                            <h4 class="mt-4">4. Choose your deployment method:</h4>
-                            <ul class="nav nav-tabs" role="tablist">
+                            <ul class="nav nav-tabs nav-tabs-install-package nav-tabs-install" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="generic-tab" data-toggle="tab" href="#generic" role="tab" aria-controls="generic" aria-selected="false">Generic</a>
+                                    <a class="nav-link" id="generic-tab" data-toggle="tab" href="#generic" role="tab" aria-controls="generic" aria-selected="false" data-deployment-method="Generic">Generic</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="ansible-tab" data-toggle="tab" href="#ansible" role="tab" aria-controls="ansible" aria-selected="false">Ansible</a>
+                                    <a class="nav-link active" id="individual-tab" data-toggle="tab" href="#individual" role="tab" aria-controls="individual" aria-selected="true" data-deployment-method="Individual">Individual</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="ccm-tab" data-toggle="tab" href="#ccm" role="tab" aria-controls="ccm" aria-selected="false">Central Management</a>
+                                    <a class="nav-link" id="ansible-tab" data-toggle="tab" href="#ansible" role="tab" aria-controls="ansible" aria-selected="false" data-deployment-method="Ansible">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Ansible-red-sm.png")" alt="Ansible" title="Ansible" />
+                                        Ansible
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="chef-tab" data-toggle="tab" href="#chef" role="tab" aria-controls="chef" aria-selected="false">Chef</a>
+                                    <a class="nav-link" id="ccm-tab" data-toggle="tab" href="#ccm" role="tab" aria-controls="ccm" aria-selected="false" data-deployment-method="Chocolatey Central Management">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/logo_small.svg")" alt="Central Management" title="Central Management" />
+                                        Central Management
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="otter-tab" data-toggle="tab" href="#otter" role="tab" aria-controls="otter" aria-selected="false">Otter</a>
+                                    <a class="nav-link" id="chef-tab" data-toggle="tab" href="#chef" role="tab" aria-controls="chef" aria-selected="false" data-deployment-method="Chef">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Chef" title="Chef" />
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="psdsc-tab" data-toggle="tab" href="#psdsc" role="tab" aria-controls="psdsc" aria-selected="false">PS DSC</a>
+                                    <a class="nav-link" id="otter-tab" data-toggle="tab" href="#otter" role="tab" aria-controls="otter" aria-selected="false" data-deployment-method="Otter">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Otter-sm.png")" alt="Otter" title="Otter" />
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="puppet-tab" data-toggle="tab" href="#puppet" role="tab" aria-controls="puppet" aria-selected="false">Puppet</a>
+                                    <a class="nav-link" id="psdsc-tab" data-toggle="tab" href="#psdsc" role="tab" aria-controls="psdsc" aria-selected="false" data-deployment-method="PS DSC">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Powershell-sm.png")" alt="PS DSC" title="PS DSC" />
+                                        PS DSC
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="salt-tab" data-toggle="tab" href="#salt" role="tab" aria-controls="salt" aria-selected="false">Salt</a>
+                                    <a class="nav-link" id="puppet-tab" data-toggle="tab" href="#puppet" role="tab" aria-controls="puppet" aria-selected="false" data-deployment-method="Puppet">
+                                        <img class="img-fluid nav-img" src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Puppet" title="Puppet" />
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="salt-tab" data-toggle="tab" href="#salt" role="tab" aria-controls="alt" aria-selected="false" data-deployment-method="Salt">
+                                        <img class="img-fluid" width="140" src="@Url.Content("~/content/images/businesses/Saltstack-sm.png")" alt="SaltStack" title="SaltStack" />
+                                    </a>
                                 </li>
                             </ul>
-                            <div class="tab-content stepThree p-3">
-                                <div class="tab-pane fade show active" id="generic" role="tabpanel" aria-labelledby="generic-tab">
-<pre class="language-powershell border py-3"><code>
-choco upgrade @Model.Id.ToLower() -y --source=&quot;'STEP 3 URL'&quot; [other options]
-</code></pre>
-                                    <p class="mt-3">See <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-upgrade" })#options-and-switches">options you can pass to upgrade.</a></p>
-                                    <p>See <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-reference" })#scripting-integration-best-practices-style-guide">best practices for scripting.</a></p>
-                                    <p>Add this to a PowerShell script or use a Batch script with tools and in places where you are calling directly to Chocolatey. If you are integrating, keep in mind enhanced exit codes.</p>
-                                    <p>If you do use a PowerShell script, use the following to ensure bad exit codes are shown as failures:</p>
-<pre class="language-powershell line-numbers border py-3"><code>
-choco upgrade @Model.Id.ToLower() -y --source="'STEP 3 URL'"
+                            <div class="text-center mt-3"><button class="btn btn-success btn-builder btn-builder-text" value="@Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed){<text> --version @Model.Version</text>} @if (Model.Prerelease){<text> --pre </text>}" title="@Model.Title" version="@Model.Version"><span class="fas fa-plus-circle" alt="Add to Script Builder"></span> Add to Script Builder</button></div>
+                            <hr class="my-4" />
+                            <div class="tab-content">
+                                @*Individual*@
+                                <div class="tab-pane fade show active" id="individual-method" role="tabpanel" aria-labelledby="individual-method-tab">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="individual" role="tabpanel" aria-labelledby="individual-tab">
+                                            <h3 class="mb-4 text-center">Deployment Method: Individual Install, Upgrade, & Uninstall</h3>
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="install-tab" data-toggle="tab" href="#install" role="tab" aria-controls="install" aria-selected="true">Install</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="upgrade-tab" data-toggle="tab" href="#upgrade" role="tab" aria-controls="upgrade" aria-selected="false">Upgrade</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="uninstall-tab" data-toggle="tab" href="#uninstall" role="tab" aria-controls="uninstall" aria-selected="false">Uninstall</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content p-3">
+                                                <div class="tab-pane fade show active" id="install" role="tabpanel" aria-labelledby="install-tab">
+                                                    <p class="mb-3">To install @Model.Title, run the following command from the command line or from PowerShell:</p>
+                                                    <div class="input-group copyBox">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">></div>
+                                                        </div>
+                                                        <input type="text" class="form-control"
+                                                                value="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
+                                                                aria-label="Install @Model.Title command"
+                                                                readonly>
+                                                        <div class="input-group-append d-inline-block">
+                                                            <button class="btn btn-primary tt"
+                                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
+                                                                    data-toggle="tooltip"
+                                                                    title="Copy to Clipboard"
+                                                                    data-clipboard-text="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
+                                                                <i class="fas fa-clipboard" aria-hidden="true">
+                                                                    <span class="sr-only">
+                                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
+                                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
+                                                                        {<text> --pre </text>} to Clipboard
+                                                                    </span>
+                                                                </i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-secondary mt-2" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a>
+                                                </div>
+                                                <div class="tab-pane fade" id="upgrade" role="tabpanel" aria-labelledby="upgrade-tab">
+                                                    <p class="mb-3">To upgrade @Model.Title, run the following command from the command line or from PowerShell:</p>
+                                                    <div class="input-group copyBox">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">></div>
+                                                        </div>
+                                                        <input type="text" class="form-control"
+                                                               value="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
+                                                               aria-label="Upgrade @Model.Title command"
+                                                               readonly>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-primary tt"
+                                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
+                                                                    data-toggle="tooltip"
+                                                                    title="Copy to Clipboard"
+                                                                    data-clipboard-text="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
+                                                                <i class="fas fa-clipboard" aria-hidden="true">
+                                                                    <span class="sr-only">
+                                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
+                                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
+                                                                        {<text> --pre </text>} to Clipboard
+                                                                    </span>
+                                                                </i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="uninstall" role="tabpanel" aria-labelledby="uninstall-tab">
+                                                    <p class="mb-3">To uninstall @Model.Title, run the following command from the command line or from PowerShell:</p>
+                                                    <div class="input-group copyBox">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">></div>
+                                                        </div>
+                                                        <input type="text" class="form-control"
+                                                               value="choco uninstall @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
+                                                               aria-label="Uninstall @Model.Title command"
+                                                               readonly>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-primary tt"
+                                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
+                                                                    data-toggle="tooltip"
+                                                                    title="Copy to Clipboard"
+                                                                    data-clipboard-text="choco uninstall @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
+                                                                <i class="fas fa-clipboard" aria-hidden="true">
+                                                                    <span class="sr-only">
+                                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
+                                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
+                                                                        {<text> --pre </text>} to Clipboard
+                                                                    </span>
+                                                                </i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*Organization*@
+                                <div class="tab-pane fade show" id="organization-method" role="tabpanel" aria-labelledby="organization-method-tab">
+                                    <h3 class="mb-4 text-center d-none deployment-method-header">Deployment Method: <span></span></h3>
+                                    <div class="callout callout-secondary bg-light">
+                                        <p>&#128221; <strong>NOTE:</strong> This applies to both open source and commercial editions of Chocolatey.</p>
+                                    </div>
+                                    <h3>1. Enter Your Internal Repository Url</h3>
+                                    @Html.Partial("~/Views/Packages/_RepositoryUrlInput.cshtml")
+                                    <hr class="my-4" />
+                                    <h3>2. Setup Your Environment</h3>
+                                    <div class="ml-30">
+                                        <h4>1. Ensure you are set for organizational deployment</h4>
+                                        <p>Please see the <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "how-to-setup-offline-installation" })">organizational deployment guide</a></p>
+                                        <h4>2. Get the package into your environment</h4>
+                                        @*Option 1*@
+                                        <a class="h5 collapsed d-block" data-toggle="collapse" href="#install-step2-option1" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 1">Option 1: Cached Package (Unreliable, Requires Internet - Same As Community)</a>
+                                        <div class="collapse" id="install-step2-option1">
+                                            <ul>
+                                                <li>
+                                                    Open Source or Commercial:
+                                                    <ul>
+                                                        <li>Proxy Repository - Create a proxy nuget repository on Nexus, Artifactory Pro, or a proxy Chocolatey repository on ProGet. Point your upstream to <strong>https://chocolatey.org/api/v2</strong>. Packages cache on first access automatically. Make sure your choco clients are using your proxy repository as a source and NOT the default community repository. See <a href="@Url.RouteUrl(RouteName.Docs, new {docName = "commands-sources"})">source command</a> for more information.</li>
+                                                        <li>You can also just download the package and push it to a repository <a class="btn btn-secondary btn-sm" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        @*Option 2*@
+                                        <a class="h5 mt-3 collapsed d-block" data-toggle="collapse" href="#install-step2-option2" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 2">Option 2: Internalized Package (Reliable, Scalable)</a>
+                                        <div class="collapse" id="install-step2-option2">
+                                            <ul>
+                                                <li>
+                                                    Open Source
+                                                    <ul>
+                                                        <li>Download the Package <a class="btn btn-secondary btn-sm" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
+                                                        <li><a href="@Url.RouteUrl(RouteName.Docs, new {docName = "how-to-recompile-packages"})">Follow manual internalization instructions</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    Package Internalizer (C4B)
+                                                    <ul>
+                                                        <li>
+                                                            Run <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-download" })">(additional options)</a>
+<pre class="line-numbers language-powershell border py-3"><code>choco download @Model.Id.ToLower() --internalize @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed){<text>--version=@Model.Version </text>}--source=https://chocolatey.org/api/v2</code></pre>
+                                                        </li>
+                                                        <li>
+                                                            For package dependencies, run:
+                                                            <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers language-powershell border py-3"><code class="command-environment-two">choco push --source=&quot;'INTERNAL REPO URL'&quot;</code></pre>
+                                                            </div>
+                                                        </li>
+                                                        <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "how-to-setup-internal-package-repository" })">Automate package internalization</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4"/>
+                                    <div class="tab-content">
+                                        <h3>3. Copy Your Script</h3>
+                                        <div class="tab-pane fade" id="generic" role="tabpanel" aria-labelledby="generic-tab">
+                                            <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers language-powershell border py-3"><code class="command-organization-generic-one">choco upgrade @Model.Id.ToLower() -y --source=&quot;'INTERNAL REPO URL'&quot; [other options]</code></pre>
+                                            </div>
+                                            <p class="mt-3">See <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-upgrade" })#options-and-switches">options you can pass to upgrade.</a></p>
+                                            <p>See <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "commands-reference" })#scripting-integration-best-practices-style-guide">best practices for scripting.</a></p>
+                                            <p>Add this to a PowerShell script or use a Batch script with tools and in places where you are calling directly to Chocolatey. If you are integrating, keep in mind enhanced exit codes.</p>
+                                            <p>If you do use a PowerShell script, use the following to ensure bad exit codes are shown as failures:</p>
+                                            <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers language-powershell line-numbers border py-3"><code class="command-organization-generic-two">
+choco upgrade @Model.Id.ToLower() -y --source="'INTERNAL REPO URL'"
 $exitCode = $LASTEXITCODE
 
 Write-Verbose "Exit code was $exitCode"
@@ -770,110 +814,126 @@ if ($validExitCodes -contains $exitCode) {
 }
 
 Exit $exitCode
-</code></pre>
-                                </div>
-                                <div class="tab-pane fade" id="ansible" role="tabpanel" aria-labelledby="ansible-tab">
-<pre class="language-yaml line-numbers border py-3"><code>
+ </code></pre>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="ansible" role="tabpanel" aria-labelledby="ansible-tab">
+                                            <div class="contains-internal-repo-url copy-command">
+<pre class="line-numbers language-yaml line-numbers border py-3"><code class="command-organization-ansible">
 - name: Ensure @Model.Id.ToLower() installed
   win_chocolatey:
     name: @Model.Id.ToLower()
     state: present
     version: @Model.Version
-    source: STEP 3 URL
+    source: INTERNAL REPO URL
 </code></pre>
-                                    <p>See docs at <a href="https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html" target="_blank" rel="noreferrer">https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="ccm" role="tabpanel" aria-labelledby="ccm-tab">
-                                    <p>Coming early 2020! Central Managment Reporting available now! <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "features-chocolatey-central-management" })">More information...</a></p>
-                                </div>
-                                <div class="tab-pane fade" id="chef" role="tabpanel" aria-labelledby="chef-tab">
-<pre class="language-ruby line-numbers border py-3"><code>
+                                            </div>
+                                            <p>See docs at <a href="https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html" target="_blank" rel="noreferrer">https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html</a>.</p>
+                                        </div>
+                                        <div class="tab-pane fade" id="ccm" role="tabpanel" aria-labelledby="ccm-tab">
+                                            <p>Coming early 2020! Central Managment Reporting available now! <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "features-chocolatey-central-management" })">More information...</a></p>
+                                        </div>
+                                        <div class="tab-pane fade" id="chef" role="tabpanel" aria-labelledby="chef-tab">
+                                            <div class="contains-internal-repo-url copy-command">
+<pre class="language-ruby line-numbers border py-3"><code class="command-organization-chef">
 chocolatey_package '@Model.Id.ToLower()' do
   action    :install
   version  '@Model.Version'
-  source   'STEP 3 URL'
+  source   'INTERNAL REPO URL'
 end
 </code></pre>
-                                    <p>See docs at <a href="https://docs.chef.io/resource_chocolatey_package.html" target="_blank" rel="noreferrer">https://docs.chef.io/resource_chocolatey_package.html</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="otter" role="tabpanel" aria-labelledby="otter-tab">
-<pre class="language-powershell line-numbers border py-3"><code>
+                                            </div>
+                                            <p>See docs at <a href="https://docs.chef.io/resource_chocolatey_package.html" target="_blank" rel="noreferrer">https://docs.chef.io/resource_chocolatey_package.html</a>.</p>
+                                        </div>
+                                        <div class="tab-pane fade" id="otter" role="tabpanel" aria-labelledby="otter-tab">
+                                            <div class="contains-internal-repo-url copy-command">
+<pre class="language-powershell line-numbers border py-3"><code class="command-organization-otter">
 Chocolatey::Ensure-Package
 (
     Name: @Model.Id.ToLower(),
     Version: @Model.Version,
-    Source: STEP 3 URL
+    Source: INTERNAL REPO URL
 );
 </code></pre>
-                                    <p>Requires Otter Chocolatey Extension. See docs at <a href="https://inedo.com/den/otter/chocolatey" target="_blank" rel="noreferrer">https://inedo.com/den/otter/chocolatey</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="psdsc" role="tabpanel" aria-labelledby="psdsc-tab">
-<pre class="language-powershell line-numbers border py-3"><code>
+                                            </div>
+                                            <p>Requires Otter Chocolatey Extension. See docs at <a href="https://inedo.com/den/otter/chocolatey" target="_blank" rel="noreferrer">https://inedo.com/den/otter/chocolatey</a>.</p>
+                                        </div>
+                                        <div class="tab-pane fade" id="psdsc" role="tabpanel" aria-labelledby="psdsc-tab">
+                                            <div class="contains-internal-repo-url copy-command">
+<pre class="language-powershell line-numbers border py-3"><code class="command-organization-psdsc">
 cChocoPackageInstaller @Model.Id.ToLower()
 {
    Name     = '@Model.Id.ToLower()'
    Ensure   = 'Present'
    Version  = '@Model.Version'
-   Source   = 'STEP 3 URL'
+   Source   = 'INTERNAL REPO URL'
 }
 </code></pre>
-                                    <p>Requires cChoco DSC Resource. See docs at <a href="https://github.com/chocolatey/cChoco" target="_blank" rel="noreferrer">https://github.com/chocolatey/cChoco</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="puppet" role="tabpanel" aria-labelledby="puppet-tab">
-<pre class="language-puppet line-numbers border py-3"><code>
+                                            </div>
+                                            <p>Requires cChoco DSC Resource. See docs at <a href="https://github.com/chocolatey/cChoco" target="_blank" rel="noreferrer">https://github.com/chocolatey/cChoco</a>.</p>
+                                        </div>
+                                        <div class="tab-pane fade" id="puppet" role="tabpanel" aria-labelledby="puppet-tab">
+                                            <div class="contains-internal-repo-url copy-command">
+<pre class="language-puppet line-numbers border py-3"><code class="command-organization-puppet">
 package { '@Model.Id.ToLower()':
   provider => 'chocolatey',
   ensure   => '@Model.Version',
-  source   => 'STEP 3 URL',
+  source   => 'INTERNAL REPO URL',
 }
 </code></pre>
-                                    <p>Requires Puppet Chocolatey Provider module. See docs at <a href="https://forge.puppet.com/puppetlabs/chocolatey" target="_blank" rel="noreferrer">https://forge.puppet.com/puppetlabs/chocolatey</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="salt" role="tabpanel" aria-labelledby="salt-tab">
-<pre class="language-powershell line-numbers border py-3"><code>
-salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source="STEP 3 URL"
-</code></pre>
-                                    <p>See docs at <a href="https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html" target="_blank" rel="noreferrer">https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html</a>.</p>
+                                            </div>
+                                            <p>Requires Puppet Chocolatey Provider module. See docs at <a href="https://forge.puppet.com/puppetlabs/chocolatey" target="_blank" rel="noreferrer">https://forge.puppet.com/puppetlabs/chocolatey</a>.</p>
+                                        </div>
+                                        <div class="tab-pane fade" id="salt" role="tabpanel" aria-labelledby="salt-tab">
+                                            <div class="contains-internal-repo-url copy-command">
+<pre class="language-powershell line-numbers border py-3"><code class="command-organization-salt">salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source="INTERNAL REPO URL"</code></pre>
+                                            </div>
+                                            <p>See docs at <a href="https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html" target="_blank" rel="noreferrer">https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html</a>.</p>
+                                        </div> 
+                                    </div>
+                                    <hr class="my-4" />
+                                    <h3>4. If applicable - Chocolatey configuration/installation</h3>
+                                    <p>See <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "features-infrastructure-automation" })#chocolatey-integration-implementation-with-common-configuration-managers">infrastructure management matrix</a> for Chocolatey configuration elements and examples.</p>
                                 </div>
                             </div>
-                            @*Step 5*@
-                            <h4 class="mt-4">5. If applicable - Chocolatey configuration/installation</h4>
-                            <p>See <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "features-infrastructure-automation" })#chocolatey-integration-implementation-with-common-configuration-managers">infrastructure management matrix</a> for Chocolatey configuration elements and examples.</p>
                         </div>
                     </div>
                 }
             }
             else
             {
-                <div class="bg-white p-3 shadow-sm mb-3">
-                    <p><strong>Note: </strong> Please <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "installation" })">visit our documentation</a> to learn how to install/uninstall @Model.Title.</p>
-                    <p class="mb-3">To upgrade @Model.Title, run the following command from the command line or from PowerShell:</p>
-                    <div class="input-group copyBox">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">></div>
-                        </div>
-                        <input type="text" class="form-control"
-                               value="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                               aria-label="Upgrade @Model.Title command"
-                               readonly>
-                        <div class="input-group-append">
-                            <button class="btn btn-primary tt"
-                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                    data-toggle="tooltip"
-                                    title="Copy to Clipboard"
-                                    data-clipboard-text="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                                <i class="fas fa-clipboard" aria-hidden="true">
-                                    <span class="sr-only">
-                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                        {<text> --version=@Model.Version</text>} @if (Model.Prerelease)
-                                        {<text> --pre </text>} to Clipboard
-                                    </span>
-                                </i>
-                            </button>
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <p><strong>Note: </strong> Please <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "installation" })">visit our documentation</a> to learn how to install/uninstall @Model.Title.</p>
+                        <p class="mb-3">To upgrade @Model.Title, run the following command from the command line or from PowerShell:</p>
+                        <div class="input-group copyBox">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">></div>
+                            </div>
+                            <input type="text" class="form-control"
+                                   value="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
+                                   aria-label="Upgrade @Model.Title command"
+                                   readonly>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary tt"
+                                        aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
+                                        data-toggle="tooltip"
+                                        title="Copy to Clipboard"
+                                        data-clipboard-text="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
+                                    <i class="fas fa-clipboard" aria-hidden="true">
+                                        <span class="sr-only">
+                                            Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
+                                            {<text> --version=@Model.Version</text>} @if (Model.Prerelease)
+                                            {<text> --pre </text>} to Clipboard
+                                        </span>
+                                    </i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             }
+                
             @*  Package Status & Notices *@
             @if (Model.IsDownloadCacheAvailable)
             {
@@ -1015,49 +1075,54 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                     }
                     <div class="collapse @if (Model.Status != PackageStatusType.Approved) {<text>show</text>} " id="add-comment">
                         <hr />
-                        <a class="h3 d-hash-none @if(Request.Cookies["chocolatey_hide_comment_instructions"] == null){<text>collapse show</text>}else{<text>collapsed</text>}" data-toggle="collapse" href="#instructions" role="button" aria-expanded="true" aria-controls="instructions" title="Instructions for @if(moderationRole){<text>Review</text>}else{<text>Comments</text>}">Instructions for @if(moderationRole){<text>Review</text>}else{<text>Comments</text>}</a>
-                        <div class="ml-0 collapse @if(Request.Cookies["chocolatey_hide_comment_instructions"] == null){<text>show</text>}" id="instructions">
-                        @if (moderationRole)
-                        {
-                            <ul>
-                                <li>Reviewers/Moderators must follow review process at <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "moderation" })#reviewer-moderator-process">moderation</a>.
-                                <li>**Please do not reject a package until the end of the conversation.**</li>
-                                <li>Check over the powershell scripts - anything look unsafe? Download urls should be official distro</li>
-                                @if (Model.Status == PackageStatusType.Approved || Model.Status == PackageStatusType.Exempted)
-                                {
-                                    <li>Moderators: Be very careful about moving a package from approved/exempt into submitted status. A package may be repushed when in this status (no matter how many downloads).</li>
-                                }
-                                @if (Model.Dependencies.DependencySets.Any())
-                                {
-                                    <li>Check dependencies, make sure they are listed on the site (approved if they needed to be moderated first).</li>
-                                }
-                                @if (!hasPreviousExistingVersions)
-                                {
-                                    <li>NOTE! This is a brand new package with no previous existing versions (prereleases do not count): check the name of the package. Does it meet the guidelines? This makes a package immediately rejectable as new package id will be submitted as a different package.</li>
-                                }
-                                <li>Check tags</li>
-                                <li>Keep in mind this is publicly visible, so do not share any sensitive data or anything you wouldn't want to share with the world.</li>
-                                <li>Be Nice! :)</li>
-                            </ul>
-                        }
+                        <a class="h3 d-hash-none @if(Request.Cookies["chocolatey_hide_comment_instructions"] == null){<text>collapse show</text>}else{<text>collapsed</text>}" data-toggle="collapse" href="#instructions" role="button" aria-expanded="true" aria-controls="instructions" title="Instructions for @if(moderationRole){<text>Review</text>}else{<text>Comments</text>}">
+                            Instructions for @if (moderationRole)
+                            {<text>Review</text>}
                         else
-                        {
-                            <ul>
-                                <li>You can respond to review comments here.</li>
-                                <li>Keep in mind this is publicly visible, so do not share any sensitive data or anything you wouldn't want to share with the world.</li>
-                                @if (Model.Status == PackageStatusType.Submitted)
-                                {
-                                    <li>You are also able to self-reject packages that may be out of date or incorrect (if the verifier fails the install). See <a href="@Url.RouteUrl(RouteName.FAQ)#how-do-i-self-reject-a-package">self-reject</a> for more information.</li>
-                                }
-                            </ul>
-                        }
+                        {<text>Comments</text>}
+                        </a>
+                        <div class="ml-0 collapse @if(Request.Cookies["chocolatey_hide_comment_instructions"] == null){<text>show</text>}" id="instructions">
+                            @if (moderationRole)
+                            {
+                                <ul>
+                                    <li>Reviewers/Moderators must follow review process at <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "moderation" })#reviewer-moderator-process">moderation</a>.
+                                    <li>**Please do not reject a package until the end of the conversation.**</li>
+                                    <li>Check over the powershell scripts - anything look unsafe? Download urls should be official distro</li>
+                                    @if (Model.Status == PackageStatusType.Approved || Model.Status == PackageStatusType.Exempted)
+                                    {
+                                        <li>Moderators: Be very careful about moving a package from approved/exempt into submitted status. A package may be repushed when in this status (no matter how many downloads).</li>
+                                    }
+                                    @if (Model.Dependencies.DependencySets.Any())
+                                    {
+                                        <li>Check dependencies, make sure they are listed on the site (approved if they needed to be moderated first).</li>
+                                    }
+                                    @if (!hasPreviousExistingVersions)
+                                    {
+                                        <li>NOTE! This is a brand new package with no previous existing versions (prereleases do not count): check the name of the package. Does it meet the guidelines? This makes a package immediately rejectable as new package id will be submitted as a different package.</li>
+                                    }
+                                    <li>Check tags</li>
+                                    <li>Keep in mind this is publicly visible, so do not share any sensitive data or anything you wouldn't want to share with the world.</li>
+                                    <li>Be Nice! :)</li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul>
+                                    <li>You can respond to review comments here.</li>
+                                    <li>Keep in mind this is publicly visible, so do not share any sensitive data or anything you wouldn't want to share with the world.</li>
+                                    @if (Model.Status == PackageStatusType.Submitted)
+                                    {
+                                        <li>You are also able to self-reject packages that may be out of date or incorrect (if the verifier fails the install). See <a href="@Url.RouteUrl(RouteName.FAQ)#how-do-i-self-reject-a-package">self-reject</a> for more information.</li>
+                                    }
+                                </ul>
+                            }
                         </div>
                         @using (Html.BeginForm())
                         {
                             <fieldset class="form mt-3">
                                 <div class="form-field d-label-none">
                                     @Html.LabelFor(m => m.NewReviewComments)
-                                    @Html.TextAreaFor(m => m.NewReviewComments, new {@class = "text-editor"})
+                                    @Html.TextAreaFor(m => m.NewReviewComments, new { @class = "text-editor" })
                                     @Html.ValidationMessageFor(m => m.NewReviewComments)
                                     <span class="field-hint-message"></span>
                                 </div>
@@ -1169,7 +1234,7 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                                             <label for="IsExemptedFromVerification" class="mt-2 mb-3">Exempt the package from verification testing?</label>
                                             <div class="form-field d-label-none pb-2">
                                                 @Html.LabelFor(m => m.ExemptedFromVerificationReason)
-                                                @Html.TextAreaFor(m => m.ExemptedFromVerificationReason, new {@class = "text-editor"})
+                                                @Html.TextAreaFor(m => m.ExemptedFromVerificationReason, new { @class = "text-editor" })
                                                 @Html.ValidationMessageFor(m => m.ExemptedFromVerificationReason)
                                             </div>
                                         }
@@ -1205,7 +1270,10 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                         {
                             var fileCount = Model.Files.Count();
                             <button type="button" class="btn btn-collapse-files mb-2 @if(fileCount <= 9){<text>btn-danger</text>}else if(fileCount > 9 && fileCount < 30){<text>btn-success</text>}else{<text>d-none</text>}">
-                                @if(fileCount <= 9){<text>Collapse</text>}else{<text>Expand</text>} All Files
+                                @if (fileCount <= 9)
+                                {<text>Collapse</text>}
+                            else
+                            {<text>Expand</text>} All Files
                             </button>
                         }
                         var packageFile = "file-path-" + @Model.Id.Replace(".", "-");
@@ -1301,8 +1369,8 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
 }
 &lt;/metadata&gt;
 &lt;/package&gt;</code></pre>
+                            </div>
                         </div>
-                    </div>
                     }
                     @if (Model.Files.Any())
                     {
@@ -1342,7 +1410,7 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                                         case ".js":
                                         case ".json":
                                             langBrush = "js";
-                                        break;
+                                            break;
                                         case ".template":
                                             langBrush = "none";
                                             if (file.FilePath.EndsWith(".nuspec.template"))
@@ -1441,6 +1509,10 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                         <table class="table table-hover mt-3">
                             <thead>
                                 <tr>
+                                    @if (Model.Title != "Chocolatey")
+                                    {
+                                        <th scope="col">Add to Builder</th>
+                                    }
                                     <th scope="col">Version</th>
                                     <th scope="col">Downloads</th>
                                     <th scope="col">Last Updated</th>
@@ -1541,7 +1613,6 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
         </div>
     </div>
 </section>
-
 @section BottomScripts {
     <script type="text/javascript" language="javascript">
         $(function () {
@@ -1564,14 +1635,12 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
         function disqus_config() {
             this.callbacks.onNewComment = [function (comment) {
             var commentViewModel = { Id: comment.id, Text: comment.text };
-
             // take the data and post it via json
             $.post('@commentPostUrl', commentViewModel, function (data) {
                 // At the minute, it is fire and forget
             });
             } ];
         }
-
         (function () {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
