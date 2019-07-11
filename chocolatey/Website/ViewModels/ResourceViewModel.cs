@@ -35,5 +35,6 @@ namespace NuGetGallery
         public string Quote { get; set; }
         public string Summary { get; set; }
         public string Post { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

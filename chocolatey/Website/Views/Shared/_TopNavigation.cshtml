@@ -2,7 +2,7 @@
 @{
     var moderationRole = User != null && User.IsInAnyModerationRole();
     var BaseHref = Request.Url.GetLeftPart(UriPartial.Authority);
-    var FullHref = Request.Url.GetLeftPart(UriPartial.Path);
+    var FullHref = Request.Url.GetLeftPart(UriPartial.Path) + Request.QueryString.ToString();
     var PackageListNav =
         (
             @FullHref == @BaseHref + "/packages" || @FullHref == @BaseHref + "/packages/" || @FullHref == @BaseHref + ("/search") || @FullHref == @BaseHref + ("/search/")
@@ -18,12 +18,13 @@
         );
     var ResourceNav =
         (
-            @FullHref.Contains("/docs") || Request.RawUrl == Url.RouteUrl(RouteName.BlogHome) || Request.RawUrl == Url.RouteUrl(RouteName.BlogArticle)
+            @FullHref.Contains("/docs") || Request.RawUrl == Url.RouteUrl(RouteName.BlogHome) || Request.RawUrl == Url.RouteUrl(RouteName.BlogArticle) || @FullHref.Contains("/resources")
         );
     var SuccessStoryNav =
         (Request.RawUrl == Url.RouteUrl(RouteName.Resources, new { resourceType = "success-stories" }));
     var CourseNav =
         (Request.Url.AbsoluteUri.ToLower().Contains("?quiz=true") || Request.RawUrl == Url.RouteUrl(RouteName.CourseName) && Request.RawUrl != Url.RouteUrl(RouteName.Courses));
+    var ResourceAreaNav = ViewContext.RouteData.Values["Action"].Equals("Resources") || ViewContext.RouteData.Values["Action"].Equals("ResourceName");
 }
 
 <header class="w-100 @if (!PackageListNav && !PackageAreaNav && !AccountNav && !ResourceNav && !CourseNav) {<text>mb-xl-3</text>}">
@@ -259,7 +260,7 @@
                         </div>
                     </div>
                 </li>
-                @if (!@FullHref.Contains("/docs") && !PackageListNav)
+                @if (!@FullHref.Contains("/docs") && !PackageListNav && !ResourceAreaNav)
                 {
                     <li class="nav-item d-none d-lg-block">
                         <div class="nav-search">
@@ -382,44 +383,58 @@
     }
     @if (ResourceNav)
     {
-        <nav id="secondaryNav" class="@if (SuccessStoryNav) {<text>successStoryNav</text>} navbar bg-white border-bottom d-none d-sm-flex">
-            <ul>
-                <li>
-                    <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">
-                        <span class="fas fa-play" alt="Videos"></span>
-                        <span>Videos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">
-                        <span class="fas fa-star" alt="Customer Success Stories"></span>
-                        <span>Success Stories</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">
-                        <span class="fas fa-briefcase" alt="Case Studies"></span>
-                        <span>Case Studies</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.RouteUrl(RouteName.Docs, new {docName = "home"})">
-                        <span class="fas fa-file" alt="Documentation"></span>
-                        <span>Docs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.RouteUrl(RouteName.BlogHome)">
-                        <span class="fas fa-rss" alt="Blog"></span>
-                        <span>Blog</span>
-                    </a>
-                </li>
-            </ul>
-            @*To be added when Success Story submission is ready*@
-            @*@if (SuccessStoryNav)
-                {
-                    <a href="#" class="btn btn-success d-none d-md-block">Submit Success Story</a>
-                }*@
-        </nav>
+        <section id="secondaryNav">
+            @if (ResourceAreaNav)
+            {
+                <div class="bg-primary d-none d-lg-block">
+                    <div class="container py-2">
+                        <div class="row">
+                            <div class="col-lg-6 mx-auto">
+                                @Html.Partial("~/Views/Shared/_SearchBox.cshtml")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <nav class="@if (SuccessStoryNav) {<text>successStoryNav</text>} navbar bg-white border-bottom d-none d-sm-flex">
+                <ul>
+                    <li>
+                        <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">
+                            <span class="fas fa-play" alt="Videos"></span>
+                            <span>Videos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">
+                            <span class="fas fa-star" alt="Customer Success Stories"></span>
+                            <span>Success Stories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">
+                            <span class="fas fa-briefcase" alt="Case Studies"></span>
+                            <span>Case Studies</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.RouteUrl(RouteName.Docs, new {docName = "home"})">
+                            <span class="fas fa-file" alt="Documentation"></span>
+                            <span>Docs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.RouteUrl(RouteName.BlogHome)">
+                            <span class="fas fa-rss" alt="Blog"></span>
+                            <span>Blog</span>
+                        </a>
+                    </li>
+                </ul>
+                @*To be added when Success Story submission is ready*@
+                @*@if (SuccessStoryNav)
+                    {
+                        <a href="#" class="btn btn-success d-none d-md-block">Submit Success Story</a>
+                    }*@
+            </nav>
+        </section>
     }
 </header>

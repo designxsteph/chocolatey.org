@@ -24,7 +24,7 @@
         {
             <h2 class="mb-0">
                 Search for "@ViewBag.SearchTerm" Returned @Model.Count()
-                @if (Model.Count() > 1)
+                @if (Model.Count() != 1)
                 {
                     <text>Resources</text>
                 }
@@ -107,6 +107,13 @@
                             {
                                 <h5>@post.Title</h5>
                             }
+                            <ul class="list-unstyled list-inline mb-0 small">
+                                <li class="list-inline-item mr-0">Tags: </li>
+                                @foreach (var tag in post.Tags)
+                                {
+                                    <li class="list-inline-item"><a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "search" })?q=tag:@tag" title="Search for @tag">@tag</a></li>
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>

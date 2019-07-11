@@ -6,15 +6,7 @@
     Bundles.Reference("Scripts");
 }
 
-<div id="header" class="bg-medium-dark">
-    <section class="py-3 py-lg-5">
-        <div class="container py-lg-5 text-center">
-            <h1 class="mb-0 display-3"><strong>Chocolatey Resource Library</strong></h1>
-        </div>
-    </section>
-    <div class="shape-border shape-border-bottom"></div>
-</div>
-<section>
+<section class="pt-3 pt-lg-5">
     <div class="container">
         <div class="row home-list">
             <div class="col-lg-4 col-sm-6 mb-4">
@@ -165,6 +157,13 @@
                                     {
                                         <h5 class="text-dark">@post.Title</h5>
                                     }
+                                    <ul class="list-unstyled list-inline mb-0 small">
+                                        <li class="list-inline-item mr-0 text-dark">Tags: </li>
+                                        @foreach (var tag in post.Tags)
+                                        {
+                                            <li class="list-inline-item"><a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "search" })?q=tag:@tag" title="Search for @tag">@tag</a></li>
+                                    }
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -202,6 +201,13 @@
                             <div class="card-footer">
                                 <h5>@post.Company</h5>
                                 <p><small><i>@post.Name, @post.Position</i></small></p>
+                                <ul class="list-unstyled list-inline mb-0 small">
+                                    <li class="list-inline-item mr-0 text-dark">Tags: </li>
+                                    @foreach (var tag in post.Tags)
+                                    {
+                                        <li class="list-inline-item"><a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "search" })?q=tag:@tag" title="Search for @tag">@tag</a></li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -237,6 +243,13 @@
                             </a>
                             <div class="card-footer">
                                 <h5>@post.Title</h5>
+                                <ul class="list-unstyled list-inline mb-0 small">
+                                    <li class="list-inline-item mr-0 text-dark">Tags: </li>
+                                    @foreach (var tag in post.Tags)
+                                    {
+                                        <li class="list-inline-item"><a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "search" })?q=tag:@tag" title="Search for @tag">@tag</a></li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -287,6 +300,13 @@
                             <div class="card-footer">
                                 <h5>@post.Company</h5>
                                 <p><small><i>@post.Name @if(!String.IsNullOrEmpty(post.Position)){<text>,</text> @post.Position}</i></small></p>
+                                <ul class="list-unstyled list-inline mb-0 small">
+                                    <li class="list-inline-item mr-0 text-dark">Tags: </li>
+                                    @foreach (var tag in post.Tags)
+                                    {
+                                        <li class="list-inline-item"><a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "search" })?q=tag:@tag" title="Search for @tag">@tag</a></li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>

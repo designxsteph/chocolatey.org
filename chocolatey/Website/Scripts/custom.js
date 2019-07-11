@@ -597,7 +597,7 @@ $('.nav-search .btn-search').click(function () {
     var btnSearchOption = btnSearch.prev().find('button');
 
     btnSearch.addClass('d-none').parent().find('form').removeClass('d-none').find('input').focus();
-    if (!btnSearchOption.hasClass('btn-docs') && document.location.pathname.indexOf("/docs") != 0) {
+    if (!btnSearchOption.hasClass('btn-docs') && document.location.pathname.indexOf("/docs") != 0 && document.location.pathname.indexOf("/resources") != 0) {
         btnSearchOption.html('<span class="small"><i class="fas fa-search" alt="Search Packages"></i> Packages</span>');
         btnSearchOption.after('<button class="btn btn-light btn-docs" type="submit" formaction="/docs/search"><span class="small"><i class="fas fa-file" alt="Search Docs"></i> Docs</span></button>');
     }

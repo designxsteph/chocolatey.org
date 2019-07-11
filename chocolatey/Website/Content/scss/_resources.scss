@@ -32,28 +32,21 @@
 }
 
 .home-list, .resource-list {
-    a {
+    .card {
+        transition: all 0.3s ease;
 
-        .card {
-            transition: all 0.3s ease;
-
-            .card-header span, .card-footer p {
-                color: $dark;
-            }
-
-            .card-footer h5 {
-                color: $primary;
-            }
+        .card-header span, .card-footer p {
+            color: $dark;
         }
+    }
 
-        .card:hover {
-            -webkit-transform: scale(0.98);
-            -ms-transform: scale(0.98);
-            transform: scale(0.98);
+    .card:not(.testimonial-3):hover {
+        -webkit-transform: scale(0.98);
+        -ms-transform: scale(0.98);
+        transform: scale(0.98);
 
-            .card-header span, .card-footer p, .card-footer h5 {
-                color: #3d8dd1;
-            }
+        .card-header span {
+            color: #3d8dd1;
         }
     }
 }

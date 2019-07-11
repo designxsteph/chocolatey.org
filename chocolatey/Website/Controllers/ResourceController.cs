@@ -49,11 +49,14 @@ namespace NuGetGallery.Controllers
         }
 
         [HttpGet, OutputCache(VaryByParam = "*", Location = OutputCacheLocation.Any, Duration = 7200)]
-        public ActionResult Resources(string resourceType)
+        public ActionResult Resources(string resourceType, string q)
         {
+            q = (q ?? string.Empty).Trim();
             resourceType = resourceType.Replace("-", "");
             var filePath = Server.MapPath("~/Views/Resources/{0}.cshtml".format_with(resourceType));
             var posts = GetPostsByMostRecentFirst();
+            ViewBag.SearchTerm = q;
+            var searchFound = false;
 
             // Find 6 most recent post and tag
             var recentPost = posts.Where(p => !p.Type.Equals("Testimonial")).Take(6);
@@ -65,6 +68,49 @@ namespace NuGetGallery.Controllers
                 post.Tags = postTags;
             }
             recentPost = posts.Where(p => p.Tags.Contains("recent"));
+
+            foreach (var post in posts)
+            {
+                // Get queries needed for search
+                var titleQuery = Request.QueryString["q"] ?? string.Empty;
+                var tagQuery = titleQuery.ToLower().Contains("tag");
+
+                // Search posts
+                var searchTitle = !tagQuery && post.Title.ToLower().Contains(ViewBag.SearchTerm.ToLower());
+                var searchTag = tagQuery && post.Tags.Contains(titleQuery.ToString().Replace("+", string.Empty).Substring(4));
+                var searchAll = searchTitle || post.Tags.Contains(titleQuery);
+
+                // Find post search results
+                var titleResults = posts.Where(p => p.Title.ToLower().Contains(ViewBag.SearchTerm.ToLower()));
+                var tagResults = posts.Where(p => p.Tags.Contains(titleQuery));
+
+                if (!string.IsNullOrEmpty(ViewBag.SearchTerm) && searchAll || searchTag)
+                {
+                    searchFound = true;
+
+                    if (searchAll && searchFound) // no tag: specified- search everything
+                    {
+                        posts = titleResults.Union(tagResults);
+                    }
+                    else if (searchTag && searchFound) // tag: specified- search tags only
+                    {
+                        tagResults = posts.Where(p => p.Tags.Contains(titleQuery.ToString().Replace("+", string.Empty).Substring(4)));
+                        posts = tagResults;
+                    }
+                }
+            }
+
+            // Has a query string, but no searches found- return 0
+            if (!string.IsNullOrEmpty(ViewBag.SearchTerm) && !searchFound)
+            {
+                posts = Enumerable.Empty<ResourceViewModel>();
+            }
+
+            // If any search
+            if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+            {
+                ViewBag.Title = "Resources matching " + ViewBag.SearchTerm;
+            }
 
             // Success Stories Page
             if (resourceType == "successstories")
@@ -80,8 +126,8 @@ namespace NuGetGallery.Controllers
                 posts = posts.Where(p => p.Type.Equals("Case Study"));
             }
 
-            // Videos Page
-            if (resourceType == "videos")
+            // Videos Page (no search)
+            if (resourceType == "videos" && string.IsNullOrEmpty(ViewBag.SearchTerm))
             {
                 ViewBag.Title = "Videos";
                 posts = posts.Where(p => !p.Type.Equals("Testimonial"));
@@ -126,10 +172,12 @@ namespace NuGetGallery.Controllers
         }
 
         [HttpGet, OutputCache(VaryByParam = "*", Location = OutputCacheLocation.Any, Duration = 7200)]
-        public ActionResult ResourceName(string resourceType, string resourceName)
+        public ActionResult ResourceName(string resourceType, string resourceName, string q)
         {
+            q = (q ?? string.Empty).Trim();
             var resourceNameNoHyphens = resourceName.Replace("-", "");
             var filePath = Server.MapPath("~/Views/Resources/Files/{0}.md".format_with(resourceNameNoHyphens));
+            ViewBag.SearchTerm = q;
 
             if (_fileSystem.FileExists(filePath))
             {
@@ -192,7 +240,7 @@ namespace NuGetGallery.Controllers
                 model.Summary = GetPostMetadataValue("Summary", contents);
                 model.Post = Markdown.ToHtml(contents.Remove(0, contents.IndexOf("---") + 3), MarkdownPipeline);
             }
-
+            
             return model;
         }
 
