@@ -30,7 +30,7 @@ namespace NuGetGallery
         public string Company { get; set; }
         public string Position { get; set; }
         public string Video { get; set; }
-        public string Tags { get; set; }
+        public string[] Tags { get; set; }
         public string Image { get; set; }
         public string Quote { get; set; }
         public string Summary { get; set; }

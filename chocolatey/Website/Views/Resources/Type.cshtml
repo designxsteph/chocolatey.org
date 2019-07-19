@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ResourceViewModel>
+@{
+    Bundles.Reference("Content/dist/chocolatey.slim.css");
+    Bundles.Reference("Scripts");
+}
+@section ExtraHeaders {
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+}
+
+@Html.Partial("~/Views/Shared/_Loader.cshtml")
+<section class="py-3 py-lg-5">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+        {
+            <h2 class="mb-0">
+                Search for "@ViewBag.SearchTerm" Returned @Model.Count()
+                @if (Model.Count() > 1)
+                {
+                    <text>Resources</text>
+                }
+                else
+                {
+                    <text>Resource</text>
+                }
+            </h2>
+        }
+        else
+        {
+            <h2 class="mb-0">There are @Model.Count() @ViewBag.Title</h2>
+        }
+        @Html.Partial("~/Views/Resources/_BreadCrumbs.cshtml")
+        <div class="row pt-3 resource-list">
+            @foreach (var post in @Model)
+            {
+                var successStory = post.Type.Contains("Customer Success Story");
+                var caseStudy = post.Type.Contains("Case Study");
+                var video = post.Type.Contains("Video");
+
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <a href="
+                            @if (successStory)
+                            {
+                                @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "success-stories", resourceName = post.UrlPath })
+                            }
+                            else if (video)
+                            {
+                                @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "videos", resourceName = post.UrlPath })
+                            }
+                            else if (caseStudy)
+                            {
+                                @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "case-studies", resourceName = post.UrlPath })
+                            }
+                        ">
+                            <div class="card-header font-weight-bold bg-medium-light text-center">
+                                @if (successStory)
+                                {
+                                    <span class="fas fa-star" alt="Customer Success Stories"></span>
+                                }
+                                else if (video)
+                                {
+                                    <span class="fas fa-play" alt="Videos"></span>
+                                }
+                                else if (caseStudy)
+                                {
+                                    <span class="fas fa-briefcase" alt="Case Studies"></span>
+                                }
+                                <span>@post.Type</span>
+                            </div>
+                            <div class="card-body p-0">
+                                @Html.Raw(post.Image)
+                            </div>
+                        </a>
+                        <div class="card-footer">
+                            @if (successStory)
+                            {
+                                <h5>@post.Company</h5>
+                                <p><small><i>@post.Name, @post.Position</i></small></p>
+                            }
+                            else if (video || caseStudy)
+                            {
+                                <h5>@post.Title</h5>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

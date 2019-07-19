@@ -22,8 +22,9 @@
 
 <section class="py-3 py-lg-5">
     <div class="container">
-         @Html.Partial("~/Views/Resources/_BreadCrumbs.cshtml")
-        <div class="row shuffle">
+        <h2 class="mb-0">@ViewBag.Title</h2>
+        @Html.Partial("~/Views/Resources/_BreadCrumbs.cshtml")
+        <div class="row pt-3 shuffle">
             @Html.Partial("~/Views/Pages/_WrittenTestimonials.cshtml")
         </div>
     </div>

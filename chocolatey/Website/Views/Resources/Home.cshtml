@@ -31,7 +31,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6 mb-4">
-                <a href="@Url.RouteUrl(RouteName.Docs, new {docName = "home"})">
+                <a href="@Url.RouteUrl(RouteName.Docs, new { docName = "home" })">
                     <div class="card h-100">
                         <div class="card-body p-0 d-flex justify-content-center flex-column text-center">
                             <span class="fas fa-file display-1"></span>
@@ -44,7 +44,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6 mb-4">
-                <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">
+                <a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "case-studies" })">
                     <div class="card h-100">
                         <div class="card-body p-0 d-flex justify-content-center flex-column text-center">
                             <span class="fas fa-briefcase display-1"></span>
@@ -57,7 +57,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6 mb-4">
-                <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">
+                <a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "videos" })">
                     <div class="card h-100">
                         <div class="card-body p-0 d-flex justify-content-center flex-column text-center">
                             <span class="fas fa-play display-1"></span>
@@ -70,7 +70,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6 mb-4">
-                <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">
+                <a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "success-stories" })">
                     <div class="card h-100">
                         <div class="card-body p-0 d-flex justify-content-center flex-column text-center">
                             <span class="fas fa-star display-1"></span>
@@ -104,28 +104,27 @@
     <section class="py-3 py-lg-5">
         <div class="container">
             <h1 class="mb-5 text-center"><strong>Featured Resources</strong></h1>
-            <div class="row resource-list resource-d-3">
+            <div class="row resource-list">
                 @foreach (var post in @Model)
                 {
                     if (post.Tags.Contains("featured"))
                     {
-
                         <div class="col-lg-4 col-sm-6 mb-4">
-                            <a href="
-                               @if (post.Type.Contains("Customer Success Story"))
-                                {
-                                    @Url.RouteUrl(RouteName.ResourceName, new { resourceType= "success-stories", resourceName = post.UrlPath })
-                                }
-                                else if (post.Type.Contains("Video"))
-                                {
-                                    @Url.RouteUrl(RouteName.ResourceName, new { resourceType= "videos", resourceName = post.UrlPath })
-                                }
-                                else if (post.Type.Contains("Case Study"))
-                                {
-                                    @Url.RouteUrl(RouteName.ResourceName, new { resourceType= "case-studies", resourceName = post.UrlPath })
-                                }
-                            ">
-                                <div class="card h-100">
+                            <div class="card h-100">
+                                <a href="
+                                   @if (post.Type.Contains("Customer Success Story"))
+                                   {
+                                        @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "success-stories", resourceName = post.UrlPath })
+                                   }
+                                   else if (post.Type.Contains("Video"))
+                                   {
+                                        @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "videos", resourceName = post.UrlPath })
+                                   }
+                                   else if (post.Type.Contains("Case Study"))
+                                   {
+                                        @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "case-studies", resourceName = post.UrlPath })
+                                   }
+                                ">
                                     <div class="card-header font-weight-bold bg-medium-light text-dark text-center">
                                         @if (post.Type.Contains("Customer Success Story"))
                                         {
@@ -155,26 +154,26 @@
                                             @Html.Raw(post.Image)
                                         }
                                     </div>
-                                    <div class="card-footer">
-                                        @if (post.Type.Contains("Customer Success Story"))
-                                        {
-                                            <h5>@post.Company</h5>
-                                            <p><small><i>@post.Name, @post.Position</i></small></p>
-                                        }
-                                        else if (post.Type.Contains("Video") || post.Type.Contains("Case Study"))
-                                        {
-                                            <h5>@post.Title</h5>
-                                        }
-                                    </div>
+                                </a>
+                                <div class="card-footer">
+                                    @if (post.Type.Contains("Customer Success Story"))
+                                    {
+                                        <h5 class="text-dark">@post.Company</h5>
+                                        <p class="text-dark"><small><i>@post.Name, @post.Position</i></small></p>
+                                    }
+                                    else if (post.Type.Contains("Video") || post.Type.Contains("Case Study"))
+                                    {
+                                        <h5 class="text-dark">@post.Title</h5>
+                                    }
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     }
                 }
             </div>
             <div class="row text-center">
                 <div class="col-12">
-                    <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})" class="btn btn-light">See More Videos</a>
+                    <a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "videos" })" class="btn btn-light">See More Videos</a>
                 </div>
             </div>
         </div>
@@ -184,14 +183,14 @@
 <section id="resources-success-stories" class="pb-3 pb-lg-5">
     <div class="container">
         <h1 class="mb-5 text-center"><strong>Success Stories</strong></h1>
-        <div class="row resource-list resource-d-3">
+        <div class="row resource-list">
             @foreach (var post in @Model)
             {
-                if (post.Tags.Contains("success-story"))
+                if (post.Type.Contains("Customer Success Story"))
                 {
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <a href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "success-stories", resourceName = post.UrlPath })">
-                            <div class="card h-100">
+                        <div class="card h-100">
+                            <a href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType = "success-stories", resourceName = post.UrlPath })">
                                 <div class="card-header font-weight-bold bg-medium-light text-center">
                                     <span class="fas fa-star" alt="Customer Success Stories"></span>
                                     <span>@post.Type</span>
@@ -199,19 +198,19 @@
                                 <div class="card-body p-0">
                                     @Html.Raw(post.Image)
                                 </div>
-                                <div class="card-footer">
-                                    <h5>@post.Company</h5>
-                                    <p><small><i>@post.Name, @post.Position</i></small></p>
-                                </div>
+                            </a>
+                            <div class="card-footer">
+                                <h5>@post.Company</h5>
+                                <p><small><i>@post.Name, @post.Position</i></small></p>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 }
             }
         </div>
         <div class="row text-center">
             <div class="col-12">
-                <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})" class="btn btn-primary">See More Success Stories</a>
+                <a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "success-stories" })" class="btn btn-primary">See More Success Stories</a>
             </div>
         </div>
     </div>
@@ -219,14 +218,15 @@
 <section id="resources-case-studies" class="pt-3 pt-lg-5 bg-white">
     <div class="container">
         <h1 class="mb-5 text-center"><strong>Case Studies</strong></h1>
-        <div class="row resource-list resource-d-3">
+        <div class="row resource-list">
             @foreach (var post in @Model)
             {
                 if (post.Type.Contains("Case Study"))
                 {
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <a href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "case-studies", resourceName = post.UrlPath })">
-                            <div class="card h-100">
+                       
+                        <div class="card h-100">
+                            <a href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType = "case-studies", resourceName = post.UrlPath })">
                                 <div class="card-header font-weight-bold bg-medium-light text-center">
                                     <span class="fas fa-briefcase" alt="Case Studies"></span>
                                     <span>@post.Type</span>
@@ -234,18 +234,18 @@
                                 <div class="card-body p-0">
                                     @Html.Raw(post.Image)
                                 </div>
-                                <div class="card-footer">
-                                    <h5>@post.Title</h5>
-                                </div>
+                            </a>
+                            <div class="card-footer">
+                                <h5>@post.Title</h5>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 }
             }
         </div>
         <div class="row text-center">
             <div class="col-12">
-                <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})" class="btn btn-primary">See More Case Studies</a>
+                <a href="@Url.RouteUrl(RouteName.Resources, new { resourceType = "case-studies" })" class="btn btn-primary">See More Case Studies</a>
             </div>
         </div>
     </div>
@@ -279,35 +279,38 @@
 <section class="py-3 py-lg-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 updated-list resource-d-6">
+            <div class="col-md-6 updated-list">
                 <h3>Recently Updated Resources</h3>
                 <hr />
                 @foreach (var post in @Model)
                 {
-                    <a href="
-                    @if (post.Type.Contains("Customer Success Story"))
+                    if (post.Tags.Contains("recent"))
                     {
-                        @Url.RouteUrl(RouteName.ResourceName, new { resourceType= "success-stories", resourceName = post.UrlPath })
+                        <a href="
+                        @if (post.Type.Contains("Customer Success Story"))
+                        {
+                            @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "success-stories", resourceName = post.UrlPath })
+                        }
+                        else if (post.Type.Contains("Video"))
+                        {
+                            @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "videos", resourceName = post.UrlPath })
+                        }
+                        else if (post.Type.Contains("Case Study"))
+                        {
+                            @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "case-studies", resourceName = post.UrlPath })
+                        }
+                        ">
+                            <div>
+                                @post.Title
+                                <br />
+                                <span>@post.Published.GetValueOrDefault().ToLongDateString()</span>
+                            </div>
+                            <hr />
+                        </a>
                     }
-                    else if (post.Type.Contains("Video"))
-                    {
-                        @Url.RouteUrl(RouteName.ResourceName, new {resourceType= "videos", resourceName = post.UrlPath })
-                    }
-                    else if (post.Type.Contains("Case Study"))
-                    {
-                        @Url.RouteUrl(RouteName.ResourceName, new { resourceType= "case-studies", resourceName = post.UrlPath })
-                    }
-                    ">
-                        <div>
-                            @post.Title
-                            <br />
-                            <span>@post.Published.GetValueOrDefault().ToLongDateString()</span>
-                        </div>
-                        <hr />
-                    </a>
                 }
             </div>
-            <div class="col-md-6 helpful-list resource-d-3">
+            <div class="col-md-6 helpful-list">
                 <h3>Helpful Resources</h3>
                 <hr />
                 @foreach (var post in @Model)

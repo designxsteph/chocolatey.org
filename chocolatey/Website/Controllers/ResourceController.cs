@@ -55,12 +55,63 @@ namespace NuGetGallery.Controllers
             var filePath = Server.MapPath("~/Views/Resources/{0}.cshtml".format_with(resourceType));
             var posts = GetPostsByMostRecentFirst();
 
-            if (_fileSystem.FileExists(filePath))
+            // Find 6 most recent post and tag
+            var recentPost = posts.Take(6);
+            foreach (var post in recentPost)
+            {
+                String[] postTags = post.Tags;
+                Array.Resize(ref postTags, postTags.Length + 1);
+                postTags[postTags.Length - 1] = "recent";
+                post.Tags = postTags;
+            }
+            recentPost = posts.Where(p => p.Tags.Contains("recent"));
+
+            // Success Stories Page
+            if (resourceType == "successstories")
+            {
+                ViewBag.Title = "Customer Success Stories";
+                posts = posts.Where(p => p.Type.Equals("Customer Success Story"));
+            }
+
+            // Case Studies Page
+            if (resourceType == "casestudies")
+            {
+                ViewBag.Title = "Case Studies";
+                posts = posts.Where(p => p.Type.Equals("Case Study"));
+            }
+
+            // Videos Page
+            if (resourceType == "videos")
+            {
+                ViewBag.Title = "Videos";
+            }
+
+            // Home Page
+            if (resourceType == "home")
+            {
+                // Randomize Posts
+                posts = posts.OrderBy(a => Guid.NewGuid()).ToList();
+
+                var featuredPost = posts.Where(p => p.Tags.Contains("featured"));
+                featuredPost = featuredPost.Count() > 3 ? featuredPost.Skip(featuredPost.Count() - 2) : featuredPost;
+
+                var successStoryPost = posts.Where(p => p.Type.Equals("Customer Success Story")).Where(p => !p.Tags.Contains("featured"));
+                successStoryPost = successStoryPost.Count() > 3 ? successStoryPost.Skip(successStoryPost.Count() - 2) : successStoryPost;
+
+                var caseStudyPost = posts.Where(p => p.Type.Equals("Case Study")).Where(p => !p.Tags.Contains("featured"));
+                caseStudyPost = caseStudyPost.Count() > 3 ? caseStudyPost.Skip(caseStudyPost.Count() - 2) : caseStudyPost;
+
+                posts = successStoryPost.Union(caseStudyPost).Union(featuredPost);
+                posts = posts.Union(recentPost).OrderByDescending(p => p.Published).ToList();
+            }
+
+            // Return Views
+            if (resourceType == "home" || resourceType == "testimonials")
             {
                 return View("~/Views/Resources/{0}.cshtml".format_with(resourceType), posts);
             }
 
-            return RedirectToAction("PageNotFound", "Error");
+            return View("~/Views/Resources/Type.cshtml", "~/Views/Resources/_Layout.cshtml", posts);
         }
 
         [HttpGet, OutputCache(VaryByParam = "*", Location = OutputCacheLocation.Any, Duration = 7200)]
@@ -124,7 +175,7 @@ namespace NuGetGallery.Controllers
                 model.Company = GetPostMetadataValue("Company", contents);
                 model.Position = GetPostMetadataValue("Position", contents);
                 model.Video = GetPostMetadataValue("Video", contents);
-                model.Tags = GetPostMetadataValue("Tags", contents);
+                model.Tags = GetPostMetadataValue("Tags", contents).Split(' ');
                 model.Image = Markdown.ToHtml(GetPostMetadataValue("Image", contents), MarkdownPipeline);
                 model.Quote = GetPostMetadataValue("Quote", contents);
                 model.Summary = GetPostMetadataValue("Summary", contents);
