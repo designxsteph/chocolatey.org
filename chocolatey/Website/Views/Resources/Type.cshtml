@@ -23,8 +23,8 @@
         @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
         {
             <h2 class="mb-0">
-                Search for "@ViewBag.SearchTerm" Returned @Model.Count()
-                @if (Model.Count() != 1)
+            	Search for "@ViewBag.SearchTerm" Returned @ViewBag.TotalCount
+                @if (@ViewBag.TotalCount != 1)
                 {
                     <text>Resources</text>
                 }
@@ -36,7 +36,11 @@
         }
         else
         {
-            <h2 class="mb-0">There are @Model.Count() @ViewBag.Title</h2>
+            <h2 class="mb-0">There are @ViewBag.TotalCount @ViewBag.Title</h2>
+        }
+        @if (ViewBag.TotalCount >= 1)
+        {
+            <p class="mb-0">Displaying Results @ViewBag.FirstIndex - @ViewBag.LastIndex of @ViewBag.TotalCount</p>
         }
         @Html.Partial("~/Views/Resources/_BreadCrumbs.cshtml")
         <div class="row pt-3 resource-list">
@@ -119,5 +123,32 @@
                 </div>
             }
         </div>
+        @if (ViewBag.TotalCount > Model.Count())
+        {
+            <ul class="pager mt-3 mb-0 p-0 list-unstyled text-center h5 list-inline">
+                <li class="previous list-inline-item pr-3 mr-0">
+                    @if (ViewBag.hasPreviousPage == true)
+                    {
+                        <a href="@Request.Url.GetLeftPart(UriPartial.Path)?@if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                        {<text>q=@ViewBag.SearchTerm&</text>}page=@ViewBag.PreviousPage">Previous</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted" title="No previous pages.">Previous</span>
+                    }
+                </li>
+                <li class="next list-inline-item pl-2">
+                    @if (ViewBag.hasNextPage == true)
+                    {
+                        <a href="@Request.Url.GetLeftPart(UriPartial.Path)?@if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                        {<text>q=@ViewBag.SearchTerm&</text>}page=@ViewBag.NextPage">Next</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted" title="No further pages">Next</span>
+                    }
+                </li>
+            </ul>
+        }
     </div>
 </section>

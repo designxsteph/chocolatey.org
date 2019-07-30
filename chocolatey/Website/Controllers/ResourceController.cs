@@ -49,9 +49,10 @@ namespace NuGetGallery.Controllers
         }
 
         [HttpGet, OutputCache(VaryByParam = "*", Location = OutputCacheLocation.Any, Duration = 7200)]
-        public ActionResult Resources(string resourceType, string q)
+        public ActionResult Resources(string resourceType, string q, int page = 1)
         {
             q = (q ?? string.Empty).Trim();
+            if (page < 1) page = 1;
             resourceType = resourceType.Replace("-", "");
             var filePath = Server.MapPath("~/Views/Resources/{0}.cshtml".format_with(resourceType));
             var posts = GetPostsByMostRecentFirst();
@@ -160,6 +161,28 @@ namespace NuGetGallery.Controllers
 
                 posts = successStoryPost.Union(caseStudyPost).Union(testimonialPost).Union(featuredPost);
                 posts = posts.Union(recentPost).OrderByDescending(p => p.Published).ToList();
+            }
+
+            // Paging
+            const int pageSize = 30; // Resources to be shown on each page
+            ViewBag.TotalCount = posts.Count(); // Gets total count 
+            posts = posts.Skip((page - 1) * pageSize).Take(pageSize).ToList(); // Shows number of resources on page based on pageSize
+            ViewBag.LastIndex = page * posts.Count();
+            ViewBag.FirstIndex = ViewBag.LastIndex - pageSize + 1;
+            ViewBag.NextPage = page + 1;
+            ViewBag.PreviousPage = page - 1;
+            if (posts.Count() < pageSize)
+            {
+                ViewBag.LastIndex = ViewBag.TotalCount;
+                ViewBag.FirstIndex = ViewBag.LastIndex - posts.Count() + 1;
+            }
+            if (ViewBag.LastIndex != ViewBag.TotalCount)
+            {
+                ViewBag.hasNextPage = true;
+            }
+            if (ViewBag.FirstIndex > posts.Count())
+            {
+                ViewBag.hasPreviousPage = true;
             }
 
             // Return Views

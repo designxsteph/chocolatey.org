@@ -28,10 +28,6 @@
 .package-grid-view .media-body > :nth-child(2) {
     margin-left: -50px;
 }
-/*Pagination*/
-ul.pager li.previous {
-    border-right: solid 1px #1a375a;
-}
 /*Individual Packages*/
 textarea {
     padding: 1rem;

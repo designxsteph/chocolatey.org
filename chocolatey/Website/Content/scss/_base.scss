@@ -284,6 +284,10 @@ input[type="text"]:disabled, .video-story div[data-toggle]:hover {
     border-radius: $border-radius;
 }
 
+ul.pager li.previous {
+    border-right: solid 1px $dark;
+}
+
 /*Load More/Show Less*/
 #showLess {
     display: none;
