@@ -213,19 +213,19 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="preferenceGridView">
+                                            <input type="checkbox" class="custom-control-input" id="preferenceGridView" @if(Model.PreferenceGridView == "true"){<text>checked</text>}>
                                             <label class="custom-control-label" for="preferenceGridView">Make grid view your default view?</label>
                                         </div>
                                         @if (moderationRole)
                                         {
                                             <div class="custom-control custom-switch mt-3">
-                                                <input type="checkbox" class="custom-control-input" id="preferenceModView">
+                                                <input type="checkbox" class="custom-control-input" id="preferenceModView" @if(Model.PreferenceModView == "true"){<text>checked</text>}>
                                                 <label class="custom-control-label" for="preferenceModView">Make the Moderator Queue your default view?</label>
                                             </div>
                                         }
                                     </div>
                                     <div class="modal-footer text-right">
-                                        <button class="btn btn-success btn-preferences">Save Preferences</button>
+                                        <button class="btn btn-success btn-preferences" data-dismiss="modal">Save Preferences</button>
                                         <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@
                 <button class="btn btn-primary w-100 d-sm-none" type="button" data-toggle="collapse" data-target="#search-filters" aria-controls="search filters" aria-expanded="false" aria-label="Toggle Search Filters">View Search Filters</button>
                 <div class="collapse navbar-collapse" id="search-filters">
                     <div class="navbar-nav d-block w-100 mt-2 mt-sm-0">
-                        <form method="get" action="">
+                        <form id="package-filter" method="get" action="">
                             <fieldset class="form search">
                                 <input type="hidden" name="q" value="@Model.SearchTerm" />
                                 <div class="form-row align-items-center">
@@ -285,6 +285,14 @@
                                         <a href="@if(@FullHref == @BaseHref + "/packages"){<text>@Url.RouteUrl(RouteName.ListPackages)</text>}else if(@FullHref == @BaseHref + "/search"){<text>@Url.RouteUrl(RouteName.SearchResults)</text>}" class="btn btn-outline-primary"><span class="fas fa-sync"></span><span class="d-sm-none d-md-inline-block ml-2 ml-sm-0 ml-md-2">Reset Filters</span></a>
                                     </div>
                                 </div>
+                                <select class="d-none" name="preferenceGridView" id="preferenceGridView">
+                                    @ViewHelpers.Option("false", "List View", Model.PreferenceGridView)
+                                    @ViewHelpers.Option("true", "Grid View", Model.PreferenceGridView)
+                                </select>
+                                <select class="d-none" name="preferenceModView" id="preferenceModView">
+                                    @ViewHelpers.Option("false", "Normal View", Model.PreferenceModView)
+                                    @ViewHelpers.Option("true", "Moderator Queue", Model.PreferenceModView)
+                                </select>
                             </fieldset>
                         </form>
                     </div>

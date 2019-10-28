@@ -364,7 +364,7 @@ namespace NuGetGallery
         }
 
         [HttpGet, OutputCache(VaryByParam = "*", Location = OutputCacheLocation.Any, Duration = 30)]
-        public virtual ActionResult ListPackages(string q, string sortOrder = null, int page = 1, bool prerelease = false, bool moderatorQueue = false, string moderationStatus = null)
+        public virtual ActionResult ListPackages(string q, string sortOrder = null, int page = 1, bool prerelease = false, bool moderatorQueue = false, string moderationStatus = null, bool preferenceGridView = false, bool preferenceModView = false)
         {
             if (page < 1) page = 1;
             q = (q ?? string.Empty).Trim();
@@ -372,9 +372,19 @@ namespace NuGetGallery
             IQueryable<Package> packageVersions = packageSvc.GetPackagesForListing(prerelease);
             IEnumerable<Package> packagesToShow = new List<Package>();
 
-            if (Request.Cookies["preferenceModView"] != null && string.IsNullOrWhiteSpace(q) && String.IsNullOrEmpty(sortOrder))
+
+            if (Request.Cookies["preferenceGridView"] != null)
             {
-                moderatorQueue = true;
+                preferenceGridView = true;
+            }
+            if (Request.Cookies["preferenceModView"] != null)
+            {
+                preferenceModView = true;
+
+                if (string.IsNullOrWhiteSpace(q) && String.IsNullOrEmpty(sortOrder))
+                {
+                    moderatorQueue = true;
+                }
             }
 
             if (moderatorQueue)
@@ -657,7 +667,7 @@ namespace NuGetGallery
             }
 
             var viewModel = new PackageListViewModel(
-                packagesToShow, q, sortOrder, totalHits, page - 1, Constants.DefaultPackageListPageSize, Url, prerelease, moderatorQueue, updatedPackagesCount, unreviewedPackagesCount, waitingPackagesCount, respondedPackagesCount, moderationStatus);
+                packagesToShow, q, sortOrder, totalHits, page - 1, Constants.DefaultPackageListPageSize, Url, prerelease, moderatorQueue, updatedPackagesCount, unreviewedPackagesCount, waitingPackagesCount, respondedPackagesCount, moderationStatus, preferenceGridView, preferenceModView);
 
             ViewBag.SearchTerm = q;
 

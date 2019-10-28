@@ -1,38 +1,39 @@
 // Package Preferences
 $(function () {
     var preferenceGridView = $('#preferenceGridView');
-    var gridView = getCookie("preferenceGridView");
+    var gridView = getCookie('preferenceGridView');
     var preferenceModView = $('#preferenceModView');
-    var modView = getCookie("preferenceModView");
-
-    // Legacy script- Delete in 30 days for users to get cookied instead of using localstorage
-    if (window.localStorage.getItem('view')) {
-        document.cookie = "preferenceModView=true";
-        localStorage.removeItem("view");
-        location.reload();
-    }
-    // End legacy script
-    if (gridView) {
-        preferenceGridView.prop("checked", true);
-    }
-    if (modView) {
-        preferenceModView.prop("checked", true);
+    var modView = getCookie('preferenceModView');
+    if (!document.location.search.length) {
+        if (gridView || modView) {
+            $('#search-filters form').submit();
+        }
     }
     // Save Preferences
     $('.btn-preferences').click(function () {
         if (preferenceGridView.prop("checked") == true) {
             document.cookie = "preferenceGridView=true";
+            $("#preferenceGridView option[value='true']").prop('selected', true);
         }
         else if (preferenceGridView.prop("checked") == false) {
             document.cookie = "preferenceGridView=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            $("#preferenceGridView option[value='false']").prop('selected', true);
         }
         if (preferenceModView.prop("checked") == true) {
             document.cookie = "preferenceModView=true";
+            $("#preferenceModView option[value='true']").prop('selected', true);
+            //$("#moderatorQueue option[value='true']").prop('selected', true);
         }
         else if (preferenceModView.prop("checked") == false) {
             document.cookie = "preferenceModView=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            $("#preferenceModView option[value='false']").prop('selected', true);
+            //$("#moderatorQueue option[value='false']").prop('selected', true);
         }
-        location.reload();
+        $('#search-filters form').submit();
+    });
+    // Package Filtering
+    $('#search-filters .form-control').change(function () {
+        $('#search-filters form').submit();
     });
     // Package warning callout
     $('#callout-package-warning a[data-toggle="collapse"]').click(function () {
@@ -40,11 +41,8 @@ $(function () {
     });
 });
 
-// Package Filtering
+// Disclaimer Model
 $(function () {
-    $("#sortOrder,#prerelease,#moderatorQueue,#moderationStatus").change(function () {
-        $(this).closest("form").submit();
-    });
     Closeable.modal("chocolatey_hide_packages_disclaimer");
     if (!getCookie('chocolatey_hide_packages_disclaimer')) {
         $(".modal-closeable").css('display', 'block');

@@ -233,7 +233,7 @@ namespace NuGetGallery {
         }
 
 
-        public override System.Web.Mvc.ActionResult ListPackages(string q, string sortOrder, int page, bool prerelease, bool moderatorQueue, string moderationStatus) {
+        public override System.Web.Mvc.ActionResult ListPackages(string q, string sortOrder, int page, bool prerelease, bool moderatorQueue, string moderationStatus, bool preferenceGridView, bool preferenceModView) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ListPackages);
 
 
@@ -248,6 +248,10 @@ namespace NuGetGallery {
             callInfo.RouteValueDictionary.Add("moderatorQueue", moderatorQueue);
 
             callInfo.RouteValueDictionary.Add("moderationStatus", moderationStatus);
+
+            callInfo.RouteValueDictionary.Add("preferenceGridView", preferenceGridView);
+
+            callInfo.RouteValueDictionary.Add("preferenceModView", preferenceModView);
 
             return callInfo;
         }

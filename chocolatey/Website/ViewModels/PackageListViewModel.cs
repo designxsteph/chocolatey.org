@@ -39,7 +39,9 @@ namespace NuGetGallery
             int submittedCount,
             int waitingCount,
             int respondedCount,
-            string moderationStatus)
+            string moderationStatus,
+            bool preferenceGridView,
+            bool preferenceModView)
         {
             // TODO: Implement actual sorting
             IEnumerable<ListPackageItemViewModel> items;
@@ -61,14 +63,14 @@ namespace NuGetGallery
                 items,
                 PageIndex,
                 pageCount,
-                page => url.PackageList(page, sortOrder, searchTerm, includePrerelease, moderatorQueue, moderationStatus)
+                page => url.PackageList(page, sortOrder, searchTerm, includePrerelease, moderatorQueue, moderationStatus, preferenceGridView, preferenceModView)
                 );
 
             var pagerSearch = new PreviousNextPagerViewModel<ListPackageItemViewModel>(
                 items,
                 PageIndex,
                 pageCount,
-                page => url.SearchResults(page, sortOrder, searchTerm, includePrerelease, moderatorQueue, moderationStatus)
+                page => url.SearchResults(page, sortOrder, searchTerm, includePrerelease, moderatorQueue, moderationStatus, preferenceGridView, preferenceModView)
                 );
 
             Items = pager.Items;
@@ -82,6 +84,8 @@ namespace NuGetGallery
             ModerationSubmittedPackageCount = submittedCount;
             ModerationWaitingPackageCount = waitingCount;
             ModerationRespondedPackageCount = respondedCount;
+            PreferenceGridView = preferenceGridView ? "true" : null;
+            PreferenceModView = preferenceModView ? "true" : null;
         }
 
         public int FirstResultIndex { get; set; }
@@ -114,5 +118,8 @@ namespace NuGetGallery
         public int ModerationSubmittedPackageCount { get; private set; }
         public int ModerationWaitingPackageCount { get; private set; }
         public int ModerationRespondedPackageCount { get; private set; }
+
+        public string PreferenceGridView { get; private set; }
+        public string PreferenceModView { get; private set; }
     }
 }

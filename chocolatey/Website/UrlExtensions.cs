@@ -42,15 +42,15 @@ namespace NuGetGallery
         }
 
         public static string SearchResults(
-            this UrlHelper url, int page, string sortOrder, string searchTerm, bool prerelease, bool moderatorQueue, string moderationStatus)
+            this UrlHelper url, int page, string sortOrder, string searchTerm, bool prerelease, bool moderatorQueue, string moderationStatus, bool preferenceGridView, bool preferenceModView)
         {
-            return url.RouteUrl(RouteName.SearchResults, new { searchTerm, sortOrder, page, prerelease, moderatorQueue, moderationStatus });
+            return url.RouteUrl(RouteName.SearchResults, new { searchTerm, sortOrder, page, prerelease, moderatorQueue, moderationStatus, preferenceGridView, preferenceModView });
         }
 
         public static string PackageList(
-            this UrlHelper url, int page, string sortOrder, string searchTerm, bool prerelease, bool moderatorQueue, string moderationStatus)
+            this UrlHelper url, int page, string sortOrder, string searchTerm, bool prerelease, bool moderatorQueue, string moderationStatus, bool preferenceGridView, bool preferenceModView)
         {
-            return url.Action(MVC.Packages.ListPackages(searchTerm, sortOrder, page, prerelease, moderatorQueue, moderationStatus));
+            return url.Action(MVC.Packages.ListPackages(searchTerm, sortOrder, page, prerelease, moderatorQueue, moderationStatus, preferenceGridView, preferenceModView));
         }
 
         public static string PackageList(this UrlHelper url)
