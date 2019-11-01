@@ -346,4 +346,16 @@
         };
     </script>
     <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+    <script>
+       $(function () {
+            var profile = $(".ux_profile");
+            if (getCookie('.ChocolateyGalleryAuthentication')) {
+                profile.html('<span class="fas fa-user-alt" alt="Profile"></span><span>Profile</span>');
+                profile.prop('href', '@Url.Action(MVC.Users.Profiles(User.Identity.Name))');
+            }
+            else {
+                profile.parent().remove();
+           }
+       });
+    </script>
 }
