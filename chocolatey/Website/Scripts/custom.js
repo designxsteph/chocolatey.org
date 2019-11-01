@@ -115,7 +115,7 @@ $(function () {
         }
     }
     // Change hash on tab/collapse click and prevent scrolling
-    $('[data-toggle="tab"], [data-toggle="collapse"]').click(function (e) {
+    $('[data-toggle="tab"], [data-toggle="collapse"]').not('.d-hash-none').click(function (e) {
         if (history.pushState) {
             history.pushState(null, null, e.target.hash);
         } else {

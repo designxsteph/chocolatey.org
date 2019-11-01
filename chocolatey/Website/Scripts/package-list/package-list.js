@@ -4,10 +4,16 @@ $(function () {
     var gridView = getCookie('preferenceGridView');
     var preferenceModView = $('#preferenceModView');
     var modView = getCookie('preferenceModView');
+    var preferencePackageWarning = $('#callout-package-warning a[data-toggle="collapse"]');
+    var packageWarning = getCookie('chocolatey_hide_packages_warning');
     if (!document.location.search.length) {
         if (gridView || modView) {
             $('#search-filters form').submit();
         }
+    }
+    if (packageWarning) {
+        $('#package-warning').collapse('hide');
+        preferencePackageWarning.text(preferencePackageWarning.text().replace('Hide', 'Show'));
     }
     // Save Preferences
     $('.btn-preferences').click(function () {
@@ -36,7 +42,7 @@ $(function () {
         $('#search-filters form').submit();
     });
     // Package warning callout
-    $('#callout-package-warning a[data-toggle="collapse"]').click(function () {
+    preferencePackageWarning.click(function () {
         document.cookie = "chocolatey_hide_packages_warning=true";
     });
 });
