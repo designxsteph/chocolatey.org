@@ -45,47 +45,63 @@
                 var successStory = post.Type.Contains("Customer Success Story");
                 var caseStudy = post.Type.Contains("Case Study");
                 var video = post.Type.Contains("Video");
+                var testimonial = post.Type.Contains("Testimonial");
 
                 <div class="col-lg-4 col-sm-6 mb-4">
-                    <div class="card h-100">
-                        <a href="
-                            @if (successStory)
-                            {
-                                @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "success-stories", resourceName = post.UrlPath })
-                            }
-                            else if (video)
-                            {
-                                @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "videos", resourceName = post.UrlPath })
-                            }
-                            else if (caseStudy)
-                            {
-                                @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "case-studies", resourceName = post.UrlPath })
-                            }
-                        ">
-                            <div class="card-header font-weight-bold bg-medium-light text-center">
+                    <div class="card h-100 @if(testimonial){<text>testimonial-3</text>}">
+                        @if (testimonial)
+                        {
+                            <div class="card-body pb-0">
+                                @if (!String.IsNullOrEmpty(post.Image))
+                                {
+                                    <div class="justify-content-center align-items-center d-flex mb-3">
+                                        @Html.Raw(post.Image)
+                                    </div>
+                                }
+                                @Html.Raw(post.Post)
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="
                                 @if (successStory)
                                 {
-                                    <span class="fas fa-star" alt="Customer Success Stories"></span>
+                                    @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "success-stories", resourceName = post.UrlPath })
                                 }
                                 else if (video)
                                 {
-                                    <span class="fas fa-play" alt="Videos"></span>
+                                    @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "videos", resourceName = post.UrlPath })
                                 }
                                 else if (caseStudy)
                                 {
-                                    <span class="fas fa-briefcase" alt="Case Studies"></span>
+                                    @Url.RouteUrl(RouteName.ResourceName, new { resourceType = "case-studies", resourceName = post.UrlPath })
                                 }
-                                <span>@post.Type</span>
-                            </div>
-                            <div class="card-body p-0">
-                                @Html.Raw(post.Image)
-                            </div>
-                        </a>
+                            ">
+                                <div class="card-header font-weight-bold bg-medium-light text-center">
+                                    @if (successStory)
+                                    {
+                                        <span class="fas fa-star" alt="Customer Success Stories"></span>
+                                    }
+                                    else if (video)
+                                    {
+                                        <span class="fas fa-play" alt="Videos"></span>
+                                    }
+                                    else if (caseStudy)
+                                    {
+                                        <span class="fas fa-briefcase" alt="Case Studies"></span>
+                                    }
+                                    <span>@post.Type</span>
+                                </div>
+                                <div class="card-body p-0">
+                                    @Html.Raw(post.Image)
+                                </div>
+                            </a>
+                        }
                         <div class="card-footer">
-                            @if (successStory)
+                            @if (successStory || testimonial)
                             {
                                 <h5>@post.Company</h5>
-                                <p><small><i>@post.Name, @post.Position</i></small></p>
+                                <p><small><i>@post.Name @if(!String.IsNullOrEmpty(post.Position)){<text>,</text>} @post.Position</i></small></p>
                             }
                             else if (video || caseStudy)
                             {

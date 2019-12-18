@@ -56,7 +56,7 @@ namespace NuGetGallery.Controllers
             var posts = GetPostsByMostRecentFirst();
 
             // Find 6 most recent post and tag
-            var recentPost = posts.Take(6);
+            var recentPost = posts.Where(p => !p.Type.Equals("Testimonial")).Take(6);
             foreach (var post in recentPost)
             {
                 String[] postTags = post.Tags;
@@ -84,6 +84,14 @@ namespace NuGetGallery.Controllers
             if (resourceType == "videos")
             {
                 ViewBag.Title = "Videos";
+                posts = posts.Where(p => !p.Type.Equals("Testimonial"));
+            }
+
+            // Testimonials Page
+            if (resourceType == "testimonials")
+            {
+                ViewBag.Title = "Testimonials";
+                posts = posts.Where(p => p.Type.Equals("Testimonial"));
             }
 
             // Home Page
@@ -101,12 +109,15 @@ namespace NuGetGallery.Controllers
                 var caseStudyPost = posts.Where(p => p.Type.Equals("Case Study")).Where(p => !p.Tags.Contains("featured"));
                 caseStudyPost = caseStudyPost.Count() > 3 ? caseStudyPost.Skip(caseStudyPost.Count() - 2) : caseStudyPost;
 
-                posts = successStoryPost.Union(caseStudyPost).Union(featuredPost);
+                var testimonialPost = posts.Where(p => p.Type.Equals("Testimonial")).Where(p => !p.Tags.Contains("featured"));
+                testimonialPost = testimonialPost.Count() > 3 ? testimonialPost.Skip(testimonialPost.Count() - 3) : testimonialPost;
+
+                posts = successStoryPost.Union(caseStudyPost).Union(testimonialPost).Union(featuredPost);
                 posts = posts.Union(recentPost).OrderByDescending(p => p.Published).ToList();
             }
 
             // Return Views
-            if (resourceType == "home" || resourceType == "testimonials")
+            if (resourceType == "home")
             {
                 return View("~/Views/Resources/{0}.cshtml".format_with(resourceType), posts);
             }

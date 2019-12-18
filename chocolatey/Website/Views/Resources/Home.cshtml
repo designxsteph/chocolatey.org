@@ -268,8 +268,30 @@
 </div>
 <section class="pb-3 pb-lg-5 bg-white">
     <div class="container">
-        <div class="row resource-d-3 shuffle">
-            @Html.Partial("~/Views/Pages/_WrittenTestimonials.cshtml")
+        <div class="row resource-list">
+            @foreach (var post in @Model)
+            {
+                if (post.Type.Contains("Testimonial"))
+                {
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="card h-100 testimonial-3">
+                            <div class="card-body pb-0">
+                                @if (!String.IsNullOrEmpty(post.Image))
+                                {
+                                    <div class="justify-content-center align-items-center d-flex mb-3">
+                                        @Html.Raw(post.Image)
+                                    </div>
+                                }
+                                @Html.Raw(post.Post)
+                            </div>
+                            <div class="card-footer">
+                                <h5>@post.Company</h5>
+                                <p><small><i>@post.Name @if(!String.IsNullOrEmpty(post.Position)){<text>,</text> @post.Position}</i></small></p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
         </div>
         <div class="text-center">
             <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "testimonials"})" class="btn btn-primary">See More Testimonials</a>

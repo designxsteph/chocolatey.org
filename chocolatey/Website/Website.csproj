@@ -1520,6 +1520,7 @@
     <Content Include="Views\Resources\Files\03-08-MarkJohnsonChocoFest18.md" />
     <Content Include="Views\Resources\Files\03-12-StevenMurawskiChocoFest18.md" />
     <Content Include="Views\Resources\Files\03-14-YelpChocoFest18.md" />
+    <Content Include="Views\Resources\Files\04-01-Pride.md" />
     <Content Include="Views\Courses\GettingStarted\WhatIsChocolatey.cshtml" />
     <Content Include="Views\Courses\Home.cshtml" />
     <Content Include="Views\Courses\_ModuleLayout.cshtml" />
@@ -1585,8 +1586,6 @@
     <Content Include="Views\Shared\_Loader.cshtml" />
     <Content Include="Views\Documentation\Documentation.cshtml" />
     <Content Include="Views\Documentation\DocumentationLayout.cshtml" />
-    <Content Include="Views\Pages\_WrittenTestimonials.cshtml" />
-    <Content Include="Views\Resources\Testimonials.cshtml" />
     <Content Include="Views\Resources\Files\03-01-AzureVmWithChocolatey.md" />
     <Content Include="Views\Resources\Files\03-05-JFrogWebinar.md" />
     <Content Include="Views\Resources\Files\03-09-MicrosoftBuild18.md" />
@@ -1743,6 +1742,15 @@
     <Content Include="Views\Shared\NewsletterLayout.cshtml" />
     <Content Include="Views\Shared\_NewsletterNavigation.cshtml" />
     <Content Include="Views\Shared\_Modals.cshtml" />
+    <Content Include="Views\Resources\Files\04-04-MPAC.md" />
+    <Content Include="Views\Resources\Files\04-03-Tricore.md" />
+    <Content Include="Views\Resources\Files\04-02-TheSageColleges.md" />
+    <Content Include="Views\Resources\Files\04-05-UniversityOfDerby.md" />
+    <Content Include="Views\Resources\Files\04-06-JCVI.md" />
+    <Content Include="Views\Resources\Files\04-07-EastCentralCollege.md" />
+    <Content Include="Views\Resources\Files\04-08-EauClaireEnergyCooperative.md" />
+    <Content Include="Views\Resources\Files\04-09-CornellUniversity.md" />
+    <Content Include="Views\Resources\Files\04-10-Fortego.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

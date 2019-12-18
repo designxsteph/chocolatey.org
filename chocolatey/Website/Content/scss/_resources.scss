@@ -1,5 +1,4 @@
 .resource-list {
-
     .card-body img {
         max-width: 100%;
     }
@@ -15,6 +14,10 @@
         p, h5 {
             margin: 0;
         }
+    }
+
+    .testimonial-3 .card-footer {
+        height: auto;
     }
 }
 
