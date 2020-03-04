@@ -1,30 +1,43 @@
+// Variable overrides
+@import "Content/scss/chocolatey-variables";
+
 /*Tooltips*/
-.bs-tooltip-top {
-    top: -8px !important;
-    left: 4px !important;
+.tooltip .arrow {
+    position: absolute;
+    display: block;
+    width: 0.8rem;
+    height: 0.4rem;
 }
 
-.bs-tooltip-top .arrow {
-    bottom: -6px;
+.tooltip .arrow::before {
+    position: absolute;
+    content: "";
+    border-color: transparent;
+    border-style: solid;
+}
+
+.bs-tooltip-top, .bs-tooltip-auto[x-placement^="top"] {
+    padding: 0.4rem 0;
+}
+
+.bs-tooltip-top .arrow, .bs-tooltip-auto[x-placement^="top"] .arrow {
+    bottom: 0;
+}
+
+.bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
+    top: 0;
+    border-width: 0.4rem 0.4rem 0;
+    border-top-color: $tooltip-bg;
 }
 
 .tooltip-inner {
     max-width: 200px;
-    padding: 3px 8px;
-    color: #fff;
-    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    color: $white;
     text-align: center;
-    background-color: #3d8dd1;
-    border-radius: .25rem;
+    background-color: $tooltip-bg;
+    border-radius: 0.25rem;
 }
-
-.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
-    margin-left: -3px;
-    content: "";
-    border-width: 5px 5px 0;
-    border-top-color: #3d8dd1;
-}
-
 /*Invisible Input*/
 .invisible-input {
     display: none;
