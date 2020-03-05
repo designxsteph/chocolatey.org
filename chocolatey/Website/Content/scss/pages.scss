@@ -1,4 +1,7 @@
-﻿/*Pricing- Tables*/
+﻿// Variable overrides
+@import "Content/scss/chocolatey-variables";
+
+/*Pricing- Tables*/
 #compare table, #compare tbody {
     display: inline-block;
 }

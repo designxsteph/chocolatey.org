@@ -1,8 +1,8 @@
 #header {
-    background: #7db9e8;
-    background: -moz-linear-gradient(-45deg, rgba(61, 141, 209,0.96) 0%, rgba(125,185,232,0.93) 100%), url("/Content/images/headers/home.jpg");
-    background: -webkit-linear-gradient(-45deg, rgba(61, 141, 209,0.96) 0%,rgba(125,185,232,0.93) 100%), url("/Content/images/headers/home.jpg");
-    background: linear-gradient(135deg, rgba(61, 141, 209,0.96) 0%,rgba(125,185,232,0.93) 100%), url("/Content/images/headers/home.jpg");
+    background: $primary;
+    background: -moz-linear-gradient(-45deg, rgba(darken($primary, 15%), .96) 0%, rgba(lighten($primary, 15%), .93) 100%), url("/Content/images/headers/home.jpg");
+    background: -webkit-linear-gradient(-45deg, rgba(darken($primary, 15%), .96) 0%, rgba(lighten($primary, 15%), .93) 100%), url("/Content/images/headers/home.jpg");
+    background: linear-gradient(135deg, rgba(darken($primary, 15%), .96) 0%, rgba(lighten($primary, 15%), .93) 100%), url("/Content/images/headers/home.jpg");
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e61a375a', endColorstr='#e67db9e8',GradientType=1 );
     background-size: cover !important;
     background-repeat: no-repeat !important;
@@ -10,16 +10,16 @@
     border-top: 0;
 
     &.team-header {
-        background: -moz-linear-gradient(-45deg, rgba(61, 141, 209,0.95) 0%, rgba(125,185,232,0.95) 100%), url("/Content/images/headers/chocolatey-staff.jpg");
-        background: -webkit-linear-gradient(-45deg, rgba(61, 141, 209,0.95) 0%,rgba(125,185,232,0.95) 100%), url("/Content/images/headers/chocolatey-staff.jpg");
-        background: linear-gradient(135deg, rgba(61, 141, 209,0.95) 0%,rgba(125,185,232,0.95) 100%), url("/Content/images/headers/chocolatey-staff.jpg");
+        background: -moz-linear-gradient(-45deg, rgba(darken($primary, 15%), .95) 0%, rgba(lighten($primary, 15%), .95) 100%), url("/Content/images/headers/chocolatey-staff.jpg");
+        background: -webkit-linear-gradient(-45deg, rgba(darken($primary, 15%), .95) 0%, rgba(lighten($primary, 15%), .95) 100%), url("/Content/images/headers/chocolatey-staff.jpg");
+        background: linear-gradient(135deg, rgba(darken($primary, 15%), .95) 0%, rgba(lighten($primary, 15%), .95) 100%), url("/Content/images/headers/chocolatey-staff.jpg");
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e61a375a', endColorstr='#e67db9e8',GradientType=1 );
     }
-    
+
     &.community-header {
-        background: -moz-linear-gradient(-45deg, rgba(61, 141, 209,0.75) 0%, rgba(125,185,232,0.85) 100%), url("/Content/images/headers/web.jpg");
-        background: -webkit-linear-gradient(-45deg, rgba(61, 141, 209,0.75) 0%,rgba(125,185,232,0.85) 100%), url("/Content/images/headers/web.jpg");
-        background: linear-gradient(135deg, rgba(61, 141, 209,0.75) 0%,rgba(125,185,232,0.85) 100%), url("/Content/images/headers/web.jpg");
+        background: -moz-linear-gradient(-45deg, rgba(darken($primary, 15%), .75) 0%, rgba(lighten($primary, 15%), .85) 100%), url("/Content/images/headers/web.jpg");
+        background: -webkit-linear-gradient(-45deg, rgba(darken($primary, 15%), .75) 0%, rgba(lighten($primary, 15%), .85) 100%), url("/Content/images/headers/web.jpg");
+        background: linear-gradient(135deg, rgba(darken($primary, 15%), .75) 0%, rgba(lighten($primary, 15%), .85) 100%), url("/Content/images/headers/web.jpg");
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e61a375a', endColorstr='#e67db9e8',GradientType=1 );
     }
 

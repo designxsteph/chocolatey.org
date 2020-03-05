@@ -14,7 +14,7 @@
     <AssemblyName>NuGetGallery.Website</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
@@ -1048,9 +1048,11 @@
     <Content Include="apple-touch-icon-76x76.png" />
     <Content Include="apple-touch-icon.png" />
     <Content Include="cloudflare-ratelimited.html" />
-    <Content Include="Content\account.css" />
-    <Content Include="Content\dist\chocolatey.slim.css" />
-    <Content Include="Content\easymde.min.css" />
+    <Content Include="Content\dist\account.min.css" />
+    <Content Include="Content\dist\chocolatey.slim.min.css" />
+    <Content Include="Content\dist\packages.min.css" />
+    <Content Include="Content\dist\pages.min.css" />
+    <Content Include="Content\easymde\easymde.min.css" />
     <Content Include="Content\fonts\fa-brands-400.svg" />
     <Content Include="Content\fonts\fa-solid-900.svg" />
     <Content Include="Content\Images\404.png" />
@@ -1351,8 +1353,6 @@
     <Content Include="Content\Images\videos\01-05.jpg" />
     <Content Include="Content\Images\xmark.png" />
     <Content Include="Content\Images\YourPackage.png" />
-    <Content Include="Content\packages.css" />
-    <Content Include="Content\pages.css" />
     <Content Include="Content\prism\prism.css" />
     <Content Include="..\..\nugetgallery\Website\api\Web.config">
       <Link>api\Web.config</Link>
@@ -1393,6 +1393,9 @@
     <Content Include="Content\fonts\fa-solid-900.woff" />
     <Content Include="Content\fonts\fa-solid-900.woff2" />
     <Content Include="Content\scss\_search.scss" />
+    <Content Include="Content\scss\account.scss" />
+    <Content Include="Content\scss\packages.scss" />
+    <Content Include="Content\scss\pages.scss" />
     <None Include="optipng.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

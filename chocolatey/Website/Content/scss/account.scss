@@ -1,4 +1,7 @@
-﻿#account .logo {
+﻿// Variable overrides
+@import "Content/scss/chocolatey-variables";
+
+#account .logo {
     max-width: 200px;
     transform: translateY(.10em) rotate(10deg) scale(1) translateX(0);
     margin-top: 10px;

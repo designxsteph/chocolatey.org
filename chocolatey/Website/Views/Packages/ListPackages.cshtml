@@ -8,8 +8,8 @@
     var moderationCount = Model.ModerationUpdatedPackageCount + Model.ModerationSubmittedPackageCount + Model.ModerationWaitingPackageCount + Model.ModerationRespondedPackageCount;
     var moderationReadyPackageCount = Model.ModerationSubmittedPackageCount - Model.ModerationPendingAutoReviewPackageCount;
     var moderationRole = User != null && User.IsInAnyModerationRole();
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/packages.css");
+    Bundles.Reference("Content/dist/chocolatey.slim.min.css");
+    Bundles.Reference("Content/dist/packages.min.css");
     Bundles.Reference("Scripts");
     Bundles.Reference("Scripts/package-list");
     Bundles.Reference("Scripts/closeable");

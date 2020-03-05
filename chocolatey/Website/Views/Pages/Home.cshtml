@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "Chocolatey - The package manager for Windows";
     ViewBag.Tab = "Home";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
+    Bundles.Reference("Content/dist/chocolatey.slim.min.css");
     Bundles.Reference("Scripts");
     Bundles.Reference("Scripts/home");
 
@@ -12,7 +12,7 @@
     var callout = false;
 }
 
-<div id="header" class="bg-medium-dark ">
+<div id="header">
     <section class="py-3 py-lg-5">
         <div class="container py-lg-5 text-center">
             <h1 class="display-3">The <strong>Package Manager</strong> for Windows</h1>

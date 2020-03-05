@@ -18,7 +18,7 @@ function compileSass() {
         .pipe(gulp.dest(dist));
 }
 
-function purge() {
+function purgeCss() {
     return gulp.src(dist + "/chocolatey.css")
         .pipe(purgecss({
             content: [
@@ -35,9 +35,19 @@ function purge() {
         .pipe(gulp.dest(dist));
 }
 
-function optimize() {
+function concatCss() {
     return gulp.src([dist + "/chocolatey.purge.css", dist + "/purge.css"])
         .pipe(concat("chocolatey.slim.css"))
+        .pipe(gulp.dest(dist));
+}
+
+function optimizeCss() {
+    return gulp.src([
+        dist + "/*.css",
+        "!" + dist + "/purge.css",
+        "!" + dist + "/chocolatey.css",
+        "!" + dist + "/chocolatey.purge.css"
+    ])
         .pipe(minifyCss({
             compatibility: 'ie8',
             level: {
@@ -47,16 +57,23 @@ function optimize() {
                 2: {}
             }
         }))
+        .pipe(rename(function (path) {
+            path.basename += ".min";
+        }))
         .pipe(gulp.dest(dist));
-        .on('end', function () {
-            del([dist + "/purge.css"]);
-        });
+}
+
+function cleanEnd() {
+    return del([dist + "/*.css", "!" + dist + "/*.min.css"]);
 }
 
 // Task
 gulp.task("clean-task", gulp.series(clean));
 gulp.task("compileSass-task", gulp.series(compileSass));
-gulp.task("purge-task", gulp.series(purge));
-gulp.task("optimize-task", gulp.series(optimize));
+gulp.task("purgeCss-task", gulp.series(purgeCss));
+gulp.task("concatCss-task", gulp.series(concatCss));
+gulp.task("optimizeCss-task", gulp.series(optimizeCss));
+gulp.task("cleanEnd-task", gulp.series(cleanEnd));
 
-gulp.task("default", gulp.series(clean, compileSass, purge, optimize));
+
+gulp.task("default", gulp.series(clean, compileSass, purgeCss, concatCss, optimizeCss, cleanEnd));

@@ -1,15 +1,19 @@
-// Variables
-$gray-100: #f8f9fa;
-$white: #ffffff;
-
 // Default Colors
 $blue: #5c9fd8;
 $red: #f4516c;
 $green: #36bc98;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$purple: #6f42c1;
+$gray-100: #f8f9fa;
 $gray-800: #202f3c; // dark
 $medium-light: #e9ecef;
 $medium: #2f6492;
 $medium-dark: #1a375a;
+$white: #ffffff;
+
+// Default Scheme
+$primary: $blue;
 
 // FontAwesome
 $fa-font-path: "../../Content/fonts";
@@ -28,7 +32,7 @@ $input-btn-padding-x-sm: 6px;
 $btn-font-weight: 700;
 
 // Tooltips
-$tooltip-bg: darken($blue, 15%);
+$tooltip-bg: darken($primary, 15%);
 
 // Cards
 $card-border-radius: 0;
@@ -41,12 +45,12 @@ $alert-border-width: 0;
 
 // Custom Select
 $custom-select-indicator: "";
-$input-border-color: $blue;
+$input-border-color: $primary;
 $input-disabled-bg: $white;
 
 // Carousel
-$carousel-indicator-active-bg: $blue;
-$carousel-control-color: $blue;
+$carousel-indicator-active-bg: $primary;
+$carousel-control-color: $primary;
 $carousel-control-opacity: 1;
 $carousel-control-hover-opacity: .7;
 
@@ -59,7 +63,7 @@ $breadcrumb-bg: transparent;
 
 // Custom Select
 $custom-select-indicator: "";
-$input-border-color: $blue;
+$input-border-color: $primary;
 $custom-control-indicator-size: 1.5rem;
 
 // Tabs

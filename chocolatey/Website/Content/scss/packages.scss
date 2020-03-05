@@ -1,18 +1,21 @@
-﻿/*Form- Filters on Packages Page*/
+﻿// Variable overrides
+@import "Content/scss/chocolatey-variables";
+
+/*Form- Filters on Packages Page*/
 .form-field label {
-    color: #21446d !important;
+    color: $gray-800 !important;
 }
 /*Package Overview*/
 .badge-orange {
-    background: #fd7e14
+    background: $orange;
 }
 .badge-purple {
-    background: #6f42c1;
-    color: white;
+    background: $purple;
+    color: $white;
 }
 .badge-outline-primary {
-    background: white;
-    border: 1px solid #5c9fd8;
+    background: $white;
+    border: 1px solid $primary;
 }
 /*Package List View*/
 .package-list-view .package-image-header {
@@ -30,7 +33,7 @@
 }
 /*Pagination*/
 ul.pager li.previous {
-    border-right: solid 1px #1a375a;
+    border-right: solid 1px $gray-800;
 }
 /*Individual Packages*/
 textarea {
@@ -129,14 +132,14 @@ textarea {
     font-weight: bold;
 }
 .virus-scan-light > span {
-    background: #ffc107;
+    background: $yellow;
 }
 .virus-scan-medium > span {
-    background: #fd7e14;
+    background: $orange;
 }
 .virus-scan-dark > span {
-    background: #f4516c;
-    color: #fff;
+    background: $red;
+    color: $white;
 }
 
 @media (min-width: 768px) {
