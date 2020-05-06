@@ -179,10 +179,65 @@ ul.list-style-type-disc, .blockquote.list-style-type-disc > ul {
     display: none;
 }
 
+ul#cyclelist {
+    position: relative;
+    height: 60px;
+
+    li {
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto
+    }
+}
+
+.list-business-logos [class*="col"] .business-logo {
+    background: $white;
+    height: 70px;
+    width: 195px;
+}
+
+@include media-breakpoint-up(sm) {
+    .list-business-logos [class*="col"] {
+        &:nth-child(even) {
+            margin-top: -25px !important;
+        }
+
+        &:nth-child(odd) {
+            margin-bottom: -25px !important;
+        }
+
+        .business-logo {
+            height: 60px;
+            width: 83px;
+        }
+    }
+}
+
 @include media-breakpoint-up(md) {
     .divider-list li:not(:last-child) {
         border-right: 1px solid #ced4da;
         border-bottom: 0;
         display: inline-block;
+    }
+
+    .list-business-logos [class*="col"] .business-logo {
+        height: 80px;
+        width: 122px;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .list-business-logos [class*="col"] .business-logo {
+        height: 100px;
+        width: 166px;
+    }
+}
+
+@include media-breakpoint-up(xl) {
+    .list-business-logos [class*="col"] .business-logo {
+        height: 125px;
+        width: 200px;
     }
 }

@@ -1,4 +1,4 @@
-#header {
+#header:not(.ccm-header) {
     background: #7db9e8;
     background: -moz-linear-gradient(-45deg, rgba(61, 141, 209,0.96) 0%, rgba(125,185,232,0.93) 100%), url("/Content/images/headers/home.jpg");
     background: -webkit-linear-gradient(-45deg, rgba(61, 141, 209,0.96) 0%,rgba(125,185,232,0.93) 100%), url("/Content/images/headers/home.jpg");

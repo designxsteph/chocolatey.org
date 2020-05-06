@@ -1,0 +1,551 @@
+﻿@{
+    ViewBag.Title = "Chocolatey Central Management";
+    Bundles.Reference("Content/dist/chocolatey.slim.css");
+    Bundles.Reference("Scripts");
+    Bundles.Reference("Scripts/jquery-zoom");
+
+    var description = "";
+}
+@section ExtraHeaders {
+    <meta property="og:description" content="@description" />
+    <meta property="description" content="@description" />
+}
+
+@*<section id="header" class="py-3 py-lg-5 bg-dark border-top-dark ccm-header">
+    <div class="container-fluid py-lg-5 text-white">
+        <div class="d-lg-flex align-items-center justify-content-center">
+            <div class="order-lg-2 text-center text-lg-left">
+                <h2 class="mb-0 text-muted-dark">THIS IS</h2>
+                <h1 class="mb-0">Chocolatey Central Management</h1>
+                <ul id="cyclelist" class="list-unstyled text-primary">
+                    <li>
+                        <h1 class="font-weight-bold display-3">Deployments</h1>
+                    </li>
+                    <li>
+                        <h1 class="font-weight-bold display-3">Reporting</h1>
+                    </li>
+                    <li>
+                        <h1 class="font-weight-bold display-3">Groups</h1>
+                    </li>
+                </ul>
+            </div>
+            <div class="mr-lg-5">
+                <div class="text-center text-lg-right mb-3"><img class="img-fluid shadow" src="https://picsum.photos/300" /></div>
+            </div>
+        </div>
+    </div>
+</section>*@
+<span class="d-none zoomImg"></span>
+<section class="bg-primary py-3 py-lg-5">
+    <div class="container d-flex flex-column">
+        <div class="text-center">
+            <img class="img-fluid" src="@Url.Content("~/content/images/chocolatey-logo.png")" /><br />
+            <img class="img-fluid" src="@Url.Content("~/content/images/ccm/central-management-logo.png")" />
+        </div>
+    </div>
+</section>
+<section id="secondaryNav" class="sticky-top c4b-nav">
+    <nav class="navbar bg-white border-bottom d-none d-sm-flex">
+        <ul>
+            <li>
+                <a href="#feature-1">
+                    <span class="fas fa-hand-holding-heart" alt="Overview"></span>
+                    <span>Overview</span>
+                </a>
+            </li>
+            <li>
+                <a href="#feature-2">
+                    <span class="fas fa-paper-plane" alt="Deployments"></span>
+                    <span>Deployments</span>
+                </a>
+            </li>
+            <li>
+                <a href="#feature-3">
+                    <span class="fas fa-desktop" alt="Computers & Software"></span>
+                    <span>Computers & Software</span>
+                </a>
+            </li>
+            <li>
+                <a href="#feature-4">
+                    <span class="fas fa-chart-line" alt="Reporting"></span>
+                    <span>Reporting</span>
+                </a>
+            </li>
+            <li>
+                <a href="#feature-5">
+                    <span class="fas fa-users-cog" alt="Role Based Access Control"></span>
+                    <span>Role Based Access Control</span>
+                </a>
+            </li>
+            <li>
+                <a href="#feature-6">
+                    <span class="fas fa-map" alt="Roadmap"></span>
+                    <span>Roadmap</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</section>
+<section id="feature-1" class="py-3 py-lg-5">
+    <div class="container">
+        <h4 class="text-center text-primary mb-0">Overview</h4>
+        <h1 class="text-center">Lorem ipsum dolor sit amet consectetur adipiscing elit</h1>
+        <h3 class="text-center">Donec luctus luctus orci et consectetur. Nunc blandit eget ex non dignissim.</h3>
+        <div class="row justify-content-center mt-3 mt-lg-5">
+            <div class="col-lg-4">
+                <div class="text-center mb-3"><img class="img-fluid shadow" src="https://picsum.photos/400" /></div>
+                <h3 class="text-center">Lorem ipsum dolor sit amet</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+            </div>
+            <div class="col-lg-4 mt-3 mt-lg-0">
+                <div class="text-center mb-3"><img class="img-fluid shadow" src="https://picsum.photos/400" /></div>
+                <h3 class="text-center">Lorem ipsum dolor sit amet</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+            </div>
+            <div class="col-lg-4 mt-3 mt-lg-0">
+                <div class="text-center mb-3"><img class="img-fluid shadow" src="https://picsum.photos/400" /></div>
+                <h3 class="text-center">Lorem ipsum dolor sit amet</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="feature-2" class="py-3 py-lg-5">
+    <div class="container">
+        <h4 class="text-center text-primary mb-0">Deployments</h4>
+        <h1 class="text-center">Central Management Deployments</h1>
+        <h3 class="text-center">Manage Your Windows Endpoint Machines Simply, Efficiently, and Securely</h3>
+        <div class="row align-items-center mt-3 mt-lg-5">
+            <div class="col-lg-6 text-center">
+                <img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/ccm/CCM_Groups_AddGroup.gif")" />
+            </div>
+            <div class="col-lg-6">
+                <h3 class="text-center text-lg-left">Create Target Groups of Computers/Machines</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+                <p>Mauris vitae cursus enim. Integer vitae sapien a ante tempus blandit. Suspendisse semper justo a neque maximus malesuada. Aliquam vulputate rhoncus urna, gravida viverra mi dapibus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="row align-items-center mt-3 mt-lg-5">
+            <div class="col-lg-6 text-center order-lg-2">
+                <img class="img-fluid zoom mb-3" src="@Url.Content("~/content/images/ccm/CCM_Mockup_StepModal.png")" />
+            </div>
+            <div class="col-lg-6">
+                <h3 class="text-center text-lg-left">Create Deployment Steps</h3>
+                <ul>
+                    <li>Scripts - Enter a basic or advanced script based on permissions</li>
+                    <li>Execution timeout in seconds - how long to let the command run before timing out? Defaults to `4 hours`.</li>
+                    <li>Valid exit codes - what exit codes indicate success? Defaults to `0, 1605, 1614, 1641, 3010`.</li>
+                    <li>Machine contact timeout in minutes - how long to attempt contact with a computer before timing out. This is set at `20 minutes` in the first release. In a future release we'll allow you to configure this, but this is set by default in this release.</li>
+                    <li>Fail overall deployment if not successful - Should the deployment status show failed if this step is not successful? Defaults to `true`.</li>
+                    <li>Only run other deployment steps if successful - Coupled with the previous item, should the deployment stop if this step is not successful on every computer? Or should it execute other steps? Defaults to `false`.</li>
+                    <li>Target groups/collections of computers</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row align-items-center mt-3 mt-lg-5">
+            <div class="col-lg-4 text-center">
+                <img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/ccm/CCM_Deployments_Edit_UpdateOrder.gif")" />
+            </div>
+            <div class="col-lg-4">
+                <h3 class="text-center text-lg-left">Review Deployment Steps</h3>
+                <p>If we have a deployment that is in draft/ready status, we can look over the aspects of it.</p>
+                <h3 class="text-center text-lg-left">Reorder Deployment Steps</h3>
+                <p>If we have a deployment that is in draft/ready status, we can look over the aspects of it.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/ccm/CCM_Deployments_Edit_View.gif")" />
+            </div>
+        </div>
+        <div class="row align-items-center mt-3 mt-lg-5">
+            <div class="col-lg-6 text-center order-lg-2">
+                <img class="img-fluid zoom mb-3" src="@Url.Content("~/content/images/ccm/CCM_Mockup_Reports.png")" />
+            </div>
+            <div class="col-lg-6">
+                <h3 class="text-center text-lg-left">Reporting</h3>
+                <ul>
+                    <li>When we move a deployment to active, it will begin to run and we can start seeing the details of the deployment as it progresses.</li>
+                    <li>We can drill down to a particular step</li>
+                    <li>Note that the log comes back for each computer in a step. If there is an error we can open up the log and go right to each error the system detects.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+@*<section id="feature-3" class="py-3 py-lg-5 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h4 class="text-center text-primary mb-0">Computers & Software</h4>
+                <h1 class="text-center">Central Management Computers & Software</h1>
+                <h3 class="text-center text-muted-dark">Donec convallis pulvinar auctor aecenas vel semper augue</h3>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <i class="fas fa-cogs h3 text-primary"></i>
+                            <h3>Lorum Ipsum</h3>
+                        </div>
+                        <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+                    </div>
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <div class="text-center">
+                            <i class="fas fa-paper-plane h3 text-primary"></i>
+                            <h3>Lorum Ipsum</h3>
+                        </div>
+                        <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia. Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+                    </div>
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <div class="text-center">
+                            <i class="fas fa-save h3 text-primary"></i>
+                            <h3>Lorum Ipsum</h3>
+                        </div>
+                        <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia. Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+                    </div>
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <div class="text-center">
+                            <i class="fas fa-download h3 text-primary"></i>
+                            <h3>Lorum Ipsum</h3>
+                        </div>
+                        <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+                    </div>
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <div class="text-center">
+                            <i class="fas fa-users h3 text-primary"></i>
+                            <h3>Lorum Ipsum</h3>
+                        </div>
+                        <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+                    </div>
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <div class="text-center">
+                            <i class="fas fa-envelope h3 text-primary"></i>
+                            <h3>Lorum Ipsum</h3>
+                        </div>
+                        <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia. Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+<section id="feature-3" class="py-3 py-lg-5 bg-dark text-white">
+    <div class="container">
+        <h4 class="text-center text-primary mb-0">Computers & Software</h4>
+        <h1 class="text-center">Central Management Computers & Software</h1>
+        <h3 class="text-center text-muted-dark">Donec convallis pulvinar auctor aecenas vel semper augue</h3>
+        <div class="row align-items-center mt-3 mt-lg-5">
+            <div class="col-lg-6 text-center">
+                <img class="img-fluid zoom mb-3" src="@Url.Content("~/content/images/ccm/CCM_Mockup_Computers.png")" />
+            </div>
+            <div class="col-lg-6">
+                <h3 class="text-center text-lg-left">Computers</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+                <p>Mauris vitae cursus enim. Integer vitae sapien a ante tempus blandit. Suspendisse semper justo a neque maximus malesuada. Aliquam vulputate rhoncus urna, gravida viverra mi dapibus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="row align-items-center mt-3 mt-lg-5">
+            <div class="col-lg-6 text-center order-lg-2">
+                <img class="img-fluid zoom mb-3" src="@Url.Content("~/content/images/ccm/CCM_Mockup_Software.png")" />
+            </div>
+            <div class="col-lg-6">
+                <h3 class="text-center text-lg-left">Software</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+                <p>Mauris vitae cursus enim. Integer vitae sapien a ante tempus blandit. Suspendisse semper justo a neque maximus malesuada. Aliquam vulputate rhoncus urna, gravida viverra mi dapibus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="feature-4" class="py-3 py-lg-5">
+    <div class="container">
+        <h4 class="text-center text-primary mb-0">Reporting</h4>
+        <h1 class="text-center">Central Management Reporting</h1>
+        <h3 class="text-center">Donec convallis pulvinar auctor aecenas vel semper augue</h3>
+        <div class="row mt-3 mt-lg-5">
+            <div class="col-lg-6">
+                <div class="px-lg-5 pb-lg-5">
+                    <div class="text-center mb-3"><img class="img-fluid zoom mb-3" src="@Url.Content("~/content/images/ccm/CCM_Mockup_PDFReports.png")" /></div>
+                    <h3 class="text-center text-lg-left">PDF Reports</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+                </div>
+                <div class="pt-3 pt-lg-0 px-lg-5">
+                    <div class="text-center mb-3"><img class="img-fluid shadow" src="https://picsum.photos/500" /></div>
+                    <h3 class="text-center text-lg-left">Lorem ipsum dolor sit amet</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="pt-3 p-lg-5">
+                    <div class="text-center mb-3"><img class="img-fluid shadow" src="https://picsum.photos/500" /></div>
+                    <h3 class="text-center text-lg-left">Lorem ipsum dolor sit amet</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+                </div>
+                <div class="pt-3 pt-lg-0 px-lg-5">
+                    <div class="text-center mb-3"><img class="img-fluid shadow" src="https://picsum.photos/500" /></div>
+                    <h3 class="text-center text-lg-left">Lorem ipsum dolor sit amet</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-3 py-sm-5 bg-dark">
+    <div class="container-fluid py-sm-4 py-lg-5">
+        <div class="row list-business-logos justify-content-center">
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://puppet.com" rel="noreferrer" title="Puppet, Inc" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Logo for Puppet, Inc" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Logo for Puppet, Inc" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://chef.io" rel="noreferrer" title="Chef Software, Inc" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Logo for Chef Software, Inc" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Logo for Chef Software, Inc" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://www.seek.com.au" rel="noreferrer" title="SEEK - Australia's number one jobs site" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/SEEK.png")" alt="Logo for SEEK" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/SEEK.png")" alt="Logo for SEEK" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://www.hulu.com" rel="noreferrer" title="Hulu" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/Hulu.png")" alt="Logo for Hulu" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/Hulu.png")" alt="Logo for Hulu" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://www.tricore.be" rel="noreferrer" title="Tricore" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/Tricore-sm.png")" alt="Logo for Tricore" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/Tricore-sm.png")" alt="Tricore" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3 my-md-5 py-sm-5">
+            <div class="col-xl-9 mx-auto">
+                <div id="testimonialCarousel" class="carousel slide carousel-fade text-dark testimonial-carousel carousel-ccm" data-ride="carousel" data-touch="true">
+                    <div class="carousel-inner">
+                        <div class="carousel-item">
+                            <div class="card">
+                                <div class="card-body p-xl-5">
+                                    <div class="row align-items-center h-100">
+                                        <div class="col-lg-4 text-center">
+                                            <img class="img-fluid lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/Yelp-Stroke.png")" alt="Yelp" title="Yelp" />
+                                            <noscript>
+                                                <img class="img-fluid" src="@Url.Content("~/content/images/businesses/Yelp-Stroke.png")" alt="Yelp" title="Yelp" />
+                                            </noscript>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-12 order-xl-2 text-center text-lg-left">
+                                                    <h3 class="mt-2 mb-0 text-primary"><small>Ryan de Temple</small></h3>
+                                                    <p><small><i>Client Platform Manager at Yelp</i></small></p>
+                                                </div>
+                                                <div class="col-12 order-lg-1">
+                                                    <q class="mb-0">We wanted to make sure our user experience was seamless. We wanted to provide a service, software, configuration- without user intervention, without restarts... Chocolatey allowed our engineers to build the products, to build the pipeline and deliver just that.</q>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item active">
+                            <div class="card">
+                                <div class="card-body p-xl-5">
+                                    <div class="row align-items-center h-100">
+                                        <div class="col-lg-4 text-center">
+                                            <img class="img-fluid lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Puppet, Inc." title="Puppet, Inc." />
+                                            <noscript>
+                                                <img class="img-fluid" src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Puppet, Inc." title="Puppet, Inc." />
+                                            </noscript>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-12 order-xl-2 text-center text-lg-left">
+                                                    <h3 class="mt-2 mb-0 text-primary"><small>Mike Lombardi</small></h3>
+                                                    <p><small><i>Software Engineer at Puppet</i></small></p>
+                                                </div>
+                                                <div class="col-12 order-lg-1">
+                                                    <q class="mb-0">The single biggest thing I love about Chocolatey has to be the ease of use and reusablility. That has made all the difference for me. I don't have to remember 37 different ways to interact with my software... just the one- and that's it!</q>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev d-none d-md-flex" href="#testimonialCarousel" role="button" data-slide="prev">
+                        <span class="fas fa-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next d-none d-md-flex" href="#testimonialCarousel" role="button" data-slide="next">
+                        <span class="fas fa-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row list-business-logos justify-content-center">
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://www.ecec.com/" rel="noreferrer" title="Eau Claire Energy Cooperative" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/ECEC-sm.png")" alt="Logo for Eau Claire Energy Cooperative" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/ECEC-sm.png")" alt="Logo for Eau Claire Energy Cooperative" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://www.mpac.ca/" rel="noreferrer" title="Municipal Property Assesment Corporation" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/MPAC-sm.png")" alt="Logo for Municipal Property Assesment Corporation" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/MPAC-sm.png")" alt="Logo for Municipal Property Assesment Corporation" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://www.sage.edu/" rel="noreferrer" title="The Sage Colleges" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/TheSageColleges-sm.png")" alt="Logo for The Sage Colleges" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/TheSageColleges-sm.png")" alt="Logo for The Sage Colleges" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://www.swissre.com" rel="noreferrer" title="Swiss Re Group" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/SwissRe.png")" alt="Logo for Swiss Re Group" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/SwissRe.png")" alt="Logo for Swiss Re Group" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-sm-auto mb-3 mb-sm-0 d-flex justify-content-center">
+                <div class="business-logo border p-md-3 d-flex align-items-center">
+                    <a href="https://www.swissre.com" rel="noreferrer" title="Yelp" target="_blank">
+                        <img class="lazy img-fluid p-2" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/Yelp-Stroke.png")" alt="Logo for Yelp" />
+                        <noscript>
+                            <img class="img-fluid p-2" src="@Url.Content("~/content/images/businesses/Yelp-Stroke.png")" alt="Logo for Yelp" />
+                        </noscript>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="feature-5" class="py-3 py-lg-5">
+    <div class="container">
+        <h4 class="text-center text-primary mb-0">Role Based Access Control</h4>
+        <h1 class="text-center">Central Management Role Based Access Control</h1>
+        <h3 class="text-center">Donec convallis pulvinar auctor aecenas vel semper augue</h3>
+        <div class="row align-items-center mt-3 mt-lg-5">
+            <div class="col-lg-6 text-center">
+                <img class="img-fluid zoom mb-3" src="@Url.Content("~/content/images/ccm/CCM_Mockup_Computers.png")" />
+            </div>
+            <div class="col-lg-6">
+                <h3 class="text-center text-lg-left">Role Based Access Conrol</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac egestas arcu. Nullam mollis ipsum nec diam placerat ornare. Nullam posuere augue nec orci vehicula, vel euismod erat facilisis.</p>
+                <p>Mauris vitae cursus enim. Integer vitae sapien a ante tempus blandit. Suspendisse semper justo a neque maximus malesuada. Aliquam vulputate rhoncus urna, gravida viverra mi dapibus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="feature-6" class="py-3 py-lg-5">
+    <div class="container">
+        <h4 class="text-center text-primary mb-0">Roadmap</h4>
+        <h1 class="text-center">Central Management Roadmap</h1>
+        <h3 class="text-center">Donec convallis pulvinar auctor aecenas vel semper augue</h3>
+        <div class="row mt-3 mt-lg-5 align-items-center">
+            <div class="col-lg-8 order-lg-2">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/LVwZ4pXa_B8?rel=0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-lg-4 mt-3 mt-lg-0">
+                <div>
+                    <h3 class="text-center">Lorum Ipsum</h3>
+                    <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+                </div>
+                <div class="mt-3 mt-lg-0 pt-3 pt-lg-0">
+                    <h3 class="text-center">Lorum Ipsum</h3>
+                    <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia. Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-lg-4">
+                <h3 class="text-center">Lorum Ipsum</h3>
+                <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+            </div>
+            <div class="col-lg-4 mt-3 mt-lg-0">
+                <h3 class="text-center">Lorum Ipsum</h3>
+                <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia. Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+            </div>
+            <div class="col-lg-4 mt-3 mt-lg-0">
+                <h3 class="text-center">Lorum Ipsum</h3>
+                <p>Cras hendrerit dolor condimentum tellus congue, nec vehicula orci varius. Praesent vitae massa augue. Vestibulum posuere eleifend nunc sed lacinia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+@section BottomScripts {
+<script>
+    $(document).ready(function() {
+	    var j = 0;
+	    var delay = 6000; //millisecond delay between cycles
+	    function cycleThru(){
+	        var jmax = $("ul#cyclelist li").length -1;
+	        $("ul#cyclelist li:eq(" + j + ")")
+	            .animate({"opacity" : "1"} ,400)
+	            .animate({"opacity" : "1"}, delay)
+	            .animate({"opacity" : "0"}, 400, function(){
+	                (j == jmax) ? j=0 : j++;
+	                cycleThru();
+	            });
+	    };
+
+	    cycleThru();
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('img.zoom')
+            .wrap('<span style="display:inline-block"></span>')
+            .css('display', 'block')
+            .parent()
+            .zoom({
+                on: 'click',
+                touch: false
+            });
+    });
+</script>
+}

@@ -1144,7 +1144,16 @@
     <Content Include="Content\Images\businesses\Yelp.png" />
     <Content Include="Content\Images\ccm-computer-white.jpg" />
     <Content Include="Content\Images\ccm-mockup.jpg" />
+    <Content Include="Content\Images\ccm\CCM_Deployments_Edit_UpdateOrder.gif" />
+    <Content Include="Content\Images\ccm\CCM_Deployments_Edit_View.gif" />
+    <Content Include="Content\Images\ccm\CCM_Groups_AddGroup.gif" />
+    <Content Include="Content\Images\ccm\CCM_Groups_Modal_SM-lg-2.png" />
+    <Content Include="Content\Images\ccm\CCM_Mockup_Computers.png" />
+    <Content Include="Content\Images\ccm\CCM_Mockup_PDFReports.png" />
     <Content Include="Content\Images\ccm\CCM_Mockup_ReportEdit.png" />
+    <Content Include="Content\Images\ccm\CCM_Mockup_Reports.png" />
+    <Content Include="Content\Images\ccm\CCM_Mockup_Software.png" />
+    <Content Include="Content\Images\ccm\CCM_Mockup_StepModal.png" />
     <Content Include="Content\Images\ccm\central-management-logo.png" />
     <Content Include="Content\Images\changePassword.png" />
     <Content Include="Content\Images\choco-chefconf.jpg" />
@@ -1460,6 +1469,7 @@
     <Content Include="Content\scss\_ribbons.scss" />
     <Content Include="Content\scss\_countdown.scss" />
     <Content Include="Content\scss\_collapsing-sidebar.scss" />
+    <Content Include="Content\scss\_zoom.scss" />
     <None Include="optipng.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1668,6 +1678,7 @@
     <Content Include="Views\Resources\Files\04-0402-C4BPackageInternalizerPart2.md" />
     <Content Include="Views\Shared\_C4BSubNavigation.cshtml" />
     <Content Include="Views\Events\EnableYourRemoteWorkforceByImplementingModernInfrastructureWithChocolatey.cshtml" />
+    <Content Include="Views\Solutions\ChocolateyCentralManagement.cshtml" />
     <Content Include="Views\Events\Home.cshtml" />
     <Content Include="Views\Events\Files\01-01-EnableYourRemoteWorkforceByImplementingModernInfrastructureWithChocolatey.md" />
     <Content Include="Views\Events\Files\01-02-ChocolateyDeployments.md" />
