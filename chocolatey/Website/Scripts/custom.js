@@ -256,31 +256,20 @@ $('a[href*="#"]')
             $(this).addClass('active');
         }
         // On-page links
-        if (
-            location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
-            &&
-            location.hostname == this.hostname
-        ) {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
             // Figure out element to scroll to
             var target = $(this.hash);
-            var top = $('.sticky-top').outerHeight();
+            var top = $('.sticky-top:not(.vertical-sticky-top)').outerHeight();
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (typeof top == typeof undefined || top == false) {
+                top = 0;
+            }
+
             // Does a scroll target exist?
             if (target.length) {
                 $('html, body').animate({
-                    scrollTop: target.offset().top
-                }, 1100, function () {
-                    // Callback after animation
-                    // Must change focus!
-                    var $target = $(target);
-                    $target.focus();
-                    if ($target.is(":focus")) { // Checking if the target was focused
-                        return false;
-                    } else {
-                        $target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
-                        $target.focus(); // Set focus again
-                    };
-                });
+                    scrollTop: target.offset().top - top
+                }, 1100 );
         }
     }
 });

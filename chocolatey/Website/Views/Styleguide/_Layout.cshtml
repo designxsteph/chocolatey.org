@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-3 col-xl-2 p-0 docs-left">
-                    <nav class="navbar navbar-expand-md navbar-dark sticky-top p-0 border-top-0 bg-medium-dark">
+                    <nav class="navbar navbar-expand-md navbar-dark sticky-top vertical-sticky-top p-0 border-top-0 bg-medium-dark">
                         <button class="navbar-toggler m-2 my-md-0 w-100 text-white border-0 collapsed" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="navbarlogoff" aria-expanded="false" aria-label="Toggle navigation">
                             <small>Documentation Table of Contents</small>
                         </button>
@@ -53,7 +53,7 @@
                 @if (IsSectionDefined("SideColumn"))
                 {
                     <div class="d-none d-xl-block col-xl-2 docs-right">
-                        <nav class="sticky-top">
+                        <nav class="sticky-top vertical-sticky-top">
                             <p><strong>Table of Contents:</strong></p>
                             @RenderSection("SideColumn")
                         </nav>
