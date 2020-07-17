@@ -521,7 +521,7 @@ any moderation related failures.",
         }
 
         [ActionName("ScanPackageApi"), HttpPost]
-        public virtual ActionResult SubmitPackageScanResults(string apiKey, string id, string version, string scanStatus, ICollection<PackageScanResult> scanResults)
+        public virtual ActionResult SubmitPackageScanResults(string apiKey, string id, string version, string scanStatus, string scanFlagResult, ICollection<PackageScanResult> scanResults)
         {
             if (String.IsNullOrEmpty(id) || String.IsNullOrEmpty(version))
             {
@@ -553,6 +553,21 @@ any moderation related failures.",
                 return new HttpStatusCodeWithBodyResult(HttpStatusCode.BadRequest, "'scanStatus' must be passed as 'NotFlagged', 'Flagged', 'Exempted', or 'Investigate'.");
             }
 
+            PackageScanFlagResultType packageScanFlagResult;
+            try
+            {
+                Enum.TryParse(scanFlagResult.to_string(), true, out packageScanFlagResult);
+            }
+            catch (Exception)
+            {
+                packageScanFlagResult = PackageScanFlagResultType.Unknown;
+            }
+
+            if (packageScanFlagResult == PackageScanFlagResultType.Unknown)
+            {
+                return new HttpStatusCodeWithBodyResult(HttpStatusCode.BadRequest, "'scanFlagResult' must be passed as 'None', 'Note', 'Warning', or 'Error'.");
+            }
+
             if (packageScanStatus != PackageScanStatusType.Investigate && !scanResults.Any())
             {
                 return new HttpStatusCodeWithBodyResult(HttpStatusCode.BadRequest, "You must submit data with results.");
@@ -569,6 +584,7 @@ any moderation related failures.",
             package.PackageScanResultDate = DateTime.UtcNow;
             package.PackageScanStatus = packageScanStatus;
             packageSvc.SaveMinorPackageChanges(package);
+            package.PackageScanFlagResult = packageScanFlagResult;
 
             return new HttpStatusCodeWithBodyResult(HttpStatusCode.Accepted, "Package scan results have been updated.");
         }
