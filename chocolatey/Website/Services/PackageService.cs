@@ -1067,7 +1067,7 @@ namespace NuGetGallery
 
             if (package.Status == PackageStatusType.Submitted)
             {
-              testComments += success || bypassHolding
+                testComments += success || bypassHolding
                                     ? string.Format("{0} This is an FYI only. There is no action you need to take. {1}", Environment.NewLine, testCommentsAdditional)
                                     : string.Format(@"{0} The package status will be changed and will be waiting on your next actions.
 
@@ -1078,7 +1078,7 @@ namespace NuGetGallery
 * Automated testing can also fail when a package is not completely silent or has pop ups ([AutoHotKey](https://chocolatey.org/packages/autohotkey.portable) can assist - a great example is the [VeraCrypt package](https://chocolatey.org/packages/veracrypt/1.16#files)). 
 * A package that cannot be made completely unattended should have the notSilent tag. Note that this must be approved by moderators.", Environment.NewLine);
 
-              ChangePackageStatus(package, package.Status, package.ReviewComments, testComments, testReporter, testReporter, true, success || bypassHolding ? package.SubmittedStatus : PackageSubmittedStatusType.Waiting, assignReviewer: false);
+                ChangePackageStatus(package, package.Status, package.ReviewComments, testComments, testReporter, testReporter, true, success || bypassHolding ? package.SubmittedStatus : PackageSubmittedStatusType.Waiting, assignReviewer: false);
             }
             else if (!success && package.Status != PackageStatusType.Submitted)
             {
