@@ -95,12 +95,12 @@
         }
     }
 
-    var testingStatusPassing = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing;
-    var testingStatusFailing = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing;
-    var testingStatusPending = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Pending;
-    var testingStatusUnknown = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Unknown;
-    var testingStatusExempt = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted;
-    var testingStatusWarning = Model.PackageTestResultsStatus != Model.PackageValidationResultStatus;
+    var testingStatusPassing = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing && Model.PackageScanResultStatus == PackageScanStatusType.NotFlagged;
+    var testingStatusFailing = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing && (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted || Model.PackageScanResultStatus == PackageScanStatusType.Investigate);
+    var testingStatusPending = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Pending && Model.PackageScanResultStatus == PackageScanStatusType.Pending;
+    var testingStatusUnknown = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Unknown && Model.PackageScanResultStatus == PackageScanStatusType.Unknown;
+    var testingStatusExempt = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted && Model.PackageScanResultStatus == PackageScanStatusType.Exempted;
+    var testingStatusWarning = !testingStatusPassing && !testingStatusPending && !testingStatusFailing && !testingStatusUnknown && !testingStatusExempt;
 }
 
 @section ExtraHeaders {
@@ -446,13 +446,13 @@
                         <div>
                             @if (testingStatusWarning)
                             {
-                                if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted)
+                                if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted || Model.PackageScanResultStatus == PackageScanStatusType.Exempted)
                                 {
-                                    if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing)
+                                    if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing || (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.Investigate || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted))
                                     {
                                         <h3>Some Checks Are Exempted or Have Failed</h3>
                                     }
-                                    else if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Pending || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending)
+                                    else if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Pending || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending || Model.PackageScanResultStatus == PackageScanStatusType.Pending)
                                     {
                                         <h3>Some Checks Are Exempted or Are Not Yet Complete</h3>
                                     }
@@ -465,32 +465,32 @@
                                 {
                                     <h3>Some Checks Have Failed or Are Not Yet Complete</h3>
                                 }
-                                <p>1 Test @Model.PackageValidationResultStatus and 1 @Model.PackageTestResultsStatus Test</p>
+                                <p>Not All Tests Have Passed</p>
                             }
                             else if (testingStatusPassing)
                             {
                                 <h3 class="text-success">All Checks are Passing</h3>
-                                <p>2 Passing Test</p>
+                                <p>3 Passing Tests</p>
                             }
                             else if (testingStatusFailing)
                             {
                                 <h3 class="text-danger">All Checks are Failing</h3>
-                                <p>2 Failing Test</p>
+                                <p>3 Failing Tests</p>
                             }
                             else if (testingStatusPending)
                             {
                                 <h3 class="text-warning">All Checks are Pending</h3>
-                                <p>2 Pending Test</p>
+                                <p>3 Pending Tests</p>
                             }
                             else if (testingStatusUnknown)
                             {
                                 <h3 class="text-secondary">All Checks are Unknown</h3>
-                                <p>2 Test of Unknown Status</p>
+                                <p>2 Tests in Unknown Status</p>
                             }
                             else if (testingStatusExempt)
                             {
                                 <h3 class="text-secondary">This Package is Exempt from Testing</h3>
-                                <p>2 Exempt Test</p>
+                                <p>3 Exempt Tests</p>
                             }
                         </div>
                     </div>
@@ -559,6 +559,52 @@
                             <div>
                                 <p class="mb-0">Verification Testing Exempt:</p>
                                 @Html.Raw(Markdown.ToHtml(Model.ExemptedFromVerificationReason.clean_html() ?? string.Empty, MarkdownPipeline))
+                            </div>
+                        }
+                    </div>
+                    <hr />
+                    @*Scanning*@
+                    <div class="d-flex px-3 pb-3">
+                        @if (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted || Model.PackageScanResultStatus == PackageScanStatusType.Investigate)
+                        {
+                            <span class="fas fa-times text-danger mr-3"></span>
+                            <div>
+                                <p class="mb-0">Scan Testing Resulted in @Model.PackageScanResultStatus</p>
+
+                                @{
+                                    switch (Model.PackageScanFlagResultType)
+                                    {
+                                        case PackageScanFlagResultType.Note:
+                                            <p>At least one file within this package had greater then 0 detections for a file</p>
+                                            break;
+                                        case PackageScanFlagResultType.Warning:
+                                            <p>At least one file within this package had between 5 and 10 detections for a file</p>
+                                            break;
+                                        case PackageScanFlagResultType.Error:
+                                            <p>At least one file within this package had greater then 10 detections for a file</p>
+                                            break;
+                                    }
+                                }
+                            </div>
+                        }
+                        @if (Model.PackageScanResultStatus == PackageScanStatusType.NotFlagged)
+                        {
+                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Scan Testing Successful - No detections found in any package files</p>
+                        }
+                        @if (Model.PackageScanResultStatus == PackageScanStatusType.Pending)
+                        {
+                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span> Scan Testing Pending</p>
+                        }
+                        @if (Model.PackageScanResultStatus == PackageScanStatusType.Unknown)
+                        {
+                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span> Scan Testing Unknown</p>
+                        }
+                        @if (Model.PackageScanResultStatus == PackageScanStatusType.Exempted)
+                        {
+                            <span class="fas fa-ban text-secondary mr-3"></span>
+                            <div>
+                                <p class="mb-0">Scan Testing Exempt:</p>
+                                @Html.Raw(Markdown.ToHtml(Model.ExemptedFromScannerReason.clean_html() ?? string.Empty, MarkdownPipeline))
                             </div>
                         }
                     </div>
