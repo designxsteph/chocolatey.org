@@ -208,6 +208,7 @@ namespace NuGetGallery
                 DownloadCache = doc.Get("DownloadCache"),
                 PackageScanStatusForDatabase = doc.Get("PackageScanStatus"),
                 PackageScanResultDate = packageScanResultDate,
+                PackageScanFlagResultForDatabase = doc.Get("PackageScanFlagResult"),
 
                 SupportedFrameworks = frameworks,
             };

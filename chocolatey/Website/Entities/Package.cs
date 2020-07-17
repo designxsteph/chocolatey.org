@@ -219,6 +219,24 @@ namespace NuGetGallery
                 else PackageScanStatus = (PackageScanStatusType)Enum.Parse(typeof(PackageScanStatusType), value);
             }
         }
+
+        public PackageScanFlagResultType PackageScanFlagResult { get; set; }
+        [MaxLength(50)]
+        [Column("PackageScanFlagResult")]
+        public string PackageScanFlagResultForDatabase
+        {
+            get { return PackageScanFlagResult.ToString(); }
+            set
+            {
+                if (value == null) PackageScanFlagResult = PackageScanFlagResultType.None;
+                else PackageScanFlagResult = (PackageScanFlagResultType)Enum.Parse(typeof(PackageScanFlagResultType), value);
+            }
+        }
+
+        public string ExemptedFromScannerReason { get; set; }
+
+        public string ExemptedFromValidatorReason { get; set; }
+
         public DateTime? PackageScanResultDate { get; set; }
         //public virtual ICollection<ScanResult> PackageScanResults { get; set; }
 

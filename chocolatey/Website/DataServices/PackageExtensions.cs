@@ -91,7 +91,7 @@ namespace NuGetGallery
                         DownloadCacheDate = p.DownloadCacheDate,
                         DownloadCache = p.DownloadCache,
                         PackageScanStatus = p.PackageScanStatusForDatabase,
-                        PackageScanResultDate = p.PackageScanResultDate
+                        PackageScanResultDate = p.PackageScanResultDate,
                         PackageScanFlagResult = p.PackageScanFlagResultForDatabase
                     });
         }

@@ -60,6 +60,10 @@ namespace NuGetGallery
             PackageTestResultsUrl = package.PackageTestResultUrl ?? string.Empty;
             PackageValidationResultStatus = package.PackageValidationResultStatus;
             IsDownloadCacheAvailable = package.DownloadCacheStatus == PackageDownloadCacheStatusType.Available;
+            PackageScanResultStatus = package.PackageScanStatus;
+            PackageScanFlagResultType = package.PackageScanFlagResult;
+            ExemptedFromScannerReason = package.ExemptedFromScannerReason;
+            ExemptedFromValidatorReason = package.ExemptedFromValidatorReason;
         }
 
         public string Id { get { return package.PackageRegistration.Id; } }
@@ -95,7 +99,8 @@ namespace NuGetGallery
         public PackageAutomatedReviewResultStatusType PackageTestResultsStatus { get; set; }
         public string PackageTestResultsUrl { get; set; }
         public PackageAutomatedReviewResultStatusType PackageValidationResultStatus { get; set; }
-
+        public PackageScanStatusType PackageScanResultStatus { get; set; }
+        public PackageScanFlagResultType PackageScanFlagResultType { get; set; }
         public bool IsDownloadCacheAvailable { get; set; }
 
         public DateTime? ApprovedDate { get; set; }
@@ -104,6 +109,14 @@ namespace NuGetGallery
         [Display(Name = "Exempted Reason")]
         [StringLength(500)]
         public string ExemptedFromVerificationReason { get; set; }
+
+        [Display(Name = "Scanner Exempted Reason")]
+        [StringLength(500)]
+        public string ExemptedFromScannerReason { get; set; }
+
+        [Display(Name = "Validator Exempted Reason")]
+        [StringLength(500)]
+        public string ExemptedFromValidatorReason { get; set; }
 
         public int TotalDownloadCount { get { return package.PackageRegistration.DownloadCount; } }
 

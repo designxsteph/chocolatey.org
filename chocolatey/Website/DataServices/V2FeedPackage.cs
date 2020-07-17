@@ -86,5 +86,6 @@ namespace NuGetGallery
         public string DownloadCache { get; set; }
         public string PackageScanStatus { get; set; }
         public DateTime? PackageScanResultDate { get; set; }
+        public string PackageScanFlagResult { get; set; }
     }
 }
