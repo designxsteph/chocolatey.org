@@ -145,6 +145,16 @@ namespace NuGetGallery
             // maintainers and reviewers cannot change the current status
             if (User.IsReviewer() || isMaintainer) status = package.Status;
 
+            if (status == PackageStatusType.Approved && !(
+                (package.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing || package.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted)
+                    && (package.PackageTestResultStatus == PackageAutomatedReviewResultStatusType.Passing || package.PackageTestResultStatus == PackageAutomatedReviewResultStatusType.Exempted)
+                    && (package.PackageScanStatus == PackageScanStatusType.NotFlagged || package.PackageScanStatus == PackageScanStatusType.Exempted)
+                ))
+            {
+                ModelState.AddModelError(String.Empty, "A package cannot be approved unless all required checks have passed, or have been exempted by a moderator.");
+                return View("~/Views/Packages/DisplayPackage.cshtml", model);
+            }
+
             if (package.Status != PackageStatusType.Unknown && status == PackageStatusType.Unknown)
             {
                 ModelState.AddModelError(String.Empty, "A package cannot be moved into unknown status.");
