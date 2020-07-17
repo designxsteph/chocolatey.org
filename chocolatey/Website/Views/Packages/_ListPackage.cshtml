@@ -19,9 +19,12 @@
             @*Title and Type*@
             <div class="d-flex @if(!gridView){<text>align-items-sm-center</text>}">
                 <div class="d-flex mt-1 @if(!gridView){<text>mt-sm-0</text>}">
-                    <a class="status status-sm @if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>bg-success</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing){<text>bg-danger</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending){<text>bg-warning</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown){<text>bg-secondary</text>}" href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)#status" title="Click to view test results">
-                        <span class="@Model.PackageValidationResultStatus"></span>
-                    	<span class="@Model.PackageTestResultsStatus"></span>
+                    <a href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)#status" title="Click to view test results">
+                        <ul class="status status-sm">
+                            <li><div class="status-@Model.PackageValidationResultStatus.ToStringSafe().ToLower()">1</div></li>
+                            <li><div class="status-@Model.PackageTestResultsStatus.ToStringSafe().ToLower()">2</div></li>
+                            <li><div class="status-@Model.PackageScanResultStatus.ToStringSafe().ToLower()">3</div></li>
+                        </ul>
                     </a>
                 </div>
                 <a href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" title="Learn more about @Model.Title" aria-label="Learn more about @Model.Title" class="h5 font-weight-bold text-dark mb-0 btn-link">@Model.Title <span class="@if(gridView){<text>d-block small</text>}">@Model.Version</span></a>

@@ -242,12 +242,13 @@
                 <p class="text-center text-danger"><strong>WARNING! The package (the *.nupkg file) is subject to a CDN with a 30 minute timeout. If you have pushed an updated version, please wait for more than 30 minutes before attempting to install from the site.</strong></p>
             }
             <div class="justify-content-center align-items-center d-flex">
-                <div class="d-flex">
-                    <a class="status status-sm @if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>bg-success</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing){<text>bg-danger</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending){<text>bg-warning</text>}else if(Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown){<text>bg-secondary</text>}" href="#status" title="Click to view test results">
-                        <span class="@Model.PackageValidationResultStatus"></span>
-                        <span class="@Model.PackageTestResultsStatus"></span>
-                    </a>
-                </div>
+                <a href="#status" title="Click to view test results">
+                    <ul class="status status-sm">
+                        <li><div class="status-@Model.PackageValidationResultStatus.ToStringSafe().ToLower()">1</div></li>
+                        <li><div class="status-@Model.PackageTestResultsStatus.ToStringSafe().ToLower()">2</div></li>
+                        <li><div class="status-@Model.PackageScanResultStatus.ToStringSafe().ToLower()">3</div></li>
+                    </ul>
+                </a>
                 @if (Model.Status != PackageStatusType.Rejected)
                 {
                     <p title="Nuspec reference: &lt;version&gt;@Model.Version&lt;/version&gt;" class="mb-0">@Model.Version | <strong>Updated: </strong>@Model.PublishedDate.ToString("dd MMM yyyy")</p>
@@ -401,12 +402,13 @@
         <div class="col-md-9 col-xl-10">
             <div class="mb-3 d-none d-md-block">
                 <h1 class="justify-content-center align-items-center d-flex mb-0" title="Nuspec reference: &lt;title&gt;@Model.Title&lt;/title&gt;">
-                    <span class="d-flex">
-                        <a class="status" href="#status" title="Click to view test results">
-                            <span class="@Model.PackageValidationResultStatus"></span>
-                            <span class="@Model.PackageTestResultsStatus"></span>
-                        </a>
-                    </span>
+                    <a href="#status" title="Click to view test results">
+                        <ul class="status">
+                            <li><div class="status-@Model.PackageValidationResultStatus.ToStringSafe().ToLower()">1</div></li>
+                            <li><div class="status-@Model.PackageTestResultsStatus.ToStringSafe().ToLower()">2</div></li>
+                            <li><div class="status-@Model.PackageScanResultStatus.ToStringSafe().ToLower()">3</div></li>
+                        </ul>
+                    </a>
                     @Model.Title
                     @if (Model.Status != PackageStatusType.Rejected)
                     {
@@ -434,11 +436,12 @@
             <div id="status" class="callout p-0 @if(testingStatusWarning || testingStatusPending){<text>callout-warning</text>}else if(testingStatusPassing){<text>callout-success</text>}else if(testingStatusFailing){<text>callout-danger</text>}else if(testingStatusUnknown || testingStatusExempt){<text>callout-secondary</text>}">
                 <div class="d-flex justify-content-between p-3">
                     <div class="d-flex">
-                        <div class="d-flex">
-                            <span class="status">
-                                <span class="@Model.PackageValidationResultStatus"></span>
-                                <span class="@Model.PackageTestResultsStatus"></span>
-                            </span>
+                        <div>
+                            <ul class="status mt-0">
+                                <li><div class="status-@Model.PackageValidationResultStatus.ToStringSafe().ToLower()">1</div></li>
+                                <li><div class="status-@Model.PackageTestResultsStatus.ToStringSafe().ToLower()">2</div></li>
+                                <li><div class="status-@Model.PackageScanResultStatus.ToStringSafe().ToLower()">3</div></li>
+                            </ul>
                         </div>
                         <div>
                             @if (testingStatusWarning)
