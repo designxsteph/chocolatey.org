@@ -21,9 +21,11 @@ namespace NuGetGallery
     public enum PackageScanStatusType
     {
         Unknown,
+        Pending,
         NotFlagged,
         Flagged,
         Investigate,
-        Exempted,
+        ScannerExempted,
+        Exempted
     }
 }
