@@ -673,6 +673,7 @@
     <Compile Include="Entities\CourseNameType.cs" />
     <Compile Include="Entities\PackageAuthor.cs" />
     <Compile Include="Entities\PackageOwnerRequest.cs" />
+    <Compile Include="Entities\PackageScanFlagResultType.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\UserCourseAchievement.cs" />
     <Compile Include="Entities\UserCourseModuleAchievement.cs" />
