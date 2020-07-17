@@ -391,7 +391,7 @@ any moderation related failures.",
             if (success)
             {
                 package.PackageValidationResultStatus = PackageAutomatedReviewResultStatusType.Passing;
-                message = "{0} has passed automated validation. It may have or may still fail other checks like testing (verification).".format_with(package.PackageRegistration.Id);
+                message = "{0} has passed automated validation.".format_with(package.PackageRegistration.Id);
             }
 
             message += "{0}{1}".format_with(Environment.NewLine, validationComments);
