@@ -725,6 +725,10 @@
     <Compile Include="Migrations\201912302335265_AdjustVarCharMaxColumnsPartTwo.Designer.cs">
       <DependentUpon>201912302335265_AdjustVarCharMaxColumnsPartTwo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007091422435_AddScanStatusToModerationProcess.cs" />
+    <Compile Include="Migrations\202007091422435_AddScanStatusToModerationProcess.Designer.cs">
+      <DependentUpon>202007091422435_AddScanStatusToModerationProcess.cs</DependentUpon>
+    </Compile>
     <Compile Include="RequestModels\RegisterRequest.cs" />
     <Compile Include="RequestModels\SignInRequest.cs" />
     <Compile Include="RouteAreaCollectionExtensions.cs" />
