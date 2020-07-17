@@ -1,15 +1,15 @@
-﻿// Copyright 2011 - Present RealDimensions Software, LLC, the original 
+﻿// Copyright 2011 - Present RealDimensions Software, LLC, the original
 // authors/contributors from ChocolateyGallery
 // at https://github.com/chocolatey/chocolatey.org,
-// and the authors/contributors of NuGetGallery 
+// and the authors/contributors of NuGetGallery
 // at https://github.com/NuGet/NuGetGallery
-//  
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,12 +48,12 @@ namespace NuGetGallery
 
         public EntitiesContext(int timeoutSeconds) : this("NuGetGallery", timeoutSeconds)
         {
-        } 
-        
+        }
+
         public EntitiesContext(string nameOrConnectionString) : this(nameOrConnectionString,DEFAULT_TIMEOUT_SECONDS)
         {
-        } 
-        
+        }
+
         public EntitiesContext(string nameOrConnectionString, int timeoutSeconds)
             : base(SetConnectionString(nameOrConnectionString))
         {
@@ -171,7 +171,7 @@ namespace NuGetGallery
                         .HasForeignKey(em => em.FromUserKey);
 
             modelBuilder.Entity<PackageRegistration>().HasKey(pr => pr.Key);
-        
+
             modelBuilder.Entity<PackageRegistration>()
                         .HasMany<User>(pr => pr.Owners)
                         .WithMany()
@@ -260,8 +260,8 @@ namespace NuGetGallery
                         .HasOptional<User>(e => e.ReviewedBy)
                         .WithMany()
                         .HasForeignKey(e => e.ReviewedById)
-                        .WillCascadeOnDelete(false);  
-            
+                        .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Package>()
                         .HasOptional<User>(e => e.CreatedBy)
                         .WithMany()
@@ -274,7 +274,7 @@ namespace NuGetGallery
                         .HasForeignKey(pf => pf.PackageKey);
 
             modelBuilder.Entity<PackageFile>().HasKey(pa => pa.Key);
-           
+
             modelBuilder.Entity<ScanResult>().HasKey(sr => sr.Key);
 
             //.WithMany(p => p.PackageScanResults)

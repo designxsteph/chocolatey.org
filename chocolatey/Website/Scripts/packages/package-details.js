@@ -10,7 +10,7 @@ $(function () {
         commentList.find("h4:contains('(maintainer)')").addClass('comment-title comment-maintainer');
         commentList.find("h4:contains('(reviewer)')").addClass('comment-title comment-reviewer');
         commentList.children().not('.comment-title').addClass("comment-body");
-        
+
         // Style Code
     	$('.comments-list pre').contents().unwrap().wrap('<p></p>');
 
@@ -98,7 +98,7 @@ $(function () {
             fileCollapse.collapse('hide');
         }
     });
-    
+
     // Initialize Text Editor
     $('.text-editor').each(function () {
         if ($(this).is('#NewReviewComments')) {

@@ -1,15 +1,15 @@
-﻿// Copyright 2011 - Present RealDimensions Software, LLC, the original 
+﻿// Copyright 2011 - Present RealDimensions Software, LLC, the original
 // authors/contributors from ChocolateyGallery
 // at https://github.com/chocolatey/chocolatey.org,
-// and the authors/contributors of NuGetGallery 
+// and the authors/contributors of NuGetGallery
 // at https://github.com/NuGet/NuGetGallery
-//  
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -66,10 +66,10 @@ namespace NuGetGallery
         [ActionName("GetPackageApi"), HttpGet]
         public virtual ActionResult GetPackage(string id, string version)
         {
-            // if the version is null, the user is asking for the latest version. Presumably they don't want includePrerelease release versions. 
+            // if the version is null, the user is asking for the latest version. Presumably they don't want includePrerelease release versions.
             // The allow prerelease flag is ignored if both partialId and version are specified.
             var package = packageSvc.FindPackageForDownloadByIdAndVersion(id, version, allowPrerelease: false);
-            
+
             if (package == null) return new HttpStatusCodeWithBodyResult(HttpStatusCode.NotFound, string.Format(CultureInfo.CurrentCulture, Strings.PackageWithIdAndVersionNotFound, id, version));
 
             // CloudFlare IP passed variable first
@@ -91,7 +91,7 @@ namespace NuGetGallery
         [ActionName("VerifyPackageKeyApi"), HttpGet]
         public virtual ActionResult VerifyPackageKey(string apiKey, string id, string version)
         {
-            Guid parsedApiKey; 
+            Guid parsedApiKey;
             if (!Guid.TryParse(apiKey, out parsedApiKey)) return new HttpStatusCodeWithBodyResult(HttpStatusCode.BadRequest, Strings.InvalidApiKey);
 
             var user = userSvc.FindByApiKey(parsedApiKey);
@@ -129,14 +129,14 @@ namespace NuGetGallery
             var user = userSvc.FindByApiKey(parsedApiKey);
             if (user == null) return new HttpStatusCodeWithBodyResult(HttpStatusCode.Forbidden, String.Format(CultureInfo.CurrentCulture, Strings.ApiKeyNotAuthorized, "push"));
 
-            if (user.IsBanned) return new HttpStatusCodeWithBodyResult(HttpStatusCode.Created, "Package has been pushed and will show up once moderated and approved."); 
+            if (user.IsBanned) return new HttpStatusCodeWithBodyResult(HttpStatusCode.Created, "Package has been pushed and will show up once moderated and approved.");
 
             if (Request.ContentLength > MAX_ALLOWED_CONTENT_LENGTH)
             {
                 return new HttpStatusCodeWithBodyResult(HttpStatusCode.RequestEntityTooLarge,String.Format(CultureInfo.CurrentCulture, Strings.PackageTooLarge, MAX_ALLOWED_CONTENT_LENGTH / ONE_MB));
             }
 
-            // Tempfile to store the package from stream. 
+            // Tempfile to store the package from stream.
             // Based on https://github.com/NuGet/NuGetGallery/issues/3042
             var temporaryFile = Path.GetTempFileName();
 
@@ -163,8 +163,8 @@ namespace NuGetGallery
                         case PackageStatusType.Rejected:
                             var testReporterUser = userSvc.FindByUserId(settings.PackageOperationsUserKey);
 
-                            if (existingPackage.PackageCleanupResultDate.HasValue && 
-                                testReporterUser != null && 
+                            if (existingPackage.PackageCleanupResultDate.HasValue &&
+                                testReporterUser != null &&
                                 existingPackage.ReviewedById == testReporterUser.Key
                                 )
                             {
@@ -175,7 +175,7 @@ namespace NuGetGallery
                             return new HttpStatusCodeWithBodyResult(
                                 HttpStatusCode.Conflict, string.Format("This package has been {0} and can no longer be submitted.", existingPackage.Status.GetDescriptionOrValue().ToLower()));
                         case PackageStatusType.Submitted:
-                            //continue on 
+                            //continue on
                             break;
                         default:
                             return new HttpStatusCodeWithBodyResult(HttpStatusCode.Conflict, String.Format(CultureInfo.CurrentCulture, Strings.PackageExistsAndCannotBeModified, packageToPush.Id, packageToPush.Version));
@@ -251,7 +251,7 @@ any moderation related failures.",
             var user = userSvc.FindByApiKey(parsedApiKey);
             if (user == null) return new HttpStatusCodeWithBodyResult(HttpStatusCode.Forbidden, string.Format(CultureInfo.CurrentCulture, Strings.ApiKeyNotAuthorized, "delete"));
 
-            if (user.IsBanned) return new EmptyResult(); 
+            if (user.IsBanned) return new EmptyResult();
 
             var package = packageSvc.FindPackageByIdAndVersion(id, version, allowPrerelease: true, useCache: false);
             if (package == null) return new HttpStatusCodeWithBodyResult(HttpStatusCode.NotFound, string.Format(CultureInfo.CurrentCulture, Strings.PackageWithIdAndVersionNotFound, id, version));
@@ -491,7 +491,7 @@ any moderation related failures.",
             {
                 return new HttpStatusCodeWithBodyResult(HttpStatusCode.NotFound, string.Format(CultureInfo.CurrentCulture, Strings.PackageWithIdAndVersionNotFound, id, version));
             }
-   
+
             // if (string.IsNullOrWhiteSpace(sha256Checksum)) return new HttpStatusCodeWithBodyResult(HttpStatusCode.BadRequest, "Sha256Checksum is required.");
 
             if (settings.ScanResultsKey.to_lower() != apiKey.to_lower())

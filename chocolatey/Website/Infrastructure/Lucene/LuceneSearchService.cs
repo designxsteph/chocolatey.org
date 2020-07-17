@@ -56,7 +56,7 @@ namespace NuGetGallery
             DateTime timestamp = File.GetLastWriteTimeUtc(LuceneCommon.IndexMetadataPath);
 
             int numRecords = searchFilter.Skip + searchFilter.Take;
-            
+
             // we want all results the first time through
             if (searchFilter.TakeAllResults)
             {
@@ -80,8 +80,8 @@ namespace NuGetGallery
 
             if (searchFilter.IncludeAllVersions)
             {
-                filter = searchFilter.IncludePrerelease ? 
-                    new QueryWrapperFilter(new TermQuery(new Term("InIndex", Boolean.TrueString))) 
+                filter = searchFilter.IncludePrerelease ?
+                    new QueryWrapperFilter(new TermQuery(new Term("InIndex", Boolean.TrueString)))
                     : new QueryWrapperFilter(new TermQuery(new Term("IsPrerelease", Boolean.FalseString)));
             }
 
@@ -246,7 +246,7 @@ namespace NuGetGallery
 
             // Escape the entire term we use for exact searches.
             var escapedSearchTerm = Escape(searchFilter.SearchTerm).Replace("id\\:", string.Empty).Replace("author\\:", string.Empty).Replace("tag\\:", string.Empty);
-            
+
             // Do not escape id when used against Id-Exact. The results will return incorrectly
             var idExactSearchTerm = searchFilter.SearchTerm.Replace("id:", string.Empty).Replace("author:", string.Empty).Replace("tag:", string.Empty);
             var exactIdQuery = new TermQuery(new Term("Id-Exact", idExactSearchTerm));

@@ -1015,7 +1015,7 @@ namespace NuGetGallery
             var skipsVerification = package.PackageRegistration.ExemptedFromVerification;
             if ((package.PackageTestResultDate.HasValue || skipsVerification) && package.PackageValidationResultDate.HasValue)
             {
-                //we don't do human moderation for prereleases
+                // we don't do human moderation for prereleases
                 if (package.IsPrerelease)
                 {
                     package.Listed = true;
