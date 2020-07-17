@@ -506,7 +506,9 @@ namespace NuGetGallery
             package.SubmittedStatus = PackageSubmittedStatusType.Pending;
 
             package.DownloadCacheStatus = PackageDownloadCacheStatusType.Unknown;
-            package.PackageScanStatus = PackageScanStatusType.Unknown;
+
+            package.PackageScanStatus = PackageScanStatusType.Pending;
+            package.PackageScanResultDate = null;
 
             package.PackageValidationResultStatus = PackageAutomatedReviewResultStatusType.Pending;
             package.PackageValidationResultDate = null;
@@ -1006,14 +1008,16 @@ namespace NuGetGallery
                                        || package.PackageTestResultStatus == PackageAutomatedReviewResultStatusType.Exempted);
             var passingValidation = (package.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing
                                      || package.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted);
+            var passingScanner = (package.PackageScanStatus == PackageScanStatusType.NotFlagged
+                                  || package.PackageScanStatus == PackageScanStatusType.Exempted);
 
-            if (passingValidation && passingVerification && package.SubmittedStatus == PackageSubmittedStatusType.Pending)
+            if (passingValidation && passingVerification && passingScanner && package.SubmittedStatus == PackageSubmittedStatusType.Pending)
             {
                 package.SubmittedStatus = PackageSubmittedStatusType.Ready;
             }
 
             var skipsVerification = package.PackageRegistration.ExemptedFromVerification;
-            if ((package.PackageTestResultDate.HasValue || skipsVerification) && package.PackageValidationResultDate.HasValue)
+            if ((package.PackageScanResultDate.HasValue || package.PackageScanStatus == PackageScanStatusType.Exempted) && (package.PackageTestResultDate.HasValue || skipsVerification) && package.PackageValidationResultDate.HasValue)
             {
                 // we don't do human moderation for prereleases
                 if (package.IsPrerelease)
@@ -1022,7 +1026,7 @@ namespace NuGetGallery
                     package.Status = PackageStatusType.Exempted;
                 }
 
-                var trustedPackagePassingAutomatedReview = PackageIsTrusted(package) && passingVerification && passingValidation;
+                var trustedPackagePassingAutomatedReview = PackageIsTrusted(package) && passingScanner && passingVerification && passingValidation;
                 if (trustedPackagePassingAutomatedReview)
                 {
                     package.Listed = true;

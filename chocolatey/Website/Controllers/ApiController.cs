@@ -583,8 +583,17 @@ any moderation related failures.",
 
             package.PackageScanResultDate = DateTime.UtcNow;
             package.PackageScanStatus = packageScanStatus;
-            packageSvc.SaveMinorPackageChanges(package);
             package.PackageScanFlagResult = packageScanFlagResult;
+
+            var message = "{0} has failed automated scanning.".format_with(package.PackageRegistration.Id);
+            if (packageScanStatus == PackageScanStatusType.NotFlagged)
+            {
+                message = "{0} has passed automated scanning.".format_with(package.PackageRegistration.Id);
+            }
+
+            packageSvc.UpdateSubmittedStatusAfterAutomatedReviews(package);
+
+            packageSvc.ChangePackageStatus(package, package.Status, package.ReviewComments, message, testReporterUser, testReporterUser, sendMaintainerEmail: true, submittedStatus: package.SubmittedStatus, assignReviewer: false);
 
             return new HttpStatusCodeWithBodyResult(HttpStatusCode.Accepted, "Package scan results have been updated.");
         }
