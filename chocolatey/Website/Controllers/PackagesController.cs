@@ -119,6 +119,9 @@ namespace NuGetGallery
             if (packageRegistration != null && !isMaintainer && !isModerationRole)
             {
                 ModelState.AddModelError(String.Empty, String.Format(CultureInfo.CurrentCulture, Strings.ApiKeyNotAuthorized, "maintain"));
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
@@ -152,24 +155,36 @@ namespace NuGetGallery
                 ))
             {
                 ModelState.AddModelError(String.Empty, "A package cannot be approved unless all required checks have passed, or have been exempted by a moderator.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
             if (package.Status != PackageStatusType.Unknown && status == PackageStatusType.Unknown)
             {
                 ModelState.AddModelError(String.Empty, "A package cannot be moved into unknown status.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
             if (package.Status == PackageStatusType.Unknown && status == PackageStatusType.Submitted)
             {
                 ModelState.AddModelError(String.Empty, "A package cannot be moved from unknown to submitted status.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
             if (User.IsReviewer() && status != PackageStatusType.Submitted)
             {
                 ModelState.AddModelError(String.Empty, "A reviewer can only comment/submit in submitted status.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
@@ -184,6 +199,9 @@ namespace NuGetGallery
                 )
             {
                 ModelState.AddModelError(String.Empty, "Only an admin can move a package from approved/exempt/rejected after one hour of status change. Please reach out on Gitter or use contact site admins link in the left side bar.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
@@ -202,12 +220,18 @@ namespace NuGetGallery
             if (maintainerReject && string.IsNullOrWhiteSpace(newComments))
             {
                 ModelState.AddModelError(String.Empty, "In order to reject a package version, you must provide comments indicating why it is being rejected.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
             if (isMaintainer && string.IsNullOrWhiteSpace(newComments))
             {
                 ModelState.AddModelError(String.Empty, "You need to provide comments.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
@@ -221,6 +245,9 @@ namespace NuGetGallery
             if (exemptVerfication && string.IsNullOrWhiteSpace(exemptVerficationReason))
             {
                 ModelState.AddModelError(String.Empty, "In order to exempt a package from automated testing, a reason should be specified.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
                 return View("~/Views/Packages/DisplayPackage.cshtml", model);
             }
 
