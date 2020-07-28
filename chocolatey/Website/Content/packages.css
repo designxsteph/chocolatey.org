@@ -137,3 +137,27 @@ textarea {
         padding-left: 67px;
     }
 }
+
+.validation-summary-errors ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.validation-summary-errors ul li {
+    padding-left: 1rem;
+    border-left: 6px solid #f4516c;
+}
+
+.validation-summary-errors ul li:not(:first-child) {
+    margin-top: .5rem;
+}
+
+.validation-summary-errors ul li, .field-hint-message, .field-validation-error, .was-validated .form-check-input:invalid ~ .form-check-label {
+    color: #f4516c;
+}
+
+.validation-summary-errors ul li, .field-hint-message, .field-validation-error {
+    font-weight: bold;
+}
