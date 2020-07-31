@@ -1125,6 +1125,13 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                                     @Html.ValidationMessageFor(m => m.Status)
                                     <span class="field-hint-message"></span>
                                 </div>
+                                @if (moderator || Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
+                                {
+                                    <div class="form-field">
+                                        <input id="RerunValidation" name="RerunValidation" type="checkbox" value="true" />
+                                        <label for="RerunValidation" class="for-checkbox" title="Rerun package validation tests.">Rerun validation tests?</label>
+                                    </div>
+                                }
                                 @if (moderator || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing)
                                 {
                                     <div class="form-field">
@@ -1132,11 +1139,11 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                                         <label for="RerunTests" class="for-checkbox" title="Only necessary if there was a mistake in the test run. A package repush will trigger test reruns.">Rerun verification tests?</label>
                                     </div>
                                 }
-                                @if (moderator || Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
+                                @if (moderator || (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.Investigate || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted))
                                 {
                                     <div class="form-field">
-                                        <input id="RerunValidation" name="RerunValidation" type="checkbox" value="true" />
-                                        <label for="RerunValidation" class="for-checkbox" title="Rerun package validation tests.">Rerun validation tests?</label>
+                                        <input id="RerunVirusScanner" name="RerunVirusScanner" type="checkbox" value="true" />
+                                        <label for="RerunVirusScanner" class="for-checkbox" title="Rerun virus scanner to get latest reports.">Rerun virus scanner?</label>
                                     </div>
                                 }
                                 @if (moderator && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
@@ -1149,13 +1156,6 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                                             @Html.TextAreaFor(m => m.ExemptedFromValidatorReason, new { @class = "text-editor" })
                                             @Html.ValidationMessageFor(m => m.ExemptedFromValidatorReason)
                                         </div>
-                                    </div>
-                                }
-                                @if (moderator || (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.Investigate || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted))
-                                {
-                                    <div class="form-field">
-                                        <input id="RerunVirusScanner" name="RerunVirusScanner" type="checkbox" value="true" />
-                                        <label for="RerunVirusScanner" class="for-checkbox" title="Rerun virus scanner to get latest reports.">Rerun virus scanner?</label>
                                     </div>
                                 }
                                 @if (moderator && (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.Investigate || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted))
