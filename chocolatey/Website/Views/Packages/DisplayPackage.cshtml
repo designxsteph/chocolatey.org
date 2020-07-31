@@ -572,7 +572,7 @@
                             <span class="fas fa-times text-danger mr-3"></span>
                             <div>
                                 <p class="mb-0">Scan Testing Resulted in @Model.PackageScanResultStatus</p>
-
+                                <a href="#virus">Details</a>
                                 @{
                                     switch (Model.PackageScanFlagResultType)
                                     {
@@ -592,6 +592,7 @@
                         @if (Model.PackageScanResultStatus == PackageScanStatusType.NotFlagged)
                         {
                             <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Scan Testing Successful - No detections found in any package files</p>
+                            <a href="#virus">Details</a>
                         }
                         @if (Model.PackageScanResultStatus == PackageScanStatusType.Pending)
                         {
@@ -606,6 +607,7 @@
                             <span class="fas fa-ban text-secondary mr-3"></span>
                             <div>
                                 <p class="mb-0">Scan Testing Exempt:</p>
+                                <a href="#virus">Details</a>
                                 @Html.Raw(Markdown.ToHtml(Model.ExemptedFromScannerReason.clean_html() ?? string.Empty, MarkdownPipeline))
                             </div>
                         }
