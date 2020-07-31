@@ -80,9 +80,11 @@ namespace NuGetGallery
         /// <param name="package">The package.</param>
         void SaveMinorPackageChanges(Package package);
 
-        void ExemptPackageFromTesting(Package package, bool exemptPackage, string reason, User reviewer);
+        void ExemptPackageFromTesting(Package package, bool exemptPackage, string reason, User reviewer, string newComments);
 
-        void ExemptPackageFromValidation(Package package);
+        void ExemptPackageFromValidation(Package package, string reason, User reviewer);
+
+        void ExemptPackageFromScanner(Package package, string reason, User reviewer);
 
         IEnumerable<ScanResult> GetPackageScanResults(string id, string version, bool useCache = true);
         IEnumerable<PackageFile> GetPackageFiles(Package package, bool useCache = true);

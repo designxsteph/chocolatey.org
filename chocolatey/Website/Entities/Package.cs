@@ -187,6 +187,16 @@ namespace NuGetGallery
         }
         public DateTime? PackageValidationResultDate { get; set; }
 
+        public virtual User ExemptedFromValidatorBy { get; set; }
+        public int? ExemptedFromValidatorById { get; set; }
+        [MaxLength(500)]
+        public string ExemptedFromValidatorReason { get; set; }
+
+        public virtual User ExemptedFromScannerBy { get; set; }
+        public int? ExemptedFromScannerById { get; set; }
+        [MaxLength(500)]
+        public string ExemptedFromScannerReason { get; set; }
+
         public DateTime? PackageCleanupResultDate { get; set; }
 
         public PackageDownloadCacheStatusType DownloadCacheStatus { get; set; }
@@ -232,10 +242,6 @@ namespace NuGetGallery
                 else PackageScanFlagResult = (PackageScanFlagResultType)Enum.Parse(typeof(PackageScanFlagResultType), value);
             }
         }
-
-        public string ExemptedFromScannerReason { get; set; }
-
-        public string ExemptedFromValidatorReason { get; set; }
 
         public DateTime? PackageScanResultDate { get; set; }
         //public virtual ICollection<ScanResult> PackageScanResults { get; set; }

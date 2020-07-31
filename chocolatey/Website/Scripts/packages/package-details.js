@@ -107,6 +107,12 @@ $(function () {
         else if ($(this).is('#ExemptedFromVerificationReason')) {
             placeholder = "Exempted Reason";
         }
+        else if ($(this).is('#ExemptedFromScannerReason')) {
+            placeholder = "Scanner Exempted Reason";
+        }
+        else if ($(this).is('#ExemptedFromValidatorReason')) {
+            placeholder = "Validator Exempted Reason";
+        }
 
         var easymde = new EasyMDE({
             element: this,

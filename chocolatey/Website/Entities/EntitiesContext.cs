@@ -263,6 +263,18 @@ namespace NuGetGallery
                         .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Package>()
+                        .HasOptional<User>(e => e.ExemptedFromScannerBy)
+                        .WithMany()
+                        .HasForeignKey(e => e.ExemptedFromScannerById)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Package>()
+                        .HasOptional<User>(e => e.ExemptedFromValidatorBy)
+                        .WithMany()
+                        .HasForeignKey(e => e.ExemptedFromValidatorById)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Package>()
                         .HasOptional<User>(e => e.CreatedBy)
                         .WithMany()
                         .HasForeignKey(e => e.CreatedByKey)

@@ -253,7 +253,43 @@ namespace NuGetGallery
 
             if (isModerationRole)
             {
-                packageSvc.ExemptPackageFromTesting(package, exemptVerfication, exemptVerficationReason, currentUser);
+                packageSvc.ExemptPackageFromTesting(package, exemptVerfication, exemptVerficationReason, currentUser, newComments);
+            }
+
+            bool exemptValidation = form["ExemptPackageFromValidation"].clean_html() == "true";
+            var exemptValidationReason = form["ExemptedFromValidatorReason"].clean_html();
+            if (exemptValidation && string.IsNullOrWhiteSpace(exemptValidationReason))
+            {
+                ModelState.AddModelError(String.Empty, "In order to exempt a package from automated validation, a reason should be specified.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
+                return View("~/Views/Packages/DisplayPackage.cshtml", model);
+            }
+
+            if (isModerationRole && exemptValidation && package.PackageValidationResultStatus != PackageAutomatedReviewResultStatusType.Exempted)
+            {
+                packageSvc.ExemptPackageFromValidation(package, exemptValidationReason, currentUser);
+                if (!string.IsNullOrWhiteSpace(newComments)) newComments += "{0}".format_with(Environment.NewLine);
+                newComments += "Auto Validation Change - Validation tests have been exempted.";
+            }
+
+            bool exemptScanner = form["ExemptPackageFromScanner"].clean_html() == "true";
+            var exemptScannerReason = form["ExemptedFromScannerReason"].clean_html();
+            if (exemptScanner && string.IsNullOrWhiteSpace(exemptScannerReason))
+            {
+                ModelState.AddModelError(String.Empty, "In order to exempt a package from automated scanning, a reason should be specified.");
+
+                TempData["ErrorMessage"] = "There was a problem completing the operation.  Check validation summary for more information.";
+
+                return View("~/Views/Packages/DisplayPackage.cshtml", model);
+            }
+
+            if (isModerationRole && exemptScanner && package.PackageScanStatus != PackageScanStatusType.Exempted)
+            {
+                packageSvc.ExemptPackageFromScanner(package, exemptScannerReason, currentUser);
+                if (!string.IsNullOrWhiteSpace(newComments)) newComments += "{0}".format_with(Environment.NewLine);
+                newComments += "Auto Scanner Change - Scanner tests have been exempted.";
             }
 
             bool rerunTests = form["RerunTests"].clean_html() == "true";
@@ -278,7 +314,7 @@ namespace NuGetGallery
                 package.PackageScanStatus = PackageScanStatusType.Unknown;
                 packageSvc.SaveMinorPackageChanges(package);
                 if (!string.IsNullOrWhiteSpace(newComments)) newComments += "{0}".format_with(Environment.NewLine);
-                newComments += "Virus Scanner has ben set to rerun";
+                newComments += "Auto Scanner Change - Virus Scanner has ben set to rerun";
             }
 
             bool rerunPackageCacher = form["RerunPackageCacher"].clean_html() == "true";
@@ -288,14 +324,6 @@ namespace NuGetGallery
                 packageSvc.SaveMinorPackageChanges(package);
                 if (!string.IsNullOrWhiteSpace(newComments)) newComments += "{0}".format_with(Environment.NewLine);
                 newComments += "Package Cacher (CDN Download Cache) has ben set to rerun";
-            }
-
-            bool exemptPackageFromValidation = form["ExemptPackageFromValidation"].clean_html() == "true";
-            if (exemptPackageFromValidation)
-            {
-                packageSvc.ExemptPackageFromValidation(package);
-                if (!string.IsNullOrWhiteSpace(newComments)) newComments += "{0}".format_with(Environment.NewLine);
-                newComments += "Auto Validation Change - Validation tests have been exempted.";
             }
 
             // could be null if no moderation has happened yet

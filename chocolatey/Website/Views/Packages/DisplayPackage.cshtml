@@ -510,7 +510,7 @@
                 <div class="collapse @if(!testingStatusPassing){<text>show</text>}" id="testingResults">
                     <hr class="mt-0" />
                     @*Validation*@
-                    <div class="px-3">
+                    <div class="d-flex px-3 pb-3">
                         @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
                         {
                             <p class="mb-0"><span class="fas fa-times text-danger mr-3"></span> Validation Testing Failed</p>
@@ -529,7 +529,11 @@
                         }
                         @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted)
                         {
-                            <p class="mb-0"><span class="fas fa-ban text-secondary mr-3"></span> Validation Testing Exempt</p>
+                            <span class="fas fa-ban text-secondary mr-3"></span>
+                            <div>
+                                <p class="mb-0">Validation Testing Exempt:</p>
+                                @Html.Raw(Markdown.ToHtml(Model.ExemptedFromValidatorReason.clean_html() ?? string.Empty, MarkdownPipeline))
+                            </div>
                         }
                     </div>
                     <hr />
@@ -555,11 +559,9 @@
                         }
                         @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted)
                         {
-                            <span class="fas fa-ban text-secondary mr-3"></span>
-                            <div>
-                                <p class="mb-0">Verification Testing Exempt:</p>
-                                @Html.Raw(Markdown.ToHtml(Model.ExemptedFromVerificationReason.clean_html() ?? string.Empty, MarkdownPipeline))
-                            </div>
+                            <p class="mb-0"><span class="fas fa-ban text-secondary mr-3"></span> Verification Testing Exempt:</p>
+                            <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
+                            @Html.Raw(Markdown.ToHtml(Model.ExemptedFromVerificationReason.clean_html() ?? string.Empty, MarkdownPipeline))
                         }
                     </div>
                     <hr />
@@ -1130,22 +1132,42 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
                                         <label for="RerunTests" class="for-checkbox" title="Only necessary if there was a mistake in the test run. A package repush will trigger test reruns.">Rerun verification tests?</label>
                                     </div>
                                 }
-                                @if (moderator && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
+                                @if (moderator || Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
                                 {
                                     <div class="form-field">
                                         <input id="RerunValidation" name="RerunValidation" type="checkbox" value="true" />
                                         <label for="RerunValidation" class="for-checkbox" title="Rerun package validation tests.">Rerun validation tests?</label>
                                     </div>
+                                }
+                                @if (moderator && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
+                                {
                                     <div class="form-field">
-                                        <input id="ExemptPackageFromValidation" name="ExemptPackageFromValidation" type="checkbox" value="true" />
+                                        <input id="ExemptPackageFromValidation" name="ExemptPackageFromValidation" type="checkbox" value="true" data-toggle="collapse" data-target="#validation-exemption" aria-expanded="false" aria-controls="validation-exemption" />
                                         <label for="ExemptPackageFromValidation" class="for-checkbox" title="Exempt this package version from validation testing.">Exempt this package version from validation testing?</label>
+                                        <div class="collapse form-field d-label-none pb-2" id="validation-exemption">
+                                            @Html.LabelFor(m => m.ExemptedFromValidatorReason)
+                                            @Html.TextAreaFor(m => m.ExemptedFromValidatorReason, new { @class = "text-editor" })
+                                            @Html.ValidationMessageFor(m => m.ExemptedFromValidatorReason)
+                                        </div>
                                     </div>
                                 }
-                                @if (moderator)
+                                @if (moderator || (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.Investigate || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted))
                                 {
                                     <div class="form-field">
                                         <input id="RerunVirusScanner" name="RerunVirusScanner" type="checkbox" value="true" />
                                         <label for="RerunVirusScanner" class="for-checkbox" title="Rerun virus scanner to get latest reports.">Rerun virus scanner?</label>
+                                    </div>
+                                }
+                                @if (moderator && (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.Investigate || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted))
+                                {
+                                    <div class="form-field">
+                                        <input id="ExemptPackageFromScanner" name="ExemptPackageFromScanner" type="checkbox" value="true" data-toggle="collapse" data-target="#scanner-exemption" aria-expanded="false" aria-controls="scanner-exemption" />
+                                        <label for="ExemptPackageFromScanner" class="for-checkbox" title="Exempt this package version from scanner testing.">Exempt this package version from scanner testing?</label>
+                                        <div class="collapse form-field d-label-none pb-2" id="scanner-exemption">
+                                            @Html.LabelFor(m => m.ExemptedFromScannerReason)
+                                            @Html.TextAreaFor(m => m.ExemptedFromScannerReason, new { @class = "text-editor" })
+                                            @Html.ValidationMessageFor(m => m.ExemptedFromScannerReason)
+                                        </div>
                                     </div>
                                 }
                                 @if (admin & !maintainer)
