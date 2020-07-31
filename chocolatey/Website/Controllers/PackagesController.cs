@@ -148,11 +148,11 @@ namespace NuGetGallery
             // maintainers and reviewers cannot change the current status
             if (User.IsReviewer() || isMaintainer) status = package.Status;
 
-            if (status == PackageStatusType.Approved && !(
-                (package.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing || package.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted)
-                    && (package.PackageTestResultStatus == PackageAutomatedReviewResultStatusType.Passing || package.PackageTestResultStatus == PackageAutomatedReviewResultStatusType.Exempted)
-                    && (package.PackageScanStatus == PackageScanStatusType.NotFlagged || package.PackageScanStatus == PackageScanStatusType.Exempted)
-                ))
+            var isPackagePassingOrExemptedFromValidator = package.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing || package.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted;
+            var isPackagePassingOrExemptedFromVerifer = package.PackageTestResultStatus == PackageAutomatedReviewResultStatusType.Passing || package.PackageTestResultStatus == PackageAutomatedReviewResultStatusType.Exempted;
+            var isPackagePassingOrExemptedFromScanner = package.PackageScanStatus == PackageScanStatusType.NotFlagged || package.PackageScanStatus == PackageScanStatusType.Exempted;
+
+            if (status == PackageStatusType.Approved && !(isPackagePassingOrExemptedFromValidator && isPackagePassingOrExemptedFromVerifer && isPackagePassingOrExemptedFromScanner))
             {
                 ModelState.AddModelError(String.Empty, "A package cannot be approved unless all required checks have passed, or have been exempted by a moderator.");
 
