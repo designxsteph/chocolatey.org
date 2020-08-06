@@ -730,6 +730,10 @@
     <Compile Include="Migrations\202007091422435_AddScanStatusToModerationProcess.Designer.cs">
       <DependentUpon>202007091422435_AddScanStatusToModerationProcess.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007301215356_AddExemptionDetailsToPackage.cs" />
+    <Compile Include="Migrations\202007301215356_AddExemptionDetailsToPackage.Designer.cs">
+      <DependentUpon>202007301215356_AddExemptionDetailsToPackage.cs</DependentUpon>
+    </Compile>
     <Compile Include="RequestModels\RegisterRequest.cs" />
     <Compile Include="RequestModels\SignInRequest.cs" />
     <Compile Include="RouteAreaCollectionExtensions.cs" />
