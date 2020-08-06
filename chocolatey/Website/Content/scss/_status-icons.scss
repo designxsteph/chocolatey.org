@@ -5,7 +5,7 @@
 .status {
     position: relative;
     padding: 0;
-    margin: 1em .75rem 1em auto;
+    margin: 0 .75rem 0 0;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -15,7 +15,7 @@
     &.status-sm {
         height: 15px;
         width: 15px;
-        margin-right: .5rem;
+        margin: 0 .5rem 0 0;
     }
 
     li {
