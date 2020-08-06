@@ -510,22 +510,22 @@
                 <div class="collapse @if(!testingStatusPassing){<text>show</text>}" id="testingResults">
                     <hr class="mt-0" />
                     @*Validation*@
-                    <div class="d-flex px-3 pb-3">
+                    <div class="d-flex px-3">
                         @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
                         {
-                            <p class="mb-0"><span class="fas fa-times text-danger mr-3"></span> Validation Testing Failed</p>
+                            <p class="mb-0"><span class="fas fa-times text-danger mr-3"></span>Validation Testing Failed</p>
                         }
                         @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing)
                         {
-                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Validation Testing Passed</p>
+                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span>Validation Testing Passed</p>
                         }
                         @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Pending)
                         {
-                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span> Validation Testing Pending</p>
+                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span>Validation Testing Pending</p>
                         }
                         @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Unknown)
                         {
-                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span> Validation Testing Unknown</p>
+                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span>Validation Testing Unknown</p>
                         }
                         @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted)
                         {
@@ -538,77 +538,107 @@
                     </div>
                     <hr />
                     @*Verification*@
-                    <div class="d-flex @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>justify-content-between</text>} px-3 pb-3">
+                    <div class="px-3">
                         @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing)
                         {
-                            <p class="mb-0"><span class="fas fa-times text-danger mr-3"></span> Verification Testing Failed</p>
-                            <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-0"><span class="fas fa-times text-danger mr-3"></span>Verification Testing Failed</p>
+                                <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
+                            </div>
                         }
                         @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing)
                         {
-                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Verification Testing Passed</p>
-                            <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-0"><span class="fas fa-check text-success mr-3"></span>Verification Testing Passed</p>
+                                <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
+                            </div>
                         }
                         @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending)
                         {
-                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span> Verification Testing Pending</p>
+                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span>Verification Testing Pending</p>
                         }
                         @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown)
                         {
-                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span> Verification Testing Unknown</p>
+                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span>Verification Testing Unknown</p>
                         }
                         @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted)
                         {
-                            <p class="mb-0"><span class="fas fa-ban text-secondary mr-3"></span> Verification Testing Exempt:</p>
-                            <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
-                            @Html.Raw(Markdown.ToHtml(Model.ExemptedFromVerificationReason.clean_html() ?? string.Empty, MarkdownPipeline))
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <span class="fas fa-ban text-secondary mr-3 mt-1"></span>
+                                    <div>
+                                        <p class="mb-0">Verification Testing Exempt:</p>
+                                        @Html.Raw(Markdown.ToHtml(Model.ExemptedFromVerificationReason.clean_html() ?? string.Empty, MarkdownPipeline))
+                                    </div>
+                                </div>
+                                <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
+                            </div>
+                            
                         }
                     </div>
                     <hr />
                     @*Scanning*@
-                    <div class="d-flex px-3 pb-3">
+                    <div class="px-3 pb-3">
                         @if (Model.PackageScanResultStatus == PackageScanStatusType.Flagged || Model.PackageScanResultStatus == PackageScanStatusType.ScannerExempted || Model.PackageScanResultStatus == PackageScanStatusType.Investigate)
                         {
-                            <span class="fas fa-times text-danger mr-3"></span>
-                            <div>
-                                <p class="mb-0">Scan Testing Resulted in @Model.PackageScanResultStatus</p>
-                                <a href="#virus">Details</a>
-                                @{
-                                    switch (Model.PackageScanFlagResultType)
-                                    {
-                                        case PackageScanFlagResultType.Note:
-                                            <p>At least one file within this package had greater then 0 detections for a file</p>
-                                            break;
-                                        case PackageScanFlagResultType.Warning:
-                                            <p>At least one file within this package had between 5 and 10 detections for a file</p>
-                                            break;
-                                        case PackageScanFlagResultType.Error:
-                                            <p>At least one file within this package had greater then 10 detections for a file</p>
-                                            break;
-                                    }
-                                }
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <span class="fas fa-times text-danger mr-3 mt-1"></span>
+                                    <div>
+                                        <p class="mb-0">Scan Testing Resulted in @Model.PackageScanResultStatus:</p>
+                                        <p class="mb-0">
+                                            @{
+                                                switch (Model.PackageScanFlagResultType)
+                                                {
+                                                    case PackageScanFlagResultType.Note:
+                                                        <text>At least one file within this package had greater then 0 detections for a file</text>
+                                                        break;
+                                                    case PackageScanFlagResultType.Warning:
+                                                        <text>At least one file within this package had between 5 and 10 detections for a file</text>
+                                                        break;
+                                                    case PackageScanFlagResultType.Error:
+                                                        <text>At least one file within this package had greater then 10 detections for a file</text>
+                                                        break;
+                                                }
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                                <a class="collapse-nav" href="#virus">Details</a>
                             </div>
                         }
                         @if (Model.PackageScanResultStatus == PackageScanStatusType.NotFlagged)
                         {
-                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Scan Testing Successful - No detections found in any package files</p>
-                            <a href="#virus">Details</a>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <span class="fas fa-check text-success mr-3 mt-1"></span>
+                                    <div>
+                                        <p class="mb-0">Scan Testing Successful:</p>
+                                        <p class="mb-0">No detections found in any package files</p>
+                                    </div>
+                                </div>
+                                <a class="collapse-nav" href="#virus">Details</a>
+                            </div>
                         }
                         @if (Model.PackageScanResultStatus == PackageScanStatusType.Pending)
                         {
-                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span> Scan Testing Pending</p>
+                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span>Scan Testing Pending</p>
                         }
                         @if (Model.PackageScanResultStatus == PackageScanStatusType.Unknown)
                         {
-                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span> Scan Testing Unknown</p>
+                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span>Scan Testing Unknown</p>
                         }
                         @if (Model.PackageScanResultStatus == PackageScanStatusType.Exempted)
                         {
-                            <span class="fas fa-ban text-secondary mr-3"></span>
-                            <div>
-                                <p class="mb-0">Scan Testing Exempt:</p>
-                                <a href="#virus">Details</a>
-                                @Html.Raw(Markdown.ToHtml(Model.ExemptedFromScannerReason.clean_html() ?? string.Empty, MarkdownPipeline))
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <span class="fas fa-ban text-secondary mr-3 mt-1"></span>
+                                    <div>
+                                        <p class="mb-0">Scan Testing Exempt:</p>
+                                        @Html.Raw(Markdown.ToHtml(Model.ExemptedFromScannerReason.clean_html() ?? string.Empty, MarkdownPipeline))
+                                    </div>
+                                </div>
+                                <a class="collapse-nav" href="#virus">Details</a>
                             </div>
                         }
                     </div>
