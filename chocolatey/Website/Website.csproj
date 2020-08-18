@@ -64,22 +64,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\AWSSDK.1.3.18.0\lib\AWSSDK.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette">
-      <HintPath>..\..\packages\Cassette.2.4.2\lib\net40-client\Cassette.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Cassette.Aspnet">
-      <HintPath>..\..\packages\Cassette.Aspnet.2.4.2\lib\net40\Cassette.Aspnet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Cassette.MSBuild">
-      <HintPath>..\..\packages\Cassette.MSBuild.2.4.2\lib\net40\Cassette.MSBuild.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Cassette.Views">
-      <HintPath>..\..\packages\Cassette.Views.2.4.2\lib\net40\Cassette.Views.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\elmah.corelibrary.1.2\lib\Elmah.dll</HintPath>
@@ -679,7 +663,6 @@
     <Compile Include="Entities\UserCourseModuleAchievement.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Infrastructure\Captcha.cs" />
-    <Compile Include="Infrastructure\CassetteConfiguration.cs" />
     <Compile Include="Infrastructure\CSharpRazorViewEngine.cs" />
     <Compile Include="Infrastructure\ISpamValidationModel.cs" />
     <Compile Include="Infrastructure\ValidateFormResponseAttribute.cs" />
@@ -1416,7 +1399,6 @@
     <Content Include="gulpfile.js" />
     <Content Include="Install-LastPoshClient.ps1" />
     <Content Include="bundleconfig.json" />
-    <None Include="Cassette.targets" />
     <Content Include="chocolatey-media-kit.zip" />
     <Content Include="chocolatey-styleguide.zip" />
     <Content Include="Content\scss\chocolatey.scss" />
@@ -1773,7 +1755,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\packages\RazorGenerator.MsBuild.*\tools\RazorGenerator.targets" />
-  <Import Project="$(ProjectDir)Cassette.targets" />
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
@@ -1782,9 +1763,6 @@
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
     <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
-  <Target Name="Bundle" AfterTargets="Build">
-    <Exec Command="&quot;$(msbuildtoolspath)\msbuild.exe&quot; &quot;$(ProjectDir)cassette.targets&quot; /p:OutputPath=$(OutputPath) /p:WebProjectOutputDir=&quot;$(WebProjectOutputDir)&quot; /t:Bundle /nr:false" />
   </Target>
   <PropertyGroup>
     <PreBuildEvent>if "%25USERNAME:~0,5%25"=="apphb" (
