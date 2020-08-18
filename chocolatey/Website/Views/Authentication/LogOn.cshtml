@@ -3,10 +3,6 @@
 @{
     ViewBag.Title = "Log On";
     Layout = "~/Views/Shared/MinimalLayout.cshtml";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/validation");
 }
 @section TopScripts {
     <script>
@@ -15,6 +11,11 @@
         }
     </script>
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/account.min.css")" />
 }
 
 <h3 class="text-center">Chocolatey Community Login</h3>
@@ -52,6 +53,8 @@
     </fieldset>
 }     
 @section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/validation.min.js")"></script>
+
     <script language="javascript" type="text/javascript">
         ((window.gitter = {}).chat = {}).options = {
             room: 'chocolatey/chocolatey.org'

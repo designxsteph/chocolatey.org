@@ -1,0 +1,128 @@
+[
+  {
+    "outputFileName": "Content/dist/chocolatey.bundle.css",
+    "inputFiles": [
+      "Content/dist/chocolatey.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/dist/packages.css",
+    "inputFiles": [
+      "Content/packages.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/dist/prism.css",
+    "inputFiles": [
+      "Content/prism.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/dist/easymde.css",
+    "inputFiles": [
+      "node_modules/easymde/dist/easymde.min.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/dist/account.css",
+    "inputFiles": [
+      "Content/account.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/dist/pages.css",
+    "inputFiles": [
+      "Content/pages.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/chocolatey.bundle.js",
+    "inputFiles": [
+      "node_modules/jquery/dist/jquery.js",
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+      "node_modules/clipboard/dist/clipboard.js",
+      "Scripts/custom.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/prism.js",
+    "inputFiles": [
+      "Scripts/prism.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/package-details.js",
+    "inputFiles": [
+      "Scripts/package-details.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/package-list.js",
+    "inputFiles": [
+      "Scripts/package-list.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/documentation.js",
+    "inputFiles": [
+      "Scripts/documentation.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/jquery.countdown.js",
+    "inputFiles": [
+      "node_modules/jquery-countdown/dist/jquery.countdown.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/easymde.js",
+    "inputFiles": [
+      "node_modules/easymde/dist/easymde.min.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/install-steps.js",
+    "inputFiles": [
+      "Scripts/install-steps.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/closeable.js",
+    "inputFiles": [
+      "Scripts/closeable.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/stats.js",
+    "inputFiles": [
+      "Scripts/stats.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/validation.js",
+    "inputFiles": [
+      "node_modules/jquery-validation/dist/jquery.validate.js",
+      "Scripts/validation/MicrosoftAjax.js",
+      "Scripts/validation/MicrosoftMvcAjax.js",
+      "Scripts/validation/MicrosoftMvcValidation.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/knockout-latest.js",
+    "inputFiles": [
+      "node_modules/knockout/build/output/knockout-latest.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/courses.js",
+    "inputFiles": [
+      "Scripts/courses.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/dist/anchor.js",
+    "inputFiles": [
+      "node_modules/anchor-js/anchor.js"
+    ]
+  }
+]

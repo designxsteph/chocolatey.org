@@ -2,10 +2,6 @@
 @using System.Linq
 @{
     ViewBag.Title = "Events";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/jquery-countdown");
-
     var description = "Find past and upcoming webinars, workshops, and conferences by Chocolatey.";
 }
 @section ExtraHeaders {
@@ -169,3 +165,7 @@
         }
     </div>
 </section>
+
+@section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/jquery-countdown.min.js")"></script>
+}

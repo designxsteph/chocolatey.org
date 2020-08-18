@@ -3,8 +3,6 @@
 @model UserProfileModel
 @{
     ViewBag.Title = @Model.Username;
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
     var MarkdownPipeline = new MarkdownPipelineBuilder()
                  .UseSoftlineBreakAsHardlineBreak()
                  .UseAdvancedExtensions()

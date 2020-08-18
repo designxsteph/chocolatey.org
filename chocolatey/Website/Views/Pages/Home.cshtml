@@ -4,9 +4,6 @@
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "Chocolatey - The package manager for Windows";
     ViewBag.Tab = "Home";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/home");
 
     // Set to True to show callout. False to hide callout if not relevent.
     var callout = true;
@@ -364,6 +361,8 @@ else
 
 @section BottomScripts
 {
+    <script src="@Href("~/Scripts/dist/stats.min.js")"></script>
+
     <script type="text/javascript" language="javascript">
         $(getStats);
     </script>

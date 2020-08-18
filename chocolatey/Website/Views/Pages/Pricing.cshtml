@@ -1,9 +1,12 @@
 ﻿@{
     ViewBag.Title = "Pricing";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
 }
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/pages.min.css")" />
+}
+
 <section id="editions" class="py-3 py-lg-5">
     <div class="container">
         <div class="row text-center pb-4">

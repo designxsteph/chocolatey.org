@@ -3,9 +3,6 @@
 @{
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "Community";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/home");
 }
 
 <div id="header" class="bg-medium-dark community-header">
@@ -103,6 +100,8 @@
 
 @section BottomScripts
 {
+    <script src="@Href("~/Scripts/dist/stats.min.js")"></script>
+
     <script language="javascript" type="text/javascript">
         ((window.gitter = {}).chat = {}).options = {
             room: 'chocolatey/chocolatey.org'

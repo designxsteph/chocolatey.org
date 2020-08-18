@@ -44,8 +44,7 @@
     </footer>
     @RenderPage("_CookiePolicy.cshtml")
 
-    @Bundles.RenderStylesheets("bottom")
-    @Bundles.RenderScripts()
+    <script src="@Href("~/Scripts/dist/chocolatey.bundle.min.js")"></script>
 
     @RenderSection("BottomScripts", required: false)
 </body>

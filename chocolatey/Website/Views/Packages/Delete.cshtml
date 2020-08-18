@@ -1,9 +1,11 @@
 ﻿@model DisplayPackageViewModel
 @{
     ViewBag.Tab = "Packages";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/account.min.css")" />
 }
 
 <section id="secondaryNav">

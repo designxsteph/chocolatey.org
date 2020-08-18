@@ -1,110 +1,148 @@
-const gulp = require("gulp"),
-    del = require("del"),
+const gulp = require('gulp'),
+    del = require('del'),
     concat = require('gulp-concat'),
-    cleanCSS = require('gulp-clean-css'),
-    purgecss = require("gulp-purgecss"),
-    sass = require("gulp-sass"),
-    uglify = require("gulp-uglify"),
-    pump = require("pump"),
-    zipfiles = require("gulp-zip"),
-    dist = "Content/dist";
+    purgeCss = require('gulp-purgecss'),
+    sass = require('gulp-sass'),
+    uglify = require('gulp-uglify-es').default,
+    rename = require('gulp-rename'),
+    pump = require('pump'),
+    zipfiles = require('gulp-zip'),
+    cleanCss = require('gulp-clean-css'),
+    cssDist = 'Content/dist',
+    jsDist = 'Scripts/dist',
+    fonts = 'Content/fonts',
+    merge = require('merge-stream'),
+    bundleconfig = require('./bundleconfig.json');
     sass.compiler = require('node-sass');
 
+const { series, parallel, src, dest } = require('gulp');
+
+const regex = {
+    css: /\.css$/,
+    js: /\.js$/
+};
+
+const getBundles = (regexPattern) => {
+    return bundleconfig.filter(bundle => {
+        return regexPattern.test(bundle.outputFileName);
+    });
+};
+
 function clean() {
-    return del([dist, "chocolatey-styleguide.zip"]);
+    return del([cssDist, jsDist, fonts, 'chocolatey-styleguide.zip']);
 }
 
-function compileSASS() {
-    return gulp.src("Content/scss/*.scss")
+function copyFonts() {
+    return src('node_modules/@fortawesome/fontawesome-free/webfonts/*.*')
+        .pipe(dest(fonts));
+}
+
+function compileSass() {
+    return src('Content/scss/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(dist));
+        .pipe(dest(cssDist));
 }
 
-function purge() {
-    return gulp.src("Content/dist/chocolatey.css")
-        .pipe(purgecss({
-            content: ["Views/**/*.cshtml", "App_Code/ViewHelpers.cshtml", "Errors/*.*", "Scripts/custom.js", "Scripts/packages/package-details.js", "Content/scss/_search.scss", "Scripts/easymde/easymde.min.js"]
-        }))
-        .pipe(gulp.dest("Content/dist/tmp"));
+function compileJs() {
+    var tasks = getBundles(regex.js).map(function (bundle) {
+
+        return src(bundle.inputFiles, { base: '.' })
+            .pipe(concat(bundle.outputFileName))
+            .pipe(dest('.'));
+    });
+
+    return merge(tasks);
 }
 
-function optimize() {
-    return gulp.src(["Content/dist/tmp/chocolatey.css", "Content/dist/purge.css"])
-        .pipe(concat("chocolatey.slim.css"))
-        .pipe(cleanCSS({
-            level: 1,
-            compatibility: 'ie8'
-        }))
-        .pipe(gulp.dest(dist))
-        .on('end', function () {
-            del(["Content/dist/purge.css", "Content/dist/tmp"]);
-        });
+function compileCss() {
+    var tasks = getBundles(regex.css).map(function (bundle) {
+
+        return src(bundle.inputFiles, { base: '.' })
+            .pipe(concat(bundle.outputFileName))
+            .pipe(purgeCss({
+                content: [
+                    'Views/**/**/*.cshtml',
+                    'Scripts/dist/*.js',
+                    'App_Code/ViewHelpers.cshtml',
+                    'Errors/*.*',
+                    'Content/scss/_search.scss',
+                    'Content/scss/_purge.scss'
+                ]
+            }))
+            .pipe(dest('.'));
+    });
+
+    return merge(tasks);
+}
+
+function minCss() {
+    var tasks = getBundles(regex.css).map(function (bundle) {
+
+        return src(bundle.outputFileName, { base: '.' })
+            .pipe(cleanCss({
+                level: 2,
+                compatibility: 'ie8'
+            }))
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(dest('.'));
+    });
+
+    return merge(tasks);
+}
+
+function minJs() {
+    var tasks = getBundles(regex.js).map(function (bundle) {
+
+        return src(bundle.outputFileName, { base: '.' })
+            .pipe(uglify())
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(dest('.'));
+    });
+
+    return merge(tasks);
+}
+
+function cleanEnd() {
+    return del([
+        cssDist + '/*.css',
+        '!' + cssDist + '/*.min.css',
+        jsDist + '/*.js',
+        '!' + jsDist + '/*.min.js',
+        fonts + '/fa-regular-400.*',
+    ]);
 }
 
 // Styleguide Zip File Process
-
 // First copy files
-function copyFonts() {
-    return gulp.src("Content/fonts/*.*")
-        .pipe(gulp.dest("styleguide/fonts"));
-}
-function copyCSS() {
-    return gulp.src(["Content/prism/prism.css", "Content/dist/chocolatey.css", "Content/dist/chocolatey.slim.css"])
-        .pipe(gulp.dest("styleguide/css"));
-}
-function copyTmpJS() {
-    return gulp.src(["Scripts/*.js"])
-        .pipe(gulp.dest("styleguide/tmp"));
-}
-function copyJS() {
-    return gulp.src("Scripts/prism/prism.js")
-        .pipe(gulp.dest("styleguide/js"));
+function copyCssZip() {
+    return src([cssDist + '/*.css'])
+        .pipe(dest('styleguide/css'));
 }
 
-// Second optimize CSS
-function cssStyleguide() {
-    return gulp.src("styleguide/css/*.css")
-        .pipe(cleanCSS({
-            level: 1,
-            compatibility: 'ie8'
-        }))
-        .pipe(gulp.dest("styleguide/css"));
+function copyJsZip() {
+    return src(jsDist + '/*.js')
+        .pipe(dest('styleguide/js'));
 }
 
-// Next concat JS files in temp folder
-function jsStyleguideConcat() {
-    return gulp.src([
-        "styleguide/tmp/jquery-3.5.1.js",
-        "styleguide/tmp/bootstrap.bundle.js",
-        "styleguide/tmp/clipboard.js",
-        "styleguide/tmp/custom.js"])
-        .pipe(concat("chocolatey.js"))
-        .pipe(gulp.dest("styleguide/js"))
-        .on('end', function () {
-            del("styleguide/tmp");
-        });
+function copyFontsZip() {
+    return src(fonts + '/*.*')
+        .pipe(dest('styleguide/fonts'));
 }
 
-// Then Optimize JS
-function jsStyleguide(cb) {
-    pump([
-        gulp.src("styleguide/js/*.js"),
-        uglify(),
-        gulp.dest("styleguide/js")
-    ],
-        cb
-    );
-}
-
-// Zip it all up and delete temporary styleguide folder
+// Zip it all up
 function zip() {
-    return gulp.src("styleguide/*/*.*")
-        .pipe(zipfiles("chocolatey-styleguide.zip"))
-        .pipe(gulp.dest("./"))
+    return src('styleguide/*/*.*')
+        .pipe(zipfiles('chocolatey-styleguide.zip'))
+        .pipe(dest('./'))
         .on('end', function () {
-            del(["styleguide", "Content/dist/chocolatey.css"]);
+            del(['styleguide']);
         });
 }
 
-// Task
-gulp.task("default", gulp.series(clean, compileSASS, purge, optimize, copyFonts, copyCSS, copyTmpJS, copyJS, cssStyleguide, jsStyleguideConcat, jsStyleguide, zip));
+// Gulp series
+exports.compileSassJs = parallel(compileSass, compileJs);
+exports.minCssJs = parallel(minCss, minJs);
+exports.createZip = series(copyFontsZip, copyCssZip, copyJsZip, zip);
+
+// Gulp default
+exports.default = series(clean, copyFonts, exports.compileSassJs, compileCss, exports.minCssJs, cleanEnd, exports.createZip);

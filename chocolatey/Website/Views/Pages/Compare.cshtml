@@ -1,8 +1,10 @@
 ﻿@{
     ViewBag.Title = "Compare";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/pages.min.css")" />
 }
 
 <section class="container py-3 py-lg-5" id="compare">

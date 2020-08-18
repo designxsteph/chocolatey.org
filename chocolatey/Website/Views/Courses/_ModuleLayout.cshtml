@@ -2,18 +2,13 @@
 @model CourseViewModel
 @{
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/prism");
-    Bundles.Reference("Scripts/courses");
     var BaseHref = Request.Url.GetLeftPart(UriPartial.Authority);
     var FullHref = Request.Url.GetLeftPart(UriPartial.Path);
 }
 @section css
 {
-    @RenderSection("css", required: false)
+    <link rel="stylesheet" href="@Href("~/Content/dist/pages.min.css")" />
+    <link rel="stylesheet" href="@Href("~/Content/dist/prism.min.css")" />
 }
 @section ExtraHeaders
 {
@@ -102,10 +97,12 @@
     </footer>
     @RenderPage("~/Views/Shared/_CookiePolicy.cshtml")
 
-    @Bundles.RenderStylesheets("bottom")
-    @Bundles.RenderScripts()
+    <script src="@Href("~/Scripts/dist/chocolatey.bundle.min.js")"></script>
+    <script src="@Href("~/Scripts/dist/prism.min.js")"></script>
+    <script src="@Href("~/Scripts/dist/courses.min.js")"></script>
 
     @RenderSection("BottomScripts", required: false)
+
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
     <script language="javascript" type="text/javascript">

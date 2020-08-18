@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<MarkdownPostViewModel>
 @{
     ViewBag.Title = "The Official Chocolatey Blog";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/pages.min.css")" />
 }
 
 <section id="secondaryNav">

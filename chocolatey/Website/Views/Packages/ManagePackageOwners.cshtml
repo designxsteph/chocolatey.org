@@ -2,10 +2,11 @@
 @{
     ViewBag.Tab = "Packages";
     var moderator = User != null && User.IsModerator();
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/manageowners");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/account.min.css")" />
 }
 
 <section id="secondaryNav">
@@ -63,6 +64,7 @@
 </section>
 
 @section bottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/knockout-latest.min.js")"></script>
     <script src="@Url.Content("~/json/JsonApi?json")"></script>
     <script>
     $(function () {

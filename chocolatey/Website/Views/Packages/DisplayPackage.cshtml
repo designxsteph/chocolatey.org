@@ -6,16 +6,6 @@
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = Model.Title + " " + Model.Version;
     ViewBag.Tab = "Packages";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/packages.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Content/easymde.min.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/packages");
-    Bundles.Reference("Scripts/prism");
-    Bundles.Reference("Scripts/install-steps");
-    Bundles.Reference("Scripts/easymde");
-    Bundles.Reference("Scripts/closeable");
 
     var markdownPipelineBuilder = new MarkdownPipelineBuilder()
                  .UseSoftlineBreakAsHardlineBreak()
@@ -114,6 +104,13 @@
         <meta property="description" content="@Model.Summary" />
     }
 }
+
+@section css {
+    <link rel="stylesheet" href="@Href("~/Content/dist/packages.min.css")" />
+    <link rel="stylesheet" href="@Href("~/Content/dist/prism.min.css")" />
+    <link rel="stylesheet" href="@Href("~/Content/dist/easymde.min.css")" />
+}
+
 @if (!User.Identity.IsAuthenticated)
 {
     @Html.Partial("~/Views/Packages/_CommunityInfoDisclaimer.cshtml")
@@ -1543,6 +1540,12 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
 </section>
 
 @section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/package-details.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/Scripts/dist/prism.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/Scripts/dist/install-steps.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/Scripts/dist/easymde.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/Scripts/dist/closeable.min.js")"></script>
+
     <script type="text/javascript" language="javascript">
         $(function () {
             Closeable.modal("chocolatey_hide_packages_disclaimer");

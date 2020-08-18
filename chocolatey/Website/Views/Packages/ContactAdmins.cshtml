@@ -1,10 +1,6 @@
 ﻿@model ContactAdminsViewModel
 @{
     ViewBag.Tab = "Packages";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/validation");
 }
 @section TopScripts {
     <script>
@@ -13,6 +9,11 @@
         }
     </script>
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/account.min.css")" />
 }
 
 <section id="secondaryNav">
@@ -79,3 +80,7 @@
         </div>
     </div>
 </section>
+
+@section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/validation.min.js")"></script>
+}

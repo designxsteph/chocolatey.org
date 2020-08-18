@@ -1,8 +1,5 @@
 ﻿@{
     ViewBag.Title = "Privacy";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
 
     var QuestionOne = "What Information Do We Collect";
     var QuestionOneAttr = QuestionOne.Replace(" ", "-").ToLower();
@@ -34,6 +31,11 @@
     var QuestionFourteenAttr = QuestionFourteen.Replace(" ", "-").ToLower();
     var QuestionFifteen = "How Can You Review, Update, or Delete the Data We Collect from You";
     var QuestionFifteenAttr = QuestionFifteen.Replace(",", "").Replace(" ", "-").ToLower();
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/pages.min.css")" />
 }
 
 <section class="py-3 py-lg-5">

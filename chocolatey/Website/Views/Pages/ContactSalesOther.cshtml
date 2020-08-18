@@ -1,11 +1,6 @@
 ﻿@model ContactSalesOtherViewModel
 @{
     ViewBag.Title = "Sales Inquiry";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/validation");
-    Bundles.Reference("Scripts/closeable");
 }
 @section TopScripts {
     <script>
@@ -14,6 +9,11 @@
         }
     </script>
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/account.min.css")" />
 }
 
 <section id="account">
@@ -91,3 +91,7 @@
         </div>
     </div>
 </section>
+
+@section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/validation.min.js")"></script>
+}

@@ -1,12 +1,13 @@
 ﻿@{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Installing Chocolatey";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/prism");
-    Bundles.Reference("Scripts/install-steps");
 }
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/prism.min.css")" />
+}
+
 @Html.Partial("~/Views/Shared/_Loader.cshtml")
 <section class="py-3 py-md-5 container">
     <h1 class="text-center mb-4">Installing Chocolatey</h1>
@@ -537,3 +538,8 @@ class {'chocolatey':
         </div>
     </div>
 </section>
+
+@section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/prism.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/Scripts/dist/install-steps.min.js")"></script>
+}

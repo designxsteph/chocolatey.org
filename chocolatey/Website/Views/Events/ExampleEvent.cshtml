@@ -1,10 +1,6 @@
 ﻿@model IEnumerable<EventViewModel>
 @{
     ViewBag.Title = "Example Event";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/jquery-countdown");
-
     var description = "This description is what shows up when this url is shared via social media and used for website SEO.";
 }
 @section ExtraHeaders {
@@ -112,4 +108,8 @@
             </div>
         </section>
     }
+}
+
+@section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/jquery-countdown.min.js")"></script>
 }

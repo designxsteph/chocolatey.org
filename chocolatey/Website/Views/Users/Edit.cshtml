@@ -1,10 +1,11 @@
 ﻿@model EditProfileViewModel
 @{
     ViewBag.Title = "Edit Profile";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/validation");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/account.min.css")" />
 }
 
 <section id="secondaryNav">
@@ -132,6 +133,8 @@
 
 @section BottomScripts
 {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/validation.min.js")"></script>
+
     <script language="javascript" type="text/javascript">
         ((window.gitter = {}).chat = {}).options = {
             room: 'chocolatey/chocolatey.org'

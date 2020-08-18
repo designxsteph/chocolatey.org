@@ -2,10 +2,11 @@
 @{
     ViewBag.Title = "Resend Email Confirmation";
     Layout = "~/Views/Shared/MinimalLayout.cshtml";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/validation");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/account.min.css")" />
 }
 
 <h3 class="text-center">Resend Email Confirmation</h3>
@@ -33,4 +34,8 @@
         <input class="btn btn-primary mx-auto mt-3 d-block" type="submit" value="Send" title="Resend Email Confirmation" />
         <p class="mb-0 mt-2 text-center"><small><a class="cancel" href="@Url.LogOn()" title="Cancel Changes and go back.">Cancel</a></small></p>
     </fieldset>
+}
+
+@section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/validation.min.js")"></script>
 }

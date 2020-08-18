@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = Model.Title;
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/prism");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/pages.min.css")" />
+    <link rel="stylesheet" href="@Href("~/Content/dist/prism.min.css")" />
 }
 
 @section ExtraHeaders {
@@ -76,6 +77,8 @@
 </section>
 
 @section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/prism.min.js")"></script>
+
     <script type="text/javascript" language="javascript">
         var disqus_shortname = '@disqusShortname';
 

@@ -1,16 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/anchorjs");
-    Bundles.Reference("Scripts/prism");
-    Bundles.Reference("Scripts/documentation");
 }
 @section css
 {
     @RenderSection("css", required: false)
+    <link rel="stylesheet" href="@Href("~/Content/dist/pages.min.css")" />
+    <link rel="stylesheet" href="@Href("~/Content/dist/prism.min.css")" />
 }
 @section ExtraHeaders
 {
@@ -225,14 +220,14 @@
                                 @*Chocolatey Central Management*@
                                 <a class="collapsed d-block" data-toggle="collapse" href="#chocolatey-central-management" role="button" aria-expanded="false" aria-controls="chocolatey-central-management" title="Chocolatey Central Management (CCM)">Chocolatey Central Management (CCM)</a>
                                 <div class="collapse" id="chocolatey-central-management">
-                                  <ul>
-                                    <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management" })">Central Management Overview</a></li>
-                                    <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-setup" })">Central Management Setup</a></li>
-                                    <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-setup-client" })">Central Management Client Setup</a></li>
-                                    <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-setup-upgrade" })">Central Management Upgrade</a></li>
-                                    <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-deployments" })">Central Management Deployments</a></li>
-                                    @* <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-reports" })">Central Management Reports</a></li>*@
-                                  </ul>
+                                    <ul>
+                                        <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management" })">Central Management Overview</a></li>
+                                        <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-setup" })">Central Management Setup</a></li>
+                                        <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-setup-client" })">Central Management Client Setup</a></li>
+                                        <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-setup-upgrade" })">Central Management Upgrade</a></li>
+                                        <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-deployments" })">Central Management Deployments</a></li>
+                                        @* <li><a href="@Url.RouteUrl(RouteName.Docs, new { docName = "central-management-reports" })">Central Management Reports</a></li>*@
+                                    </ul>
                                 </div>
                                 @*Use Cases*@
                                 <a class="collapsed d-block" data-toggle="collapse" href="#use-cases" role="button" aria-expanded="false" aria-controls="use-cases" title="Use Cases">Use Cases</a>
@@ -277,8 +272,10 @@
     </footer>
     @RenderPage("~/Views/Shared/_CookiePolicy.cshtml")
 
-    @Bundles.RenderStylesheets("bottom")
-    @Bundles.RenderScripts()
+    <script src="@Href("~/Scripts/dist/chocolatey.bundle.min.js")"></script>
+    <script src="@Href("~/Scripts/dist/anchor.min.js")"></script>
+    <script src="@Href("~/Scripts/dist/prism.min.js")"></script>
+    <script src="@Href("~/Scripts/dist/documentation.min.js")"></script>
 
     @RenderSection("BottomScripts", required: false)
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>

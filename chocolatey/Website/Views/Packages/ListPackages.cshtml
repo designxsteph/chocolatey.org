@@ -8,15 +8,13 @@
     var moderationCount = Model.ModerationUpdatedPackageCount + Model.ModerationSubmittedPackageCount + Model.ModerationWaitingPackageCount + Model.ModerationRespondedPackageCount;
     var moderationReadyPackageCount = Model.ModerationSubmittedPackageCount - Model.ModerationPendingAutoReviewPackageCount;
     var moderationRole = User != null && User.IsInAnyModerationRole();
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/packages.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/package-list");
-    Bundles.Reference("Scripts/closeable");
-
     var currentUrl = Request.Url.AbsoluteUri;
     var FullHref = Request.Url.GetLeftPart(UriPartial.Path);
     var packageWarning = Request.Cookies["chocolatey_hide_packages_warning"] == null;
+}
+
+@section css {
+    <link rel="stylesheet" href="@Href("~/Content/dist/packages.min.css")" />
 }
 
 <section id="secondaryNav">
@@ -275,6 +273,9 @@
 </section>
 
 @section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/package-list.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/Scripts/dist/closeable.min.js")"></script>
+
     <script language="javascript" type="text/javascript">
         ((window.gitter = {}).chat = {}).options = {
             room: 'chocolatey/chocolatey.org'

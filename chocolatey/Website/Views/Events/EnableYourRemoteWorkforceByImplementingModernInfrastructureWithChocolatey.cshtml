@@ -1,10 +1,6 @@
 ﻿@model IEnumerable<EventViewModel>
 @{
     ViewBag.Title = "Webinar: Enable Your Remote Workforce by Implementing Modern Infrastructure with Chocolatey";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/jquery-countdown");
-
     var description = "Deploying software to remote desktop and endpoint devices is not always easy, especially in highly regulated and locked down environments. This can be even more challenging if your IT team is overworked, and you need to ensure your users are productive with no vulnerabilities.";
 }
 @section ExtraHeaders {
@@ -112,4 +108,8 @@
             </div>
         </section>
     }
+}
+
+@section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/jquery-countdown.min.js")"></script>
 }

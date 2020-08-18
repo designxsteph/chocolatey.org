@@ -13,12 +13,6 @@
       TempData.Add(Constants.ReturnUrlViewDataKey, Request.RawUrl);
     }
   }
-
-  //css
-  
-  //js
-  Bundles.Reference("Scripts");
-  Bundles.Reference("Scripts/header", "header");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -41,8 +35,8 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="700" />
     <meta property="copyright" content="Chocolatey is Copyright 2017 - @DateTime.UtcNow.Year Chocolatey Software, Inc. Copyright 2011 - 2017 RealDimensions Software, LLC." />
+    <link rel="stylesheet" href="@Href("~/Content/dist/chocolatey.bundle.min.css")" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700">
-    @Bundles.RenderStylesheets()
     @RenderSection("css", required: false)
     <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
     <link rel="apple-touch-icon" href="@Url.Content("~/apple-touch-icon.png")" />
@@ -56,7 +50,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="@Url.Content("~/apple-touch-icon-180x180.png")" />
     <link rel="nuget" type="application/atom+xml" title="Chocolatey" href="http://www.chocolatey.org/api/v2" />
     <link rel="search" type="application/opensearchdescription+xml" href="@Url.Content("~/opensearch.xml")" title="Chocolatey Search" />
-    @Bundles.RenderScripts("header")
     @MiniProfiler.RenderIncludes()
     @{
         var propertyId = ConfigurationManager.AppSettings["Gallery:GoogleAnalyticsPropertyId"];

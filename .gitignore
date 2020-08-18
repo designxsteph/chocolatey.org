@@ -10,8 +10,10 @@ App_Data
 /chocolatey/Website/cassette-cache/
 /chocolatey/Website/Content/packageimages
 /chocolatey/Website/Content/dist
+/chocolatey/Website/Content/fonts
 /chocolatey/Website/node_modules
 /chocolatey/Website/chocolatey-styleguide.zip
+/chocolatey/Website/Scripts/dist
 snags/
 _AzurePackage
 *.sln.docstates

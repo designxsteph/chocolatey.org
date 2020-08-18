@@ -1,0 +1,84 @@
+/*Tooltips*/
+.tooltip .arrow {
+    position: absolute;
+    display: block;
+    width: 0.8rem;
+    height: 0.4rem;
+}
+
+.tooltip .arrow::before {
+    position: absolute;
+    content: "";
+    border-color: transparent;
+    border-style: solid;
+}
+
+.bs-tooltip-top, .bs-tooltip-auto[x-placement^="top"] {
+    padding: 0.4rem 0;
+}
+
+.bs-tooltip-top .arrow, .bs-tooltip-auto[x-placement^="top"] .arrow {
+    bottom: 0;
+}
+
+.bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
+    top: 0;
+    border-width: 0.4rem 0.4rem 0;
+    border-top-color: $tooltip-bg;
+}
+
+.tooltip-inner {
+    max-width: 200px;
+    padding: 0.25rem 0.5rem;
+    color: $white;
+    text-align: center;
+    background-color: $tooltip-bg;
+    border-radius: 0.25rem;
+}
+/*Invisible Input*/
+.invisible-input {
+    display: none;
+}
+
+/*Transitions*/
+.fade {
+    transition: opacity .15s linear;
+
+    &:not(.show) {
+        opacity: 0;
+    }
+}
+
+.collapsing {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition: height .35s ease;
+}
+
+/*Gitter*/
+.gitter-chat-embed {
+    right: 0;
+    left: 0;
+    border-right: 3px solid $primary;
+
+    &:after {
+        left: 0;
+        right: 100%;
+    }
+
+    &.is-collapsed:not(.is-loading) {
+        transform: translateX(-110%);
+    }
+}
+
+.gitter-open-chat-button {
+    right: unset;
+    left: 10px;
+}
+
+@media (min-width: 720px) {
+    .gitter-chat-embed {
+        right: 60%;
+    }
+}

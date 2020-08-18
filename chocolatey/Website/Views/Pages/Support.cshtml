@@ -1,9 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "Support";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/pages.min.css")" />
 }
 
 <div class="container-fluid">

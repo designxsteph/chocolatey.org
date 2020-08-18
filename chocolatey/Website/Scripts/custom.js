@@ -1,3 +1,7 @@
+/*!
+  * Custom JS for Chocolatey.org
+*/
+
 // Preloader
 $(window).on('load', function () {
     $('.authentication-error').remove();

@@ -1,4 +1,0 @@
-jquery.validate.js
-MicrosoftAjax.js
-MicrosoftMvcAjax.js
-MicrosoftMvcValidation.js

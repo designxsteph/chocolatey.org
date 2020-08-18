@@ -1,10 +1,11 @@
 ﻿@model AccountViewModel
 @{
     ViewBag.Tab = "Contribute";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/prism");
+}
+
+@section css
+{
+    <link rel="stylesheet" href="@Href("~/Content/dist/prism.min.css")" />
 }
 
 <section id="secondaryNav">
@@ -113,6 +114,8 @@
 </section>
 
 @section BottomScripts {
+    <script type="text/javascript" src="@Href("~/Scripts/dist/prism.min.js")"></script>
+
     <script language="javascript" type="text/javascript">
         ((window.gitter = {}).chat = {}).options = {
             room: 'chocolatey/chocolatey.org'
