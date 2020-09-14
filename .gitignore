@@ -12,10 +12,12 @@ App_Data
 /chocolatey/Website/Content/dist
 /chocolatey/Website/node_modules
 /chocolatey/Website/chocolatey-styleguide.zip
+/chocolatey/Website/Content/Pdf/chocolatey-pdf.min.css
 snags/
 _AzurePackage
 *.sln.docstates
 *.bak
+Temp_PDF
 
 .DS_Store
 Thumbs.db

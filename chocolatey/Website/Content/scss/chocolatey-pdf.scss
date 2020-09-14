@@ -1,0 +1,27 @@
+// Variable overrides
+@import "Content/scss/chocolatey-pdf-variables";
+
+// Bootstrap
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/images";
+@import "node_modules/bootstrap/scss/code";
+@import "node_modules/bootstrap/scss/buttons";
+
+// FontAwesome
+@import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
+
+// Aditional custom styles
+@import "Content/scss/base";
+@import "Content/scss/lists";
+@import "Content/scss/icons";
+@import "Content/scss/tabs";
+@import "Content/scss/status-icons";
+@import "Content/scss/cards";
+@import "Content/scss/callouts";
+@import "Content/scss/print";

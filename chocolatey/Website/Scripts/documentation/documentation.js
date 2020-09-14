@@ -2,6 +2,13 @@
 anchors.options = { placement: 'left' };
 anchors.add();
 
+// PDF Download Links
+var downloadPdfLink = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
+if (downloadPdfLink == 'docs') {
+    downloadPdfLink = 'home';
+}
+$('.btn-pdf-download').attr('href', 'https://files.chocolatey.org/docs/' + downloadPdfLink + '.pdf');
+
 // Syntax and Tables
 $('pre').addClass('line-numbers border py-2');
 $('pre:not([class*="language-"])').addClass('language-none');
