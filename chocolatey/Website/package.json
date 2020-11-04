@@ -10,7 +10,8 @@
     "gulp-uglify": "^3.0.2",
     "gulp-zip": "^4.2.0",
     "jquery-countdown": "^2.2.0",
-    "node-sass": "^4.14.1"
+    "node-sass": "^4.14.1",
+    "jquery-zoom": "^1.7.21"
   },
   "dependencies": {
     "anchor-js": "^4.2.2",
