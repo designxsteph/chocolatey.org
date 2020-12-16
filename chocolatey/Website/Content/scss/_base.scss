@@ -132,6 +132,12 @@ code:not([class*="language-"]) {
     background: $medium;
 }
 
+@each $color, $value in $colors {
+    .text-#{$color} {
+        color: $value;
+    }
+}
+
 #editions ul li a, .sticky-nav a {
     color: $dark;
 }

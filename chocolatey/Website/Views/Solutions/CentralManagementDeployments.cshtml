@@ -1,0 +1,307 @@
+﻿@{
+    ViewBag.Title = "Solutions | Central Management Deployments";
+    Bundles.Reference("Content/dist/chocolatey.slim.css");
+    Bundles.Reference("Scripts");
+}
+@section ExtraHeaders {
+    <meta property="og:description" content="" />
+    <meta property="description" content="" />
+}
+
+<div id="header" class="bg-medium-dark">
+    <section class="py-3 py-lg-5">
+        <div class="container py-3">
+            <h3 class="text-uppercase">The best software management for Windows endpoints</h3>
+            <h1 class="mb-0">Chocolatey Central Management Deployments</h1>
+        </div>
+    </section>
+</div>
+<section class="py-3 py-lg-5">
+    <div class="container">
+        <h3 class="text-center mb-3">Central Management Deployments for Windows Systems Administrators is easy to use yet powerful software for the management of all software on all Windows endpoints</h3>
+        <div class="row video-story">
+            <div class="col-lg-10 mx-auto">
+                <p>When you have more than one endpoint to manage.. perhaps in more than one location… and the list of software to manage is growing, with patches and releases becoming more frequent… that’s when system admins turn to Central Management Deployments to get a grip of their Windows estate.</p>
+                <div class="card card-body mt-5" data-toggle="modal" data-target="#automation-story">
+                    <h4 class="text-center">"How I Completely Automated Managing Windows Desktop Software...how we internalize, schedule and upgrade all of our software with very little human interaction necessary."</h4>
+                    <div class="d-flex align-items-center justify-content-center mt-4">
+                        <img class="img-fluid shadow rounded-circle mr-3" width="50" src="@Url.Content("~/content/images/speakers/dan-franciscus.jpg")" alt="Dan Franciscus" title="Dan Franciscus" />
+                        <div>
+                            <p class="mb-0"><strong>Dan Franciscus</strong></p>
+                            <p class="mb-0">Systems Engineer, Institute for Advanced Study</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="automation-story" tabindex="-1" role="dialog" aria-labelledby="How I Completely Automated Managing Windows Desktop Software...Forever Video" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/d-1jx5hXtyg?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="text-center mt-5 mb-4">Benefits</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <p class="text-success mb-0"><strong>Ready to go!</strong></p>
+                    <h4>Simple, sensible, sane!</h4>
+                </div>
+                <p>
+                    Everything is set up to work out of the box with convention over configuration. It’s not like starting with an empty Excel spreadsheet! Sensible defaults are preset by experts and it’s ready to go. 
+                    Connect your repository of packages and your target endpoints then start to build plans for remediation.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div class="text-center">
+                    <p class="text-success mb-0"><strong>Anyone can use it!</strong></p>
+                    <h4>Popular and standardized</h4>
+                </div>
+                <p>
+                    Deployments uses the ubiquitous Chocolatey packages which have passed a billion installs around the world. You use community packages or curate your own in a private repository. 
+                    Even the most complex Windows environments and be tamed with the mix of Chocolatey packages and Deployments automation and control.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div class="text-center">
+                    <p class="text-success mb-0"><strong>Keeps finance happy</strong></p>
+                    <h4>Budget friendly</h4>
+                </div>
+                <p>
+                    Deployments is one feature of the larger Chocolatey for Business suite, which has a list price starting at $16 for each managed target. But you get more features that integrate with Deployments and further improve your workflow. 
+                    Other parts of C4B include Visual Package Management (Internalizer, Synchronizer and more) and Self-Service Anywhere so users can "pull" packages as an alternative to Deployments "push".
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div class="text-center">
+                    <p class="text-success mb-0"><strong>Playes nice with others </strong></p>
+                    <h4>Integrates with everything</h4>
+                </div>
+                <p>
+                    You can use Deployments on its own, but in more complex environments you can plug Deployments into a larger workflow and other tools. For example, you can easily integrate Deployments with a software repository of your choice, 
+                    and also with configuration management tools such as Puppet, Ansible and Microsoft SCCM.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-3 py-lg-5 bg-dark text-white">
+    <div class="container">
+        <h2 class="text-center">Pre-Deployments pain-points</h2>
+        <h4 class="text-center mb-4">We hear common complaints from our community about Windows software management — <br class="d-none d-lg-block" />do you feel this pain?</h4>
+        <div class="row text-center">
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <div class="card card-body h-100">
+                    <h5 class="text-orange font-weight-bold">I'm flying blind <i class="fas fa-sad-cry"></i></h5>
+                    <p class="text-dark mb-0">
+                        I can't manage what I can't see or understand. Before Central Management Deployments I found it hard to see (a) what packages exist in the library
+                        and (b) which of those packages are deployed to which endpoints and (c) which packages are out of date and need remediation.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <div class="card card-body h-100">
+                    <h5 class="text-orange font-weight-bold">Automation is hard <i class="fas fa-angry"></i></h5>
+                    <p class="text-dark mb-0">
+                        We have a reasonably complicated landscape. Manual tools and processes need more time and budget to make them work. New hires struggle to get up to speed, 
+                        everyone is making mistakes, tickets queue gets longer, users get frustrated. Short cuts are taken. I'm exhausted.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card card-body h-100">
+                    <h5 class="text-orange font-weight-bold">We're in a mess! <i class="fas fa-surprise"></i></h5>
+                    <p class="text-dark mb-0">
+                        Over time we've accrued a bunch of tools and a mix of manual and automated steps: we've built a Heath Robinson contraption! We need to simplify it all to focus on what's important: getting Windows packages to Windows endpoints on time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-white py-3 py-lg-5">
+    <div class="container">
+        <h2 class="text-center">How it works</h2>
+        <h4 class="text-center mb-4">Deployments is the new Sys Admin on your team that always does as it’s told and never sleeps!</h4>
+        <div class="row align-items-center mb-3">
+            <div class="col-md-6 order-md-2 mb-3 mb-md-0">
+                <img class="img-fluid lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/ccm/deployment-pipeline.jpg")" />
+            </div>
+            <div class="col-md-6">
+                <h5>Integrate into your existing setup, or create a new and improved software management system.</h5>
+                <ul class="mb-0">
+                    <li>Connect Deployments to your software repository.</li>
+                    <li>If you need to use other tools like Configuration Management, integrate with those.</li>
+                    <li>Integrate Deployments with your endpoints.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-3 mb-md-0 text-center">
+                <img class="img-fluid lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/ooda-loop.svg")" alt="OODA Loop" title="OODA Loop" width="300" />
+            </div>
+            <div class="col-md-6">
+                <h5>Create a WinOps workflow like the popular OODA loop:</h5>
+                <ul class="mb-0">
+                    <li><strong>Observe</strong> - see new software, releases, upgrades and patches.</li>
+                    <li><strong>Orient</strong> - which software is out of date on which endpoints?</li>
+                    <li><strong>Decide</strong> - build plans to automate software management.</li>
+                    <li><strong>Act</strong> - on-demand execute or schedule plans.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-3 py-lg-5">
+    <div class="container">
+        <h2 class="text-center">Features</h2>
+        <h4 class="text-center mb-4">All the power without the learning curve means Sys Admins can go from zero to hero in hours. Create a modern software management workflow that’s aligned with WinOps, DevOps and OODA.</h4>
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <h4 class="text-center">Observe & Orient</h4>
+                <ul>
+                    <li>Dashboard</li>
+                    <li>Reports</li>
+                    <li>Software Collections</li>
+                    <li>Target Groups</li>
+                    <li>Watch plans execute</li>
+                    <li>View endpoint logs</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-center">Decide</h4>
+                <ul>
+                    <li>Create Plans</li>
+                    <li>Enrich with Powershell</li>
+                    <li>Ordered, multi-step plans</li>
+                    <li>Each step can target different endpoints with different packages</li>
+                    <li>Fine-grained permissions</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-center">Act</h4>
+                <ul>
+                    <li>On-demand immediate action</li>
+                    <li>Schedule out-of-hours, unattended</li>
+                    <li>Live display to watch plans execute</li>
+                    <li>Integrate with other systems live</li>
+                    <li>Powershell expert control</li>
+                </ul>
+            </div>
+        </div>
+        <h4 class="text-center mt-5 mb-4">What Sys Admins say about Central Management Deployments</h4>
+        <div class="row text-center">
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <div class="card card-body h-100">
+                    <p class="text-dark mb-0">
+                        "I can arrange my important software into collections and my endpoints into groups by department. Then I can see which departments have out of date software and who are exposed to a new CVE."
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <div class="card card-body h-100">
+                    <p class="text-dark mb-0">
+                        "Some endpoints need different packages and have dependencies in the same change plan. I can now set the order to upgrade dependencies first, pause services while software is updated. It's automating how I used to carefully do it by hand."
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card card-body h-100">
+                    <p class="text-dark mb-0">
+                        "With the visibility on the dashboard, reports and plans, I can communicate changes better to the IT Service Management team. It gives me confidence that everyone knows what's happening so if there is a problem, we're covered!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-success py-3 py-lg-5">
+    <div class="container">
+        <h2 class="text-center mb-4 text-white">Getting Started</h2>
+        <div class="row align-items-center text-center">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <a href="@Url.RouteUrl(RouteName.BlogArticle, new {articleName = "announcing-deployments"})" target="_blank">
+                    <h5 class="text-white btn-link"><strong>Read the detailed product announcement</strong></h5>
+                    <img class="lazy img-fluid shadw" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/ccm/edit-deployment-screen.jpg")" alt="Read the detailed product announcement" title="Read the detailed product announcement" />
+                </a>
+            </div>
+            <div class="col-md-6 video-story resource-list">
+                <div data-toggle="modal" data-target="#deployments-story">
+                    <h5 class="text-white btn-link"><strong>A Windows Automation Expert explains Central Management Deployments</strong></h5>
+                    <img class="lazy img-fluid shadow" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/videos/04-07.jpg")" alt="An expert explains Central Management Deployments" title="An expert explains Central Management Deployments" />
+                </div>
+                <div class="modal fade" id="deployments-story" tabindex="-1" role="dialog" aria-labelledby="Chocolatey Central Management (with Deployments) Video" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/Uft68tnxDEQ?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-3 py-lg-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Resources - TBD TO LINK</h2>
+        <div class="row mb-3 mb-md-5">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <a href="#" target="_blank"><h5><strong>Quick Start Guide</strong></h5></a>
+                <p class="mb-0">A step-by-step guide to setting up and running your first Deployments plan.</p>
+            </div>
+            <div class="col-md-6">
+                <a href="#" target="_blank"><h5><strong>User Guide</strong></h5></a>
+                <p class="mb-0">A reference to all of the features of Deployments</p>
+            </div>
+        </div>
+        <div class="row mb-3 mb-md-5">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <a href="#" target="_blank"><h5><strong>Powershell Guide</strong></h5></a>
+                <p class="mb-0">A list of all the CMDlets and their uses for driving Deployments.</p>
+            </div>
+            <div class="col-md-6">
+                <a href="#" target="_blank"><h5><strong>API Guide</strong></h5></a>
+                <p class="mb-0">A Swagger Guide to the Deployments API to aid integration with other tools and processes to create complex workflows.</p>
+            </div>
+        </div>
+        <div class="row mb-3 mb-md-5">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <a href="#" target="_blank"><h5><strong>Solution Blueprints</strong></h5></a>
+                <p class="mb-0">Real world solutions documented in diagrams, configurations and use cases for Deployments.</p>
+            </div>
+            <div class="col-md-6">
+                <a href="#" target="_blank"><h5><strong>Blog Posts</strong></h5></a>
+                <p class="mb-0">All the announcements and team insights for Deployments.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <a href="#" target="_blank"><h5><strong>Deployments Community</strong></h5></a>
+                <p class="mb-0">Specific blog posts in the Chocolatey community groups.</p>
+            </div>
+            <div class="col-md-6">
+                <a href="#" target="_blank"><h5><strong>Get Support</strong></h5></a>
+                <p class="mb-0">Contact Chocolatey for Deployments questions.</p>
+            </div>
+        </div>
+    </div>
+</section>

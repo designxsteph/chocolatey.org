@@ -1151,6 +1151,8 @@
     <Content Include="Content\Images\ccm-mockup.jpg" />
     <Content Include="Content\Images\ccm\CCM_Mockup_ReportEdit.png" />
     <Content Include="Content\Images\ccm\central-management-logo.png" />
+    <Content Include="Content\Images\ccm\deployment-pipeline.jpg" />
+    <Content Include="Content\Images\ccm\edit-deployment-screen.jpg" />
     <Content Include="Content\Images\changePassword.png" />
     <Content Include="Content\Images\choco-chefconf.jpg" />
     <Content Include="Content\Images\choco-ps-summit.jpg" />
@@ -1378,6 +1380,7 @@
     <Content Include="Content\Images\nothing-50x50.png" />
     <Content Include="Content\Images\nugetlogo.png" />
     <Content Include="Content\Images\nugetLogoFooter.png" />
+    <Content Include="Content\Images\ooda-loop.svg" />
     <Content Include="Content\Images\package-source.jpg" />
     <Content Include="Content\Images\packageDefaultIcon-50x50.png" />
     <Content Include="Content\Images\packageDefaultIcon.png" />
@@ -1395,6 +1398,7 @@
     <Content Include="Content\Images\sendMessageGraphic.png" />
     <Content Include="Content\Images\snowflake-background.png" />
     <Content Include="Content\Images\speakers\adil-leghari.jpg" />
+    <Content Include="Content\Images\speakers\dan-franciscus.jpg" />
     <Content Include="Content\Images\speakers\default-speaker.jpg" />
     <Content Include="Content\Images\speakers\derek-campbell.jpg" />
     <Content Include="Content\Images\speakers\gary-ewan-park.jpg" />
@@ -1709,6 +1713,7 @@
     <Content Include="Views\Shared\_LivestreamShare.cshtml" />
     <Content Include="Views\Events\Files\01-07-ChocolateyAndAnsible.md" />
     <Content Include="Views\Events\ChocolateyAndAnsible.cshtml" />
+    <Content Include="Views\Solutions\CentralManagementDeployments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\videos\**\*.jpg" />
