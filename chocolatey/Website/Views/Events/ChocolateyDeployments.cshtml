@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<EventViewModel>
 @{
     ViewBag.Title = "Webinar: Chocolatey Deployments - Easily Orchestrate Amazing Things!";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/jquery-countdown");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
+    Bundles.Reference("Scripts/events");
 
     var description = "Chocolatey Central Management now includes the premiere feature of managing endpoints through a Chocolatey-centered solution aka Deployments. We are excited to share what Deployments is all about!";
 }
@@ -20,21 +20,21 @@
             <input class="countdown-date-time" type="hidden" value="@post.EventDate.GetValueOrDefault().ToString("yyyy/MM/dd HH:mm:ss") UTC" />
         </div>
 
-        <div id="countdown-header" class="bg-primary text-center countdown-single-event">
+        <div id="countdown-header" class="bg-theme-primary text-center countdown-single-event">
             <section class="pt-3 pt-lg-5 pb-5">
                 <div class="container-fluid pt-lg-3">
                     <div class="d-md-flex align-items-center justify-content-center mb-4">
-                        <div class="order-md-2 text-center text-md-left">
+                        <div class="order-md-2 text-center text-md-start">
                             <h3 class="mb-0">WEBINAR</h3>
                             <h1 class="mb-0 display-4 d-none d-xl-block">Chocolatey Deployments -<br>Easily Orchestrate Amazing Things!</h1>
                             <h1 class="mb-0 d-xl-none">Chocolatey Deployments -<br>Easily Orchestrate Amazing Things!</h1>
                             <h5 class="countdown-date d-none d-lg-block mt-3">
-                                <span class="mr-md-4 mb-3 mb-md-0 d-inline-block"><i class="fas fa-calendar"></i> @post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")</span>
+                                <span class="me-md-4 mb-3 mb-md-0 d-inline-block"><i class="fas fa-calendar"></i> @post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")</span>
                                 <br class="d-md-none" />
                                 <span><i class="fas fa-clock"></i> @post.Time</span>
                             </h5>
                         </div>
-                        <div class="mr-md-3 pr-md-3 mr-lg-5 pr-lg-5 d-none d-md-flex border-right">
+                        <div class="me-md-3 pe-md-3 me-lg-5 pe-lg-5 d-none d-md-flex border-end">
                             <div class="d-flex flex-column">
                                 <div class="text-center">
                                     <img class="img-fluid" width="350" src="@Url.Content("~/content/images/chocolatey-logo.png")" /><br />
@@ -45,15 +45,15 @@
                     </div>
                     <hr class="mt-3 mb-4 d-md-none border-hr-lg border-hr-white">
                     <h5 class="countdown-date d-lg-none">
-                        <span class="mr-md-4 mb-3 mb-md-0 d-inline-block"><i class="fas fa-calendar"></i> @post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")</span>
+                        <span class="me-md-4 mb-3 mb-md-0 d-inline-block"><i class="fas fa-calendar"></i> @post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")</span>
                         <br class="d-md-none" />
                         <span><i class="fas fa-clock"></i> @post.Time</span>
                     </h5>
-                    <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-light btn-lg my-4 mb-md-5"><span class="h2 font-weight-bold">Reserve My Spot Now</span></a>
+                    <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-theme btn-lg my-4 mb-md-5">Reserve My Spot Now</a>
                 </div>
             </section>
             <div class="position-relative"><div class="countdown-container countdown-container-blocks countdown-container-absolute-center countdown-container-success"></div></div>
-            <div class="shape-border shape-border-bottom"></div>
+            <div class="curve curve-bottom curve-bg-theme"></div>
         </div>
         <section class="pb-3 pt-lg-3 pb-lg-5">
             <div class="container">
@@ -86,47 +86,47 @@
                     <div class="col-lg-4 mt-sm-4 mt-lg-0">
                         <hr class="my-4 d-sm-none" />
                         <h3>Speakers:</h3>
-                        <div class="event-speaker">
+                        <div class="mb-4">
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/gary-ewan-park.jpg")" alt="Gary Ewan Park" title="Gary Ewan Park" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-primary mb-0">Gary Ewan Park</h5>
+                                    <h5 class="fw-bold text-primary mb-0">Gary Ewan Park</h5>
                                     <p class="mb-0"><strong>Senior Software Engineer at Chocolatey Software</strong></p>
                                 </div>
                             </div>
                             <p class="mb-2">Gary Ewan Park has 10+ years working as a developer in the Oil and Gas Industry. He is the primary maintainer on the Chocolatey GUI project.</p>
                             <div class="d-flex">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/gep13" target="_blank" rel="noreferrer" title="View more about Gary Ewan Park on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/gep13" target="_blank" rel="noreferrer" title="View more about Gary Ewan Park on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/gep13" target="_blank" rel="noreferrer" title="View more about Gary Ewan Park on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/gep13" target="_blank" rel="noreferrer" title="View more about Gary Ewan Park on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
                         </div>
-                        <div class="event-speaker">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/rob-reynolds.jpg")" alt="Rob Reynolds" title="Rob Reynolds" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-primary mb-0">Rob Reynolds</h5>
+                                    <h5 class="fw-bold text-primary mb-0">Rob Reynolds</h5>
                                     <p class="mb-0"><strong>Chocolatey Software Founder</strong></p>
                                 </div>
                             </div>
                             <p class="mb-2">Rob is a developer turned founder with 14+ years experience in infrastructure automation and modern automation approaches. He excels in taking hard concepts and making them approachable and easy.</p>
                             <div class="d-flex">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/robreynolds" target="_blank" rel="noreferrer" title="View more about Rob Reynolds on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/ferventcoder" target="_blank" rel="noreferrer" title="View more about Rob Reynolds on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/robreynolds" target="_blank" rel="noreferrer" title="View more about Rob Reynolds on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/ferventcoder" target="_blank" rel="noreferrer" title="View more about Rob Reynolds on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="py-3 py-lg-5 bg-primary">
+        <section class="py-3 py-lg-5 bg-theme-primary">
             <div class="container text-center">
                 <h2>@post.Title</h2>
                 <h3 class="mb-3">Spots Are Limited. Secure Your Spot Today!</h3>
-                <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-lg btn-light">Reserve My Spot Now</a>
+                <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-lg btn-theme">Reserve My Spot Now</a>
             </div>
         </section>
     }

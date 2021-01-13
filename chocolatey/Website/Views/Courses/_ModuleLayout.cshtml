@@ -2,11 +2,8 @@
 @model CourseViewModel
 @{
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/prism");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
     Bundles.Reference("Scripts/courses");
     var BaseHref = Request.Url.GetLeftPart(UriPartial.Authority);
     var FullHref = Request.Url.GetLeftPart(UriPartial.Path);
@@ -24,16 +21,13 @@
     @RenderSection("TopScripts", required: false)
 }
 
-<body>
+<body class="chocolatey-org">
     @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
     <main id="docs" class="mb-auto">
-        <section id="secondaryNav">
-            @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-        </section>
+        @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
         <section class="pt-3 pt-lg-5 module-top">
             <div class="container">
                 <h1>@ViewBag.Title</h1>
-                <hr />
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Courses)">Courses</a></li>
@@ -58,20 +52,19 @@
                         <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
                     </ol>
                 </nav>
-                <hr class="mb-0 mb-md-5" />
             </div>
         </section>
         <section class="pb-3 pb-lg-5">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-3 col-xl-2 module-left">
-                        <nav class="navbar navbar-expand-md navbar-dark sticky-top p-0 border-top-0 bg-medium-dark mb-3 mb-md-0">
-                            <button class="navbar-toggler m-2 my-md-0 w-100 text-white border-0 collapsed" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="navbarlogoff" aria-expanded="false" aria-label="Toggle navigation">
+                        <nav class="navbar navbar-expand-md sticky-top p-0 border-top-0 mb-3 mb-md-0 h-100 align-items-start">
+                            <button class="navbar-toggler m-2 my-md-0 w-100 border-0 btn-collapse link-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#docs-nav" aria-controls="navbarlogoff" aria-expanded="false" aria-label="Toggle navigation">
                                 <small>View Course Modules</small>
                             </button>
-                            <div class="collapse navbar-collapse bg-light" id="docs-nav">
+                            <div class="collapse navbar-collapse bg-theme" id="docs-nav">
                                 <div class="navbar-nav d-block w-100 mt-3 mt-md-0">
-                                    <p class="text-dark d-none d-md-block"><strong>Course Modules:</strong></p>
+                                    <p class="d-none d-md-block"><strong>Course Modules:</strong></p>
                                     @RenderSection("LeftSideColumn")
                                 </div>
                             </div>
@@ -82,12 +75,12 @@
                     </div>
                     @if (IsSectionDefined("RightSideColumn"))
                     {
-                        <div class="d-none d-xl-block col-xl-2 docs-right">
+                        <div id="rightSidebarNav" class="d-none d-xl-block col-xl-2">
                             <nav class="sticky-top">
                                 <p><strong>Module Topics:</strong></p>
-                                <ul>
+                                <ul class="nav nav-scrollspy flex-column pb-3">
                                     @RenderSection("RightSideColumn")
-                                    <li><a href="#quiz">Quiz</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#quiz">Quiz</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -96,11 +89,13 @@
             </div>
         </section>
     </main>
-    <footer>
+    <footer class="flex-shrink-0">
         @Html.Partial("~/Views/Shared/_NewsletterNavigation.cshtml")
         @Html.Partial("~/Views/Shared/_BottomNavigation.cshtml")
+        @Html.Partial("~/Views/Shared/_CopyrightNavigation.cshtml")
+        @Html.Partial("~/Views/Shared/_CookiePolicy.cshtml")
     </footer>
-    @RenderPage("~/Views/Shared/_CookiePolicy.cshtml")
+    
 
     @Bundles.RenderStylesheets("bottom")
     @Bundles.RenderScripts()
@@ -112,6 +107,9 @@
         ((window.gitter = {}).chat = {}).options = {
             room: 'chocolatey/chocolatey.org'
         };
+        if (window.location.search.includes('quiz=true')) {
+            console.log(window.location.search);
+        }
     </script>
 
     <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>

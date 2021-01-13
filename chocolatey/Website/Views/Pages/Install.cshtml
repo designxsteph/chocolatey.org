@@ -1,19 +1,16 @@
 ﻿@{
     Layout = "~/Views/Shared/MainLayout.cshtml";
     ViewBag.Title = "Installing Chocolatey";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/prism");
-    Bundles.Reference("Scripts/install-steps");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 @Html.Partial("~/Views/Shared/_Loader.cshtml")
 <section class="py-3 py-md-5 container">
     <h1 class="text-center mb-4">Installing Chocolatey</h1>
-    <div class="bg-primary shadow p-2">
-        <a class="h3 font-weight-bold collapse show" data-toggle="collapse" href="#install-step1" role="button" aria-expanded="true" aria-controls="install-step1" title="Install Step 1">Step 1: Subscribe to the Chocolatey Newsletter (Optional)</a>
+    <div class="bg-theme-primary shadow p-2">
+        <a class="h3 fw-bold btn-collapse" data-bs-toggle="collapse" href="#install-step1" role="button" aria-expanded="true" aria-controls="install-step1" title="Install Step 1">Step 1: Subscribe to the Chocolatey Newsletter (Optional)</a>
     </div>
-    <div class="collapse show bg-white shadow" id="install-step1">
+    <div class="collapse show bg-theme-light shadow" id="install-step1">
         <div class="p-3">
             <p>Be the first to know about upcoming features, security releases, and news about Chocolatey.</p>
             <div id="mc_embed_signup">
@@ -33,10 +30,10 @@
             </div>
         </div>
     </div>
-    <div class="bg-primary shadow p-2 mt-4">
-        <a class="h3 font-weight-bold collapse show" data-toggle="collapse" href="#install-step2" role="button" aria-expanded="true" aria-controls="install-step2" title="Install Step 2">Step 2: Choose Your Installation Method</a>
+    <div class="bg-theme-primary shadow p-2 mt-4">
+        <a class="h3 fw-bold btn-collapse" data-bs-toggle="collapse" href="#install-step2" role="button" aria-expanded="true" aria-controls="install-step2" title="Install Step 2">Step 2: Choose Your Installation Method</a>
     </div>
-    <div class="collapse show bg-white shadow" id="install-step2">
+    <div class="collapse show bg-theme-light shadow" id="install-step2">
         <div class="p-3">
             <h4 class="mb-3">Know the Requirements:</h4>
             <ul>
@@ -48,10 +45,10 @@
             <h4 class="mb-3">Chocolatey Install:</h4>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="individual-tab" data-toggle="tab" href="#individual" role="tab" aria-controls="individual" aria-selected="true">Individual</a>
+                    <a class="nav-link active" id="individual-tab" data-bs-toggle="tab" href="#individual" role="tab" aria-controls="individual" aria-selected="true">Individual</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="organization-tab" data-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Organization</a>
+                    <a class="nav-link" id="organization-tab" data-bs-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Organization</a>
                 </li>
             </ul>
             <div class="tab-content p-3">
@@ -60,7 +57,7 @@
                         <li class="mb-3">First, ensure that you are using an <strong><em><a href="http://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/">administrative shell</a></em></strong> - you can also install as a non-admin, check out <a href="https://docs.chocolatey.org/en-us/choco/setup#non-administrative-install">Non-Administrative Installation</a>.</li>
                         <li class="mb-3">
                             <p>Install with powershell.exe</p>
-                            <div class="callout-warning">
+                            <div class="callout callout-warning shadow-none">
                                 <strong>NOTE:</strong> Please inspect <a href="https://chocolatey.org/install.ps1" class="uri">https://chocolatey.org/install.ps1</a> prior to running any of these scripts to ensure safety. We already know it's safe, but you should verify the security and contents of <strong><em>any</em></strong> script from the internet you are not familiar with.
                                 All of these scripts download a remote PowerShell script and execute it on your machine. We take security very seriously. <a href="https://chocolatey.org/security">Learn more about our security protocols</a>.
                             </div>
@@ -70,23 +67,9 @@
                             </ul>
                             <p>Now run the following command:</p>
                             <div class="input-group">
-                                <input type="text" class="form-control"
-                                        value="Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))"
-                                        aria-label="Install with powershell.exe command"
-                                        readonly>
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary tt"
-                                            aria-label="Copy Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;)) to Clipboard"
-                                            data-toggle="tooltip"
-                                            title="Copy to Clipboard"
-                                            data-clipboard-text="Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))">
-                                        <i class="fas fa-clipboard" aria-hidden="true">
-                                            <span class="sr-only">
-                                                Copy Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;)) to Clipboard
-                                            </span>
-                                        </i>
-                                    </button>
-                                </div>
+                                <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                                <input type="text" id="id-individual" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Install Chocolatey Command" value="Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))" readonly>
+                                <button data-clipboard-target="#id-individual" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
                             </div>
                         </li>
                         <li class="mb-3">Paste the copied text into your shell and press Enter.</li>
@@ -95,7 +78,7 @@
                     </ol>
                 </div>
                 <div class="tab-pane fade" id="organization" role="tabpanel" aria-labelledby="organization-tab">
-                    <p class="small font-weight-bold">NOTE: This applies to both open source and commercial editions of Chocolatey.</p>
+                    <p class="small fw-bold">NOTE: This applies to both open source and commercial editions of Chocolatey.</p>
                     <h4>1. Download the Chocolatey package <a class="btn btn-secondary btn-sm" href="https://chocolatey.org/api/v2/package/chocolatey" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></h4>
                     @*Step 2*@
                     <h4 class="mt-4">2. Put the Chocolatey package on your internal repository</h4>
@@ -108,33 +91,33 @@
                     <h4 class="mt-4">4. Pick your deployment methods:</h4>
                       <ul class="nav nav-tabs" role="tablist">
                           <li class="nav-item">
-                              <a class="nav-link active" id="generic-tab" data-toggle="tab" href="#generic" role="tab" aria-controls="generic" aria-selected="false">Generic</a>
+                              <a class="nav-link active" id="generic-tab" data-bs-toggle="tab" href="#generic" role="tab" aria-controls="generic" aria-selected="false">Generic</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" id="ansible-tab" data-toggle="tab" href="#ansible" role="tab" aria-controls="ansible" aria-selected="false">Ansible</a>
+                              <a class="nav-link" id="ansible-tab" data-bs-toggle="tab" href="#ansible" role="tab" aria-controls="ansible" aria-selected="false">Ansible</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" id="ccm-tab" data-toggle="tab" href="#ccm" role="tab" aria-controls="ccm" aria-selected="false">Central Management</a>
+                              <a class="nav-link" id="ccm-tab" data-bs-toggle="tab" href="#ccm" role="tab" aria-controls="ccm" aria-selected="false">Central Management</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" id="chef-tab" data-toggle="tab" href="#chef" role="tab" aria-controls="chef" aria-selected="false">Chef</a>
+                              <a class="nav-link" id="chef-tab" data-bs-toggle="tab" href="#chef" role="tab" aria-controls="chef" aria-selected="false">Chef</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" id="otter-tab" data-toggle="tab" href="#otter" role="tab" aria-controls="otter" aria-selected="false">Otter</a>
+                              <a class="nav-link" id="otter-tab" data-bs-toggle="tab" href="#otter" role="tab" aria-controls="otter" aria-selected="false">Otter</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" id="psdsc-tab" data-toggle="tab" href="#psdsc" role="tab" aria-controls="psdsc" aria-selected="false">PS DSC</a>
+                              <a class="nav-link" id="psdsc-tab" data-bs-toggle="tab" href="#psdsc" role="tab" aria-controls="psdsc" aria-selected="false">PS DSC</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" id="puppet-tab" data-toggle="tab" href="#puppet" role="tab" aria-controls="puppet" aria-selected="false">Puppet</a>
+                              <a class="nav-link" id="puppet-tab" data-bs-toggle="tab" href="#puppet" role="tab" aria-controls="puppet" aria-selected="false">Puppet</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" id="salt-tab" data-toggle="tab" href="#salt" role="tab" aria-controls="salt" aria-selected="false">Salt</a>
+                              <a class="nav-link" id="salt-tab" data-bs-toggle="tab" href="#salt" role="tab" aria-controls="salt" aria-selected="false">Salt</a>
                           </li>
                       </ul>
                       <div class="tab-content stepFour p-3">
                                         <div class="tab-pane fade show active" id="generic" role="tabpanel" aria-labelledby="generic-tab">
-                 <a class="h5 collapsed d-block" data-toggle="collapse" href="#install-step4" role="button" aria-expanded="false" aria-controls="install-step4" title="Step 4">1. Save this installation script</a>
+                 <a class="h5 collapsed d-block" data-bs-toggle="collapse" href="#install-step4" role="button" aria-expanded="false" aria-controls="install-step4" title="Step 4">1. Save this installation script</a>
                     <div class="collapse" id="install-step4">
                         <p>Save the following as ChocolateyInstall.ps1:</p>
 <pre class="language-powershell border py-3"><code>
@@ -427,7 +410,7 @@ Install-ChocolateyFromPackage $localChocolateyPackageFilePath
                     <h5 class="mt-4">3. Install/Deploy Chocolatey internally </h5>
                     <p>Now you can do similar to the individual side, but your command will be something like:</p>
 <pre class="language-powershell border py-3"><code>
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('http://internal_raw_url/ChocolateyInstall.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('STEP 3 URL/ChocolateyInstall.ps1'))
 </code></pre>
 
 
@@ -440,7 +423,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
   win_chocolatey:
     name: chocolatey
     state: present
-    source: http://script/url/from/generic/tab/ChocolateyInstall.ps1
+    source: STEP 3 URL/ChocolateyInstall.ps1
 </code></pre>
                                             <p>See docs at <a href="https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html" target="_blank" rel="noreferrer">https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html</a>.</p>
                                         </div>
@@ -470,7 +453,7 @@ include_recipe 'chocolatey::default'
 cChocoInstaller InstallChocolatey
 {
   InstallDir            = "C:\ProgramData\chocolatey"
-  ChocoInstallScriptUrl = "http://script/url/from/generic/tab/ChocolateyInstall.ps1"
+  ChocoInstallScriptUrl = "STEP 3 URL/ChocolateyInstall.ps1"
 }
 </code></pre>
                                             <p>Requires cChoco DSC Resource. See docs at <a href="https://github.com/chocolatey/cChoco" target="_blank" rel="noreferrer">https://github.com/chocolatey/cChoco</a>.</p>
@@ -522,14 +505,14 @@ class {'chocolatey':
                 <hr class="my-3" />
                     <h4 class="mb-3">Advanced Chocolatey Install:</h4>
                     <p>Are you installing behind a proxy, need a completely offline install, or wanting to install a licenced edition of Chocolatey? Need even more options? Visit our Documentation or take our new Installation Course to help you get up and running with Chocolatey!</p>
-                    <div class="row divider-row">
-                        <div class="col-lg-6">
+                    <div class="row row-divider row-lg-divider">
+                        <div class="col-lg-6 pb-3 pb-lg-0">
                             <hr class="d-lg-none" />
                             <h5 class="mb-3"><small>Option 1:</small><br />Read the Documentation</h5>
                             <a class="btn btn-primary" href="https://docs.chocolatey.org/en-us/choco/setup#more-install-options">Read the Installation Docs</a>
                         </div>
-                        <div class="col-lg-6">
-                            <h5 class="mb-3"><small>Option 2:</small><br />Take the step-by-step Installation Course<span class="badge badge-success ml-2">New!</span></h5>
+                        <div class="col-lg-6 pt-3 pt-lg-0">
+                            <h5 class="mb-3"><small>Option 2:</small><br />Take the step-by-step Installation Course<span class="badge bg-success ms-2">New!</span></h5>
                             <a class="btn btn-primary" href="@Url.RouteUrl(RouteName.CourseName, new { courseName= "installation", courseModuleName = "installing"})">Take the Installation Course</a>
                         </div>
                     </div>

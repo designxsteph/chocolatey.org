@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "Privacy";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 
     var QuestionOne = "What Information Do We Collect";
     var QuestionOneAttr = QuestionOne.Replace(" ", "-").ToLower();
@@ -43,7 +42,7 @@
         <p><strong>In Short: </strong><i>Chocolatey&reg; Software is the sole owner of the information collected. We only have access to/collect information that you voluntarily give us via email or other direct contact from you.</i></p>
         <p><i>We do not share or rent your information with anyone. Your information is strictly used for the purposes of following up with you and offering products from Chocolatey Software.</i></p>
         <p><i>We will use your information to respond to you. We will not share your information with any third party outside of our organization, other than as necessary to fulfill your request, e.g. to ship an order.</i></p>
-        <p><i>Unless you ask us not to (see <a href="#@QuestionNineAttr" class="collapse-nav " data-toggle="collapse" role="button" aria-expanded="false" aria-controls="@QuestionNineAttr">"@QuestionNine?"</a> below), we may contact you via email in the future to tell you about specials, new products or services, or changes to this privacy policy.</i></p>
+        <p><i>Unless you ask us not to (see <a href="#@QuestionNineAttr" class="collapse-nav " data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="@QuestionNineAttr">"@QuestionNine?"</a> below), we may contact you via email in the future to tell you about specials, new products or services, or changes to this privacy policy.</i></p>
         <h2 class="mt-4">Summary</h2>
         <p>
             Thank you for choosing to be part of our community at Chocolatey Software, Inc (<strong>"Company", "we", "us", or "our"</strong>). We are committed to protecting your personal information and your right to privacy.
@@ -78,7 +77,7 @@
         <!-- /TOC -->
         @* #1 *@
         <div class="mb-4">
-            <a class="h2 collapse show" data-toggle="collapse" href="#@QuestionOneAttr" role="button" aria-expanded="true" aria-controls="@QuestionOneAttr" title="@QuestionOne?">#1. @QuestionOne?</a>
+            <a class="h2 btn-collapse" data-bs-toggle="collapse" href="#@QuestionOneAttr" role="button" aria-expanded="true" aria-controls="@QuestionOneAttr" title="@QuestionOne?">#1. @QuestionOne?</a>
             <div class="collapse show" id="@QuestionOneAttr">
                 <hr />
                 <h3>Personal information you disclose to us</h3>
@@ -119,7 +118,7 @@
         </div>
         @* #2 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionTwoAttr" role="button" aria-expanded="false" aria-controls="@QuestionTwoAttr" title="@QuestionTwo?">#2. @QuestionTwo?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionTwoAttr" role="button" aria-expanded="false" aria-controls="@QuestionTwoAttr" title="@QuestionTwo?">#2. @QuestionTwo?</a>
             <div class="collapse" id="@QuestionTwoAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>We process your information for purposes based on legitimate business interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent.</i></p>
@@ -175,7 +174,7 @@
         </div>
         @* #3 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionThreeAttr" role="button" aria-expanded="false" aria-controls="@QuestionThreeAttr" title="@QuestionThree?">#3. @QuestionThree?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionThreeAttr" role="button" aria-expanded="false" aria-controls="@QuestionThreeAttr" title="@QuestionThree?">#3. @QuestionThree?</a>
             <div class="collapse" id="@QuestionThreeAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.</i></p>
@@ -221,7 +220,7 @@
         </div>
         @* #4 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionFourAttr" role="button" aria-expanded="false" aria-controls="@QuestionFourAttr" title="@QuestionFour?">#4. @QuestionFour?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionFourAttr" role="button" aria-expanded="false" aria-controls="@QuestionFourAttr" title="@QuestionFour?">#4. @QuestionFour?</a>
             <div class="collapse" id="@QuestionFourAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>We only share information with the following third parties.</i></p>
@@ -265,7 +264,7 @@
         </div>
         @* #5 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionFiveAttr" role="button" aria-expanded="false" aria-controls="@QuestionFiveAttr" title="@QuestionFive?">#5. @QuestionFive?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionFiveAttr" role="button" aria-expanded="false" aria-controls="@QuestionFiveAttr" title="@QuestionFive?">#5. @QuestionFive?</a>
             <div class="collapse" id="@QuestionFiveAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>We may use cookies and other tracking technologies to collect and store your information.</i></p>
@@ -276,7 +275,7 @@
         </div>
         @* #6 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionSixAttr" role="button" aria-expanded="false" aria-controls="@QuestionSixAttr" title="@QuestionSix?">#6. @QuestionSix?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionSixAttr" role="button" aria-expanded="false" aria-controls="@QuestionSixAttr" title="@QuestionSix?">#6. @QuestionSix?</a>
             <div class="collapse" id="@QuestionSixAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>We keep your information for as long as necessary to fulfill the purposes outlined in this privacy policy unless otherwise required by law.</i></p>
@@ -292,7 +291,7 @@
         </div>
         @* #7 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionSevenAttr" role="button" aria-expanded="false" aria-controls="@QuestionSevenAttr" title="@QuestionSeven?">#7. @QuestionSeven?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionSevenAttr" role="button" aria-expanded="false" aria-controls="@QuestionSevenAttr" title="@QuestionSeven?">#7. @QuestionSeven?</a>
             <div class="collapse" id="@QuestionSevenAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>We aim to protect your personal information through a system of organizational and technical security measures.</i></p>
@@ -304,7 +303,7 @@
         </div>
         @* #8 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionEightAttr" role="button" aria-expanded="false" aria-controls=@QuestionEightAttr" title="@QuestionEight?">#8. @QuestionEight?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionEightAttr" role="button" aria-expanded="false" aria-controls=@QuestionEightAttr" title="@QuestionEight?">#8. @QuestionEight?</a>
             <div class="collapse" id="@QuestionEightAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>We do not knowingly collect data from or market to children under 18 years of age.</i></p>
@@ -317,7 +316,7 @@
         </div>
         @* #9 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionNineAttr" role="button" aria-expanded="false" aria-controls="@QuestionNineAttr" title="@QuestionNine?">#9. @QuestionNine?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionNineAttr" role="button" aria-expanded="false" aria-controls="@QuestionNineAttr" title="@QuestionNine?">#9. @QuestionNine?</a>
             <div class="collapse" id="@QuestionNineAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>In some regions, such as the European Economic Area, you have rights that allow you greater access to and control over your personal information. You may review, change, or terminate your account at any time.</i></p>
@@ -359,7 +358,7 @@
         </div>
         @* #10 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionTenAttr" role="button" aria-expanded="false" aria-controls="@QuestionTenAttr" title="@QuestionTen?">#10. @QuestionTen?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionTenAttr" role="button" aria-expanded="false" aria-controls="@QuestionTenAttr" title="@QuestionTen?">#10. @QuestionTen?</a>
             <div class="collapse" id="@QuestionTenAttr">
                 <hr />
                 <p>
@@ -372,7 +371,7 @@
         </div>
         @* #11 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionElevenAttr" role="button" aria-expanded="false" aria-controls="@QuestionElevenAttr" title="@QuestionEleven?">#11. @QuestionEleven?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionElevenAttr" role="button" aria-expanded="false" aria-controls="@QuestionElevenAttr" title="@QuestionEleven?">#11. @QuestionEleven?</a>
             <div class="collapse" id="@QuestionElevenAttr">
                 <hr />
                 <p>
@@ -384,7 +383,7 @@
         </div>
         @* #12 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionTwelveAttr" role="button" aria-expanded="false" aria-controls="@QuestionTwelveAttr" title="@QuestionTwelve?">#12. @QuestionTwelve?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionTwelveAttr" role="button" aria-expanded="false" aria-controls="@QuestionTwelveAttr" title="@QuestionTwelve?">#12. @QuestionTwelve?</a>
             <div class="collapse" id="@QuestionTwelveAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>Yes, if you are a resident of California, you are granted specific rights regarding access to your personal information.</i></p>
@@ -402,7 +401,7 @@
         </div>
         @* #13 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionThirteenAttr" role="button" aria-expanded="false" aria-controls="@QuestionThirteenAttr" title="@QuestionThirteen?">#13. @QuestionThirteen?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionThirteenAttr" role="button" aria-expanded="false" aria-controls="@QuestionThirteenAttr" title="@QuestionThirteen?">#13. @QuestionThirteen?</a>
             <div class="collapse" id="@QuestionThirteenAttr">
                 <hr />
                 <p><strong>In Short: </strong><i>Yes, we will update this policy as necessary to stay compliant with relevant laws.</i></p>
@@ -415,7 +414,7 @@
         </div>
         @* #14 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionFourteenAttr" role="button" aria-expanded="false" aria-controls="@QuestionFourteenAttr" title="@QuestionFourteen?">#14. @QuestionFourteen?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionFourteenAttr" role="button" aria-expanded="false" aria-controls="@QuestionFourteenAttr" title="@QuestionFourteen?">#14. @QuestionFourteen?</a>
             <div class="collapse" id="@QuestionFourteenAttr">
                 <hr />
                 <p>If you have questions or comments about this policy, you may <a href="mailto:legal@chocolatey.io">email us at legal@chocolatey.io</a> or by post to:</p>
@@ -430,7 +429,7 @@
         </div>
         @* #15 *@
         <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#@QuestionFifteenAttr" role="button" aria-expanded="false" aria-controls="@QuestionFifteenAttr" title="@QuestionFifteen?">#15. @QuestionFifteen?</a>
+            <a class="h2 btn-collapse collapsed" data-bs-toggle="collapse" href="#@QuestionFifteenAttr" role="button" aria-expanded="false" aria-controls="@QuestionFifteenAttr" title="@QuestionFifteen?">#15. @QuestionFifteen?</a>
             <div class="collapse" id="@QuestionFifteenAttr">
                 <hr />
                 <p>

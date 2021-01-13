@@ -1,11 +1,11 @@
 ﻿@using NuGetGallery;
 @{
     ViewBag.Title = "Why Chocolatey";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
-<div id="header" class="bg-medium-dark">
+<div class="bg-theme-primary">
     <section class="py-3 py-lg-5">
         <div class="container py-3 py-lg-5">
             <div class="row">
@@ -16,7 +16,7 @@
             </div>
         </div>
     </section>
-    <div class="shape-border shape-border-bottom"></div>
+    <div class="curve curve-bottom curve-bg-theme"></div>
 </div>
 <section class="pb-3 pb-lg-5">
     <div class="container">
@@ -40,18 +40,18 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
                         <div class="video-story">
-                            <div class="text-center" data-toggle="modal" data-target="#chocolatey-story"><img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="What is Chocolatey" title="What is Chocolatey" /></div>
+                            <div class="text-center" data-bs-toggle="modal" data-bs-target="#chocolatey-story"><img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="What is Chocolatey" title="What is Chocolatey" /></div>
                             <div class="modal fade" id="chocolatey-story" tabindex="-1" role="dialog" aria-labelledby="What is Chocolatey Video" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                                            <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true" class="fas fa-times"></span>
                                             </button>
                                         </div>
                                         <div class="modal-body p-0">
-                                            <div class="embed-responsive embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/Z8olEnt65bk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            <div class="ratio ratio-16x9">
+                                                <iframe data-src="https://www.youtube.com/embed/Z8olEnt65bk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -66,20 +66,11 @@
         </div>
     </div>
 </section>
-<section class="py-3 py-lg-5 bg-white">
+<section class="py-3 py-lg-5 bg-theme-light">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <div id="terminal" class="shadow" style="max-height: 500px;">
-                    <div class="d-flex flex-row-reverse align-items-center bg-white p-2">
-                        <h3 class="mb-0">&times</h3>
-                        <div class="maximize mx-3"></div>
-                        <h3 class="mb-0">-</h3>
-                    </div>
-                    <div class="terminal-body bg-dark text-white p-3 h3 mb-0 text-left">
-                        > choco <span data-animate="install docker-desktop,upgrade nodejs,uninstall flashplayer,search nodejs --id-starts-with,info docker-desktop">install docker-desktop</span><span class="terminal-cursor"></span>
-                    </div>
-                </div>
+                @Html.Partial("~/Views/Shared/_Terminal.cshtml")
             </div>
             <div class="col-lg-6">
                 <h2>Simplify Complex Processes, Save Time & Effort</h2>
@@ -122,7 +113,7 @@
         </div>
     </div>
 </section>
-<section class="py-3 py-lg-5 bg-white">
+<section class="py-3 py-lg-5 bg-theme-light">
     <div class="container">
         <h2>Next Steps</h2>
         <hr class="border-hr mb-4" />
@@ -133,7 +124,7 @@
                         <span class="fas fa-graduation-cap display-3 text-primary"></span>
                         <h3 class="text-center mb-0 w-75 mx-auto">I'm new to Chocolatey and want to learn more</h3>
                     </div>
-                    <div class="card-footer bg-white pt-0 pb-4">
+                    <div class="card-footer bg-theme-light pt-0 pb-4">
                         <a href="@Url.RouteUrl(RouteName.Courses)" class="btn btn-primary">Take the Getting Started Course</a>
                     </div>
                 </div>
@@ -144,7 +135,7 @@
                         <span class="fas fa-tachometer-alt display-3 text-primary"></span>
                         <h3 class="text-center mb-0 w-75 mx-auto">I'm looking for solutions for my business</h3>
                     </div>
-                    <div class="card-footer bg-white pt-0 pb-4">
+                    <div class="card-footer bg-theme-light pt-0 pb-4">
                         <a href="@Url.RouteUrl(RouteName.Products, new {productName = "home"})" class="btn btn-primary">See Chocolatey Products</a>
                     </div>
                 </div>
@@ -155,7 +146,7 @@
                         <span class="fas fa-users display-3 text-primary"></span>
                         <h3 class="text-center mb-0 w-75 mx-auto">I want to join the Chocolatey Community</h3>
                     </div>
-                    <div class="card-footer bg-white pt-0 pb-4">
+                    <div class="card-footer bg-theme-light pt-0 pb-4">
                         <a href="@Url.RouteUrl(RouteName.Community)" class="btn btn-primary">Join the Community</a>
                     </div>
                 </div>

@@ -2,8 +2,8 @@
 @{
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "12 Days of Chocolatey";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 @section ExtraHeaders {
     <div id="fb-root"></div>
@@ -20,29 +20,25 @@
     <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
 }
 
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_ResourceSubNavigation.cshtml")
-</section>
+@Html.Partial("~/Views/Shared/_ResourceSubNavigation.cshtml")
 <section class="py-3 py-lg-5">
     <div class="container">
         @Html.Partial("~/Views/Resources/_BreadCrumbs.cshtml")
-        <div class="row resource-list">
+        <div class="row card-row">
             @foreach (var post in @Model)
             {
                 if (post.Type.Contains("Feature") && post.Tags.Contains("12-days-of-chocolatey"))
                 {
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <a href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "12-days-of-chocolatey", resourceName = post.UrlPath })">
-                            <div class="card h-100">
-                                <div class="card-header font-weight-bold bg-medium-light text-center">
-                                    <span class="fas fa-holly-berry" alt="12 Days of Chocolatey"></span>
+                        <a class="text-reset" href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "12-days-of-chocolatey", resourceName = post.UrlPath })">
+                            <div class="card h-100 card-body p-0">
+                                <div class="bg-medium-light fw-bold text-center px-3 py-2">
+                                    <span class="fas fa-holly-berry" alt="12 Days of Chocolatey Feature Video Series"></span>
                                     <span>12 Days of Chocolatey</span>
                                 </div>
-                                <div class="card-body p-0">
-                                    @Html.Raw(post.Image)
-                                </div>
-                                <div class="card-footer">
-                                    <h5>@post.Title</h5>
+                                @Html.Raw(post.Image)
+                                <div class="d-flex flex-fill align-items-center justify-content-center text-center p-3">
+                                    <h5 class="mb-0 link-primary">@post.Title</h5>
                                 </div>
                             </div>
                         </a>

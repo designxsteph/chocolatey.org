@@ -9,16 +9,16 @@
 }
 
 @section RightSideColumn {
-    <li><a href="#chocolatey-overview">Overview</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#common-thoughts">Common Thoughts</a></li>
-    <li><a href="#summary">Summary</a></li>
-    <li><a href="#other-package-managers">Other Package Managers</a></li>
+    <li class="nav-item"><a class="nav-link" href="#chocolatey-overview">Overview</a></li>
+    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+    <li class="nav-item"><a class="nav-link" href="#common-thoughts">Common Thoughts</a></li>
+    <li class="nav-item"><a class="nav-link" href="#summary">Summary</a></li>
+    <li class="nav-item"><a class="nav-link" href="#other-package-managers">Other Package Managers</a></li>
 }
 <div id="chocolatey-overview" class="row mb-5">
     <div class="col-xl-10 mx-auto">
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Z8olEnt65bk" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/Z8olEnt65bk" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 </div>
@@ -104,7 +104,7 @@
     else
     {
         @Html.ValidationSummary(true)
-        using (Html.BeginForm())
+        using (Html.BeginForm("CourseName", "Courses", FormMethod.Post, new { id = "quiz" }))
         {
             @Html.AntiForgeryToken()
             <fieldset class="form @if (Model.UserCourseAchievements != null)
@@ -123,16 +123,22 @@
                 @Html.HiddenFor(m => m.CourseName)
                 @Html.HiddenFor(m => m.CourseKey)
                 @Html.HiddenFor(m => m.CourseModuleKey)
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>Who is the founder of Chocolatey?</h5>
-                    @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionOne" })
-                    <label for="QuestOneOptionOne">Bill Gates</label><br />
-                    @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionTwo" })
-                    <label for="QuestOneOptionTwo">Steve Jobs</label><br />
-                    @Html.RadioButtonFor(m => m.QuestionOne, "1", new { id = "QuestOneOptionThree" })
-                    <label for="QuestOneOptionThree">Rob Reynolds</label>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionOne", @class = "form-check-input" })
+                        <label class="form-check-label" for="QuestOneOptionOne">Bill Gates</label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionTwo", @class = "form-check-input" })
+                        <label class="form-check-label" for="QuestOneOptionTwo">Steve Jobs</label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.QuestionOne, "1", new { id = "QuestOneOptionThree", @class = "form-check-input" })
+                        <label class="form-check-label" for="QuestOneOptionThree">Rob Reynolds</label>
+                    </div>
                 </div>
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>What type of software can be deployed in a Chocolatey package?</h5>
                     @Html.RadioButtonFor(m => m.QuestionTwo, "0", new { id = "QuestTwoOptionOne" })
                     <label for="QuestTwoOptionOne">Installers</label><br />
@@ -145,7 +151,7 @@
                     @Html.RadioButtonFor(m => m.QuestionTwo, "1", new { id = "QuestTwoOptionFive" })
                     <label for="QuestTwoOptionFive">All the above</label>
                 </div>
-                <input class="btn btn-primary mt-3 disabled" data-toggle="modal" data-target="#quiz-modal" type="submit" value="Check Answers" title="Check Answers" />
+                <input class="btn btn-primary mt-3 disabled" type="submit" value="Check Answers" title="Check Answers" />
             </fieldset>
         }
 

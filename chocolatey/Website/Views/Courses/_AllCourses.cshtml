@@ -8,16 +8,16 @@
             @*Getting Started with Chocolatey*@
             <div class="col-lg-4 col-sm-6 mb-4">
                 <div class="card h-100">
-                    <div class="card-header bg-dark pb-2">
+                    <div class="card-header bg-theme-light-2 pb-2">
                       @Html.Partial("~/Views/Courses/_LeftSideColumn.cshtml", new CourseLeftViewModel() {CourseNameType = CourseNameType.GettingStartedWithChocolatey, CourseModules = Model.CourseModules, UserCourseAchievements = Model.UserCourseAchievements})
                     </div>
                     <div class="card-body text-center">
                         <a class="h4 btn-link" href="@Url.RouteUrl(RouteName.CourseName, new {courseName = CourseConstants.GetCourseUrl(CourseNameType.GettingStartedWithChocolatey), courseModuleName = "home"})">@CourseConstants.GetCourseName(CourseNameType.GettingStartedWithChocolatey)</a>
                         <p class="text-muted">7 Topics | 1 Hour | <span class="level beginner">Beginner</span></p>
                         <hr />
-                        <p class="text-left">In this course you will learn what exactly Chocolatey is and how it has helped thousands of companies and people just like you.</p>
+                        <p class="text-start">In this course you will learn what exactly Chocolatey is and how it has helped thousands of companies and people just like you.</p>
                     </div>
-                    <div class="card-footer text-center bg-white pt-0">
+                    <div class="card-footer text-center bg-theme-light pt-0">
                         @if (User.Identity.IsAuthenticated)
                         {
                             foreach (var userCourseAchievement in Model.UserCourseAchievements)
@@ -39,16 +39,16 @@
             @*Installing, Upgrading, and Uninstalling Chocolatey*@
             <div class="col-lg-4 col-sm-6 mb-4">
                 <div class="card h-100">
-                    <div class="card-header bg-dark pb-2">
+                    <div class="card-header bg-theme-light-2 pb-2">
                         @Html.Partial("~/Views/Courses/_LeftSideColumn.cshtml", new CourseLeftViewModel() {CourseNameType = CourseNameType.InstallingUpgradingUninstalling, CourseModules = Model.CourseModules, UserCourseAchievements = Model.UserCourseAchievements})
                     </div>
                     <div class="card-body text-center">
                         <a class="h4 btn-link" href="@Url.RouteUrl(RouteName.CourseName, new {courseName = CourseConstants.GetCourseUrl(CourseNameType.InstallingUpgradingUninstalling), courseModuleName = "home"})">@CourseConstants.GetCourseName(CourseNameType.InstallingUpgradingUninstalling)</a>
                         <p class="text-muted">3 Topics | < 30 Minutes | <span class="level beginner">Beginner</span></p>
                         <hr />
-                        <p class="text-left">Chocolatey installs in just seconds! Learn how to get up and running with Chocolatey with a basic or more advanced install method.</p>
+                        <p class="text-start">Chocolatey installs in just seconds! Learn how to get up and running with Chocolatey with a basic or more advanced install method.</p>
                     </div>
-                    <div class="card-footer text-center bg-white pt-0">
+                    <div class="card-footer text-center bg-theme-light pt-0">
                         @if (User.Identity.IsAuthenticated)
                         {
                             foreach (var userCourseAchievement in Model.UserCourseAchievements)
@@ -70,16 +70,16 @@
             @*Creating Chocolatey Packages*@
             <div class="col-lg-4 col-sm-6 mb-4">
                 <div class="card h-100">
-                    <div class="card-header bg-dark pb-2">
+                    <div class="card-header bg-theme-light-2 pb-2">
                         @Html.Partial("~/Views/Courses/_LeftSideColumn.cshtml", new CourseLeftViewModel() { CourseNameType = CourseNameType.CreatingChocolateyPackages, CourseModules = Model.CourseModules, UserCourseAchievements = Model.UserCourseAchievements })
                     </div>
                     <div class="card-body text-center">
                         <a class="h4 btn-link" href="@Url.RouteUrl(RouteName.CourseName, new {courseName = CourseConstants.GetCourseUrl(CourseNameType.CreatingChocolateyPackages), courseModuleName = "home"})">@CourseConstants.GetCourseName(CourseNameType.CreatingChocolateyPackages)</a>
                         <p class="text-muted">10 Topics | 1.5 Hours | <span class="level intermediate">Intermediate</span></p>
                         <hr />
-                        <p class="text-left">Learn everything you need to know about creating your first Chocolatey Package.</p>
+                        <p class="text-start">Learn everything you need to know about creating your first Chocolatey Package.</p>
                     </div>
-                    <div class="card-footer text-center bg-white pt-0">
+                    <div class="card-footer text-center bg-theme-light pt-0">
                         @if (User.Identity.IsAuthenticated)
                         {
                             foreach (var userCourseAchievement in Model.UserCourseAchievements)

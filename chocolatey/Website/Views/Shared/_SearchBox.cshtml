@@ -1,21 +1,30 @@
 ﻿@using NuGetGallery
-
-<form class="form-inline search-box position-relative" autocomplete= "off" role="search" action="@Url.PackageList()" method="get">
-    <div class="input-group w-100">
-        <input class="form-control" name="q" type="text" title="Search" placeholder="Search Packages" value="@(String.IsNullOrEmpty(ViewBag.SearchTerm) ? "" : ViewBag.SearchTerm)" autofocus>
-        <div class="input-group-append">
-            <button class="btn btn-light" type="submit" title="Search" value="">
-                <span class="fas fa-search" alt="Search"></span>
-            </button>
-        </div>
+@{ 
+    bool packagesPage = ViewContext.RouteData.Values["Action"].Equals("ListPackages");
+}
+<form class="ms-3 ms-md-0 search-box search-d-submit @if(packagesPage){<text>search-d-none-close</text>}" autocomplete="off" role="search" action="@Url.PackageList()" method="get">
+    <div class="flex-grow-1">
+        <input name="q" type="search" class="form-control search-input" id="searchQuery" placeholder="Search Packages" aria-label="Search Packages" value="@(String.IsNullOrEmpty(ViewBag.SearchTerm) ? "" : ViewBag.SearchTerm)" autofocus />
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <span class="d-none d-md-flex search-key-container">
+            <span class="badge badge-key bg-primary search-key"></span>
+            <span class="badge badge-key bg-primary">k</span>
+        </span>
     </div>
-    <div class="search-help position-absolute d-none">
-        <span class="arrow-up position-absolute"></span>
-        <div class="card mt-3 rounded">
-            <div class="card-body d-md-flex justify-content-between text-dark">
-                <p class="mb-md-0 small"><strong>id:searchValue</strong> search by id only</p>
-                <p class="mb-0 small"><strong>tag:searchValue</strong> search by tags</p>
-            </div>
+    @if (packagesPage)
+    {
+        <button type="submit" aria-label="Search Packages" class="btn btn-theme ms-2" title="Search Packages" value="">Search</button>
+    }
+    else
+    {
+        <button type="submit" aria-label="Search Packages" class="btn btn-outline-primary ms-2" title="Search Packages" value="">Search</button>
+        <button type="button" aria-label="Close search" class="btn btn-search-close btn-outline-primary ms-2 me-3 me-md-0"><i class="fas fa-times" aria-hidden="true"></i></button>
+    }
+    <div class="search-help position-absolute w-100 top-100 start-0 end-0">
+        <div class="arrow-up position-absolute"><div class="arrow-up-inner position-relative"></div></div>
+        <div class="card card-body bg-theme mt-3 me-3 rounded d-md-flex flex-md-row justify-content-md-between border">
+            <p class="mb-md-0 small"><strong>id:searchValue</strong> search by id only</p>
+            <p class="mb-0 small"><strong>tag:searchValue</strong> search by tags</p>
         </div>
     </div>
 </form>

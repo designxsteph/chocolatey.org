@@ -7,9 +7,9 @@
     @Html.Partial("~/Views/Courses/_LeftSideColumn.cshtml", new CourseLeftViewModel() { CourseNameType = Model.CourseNameType, CourseModules = Model.CourseModules, UserCourseAchievements = Model.UserCourseAchievements })
 }
 @section RightSideColumn {
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#upgrade">Upgrade</a></li>
-    <li><a href="#uninstall">Uninstall</a></li>
+    <li class="nav-item"><a class="nav-link" href="#installation">Installation</a></li>
+    <li class="nav-item"><a class="nav-link" href="#upgrade">Upgrade</a></li>
+    <li class="nav-item"><a class="nav-link" href="#uninstall">Uninstall</a></li>
 }
 
 <h2 id="installation" class="mb-3">Installation</h2>
@@ -56,7 +56,7 @@
     else
     {
         @Html.ValidationSummary(true)
-        using (Html.BeginForm())
+        using (Html.BeginForm("CourseName", "Courses", FormMethod.Post, new { id = "quiz" }))
         {
             @Html.AntiForgeryToken()
             <fieldset class="form @if (Model.UserCourseAchievements != null)
@@ -75,7 +75,7 @@
                 @Html.HiddenFor(m => m.CourseName)
                 @Html.HiddenFor(m => m.CourseKey)
                 @Html.HiddenFor(m => m.CourseModuleKey)
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>During which operations will the chocolateyBeforeModify.ps1 file be executed?</h5>
                     @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionOne" })
                     <label for="QuestOneOptionOne">Install</label><br />
@@ -84,7 +84,7 @@
                     @Html.RadioButtonFor(m => m.QuestionOne, "1", new { id = "QuestOneOptionThree" })
                     <label for="QuestOneOptionThree">Upgrade and Uninstall</label>
                 </div>
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>What percentage of native uninstallers can Chocolatey’s Auto Uninstaller feature help with?</h5>
                     @Html.RadioButtonFor(m => m.QuestionTwo, "0", new { id = "QuestTwoOptionOne" })
                     <label for="QuestTwoOptionOne">70</label><br />
@@ -93,7 +93,7 @@
                     @Html.RadioButtonFor(m => m.QuestionTwo, "0", new { id = "QuestTwoOptionThree" })
                     <label for="QuestTwoOptionThree">90</label>
                 </div>
-                <input class="btn btn-primary mt-3 disabled" data-toggle="modal" data-target="#quiz-modal" type="submit" value="Check Answers" title="Check Answers" />
+                <input class="btn btn-primary mt-3 disabled" type="submit" value="Check Answers" title="Check Answers" />
             </fieldset>
         }
 

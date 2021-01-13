@@ -3,8 +3,8 @@
 @{
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "COVID-19";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 
     var openingTagline = "In response to the current pandemic, Chocolatey Software is actively responding in a number of ways, such as enabling organizations to implement modern infrastructure that better supports a remote workforce, and  ensuring our community continues to flourish.";
 }
@@ -13,7 +13,7 @@
     <meta property="description" content="@openingTagline" />
 }
 
-<div id="header" class="bg-medium-dark">
+<div class="bg-theme-primary">
     <section class="py-3 py-lg-5">
         <div class="container py-3">
             <h3>Responding to COVID-19</h3>
@@ -21,13 +21,13 @@
         </div>
     </section>
 </div>
-<div class="bg-medium-dark d-none d-lg-block">
+<div class="bg-primary-900 d-none d-lg-block">
     <section>
         <div class="container py-3">
             <h4 class="mb-0">@openingTagline</h4>
         </div>
     </section>
-    <div class="shape-border shape-border-bottom"></div>
+    <div class="curve curve-bottom curve-bg-theme"></div>
 </div>
 <section class="py-3 pt-lg-0 pb-lg-5">
     <div class="container">
@@ -38,7 +38,7 @@
         </p>
         <div class="row align-items-center">
             <div class="col-lg-6 d-none d-lg-flex justify-content-center">
-                <img class="lazy img-fluid" width="350" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/covid-response.png")" alt="COVID-19 Response" title="COVID-19 Response" />
+                <img class="lazy" width="350" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/covid-response.png")" alt="COVID-19 Response" title="COVID-19 Response" />
             </div>
             <div class="col-lg-6">
                 <p>At Chocolatey, we have resources that can help enable our community. We can all get through this together.</p>
@@ -111,14 +111,14 @@
         </div>
     </div>
 </section>
-<section class="py-3 py-lg-5 bg-white">
+<section class="py-3 py-lg-5 bg-theme-light">
     <div class="container">
         @*Folding@home*@
         <h2 class="text-center mb-3">Join the Chocolatey Team on the Folding@home Project!</h2>
         <div class="row align-items-center">
             <div class="col-lg-6 justify-content-center">
-                <div class="embed-responsive embed-responsive-16by9 shadow">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/nKqLtwMOfg4?loop=1&playlist=nKqLtwMOfg4" frameborder="0" allowfullscreen></iframe>
+                <div class="ratio ratio-16x9 shadow">
+                    <iframe src="https://www.youtube.com/embed/nKqLtwMOfg4?loop=1&playlist=nKqLtwMOfg4" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="col-lg-6 mt-3 mt-lg-0">

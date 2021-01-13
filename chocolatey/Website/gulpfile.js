@@ -1,110 +1,182 @@
-const gulp = require("gulp"),
-    del = require("del"),
+'use strict';
+
+const gulp = require('gulp'),
+    babel = require('gulp-babel'),
     concat = require('gulp-concat'),
-    cleanCSS = require('gulp-clean-css'),
-    purgecss = require("gulp-purgecss"),
-    sass = require("gulp-sass"),
-    uglify = require("gulp-uglify"),
-    pump = require("pump"),
-    zipfiles = require("gulp-zip"),
-    dist = "Content/dist";
-    sass.compiler = require('node-sass');
+    cleancss = require('gulp-clean-css'),
+    uglify = require('gulp-uglify-es').default,
+    sass = require('gulp-sass'),
+    clean = require('gulp-clean'),
+    purgecss = require('gulp-purgecss'),
+    rename = require('gulp-rename'),
+    merge = require('merge-stream'),
+    injectstring = require('gulp-inject-string'),
+    bundleconfig = require('./bundleconfig.json');
 
-function clean() {
-    return del([dist, "chocolatey-styleguide.zip"]);
+const editFilePartial = 'Edit this file at https://github.com/chocolatey/choco-theme/partials';
+const { series, parallel, src, dest, watch } = require('gulp');
+sass.compiler = require('node-sass');
+
+const regex = {
+    css: /\.css$/,
+    js: /\.js$/
+};
+
+const paths = {
+    content: 'Content/',
+    js: 'Scripts/',
+    partials: 'Views/GlobalPartials',
+    node_modules: 'node_modules/',
+    theme: 'node_modules/choco-theme/'
+};
+
+const getBundles = (regexPattern) => {
+    return bundleconfig.filter(bundle => {
+        return regexPattern.test(bundle.outputFileName);
+    });
+};
+
+function del() {
+    return src([
+        paths.content + 'css',
+        paths.content + 'fonts',
+        paths.content + 'images/global-shared',
+        paths.js + '*',
+        '!' + paths.js + 'validation',
+        '!' + paths.js + 'validation/*.*',
+        paths.partials
+    ], { allowEmpty: true })
+        .pipe(clean({ force: true }));
 }
 
-function compileSASS() {
-    return gulp.src("Content/scss/*.scss")
+function copyTheme() {
+    var copyFontAwesome = src(paths.node_modules + '@fortawesome/fontawesome-free/webfonts/*.*')
+        .pipe(dest(paths.content + 'fonts/fontawesome-free'));
+
+    var copyImages = src(paths.theme + 'images/global-shared/*.*')
+        .pipe(dest(paths.content + 'images/global-shared'));
+
+    var copyIcons = src(paths.theme + 'images/icons/*.*')
+        .pipe(dest('./'));
+
+    var copyPartials = src([paths.theme + 'partials/*.*'])
+        .pipe(injectstring.prepend('@* ' + editFilePartial + ' *@\n'))
+        .pipe(rename({ prefix: "_", extname: '.cshtml' }))
+        .pipe(dest(paths.partials));
+
+    var copyValidationJs = src(paths.theme + 'js/chocolatey-validation.js')
+        .pipe(dest(paths.js + 'validation'));
+
+    return merge(copyFontAwesome, copyImages, copyIcons, copyPartials, copyValidationJs);
+}
+
+function compileSass() {
+    return src(paths.theme + 'scss/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(dist));
+        .pipe(injectstring.replace('/assets/fonts/fontawesome-free', '/Content/fonts/fontawesome-free'))
+        .pipe(dest(paths.content + 'css'));
 }
 
-function purge() {
-    return gulp.src("Content/dist/chocolatey.css")
+function compileJs() {
+    var tasks = getBundles(regex.js).map(function (bundle) {
+
+        return gulp.src(bundle.inputFiles, { base: '.' })
+            .pipe(babel({
+                "sourceType": "unambiguous",
+                "presets": [
+                    ["@babel/preset-env", { 
+                        "targets": {
+                            "ie": "10"
+                        }
+                    }
+                  ]]
+            }))
+            .pipe(concat(bundle.outputFileName))
+            .pipe(dest('.'));
+    });
+
+    return merge(tasks);
+}
+
+function compileCss() {
+    var tasks = getBundles(regex.css).map(function (bundle) {
+
+        return gulp.src(bundle.inputFiles, { base: '.' })
+            .pipe(concat(bundle.outputFileName))
+            .pipe(gulp.dest('.'));
+    });
+
+    return merge(tasks);
+}
+
+function purgeCss() {
+    return src(paths.content + 'css/chocolatey.bundle.css')
         .pipe(purgecss({
-            content: ["Views/**/*.cshtml", "App_Code/ViewHelpers.cshtml", "Errors/*.*", "Scripts/custom.js", "Scripts/packages/package-details.js", "Content/scss/_search.scss", "Scripts/easymde/easymde.min.js"]
+            content: [
+                'Views/**/*.cshtml',
+                'App_Code/ViewHelpers.cshtml',
+                'Errors/*.*',
+                paths.js + '**/**/*.*',
+                paths.theme + 'scss/_gitter.scss'
+            ],
+            safelist: [
+                '::-webkit-scrollbar', 
+                '::-webkit-scrollbar-thumb'
+            ]
         }))
-        .pipe(gulp.dest("Content/dist/tmp"));
+        .pipe(dest(paths.content + 'css/'));
 }
 
-function optimize() {
-    return gulp.src(["Content/dist/tmp/chocolatey.css", "Content/dist/purge.css"])
-        .pipe(concat("chocolatey.slim.css"))
-        .pipe(cleanCSS({
-            level: 1,
-            compatibility: 'ie8'
-        }))
-        .pipe(gulp.dest(dist))
-        .on('end', function () {
-            del(["Content/dist/purge.css", "Content/dist/tmp"]);
-        });
+function minCss() {
+    var tasks = getBundles(regex.css).map(function (bundle) {
+
+        return gulp.src(bundle.outputFileName, { base: '.' })
+            .pipe(cleancss({
+                level: 2,
+                compatibility: 'ie8'
+            }))
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(gulp.dest('.'));
+    });
+
+    return merge(tasks);
 }
 
-// Styleguide Zip File Process
+function minJs() {
+    var tasks = getBundles(regex.js).map(function (bundle) {
 
-// First copy files
-function copyFonts() {
-    return gulp.src("Content/fonts/*.*")
-        .pipe(gulp.dest("styleguide/fonts"));
-}
-function copyCSS() {
-    return gulp.src(["Content/prism/prism.css", "Content/dist/chocolatey.css", "Content/dist/chocolatey.slim.css"])
-        .pipe(gulp.dest("styleguide/css"));
-}
-function copyTmpJS() {
-    return gulp.src(["Scripts/*.js"])
-        .pipe(gulp.dest("styleguide/tmp"));
-}
-function copyJS() {
-    return gulp.src("Scripts/prism/prism.js")
-        .pipe(gulp.dest("styleguide/js"));
+        return gulp.src(bundle.outputFileName, { base: '.' })
+            .pipe(uglify())
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(dest('.'));
+    });
+
+    return merge(tasks);
 }
 
-// Second optimize CSS
-function cssStyleguide() {
-    return gulp.src("styleguide/css/*.css")
-        .pipe(cleanCSS({
-            level: 1,
-            compatibility: 'ie8'
-        }))
-        .pipe(gulp.dest("styleguide/css"));
+function delEnd() {
+    return src([
+        paths.content + 'css/**/*.css',
+        '!' + paths.content + 'css/**/*.min.css',
+        paths.js + '**/*.js',
+        '!' + paths.js + '**/*.min.js',
+        '!' + paths.js + 'validation',
+        '!' + paths.js + 'validation/*.*'
+    ], { allowEmpty: true })
+        .pipe(clean({ force: true }));
 }
 
-// Next concat JS files in temp folder
-function jsStyleguideConcat() {
-    return gulp.src([
-        "styleguide/tmp/jquery-3.5.1.js",
-        "styleguide/tmp/bootstrap.bundle.js",
-        "styleguide/tmp/clipboard.js",
-        "styleguide/tmp/custom.js"])
-        .pipe(concat("chocolatey.js"))
-        .pipe(gulp.dest("styleguide/js"))
-        .on('end', function () {
-            del("styleguide/tmp");
-        });
-}
+// Independednt tasks
+exports.del = del;
 
-// Then Optimize JS
-function jsStyleguide(cb) {
-    pump([
-        gulp.src("styleguide/js/*.js"),
-        uglify(),
-        gulp.dest("styleguide/js")
-    ],
-        cb
-    );
-}
+// Gulp series
+exports.compileSassJs = parallel(compileSass, compileJs);
+exports.minCssJs = parallel(minCss, minJs);
 
-// Zip it all up and delete temporary styleguide folder
-function zip() {
-    return gulp.src("styleguide/*/*.*")
-        .pipe(zipfiles("chocolatey-styleguide.zip"))
-        .pipe(gulp.dest("./"))
-        .on('end', function () {
-            del(["styleguide", "Content/dist/chocolatey.css"]);
-        });
-}
+// Gulp default
+exports.default = series(del, copyTheme, exports.compileSassJs, compileCss, purgeCss, exports.minCssJs, delEnd);
 
-// Task
-gulp.task("default", gulp.series(clean, compileSASS, purge, optimize, copyFonts, copyCSS, copyTmpJS, copyJS, cssStyleguide, jsStyleguideConcat, jsStyleguide, zip));
+// Watch files
+exports.watchFiles = function () {
+    watch([paths.theme], exports.default);
+};

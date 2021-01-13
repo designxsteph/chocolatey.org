@@ -11,28 +11,28 @@
 
 @helper PreviousNextPager(IPreviousNextPager pager) {
     if (pager.HasNextPage || pager.HasPreviousPage) {
-        <ul class="pager mt-3 mb-0 p-0 list-unstyled text-center h5 list-inline">
-            <li class="previous list-inline-item pr-3 mr-0">
+        <nav class="d-flex justify-content-center" aria-label="Navigate to previous or next page of results">
+            <div class="btn-group" role="group" aria-label="Navigate to previous or next page of results">
                 @if (pager.HasPreviousPage)
                 {
-                    <a href="@pager.PreviousPageUrl" title="Go to the previous page.">Previous</a>
+                    <a role="button" href="@pager.PreviousPageUrl" class="btn btn-outline-primary">Previous</a>
                 }
                 else
                 {
-                    <span class="text-muted" title="No previous pages.">Previous</span>
+                    <button type="button" class="btn btn-outline-primary" aria-disabled="true" disabled>Previous</button>
+
                 }
-            </li>
-            <li class="next list-inline-item pl-2">
                 @if (pager.HasNextPage)
                 {
-                    <a href="@pager.NextPageUrl" title="Go to the next page.">Next</a>
+                    <a role="button" href="@pager.NextPageUrl" class="btn btn-outline-primary">Next</a>
                 }
                 else
                 {
-                    <span class="text-muted" title="No further pages">Next</span>
+                    <button type="button" class="btn btn-outline-primary" aria-disabled="true" disabled>Next</button>
+
                 }
-            </li>
-        </ul>
+            </div>
+        </nav>
     }
 }
 
@@ -54,7 +54,7 @@
     <a class="d-flex align-items-center mb-2" href="@url.Action(MVC.Users.Profiles(owner.Username))" title="@owner.Username">
         @if(!string.IsNullOrEmpty(owner.EmailAddress)) { @GravatarImage(owner.EmailAddress, owner.Username, size) }
         @if (showName) {
-            <span class="ml-2">@owner.Username</span>
+            <span class="ms-2">@owner.Username</span>
         }
     </a>
 }

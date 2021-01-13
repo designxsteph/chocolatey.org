@@ -8,70 +8,70 @@
     @Html.Partial("~/Views/Courses/_LeftSideColumn.cshtml", new CourseLeftViewModel() { CourseNameType = Model.CourseNameType, CourseModules = Model.CourseModules, UserCourseAchievements = Model.UserCourseAchievements })
 }
 @section RightSideColumn {
-    <li><a href="#install-requirements">Requirements</a></li>
-    @if (Request.RawUrl == url + "?method=installing-chocolatey?quiz=true")
+    <li class="nav-item"><a class="nav-link" href="#install-requirements">Requirements</a></li>
+    @if (Request.RawUrl.Contains("method=installing-chocolatey"))
     {
-        <li><a href="#installing-chocolatey">Basic Chocolatey Install</a></li>
+        <li class="nav-item"><a class="nav-link" href="#installing-chocolatey">Basic Chocolatey Install</a></li>
     }
-    else if (Request.RawUrl == url + "?method=install-from-powershell-v3?quiz=true")
+    else if (Request.RawUrl.Contains("method=install-from-powershell-v3"))
     {
-        <li><a href="#install-from-powershell-v3">Install from Powershell v3+</a></li>
+        <li class="nav-item"><a class="nav-link" href="#install-from-powershell-v3">Install from Powershell v3+</a></li>
     }
-    else if (Request.RawUrl == url + "?method=completely-offline-install?quiz=true")
+    else if (Request.RawUrl.Contains("method=completely-offline-install"))
     {
-        <li><a href="#completely-offline-install">Completely Offline Install</a></li>
+        <li class="nav-item"><a class="nav-link" href="#completely-offline-install">Completely Offline Install</a></li>
     }
-    else if (Request.RawUrl == url + "?method=install-with-puppet?quiz=true")
+    else if (Request.RawUrl.Contains("method=install-with-puppet"))
     {
-        <li><a href="#install-with-puppet">Install with Puppet</a></li>
+        <li class="nav-item"><a class="nav-link" href="#install-with-puppet">Install with Puppet</a></li>
     }
-    else if (Request.RawUrl == url + "?method=install-using-powershell-from-cmdexe?quiz=true")
+    else if (Request.RawUrl.Contains("method=install-using-powershell-from-cmdexe"))
     {
-        <li><a href="#install-using-powershell-from-cmdexe">Install Using PowerShell from cmd.exe</a></li>
+        <li class="nav-item"><a class="nav-link" href="#install-using-powershell-from-cmdexe">Install Using PowerShell from cmd.exe</a></li>
     }
-    else if (Request.RawUrl == url + "?method=install-using-nuget-package-manager?quiz=true")
+    else if (Request.RawUrl.Contains("method=install-using-nuget-package-manager"))
     {
-        <li><a href="#install-using-nuget-package-manager">Install Using NuGet Package Manager</a></li>
+        <li class="nav-item"><a class="nav-link" href="#install-using-nuget-package-manager">Install Using NuGet Package Manager</a></li>
     }
-    else if (Request.RawUrl == url + "?method=install-using-nugetexe-from-powershell?quiz=true")
+    else if (Request.RawUrl.Contains("method=install-using-nugetexe-from-powershell"))
     {
-        <li><a href="#install-using-nugetexe-from-powershell">Install Using NuGet.exe from PowerShell</a></li>
+        <li class="nav-item"><a class="nav-link" href="#install-using-nugetexe-from-powershell">Install Using NuGet.exe from PowerShell</a></li>
     }
-    else if (Request.RawUrl == url + "?method=install-downloaded-nuget-package-from-powershell?quiz=true")
+    else if (Request.RawUrl.Contains("method=install-downloaded-nuget-package-from-powershell"))
     {
-        <li><a href="#install-downloaded-nuget-package-from-powershell">Install Downloaded NuGet Package from PowerShell</a></li>
+        <li class="nav-item"><a class="nav-link" href="#install-downloaded-nuget-package-from-powershell">Install Downloaded NuGet Package from PowerShell</a></li>
     }
-    else if (Request.RawUrl == url + "?method=install-licensed-edition?quiz=true")
+    else if (Request.RawUrl.Contains("method=install-licensed-edition"))
     {
-        <li><a href="#install-licensed-edition">Install Licensed Edition</a></li>
+        <li class="nav-item"><a class="nav-link" href="#install-licensed-edition">Install Licensed Edition</a></li>
     }
-    else if (Request.RawUrl == url + "?method=installing-behind-a-proxy?quiz=true")
+    else if (Request.RawUrl.Contains("method=installing-behind-a-proxy"))
     {
-        <li><a href="#installing-behind-a-proxy">Installing Behind a Proxy</a></li>
+        <li class="nav-item"><a class="nav-link" href="#installing-behind-a-proxy">Installing Behind a Proxy</a></li>
     }
-    else if (Request.RawUrl == url + "?method=installing-behind-an-explicit-proxy?quiz=true")
+    else if (Request.RawUrl.Contains("method=installing-behind-an-explicit-proxy"))
     {
-        <li><a href="#installing-behind-an-explicit-proxy">Installing Behind an Explicit Proxy</a></li>
+        <li class="nav-item"><a class="nav-link" href="#installing-behind-an-explicit-proxy">Installing Behind an Explicit Proxy</a></li>
     }
-    else if (Request.RawUrl == url + "?method=installing-to-a-different-location?quiz=true")
+    else if (Request.RawUrl.Contains("method=installing-to-a-different-location"))
     {
-        <li><a href="#installing-to-a-different-location">Installing to a Different Location</a></li>
+        <li class="nav-item"><a class="nav-link" href="#installing-to-a-different-location">Installing to a Different Location</a></li>
     }
-    else if (Request.RawUrl == url + "?method=installing-a-particular-version-of-chocolatey?quiz=true")
+    else if (Request.RawUrl.Contains("method=installing-a-particular-version-of-chocolatey"))
     {
-        <li><a href="#installing-a-particular-version-of-chocolatey">Installing a Particular Version of Chocolatey</a></li>
+        <li class="nav-item"><a class="nav-link" href="#installing-a-particular-version-of-chocolatey">Installing a Particular Version of Chocolatey</a></li>
     }
-    else if (Request.RawUrl == url + "?method=use-windows-built-in-compression-instead-of-downloading-7zip?quiz=true")
+    else if (Request.RawUrl.Contains("method=use-windows-built-in-compression-instead-of-downloading-7zip"))
     {
-        <li><a href="#use-windows-built-in-compression-instead-of-downloading-7zip">Use Windows Built-In Compression Instead of Downloading 7zip</a></li>
+        <li class="nav-item"><a class="nav-link" href="#use-windows-built-in-compression-instead-of-downloading-7zip">Use Windows Built-In Compression Instead of Downloading 7zip</a></li>
     }
-    else if (Request.RawUrl == url + "?method=installing-with-restricted-tls?quiz=true")
+    else if (Request.RawUrl.Contains("method=installing-with-restricted-tls"))
     {
-        <li><a href="#installing-with-restricted-tls">Installing with Restricted TLS</a></li>
+        <li class="nav-item"><a class="nav-link" href="#installing-with-restricted-tls">Installing with Restricted TLS</a></li>
     }
-    else if (Request.RawUrl == url + "?method=non-administrative-install?quiz=true")
+    else if (Request.RawUrl.Contains("method=non-administrative-install"))
     {
-        <li><a href="#non-administrative-install">Non-Administrative Install</a></li>
+        <li class="nav-item"><a class="nav-link" href="#non-administrative-install">Non-Administrative Install</a></li>
     }
 }
 
@@ -82,7 +82,7 @@
             <div class="modal-body text-center">
                 <h3>Choose Your Installation Method</h3>
                 <p><small><i>(You can always change this later!)</i></small></p>
-                <select class="custom-select w-75" name="menu" id="select-method" aria-label="Install Method Selection" size="1">
+                <select class="form-select w-75 mx-auto" name="menu" id="select-method" aria-label="Install Method Selection" size="1">
                     <option selected>Choose...</option>
                     @Html.Partial("~/Views/Courses/Installation/_Method.cshtml")
                 </select>
@@ -94,7 +94,7 @@
 
 <div class="row">
     <div class="col-12 col-lg-4">
-        <select class="custom-select" name="menu" id="reselect-method" aria-label="Install Method Selection" size="1">
+        <select class="form-select" name="menu" id="reselect-method" aria-label="Install Method Selection" size="1">
             <option selected>Change Installation Method...</option>
             @Html.Partial("~/Views/Courses/Installation/_Method.cshtml")
         </select>
@@ -173,11 +173,11 @@
                 All of these scripts download a remote PowerShell script and execute it on your machine. We take security very seriously. <a href="https://chocolatey.org/security">Learn more about our security protocols</a>.
             </div>
             <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item mr-2">
-                    <a class="nav-link active" id="cmd-tab" data-toggle="tab" href="#cmd" role="tab" aria-controls="cmd" aria-selected="true">Install with cmd.exe</a>
+                <li class="nav-item me-2">
+                    <a class="nav-link active" id="cmd-tab" data-bs-toggle="tab" href="#cmd" role="tab" aria-controls="cmd" aria-selected="true">Install with cmd.exe</a>
                 </li>
-                <li class="nav-item mr-2">
-                    <a class="nav-link" id="powershell-tab" data-toggle="tab" href="#powershell" role="tab" aria-controls="powershell" aria-selected="false">Install with powershell.exe</a>
+                <li class="nav-item me-2">
+                    <a class="nav-link" id="powershell-tab" data-bs-toggle="tab" href="#powershell" role="tab" aria-controls="powershell" aria-selected="false">Install with powershell.exe</a>
                 </li>
             </ul>
             <div class="tab-content p-3">
@@ -185,23 +185,9 @@
                     <h5>Install with cmd.exe</h5>
                     <p>Run the following command:</p>
                     <div class="input-group">
-                        <input type="text" class="form-control"
-                               value="@@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;"
-                               aria-label="Install with cmd.exe command"
-                               readonly>
-                        <div class="input-group-append">
-                            <button class="btn btn-primary tt"
-                                    aria-label="Copy @@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot; to Clipboard"
-                                    data-toggle="tooltip"
-                                    title="Copy to Clipboard"
-                                    data-clipboard-text="@@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;">
-                                <i class="fas fa-clipboard" aria-hidden="true">
-                                    <span class="sr-only">
-                                        Copy @@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot; to Clipboard
-                                    </span>
-                                </i>
-                            </button>
-                        </div>
+                        <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                        <input type="text" id="id-cmd" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Install Chocolatey Command" value="@@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" readonly>
+                        <button data-clipboard-target="#id-cmd" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="powershell" role="tabpanel" aria-labelledby="powershell-tab">
@@ -212,23 +198,9 @@
                     </ul>
                     <p>Now run the following command:</p>
                     <div class="input-group">
-                        <input type="text" class="form-control"
-                               value="Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
-                               aria-label="Install with powershell.exe command"
-                               readonly>
-                        <div class="input-group-append">
-                            <button class="btn btn-primary tt"
-                                    aria-label="Copy Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) to Clipboard"
-                                    data-toggle="tooltip"
-                                    title="Copy to Clipboard"
-                                    data-clipboard-text="Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))">
-                                <i class="fas fa-clipboard" aria-hidden="true">
-                                    <span class="sr-only">
-                                        Copy Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) to Clipboard
-                                    </span>
-                                </i>
-                            </button>
-                        </div>
+                        <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                        <input type="text" id="id-cmd-2" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Install Chocolatey Command" value="Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" readonly>
+                        <button data-clipboard-target="#id-cmd-2" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -721,11 +693,11 @@ SET DIR=%~dp0%
     <h2 class="mt-5">Installing Behind a Proxy</h2>
     <div class="body-tabs">
         <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item mr-2">
-                <a class="nav-link active" id="proxy-cmd-tab" data-toggle="tab" href="#proxy-cmd" role="tab" aria-controls="proxy-cmd" aria-selected="true">Install with cmd.exe</a>
+            <li class="nav-item me-2">
+                <a class="nav-link active" id="proxy-cmd-tab" data-bs-toggle="tab" href="#proxy-cmd" role="tab" aria-controls="proxy-cmd" aria-selected="true">Install with cmd.exe</a>
             </li>
-            <li class="nav-item mr-2">
-                <a class="nav-link" id="proxy-powershell-tab" data-toggle="tab" href="#proxy-powershell" role="tab" aria-controls="proxy-powershell" aria-selected="false">Install with powershell.exe</a>
+            <li class="nav-item me-2">
+                <a class="nav-link" id="proxy-powershell-tab" data-bs-toggle="tab" href="#proxy-powershell" role="tab" aria-controls="proxy-powershell" aria-selected="false">Install with powershell.exe</a>
             </li>
         </ul>
         <div class="tab-content p-3">
@@ -733,23 +705,9 @@ SET DIR=%~dp0%
                 <h5>Install with cmd.exe</h5>
                 <p>Run the following command:</p>
                 <div class="input-group">
-                    <input type="text" class="form-control"
-                           value="@@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;[System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-                           aria-label="Install with cmd.exe command behind a proxy"
-                           readonly>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary tt"
-                                aria-label="Copy @@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;[System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin to Clipboard"
-                                data-toggle="tooltip"
-                                title="Copy to Clipboard"
-                                data-clipboard-text="@@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;[System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin">
-                            <i class="fas fa-clipboard" aria-hidden="true">
-                                <span class="sr-only">
-                                    Copy @@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;[System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin to Clipboard
-                                </span>
-                            </i>
-                        </button>
-                    </div>
+                    <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                    <input type="text" id="id-proxy" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Install Chocolatey Command" value="@@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;[System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin" readonly>
+                    <button data-clipboard-target="#id-proxy" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="tab-pane fade" id="proxy-powershell" role="tabpanel" aria-labelledby="proxy-powershell-tab">
@@ -757,23 +715,9 @@ SET DIR=%~dp0%
                 <p>(Ensure <a href="https://go.microsoft.com/fwlink/?LinkID=135170">Get-ExecutionPolicy</a> is at least RemoteSigned).</p>
                 <p>Now run the following command:</p>
                 <div class="input-group">
-                    <input type="text" class="form-control"
-                           value="[System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))"
-                           aria-label="Install with powershell.exe command behind a proxy"
-                           readonly>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary tt"
-                                aria-label="Copy [System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;)) to Clipboard"
-                                data-toggle="tooltip"
-                                title="Copy to Clipboard"
-                                data-clipboard-text="[System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))">
-                            <i class="fas fa-clipboard" aria-hidden="true">
-                                <span class="sr-only">
-                                    Copy [System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;)) to Clipboard
-                                </span>
-                            </i>
-                        </button>
-                    </div>
+                    <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                    <input type="text" id="id-proxy-2" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Install Chocolatey Command" value="[System.Net.WebRequest]::DefaultWebProxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))" readonly>
+                    <button data-clipboard-target="#id-proxy-2" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>
@@ -878,7 +822,7 @@ choco install notepadplusplus.commandline -y
     else
     {
         @Html.ValidationSummary(true)
-        using (Html.BeginForm())
+        using (Html.BeginForm("CourseName", "Courses", FormMethod.Post, new { id = "quiz" }))
         {
             @Html.AntiForgeryToken()
             <fieldset class="form @if (Model.UserCourseAchievements != null)
@@ -897,7 +841,7 @@ choco install notepadplusplus.commandline -y
               @Html.HiddenFor(m => m.CourseName)
               @Html.HiddenFor(m => m.CourseKey)
               @Html.HiddenFor(m => m.CourseModuleKey)
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>What is the minimum PowerShell version that Chocolatey supports?</h5>
                     @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionOne" })
                     <label for="QuestOneOptionOne">PowerShell 5</label><br />
@@ -906,7 +850,7 @@ choco install notepadplusplus.commandline -y
                     @Html.RadioButtonFor(m => m.QuestionOne, "1", new { id = "QuestOneOptionThree" })
                     <label for="QuestOneOptionThree">PowerShell 2</label>
                 </div>
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>What is the default installation location for Chocolatey (as of version 0.9.8.24)?  NOTE: You may need to have read and completed what is suggested in the note above, if unsure.</h5>
                     @Html.RadioButtonFor(m => m.QuestionTwo, "0", new { id = "QuestTwoOptionOne" })
                     <label for="QuestTwoOptionOne">C:\Chocolatey</label><br />
@@ -915,7 +859,7 @@ choco install notepadplusplus.commandline -y
                     @Html.RadioButtonFor(m => m.QuestionTwo, "0", new { id = "QuestTwoOptionThree" })
                     <label for="QuestTwoOptionThree">C:\Program Files (x86)\Chocolatey</label>
                 </div>
-                <input class="btn btn-primary mt-3 disabled" data-toggle="modal" data-target="#quiz-modal" type="submit" value="Check Answers" title="Check Answers" />
+                <input class="btn btn-primary mt-3 disabled" type="submit" value="Check Answers" title="Check Answers" />
             </fieldset>
         }
 
@@ -965,7 +909,8 @@ choco install notepadplusplus.commandline -y
                 }
                 else {
                     localStorage.removeItem("reload");
-                    location.search = $.param(queryParameters) + "?quiz=true"; // Change Parameter
+                    //location.search = $.param(queryParameters) + "?quiz=true"; // Change Parameter
+                    location.search = $.param(queryParameters); // Change Parameter
                 }
                 method = "#" + method;
                 $(method.toString()).fadeIn().addClass('method');

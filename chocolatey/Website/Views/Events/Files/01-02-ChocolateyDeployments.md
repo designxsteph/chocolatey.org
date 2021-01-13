@@ -7,7 +7,7 @@ Duration: 1 hour
 Title: Chocolatey Deployments - Easily Orchestrate Amazing Things!
 Tagline: Easily Orchestrate Amazing Things!
 Speakers: Rob Reynolds, Gary Ewan Park
-Image: <img class="lazy img-fluid" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/content/images/events/01-02.jpg" alt="Chocolatey Deployments - Easily Orchestrate Amazing Things!" title="Chocolatey Deployments - Easily Orchestrate Amazing Things!" />
+Image: <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/content/images/events/01-02.jpg" alt="Chocolatey Deployments - Easily Orchestrate Amazing Things!" title="Chocolatey Deployments - Easily Orchestrate Amazing Things!" />
 RegisterLink: https://chocolatey.zoom.us/webinar/register/WN_MPT5b34zQnud8R0nGgpe5A
 Tags: 2020, c4b, chocolatey-for-business, self-service remote, remote-work, quick-deployment, qde, deployments
 Summary: Chocolatey Central Management now includes the premiere feature of managing endpoints through a Chocolatey-centered solution aka Deployments. We are excited to share what Deployments is all about!

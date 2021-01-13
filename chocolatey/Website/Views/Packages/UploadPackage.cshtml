@@ -2,17 +2,13 @@
 @model SubmitPackageRequest
 @{
     ViewBag.Tab = "Upload Your Package";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/prism");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-</section>
-<section id="account" class="container upload-package py-3 py-md-5">
-    <div class="callout-warning">
+@Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
+<section class="container py-3 py-md-5">
+    <div class="callout callout-warning">
         <strong>Warning:</strong> Directly uploading nupkg files through the Chocolatey Community Repository Website is no longer supported.  All packages should be uploaded using the choco push command.  See <a href="@Url.Action(MVC.Users.Account())">account</a> for details on associating your API key with your local Chocolatey install.
     </div>
     <h3 class="mt-4">Example Usage:</h3>

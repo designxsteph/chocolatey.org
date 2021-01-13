@@ -2,9 +2,8 @@
 @model ContactQuickDeploymentViewModel
 @{
     ViewBag.Title = "Quick Deployment Environment Inquiry";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
     Bundles.Reference("Scripts/validation");
 }
 @section TopScripts {
@@ -16,7 +15,7 @@
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 }
 
-<section id="account">
+<section>
     <div class="container py-3 py-lg-5">
         <div class="row">
             <div class="col-lg-8">
@@ -30,61 +29,58 @@
                     @Html.ValidationSummary(true)
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-field">
-                                @Html.LabelFor(m => m.FirstName) <span class="fas fa-asterisk"></span>
-                                @Html.EditorFor(m => m.FirstName)
+                            <div class="mt-3">
+                                @Html.LabelFor(m => m.FirstName) <span class="fas fa-asterisk text-primary small"></span>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control mt-2" })
                                 @Html.ValidationMessageFor(m => m.FirstName)
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-field">
-                                @Html.LabelFor(m => m.LastName) <span class="fas fa-asterisk"></span>
-                                @Html.EditorFor(m => m.LastName)
+                            <div class="mt-3">
+                                @Html.LabelFor(m => m.LastName) <span class="fas fa-asterisk text-primary small"></span>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control mt-2" })
                                 @Html.ValidationMessageFor(m => m.LastName)
                             </div>
                         </div>
                     </div>
-                    <div class="form-field">
-                        @Html.LabelFor(m => m.Email) <span class="fas fa-asterisk"></span>
-                        @Html.EditorFor(m => m.Email)
+                    <div class="mt-3">
+                        @Html.LabelFor(m => m.Email) <span class="fas fa-asterisk text-primary small"></span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control mt-2" })
                         @Html.ValidationMessageFor(m => m.Email)
                     </div>
-                    <div class="form-field">
-                        @Html.LabelFor(m => m.PhoneNumber) <span class="fas fa-asterisk"></span><span class="fas fa-question-circle small pl-2" alt="Why is phone number required?" data-toggle="tooltip" data-placement="top" title="We need this as a way to contact you in case you don't receive our emails."></span>
-                        @Html.EditorFor(m => m.PhoneNumber)
+                    <div class="mt-3">
+                        @Html.LabelFor(m => m.PhoneNumber) <span class="fas fa-asterisk text-primary small"></span><span class="fas fa-question-circle small ps-2" alt="Why is phone number required?" data-bs-toggle="tooltip" data-placement="top" title="We need this as a way to contact you in case you don't receive our emails."></span>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control mt-2" })
                         @Html.ValidationMessageFor(m => m.PhoneNumber)
                     </div>
-                    <div class="form-field">
-                        @Html.LabelFor(m => m.Country) <span class="fas fa-asterisk"></span>
-                        @Html.DropDownListFor(m => m.Country, Model.CountryList.OrderBy(x => x.Text).OrderBy(x => x.Text == "Other..."), new { @class = "form-control" })
+                    <div class="mt-3">
+                        @Html.LabelFor(m => m.Country) <span class="fas fa-asterisk text-primary small"></span>
+                        @Html.DropDownListFor(m => m.Country, Model.CountryList.OrderBy(x => x.Text).OrderBy(x => x.Text == "Other..."), new { @class = "form-select mt-2" })
                         @Html.ValidationMessageFor(m => m.Email)
                     </div>
-                    <div class="form-field">
-                        @Html.LabelFor(m => m.CompanyName) <span class="fas fa-asterisk"></span>
-                        @Html.EditorFor(m => m.CompanyName)
+                    <div class="mt-3">
+                        @Html.LabelFor(m => m.CompanyName) <span class="fas fa-asterisk text-primary small"></span>
+                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control mt-2" })
                         @Html.ValidationMessageFor(m => m.CompanyName)
                     </div>
-                    <div class="form-field">
-                        @Html.LabelFor(m => m.Machines) <span class="fas fa-asterisk"></span>
-                        @Html.EditorFor(m => m.Machines)
+                    <div class="mt-3">
+                        @Html.LabelFor(m => m.Machines) <span class="fas fa-asterisk text-primary small"></span>
+                        @Html.TextBoxFor(m => m.Machines, new { @class = "form-control mt-2" })
                         @Html.ValidationMessageFor(m => m.Machines)
                     </div>
-                    <div class="form-field">
-                        <div>@Html.LabelFor(m => m.Hypervisor) <span class="fas fa-asterisk"></span></div>
-                        @Html.DropDownListFor(m => m.Hypervisor, Model.HypervisorItems, "Select...", new { @class = "form-control" })
+                    <div class="mt-3">
+                        <div>@Html.LabelFor(m => m.Hypervisor) <span class="fas fa-asterisk text-primary small"></span></div>
+                        @Html.DropDownListFor(m => m.Hypervisor, Model.HypervisorItems, "Select...", new { @class = "form-select mt-2" })
                         @Html.ValidationMessageFor(m => m.Hypervisor)
                     </div>
-                    <div class="form-field">
-                        @Html.LabelFor(m => m.Message) <span class="fas fa-asterisk"></span>
-                        @Html.TextAreaFor(m => m.Message, new { @rows = 5 })
+                    <div class="mt-3">
+                        @Html.LabelFor(m => m.Message) <span class="fas fa-asterisk text-primary small"></span>
+                        @Html.TextAreaFor(m => m.Message, new { @rows = 5, @class = "form-control mt-2" })
                         @Html.ValidationMessageFor(m => m.Message)
                     </div>
-                    <div class="form-field mt-3">
-                        <label class="for-checkbox checkbox mb-0">
-                            @Html.CheckBoxFor(m => m.CheckBox, new { @class = "check-box" })
-                            I am not attempting to market software or services (such as SEO). I am also not requesting advertising space. <span class="fas fa-asterisk"></span>
-                            <span class="checkmark"></span>
-                        </label>
+                    <div class="form-check mt-3">
+                        @Html.CheckBoxFor(m => m.CheckBox, new { @class = "form-check-input" })
+                        <label class="form-check-label" for="CheckBox">I am not attempting to market software or services (such as SEO). I am also not requesting advertising space. <span class="fas fa-asterisk text-primary small"></span></label>
                         @Html.ValidationMessageFor(m => m.CheckBox)
                     </div>
                     @if(ViewData.ModelState["SpamValidationResponse"] != null)
@@ -93,11 +89,11 @@
                             <li><strong>reCAPTCHA Error(s):</strong></li>
                             @foreach(var error in ViewData.ModelState["SpamValidationResponse"].Errors)
                             {
-                                <li class="field-validation-error">@Html.Raw(error.ErrorMessage)</li>
+                                <li>@Html.Raw(error.ErrorMessage)</li>
                             }
                         </ul>
                     }
-                    <p class="mb-0 mt-3"><small>Fields marked with</small> <span class="fas fa-asterisk"></span> <small>are required.</small></p>
+                    <p class="mb-0 mt-3"><small>Fields marked with</small> <span class="fas fa-asterisk text-primary small"></span> <small>are required.</small></p>
                     <input class="btn btn-primary mt-3 g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["reCAPTCHA::PublicKey"]" data-callback="onSubmit" data-action="Form_ContactQuickDeployment" data-badge="bottomleft" type="submit" value="Send Message" title="Send us a message. We'll be in touch soon!" />
                 </fieldset>
                 }

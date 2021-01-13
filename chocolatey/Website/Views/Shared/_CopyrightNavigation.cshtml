@@ -1,14 +1,11 @@
 ﻿@using System.Configuration
-
-<section class="container-fluid bg-dark text-center pt-3">
-    <div class="row">
-        <div class="col-12">
-            <p class="mb-0 text-white"><strong>&copy; @DateTime.UtcNow.Year</strong> Chocolatey Software, Inc.</p>
-            @{
-                string commitId = ConfigurationManager.AppSettings["appharbor.commit_id"];
-                string worker = ConfigurationManager.AppSettings["appharbor.worker_name"];
-            }
-            <p id="releaseTag" class="mb-0 text-dark"><small>Deployed from <a class="text-dark" href="https://github.com/chocolatey/chocolatey.org/commit/@commitId" title="View the commit.">@commitId.Substring(0, 10)</a>. You are on @worker. Page generated @DateTime.UtcNow.ToString("dd MMM yyyy HH:mm:ss") +00:00.</small></p>
-        </div>
-    </div>
+@{
+    string commitId = ConfigurationManager.AppSettings["appharbor.commit_id"];
+    string worker = ConfigurationManager.AppSettings["appharbor.worker_name"];
+}
+<section class="bg-theme-light border-top text-center px-3 pt-3">
+    <span class="small">
+        <span>&copy; @DateTime.UtcNow.Year Chocolatey Software, Inc.</span><br />
+        <span class="text-bg-theme-light">Deployed from <a class="text-reset" href="https://github.com/chocolatey/chocolatey.org/commit/@commitId" title="View the commit.">@commitId.Substring(0, 10)</a>. You are on @worker. Page generated @DateTime.UtcNow.ToString("dd MMM yyyy HH:mm:ss") +00:00.</span>
+    </span>
 </section>

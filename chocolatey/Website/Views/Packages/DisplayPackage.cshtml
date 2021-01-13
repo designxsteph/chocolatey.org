@@ -6,16 +6,9 @@
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = Model.Title + " " + Model.Version;
     ViewBag.Tab = "Packages";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/packages.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Content/easymde.min.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
     Bundles.Reference("Scripts/packages");
-    Bundles.Reference("Scripts/prism");
-    Bundles.Reference("Scripts/install-steps");
-    Bundles.Reference("Scripts/easymde");
-    Bundles.Reference("Scripts/closeable");
 
     var markdownPipelineBuilder = new MarkdownPipelineBuilder()
                  .UseSoftlineBreakAsHardlineBreak()
@@ -101,6 +94,8 @@
     var testingStatusUnknown = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Unknown;
     var testingStatusExempt = Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted;
     var testingStatusWarning = Model.PackageTestResultsStatus != Model.PackageValidationResultStatus;
+
+    var copyId = "id-" + @Model.Id.ToLower().Replace(".", "") + "-" + @Model.Version.Replace(".", "");
 }
 
 @section ExtraHeaders {
@@ -114,36 +109,36 @@
         <meta property="description" content="@Model.Summary" />
     }
 }
+@Html.Partial("~/Views/Shared/_Loader.cshtml")
 @if (!User.Identity.IsAuthenticated)
 {
     @Html.Partial("~/Views/Packages/_CommunityInfoDisclaimer.cshtml")
 }
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-    @Html.Partial("~/Views/Shared/_PackageStatusSubNavigation.cshtml")
-</section>
+
+@Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
+@Html.Partial("~/Views/Shared/_PackageStatusSubNavigation.cshtml")
 <section class="container py-3 py-lg-5">
     <div id="package-sidebar" class="row">
         @*Desktop Sidebar*@
         <div class="col-md-3 col-xl-2 d-none d-md-block">
             <img class="package-logo img-fluid" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_png))" alt="Icon for package @Model.Id" title="Icon for package @Model.Id | Nuspec reference: &lt;iconUrl&gt;@Model.IconUrl&lt;/iconurl&gt;" onerror="this.src='@Links.Content.Images.packageDefaultIcon_png';" />
             <p class="mb-0"><strong>Downloads:</strong></p>
-            <h3 class="mb-3">@Model.TotalDownloadCount.ToString("n0")</h3>
+            <h3 class="mt-0 mb-3">@Model.TotalDownloadCount.ToString("n0")</h3>
             <p class="mb-0"><strong>Downloads of v @Model.Version:</strong></p>
-            <h3 class="mb-3">@Model.DownloadCount.ToString("n0")</h3>
+            <h3 class="mt-0 mb-3">@Model.DownloadCount.ToString("n0")</h3>
             <p class="mb-0"><strong>Last Update:</strong></p>
-            <h3 class="mb-3">@Model.PublishedDate.ToString("dd MMM yyyy")</h3>
+            <h3 class="mt-0 mb-3">@Model.PublishedDate.ToString("dd MMM yyyy")</h3>
             @if (Model.Status == PackageStatusType.Submitted)
             {
                 <p class="mb-0"><strong>Published Date:</strong></p>
-                <h3 class="mb-3">@Model.PublishedDate.ToString("dd MMM yyyy")</h3>
+                <h3 class="mt-0 mb-3">@Model.PublishedDate.ToString("dd MMM yyyy")</h3>
 
                 if (Model.ReviewedDate.HasValue)
                 {
                     <p class="mb-0"><strong>Reviewed Date:</strong></p>
-                    <h3 class="mb-3">@Model.ReviewedDate.GetValueOrDefault().ToString("dd MMM yyyy")</h3>
+                    <h3 class="mt-0 mb-3">@Model.ReviewedDate.GetValueOrDefault().ToString("dd MMM yyyy")</h3>
                     <p class="mb-0"><strong>Reviewer:</strong></p>
-                    <h3 class="mb-3">@ViewHelpers.GravatarImage(Model.ReviewerEmailAddress, Model.ReviewerUserName, 32)</h3>
+                    <h3 class="mt-0 mb-3">@ViewHelpers.GravatarImage(Model.ReviewerEmailAddress, Model.ReviewerUserName, 32)</h3>
                 }
             }
             <p class="mb-0" title="Nuspec reference: owners | nuspec value not used on community feed | Specified as comma-separated"><strong>Package Maintainer(s):</strong></p>
@@ -160,7 +155,7 @@
                 <p class="mb-0" title="Nuspec reference: tags | Specified as space-separated"><strong>Tags:</strong></p>
                 foreach (var tag in Model.Tags)
                 {
-                    <a class="badge badge-pill badge-primary" href="@Url.Search("tag:" + tag)" title="Search for @tag">@tag</a>
+                    <a class="badge bg-primary" href="@Url.Search("tag:" + tag)" title="Search for @tag">@tag</a>
                 }
             }
             <ul class="list-unstyled">
@@ -213,7 +208,7 @@
                 </li>
                 @if (maintainer || moderator)
                 {
-                    <li class="mt-3"><a href="#" data-toggle="modal" data-target="#package-edit">Edit Package</a></li>
+                    <li class="mt-3"><a href="#" data-bs-toggle="modal" data-bs-target="#package-edit">Edit Package</a></li>
                     <li><a href="@Url.ManagePackageOwners(Model)">Manage Maintainers</a></li>
                     <li><a href="@Url.DeletePackage(Model)" class="delete">Delete Package</a></li>
                 }
@@ -222,7 +217,7 @@
         @*Mobile Sidebar*@
         <div class="col-12 d-md-none">
             <div class="justify-content-center align-items-center d-flex">
-                <img class="package-logo img-fluid mr-2" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_png))" alt="Icon for package @Model.Id" title="Icon for package @Model.Id | Nuspec reference: &lt;iconUrl&gt;@Model.IconUrl&lt;/iconurl&gt;" onerror="this.src='@Links.Content.Images.packageDefaultIcon_png';" />
+                <img class="package-logo img-fluid me-2" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_png))" alt="Icon for package @Model.Id" title="Icon for package @Model.Id | Nuspec reference: &lt;iconUrl&gt;@Model.IconUrl&lt;/iconurl&gt;" onerror="this.src='@Links.Content.Images.packageDefaultIcon_png';" />
                 <h4 class="mb-0" title="Nuspec reference: &lt;title&gt;@Model.Title&lt;/title&gt;">@Model.Title</h4>
             </div>
             @if (Model.Status == PackageStatusType.Submitted)
@@ -254,10 +249,10 @@
                 }
             </div>
             <div class="text-center">
-                <button class="btn btn-sm btn-primary mb-3 mt-1" type="button" data-toggle="collapse" data-target="#additional-links" aria-expanded="false" aria-controls="additional-links">
+                <button class="btn btn-sm btn-primary btn-collapse btn-show-hide mb-3 mt-1" type="button" data-bs-toggle="collapse" data-bs-target="#additional-links" aria-expanded="false" aria-controls="additional-links">
                     Show Additional Links
                 </button>
-                <div class="collapse text-left" id="additional-links">
+                <div class="collapse text-start" id="additional-links">
                     <ul class="list-unstyled">
                         <li class="mt-3"><strong>Software Specific:</strong></li>
                         @if (!String.IsNullOrEmpty(Model.ProjectUrl))
@@ -308,7 +303,7 @@
                         </li>
                         @if (maintainer || moderator)
                         {
-                            <li class="mt-3"><a href="#" data-toggle="modal" data-target="#package-edit">Edit Package</a></li>
+                            <li class="mt-3"><a href="#" data-bs-toggle="modal" data-bs-target="#package-edit">Edit Package</a></li>
                             <li><a href="@Url.ManagePackageOwners(Model)">Manage Maintainers</a></li>
                             <li><a href="@Url.DeletePackage(Model)" class="delete">Delete Package</a></li>
                         }
@@ -369,7 +364,7 @@
                     <p class="mb-0" title="Nuspec reference: tags | Specified as space-separated"><small>Tags:</small></p>
                     @foreach (var tag in Model.Tags)
                     {
-                        <a class="badge badge-pill badge-primary" href="@Url.Search("tag:" + tag)" title="Search for @tag">@tag</a>
+                        <a class="badge bg-primary" href="@Url.Search("tag:" + tag)" title="Search for @tag">@tag</a>
                     }
                 </div>
             }
@@ -392,7 +387,7 @@
                     </div>
                     <div class="modal-footer justify-content-center">
                         <a href="@Url.UploadPackage()" class="btn btn-success"><i class="fas fa-upload" alt="Upload"></i> Upload Updated Package</a>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -410,7 +405,7 @@
                     @Model.Title
                     @if (Model.Status != PackageStatusType.Rejected)
                     {
-                        <span class="ml-2" title="Nuspec reference: &lt;version&gt;@Model.Version&lt;/version&gt;">@Model.Version</span>
+                        <span class="ms-2" title="Nuspec reference: &lt;version&gt;@Model.Version&lt;/version&gt;">@Model.Version</span>
                     }
                 </h1>
                 @if (Model.Status == PackageStatusType.Submitted)
@@ -492,273 +487,221 @@
                         </div>
                     </div>
                     <div class="d-none d-xl-block">
-                        <a class="@if(!testingStatusPassing){<text>collapse show</text>}else{<text>collapsed</text>} btn btn-sm btn-secondary" data-toggle="collapse" href="#testingResults" role="button" aria-expanded="true" aria-controls="testing results" title="Testing Results">@if (!testingStatusPassing)
-                        {<text>Hide Checks</text>}
-                            else
-                        {<text>Show Checks</text>}</a>
-                    </div>
-                </div>
-                <div class="px-3 pb-3 d-xl-none">
-                    <a class="@if(!testingStatusPassing){<text>collapse show</text>}else{<text>collapsed</text>} btn btn-sm btn-secondary" data-toggle="collapse" href="#testingResults" role="button" aria-expanded="true" aria-controls="testing results" title="Testing Results">@if (!testingStatusPassing)
-                    {<text>Hide Checks</text>}
-                    else
-                    {<text>Show Checks</text>}</a>
-                </div>
-                <div class="collapse @if(!testingStatusPassing){<text>show</text>}" id="testingResults">
-                    <hr class="mt-0" />
-                    @*Validation*@
-                    <div class="px-3">
-                        @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
-                        {
-                            <p class="mb-0"><span class="fas fa-times text-danger mr-3"></span> Validation Testing Failed</p>
-                        }
-                        @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing)
-                        {
-                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Validation Testing Passed</p>
-                        }
-                        @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Pending)
-                        {
-                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span> Validation Testing Pending</p>
-                        }
-                        @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Unknown)
-                        {
-                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span> Validation Testing Unknown</p>
-                        }
-                        @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted)
-                        {
-                            <p class="mb-0"><span class="fas fa-ban text-secondary mr-3"></span> Validation Testing Exempt</p>
-                        }
-                    </div>
-                    <hr />
-                    @*Verification*@
-                    <div class="d-flex @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>justify-content-between</text>} px-3 pb-3">
-                        @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing)
-                        {
-                            <p class="mb-0"><span class="fas fa-times text-danger mr-3"></span> Verification Testing Failed</p>
-                            <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
-                        }
-                        @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing)
-                        {
-                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Verification Testing Passed</p>
-                            <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
-                        }
-                        @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending)
-                        {
-                            <p class="mb-0"><span class="fas fa-clock text-warning mr-3"></span> Verification Testing Pending</p>
-                        }
-                        @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown)
-                        {
-                            <p class="mb-0"><span class="fas fa-question text-secondary mr-3"></span> Verification Testing Unknown</p>
-                        }
-                        @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted)
-                        {
-                            <span class="fas fa-ban text-secondary mr-3"></span>
-                            <div>
-                                <p class="mb-0">Verification Testing Exempt:</p>
-                                @Html.Raw(Markdown.ToHtml(Model.ExemptedFromVerificationReason.clean_html() ?? string.Empty, MarkdownPipeline))
-                            </div>
-                        }
-                    </div>
+                        <a class="btn-collapse @if(testingStatusPassing){<text>collapsed</text>} btn btn-sm btn-secondary btn-show-hide" data-bs-toggle="collapse" href="#testingResults" role="button" aria-expanded="@if(testingStatusPassing){<text>false</text>}else{<text>true</text>}" aria-controls="testing results" title="Testing Results">
+                            @if (!testingStatusPassing)
+                            {<text>Hide Checks</text>}
+                        else
+                        {<text>Show Checks</text>}
+                    </a>
                 </div>
             </div>
-            @* Install Tabs *@
-            @if (Model.Title != "Chocolatey")
-            {
-                if (Model.Listed || anyPackageRole && Model.Status != PackageStatusType.Rejected)
+            <div class="px-3 pb-3 d-xl-none">
+                <a class="btn-collapse @if(testingStatusPassing){<text>collapsed</text>} btn btn-sm btn-secondary btn-show-hide" data-bs-toggle="collapse" href="#testingResults" role="button" aria-expanded="@if(testingStatusPassing){<text>false</text>}else{<text>true</text>}" aria-controls="testing results" title="Testing Results">
+                    @if (!testingStatusPassing)
+                    {<text>Hide Checks</text>}
+                else
+                {<text>Show Checks</text>}
+            </a>
+        </div>
+        <div class="collapse @if(!testingStatusPassing){<text>show</text>}" id="testingResults">
+            <hr class="mt-0" />
+            @*Validation*@
+            <div class="px-3">
+                @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
                 {
-                    <ul class="nav card-tabs nav-tabs border-bottom-0" role="tablist">
+                    <p class="mb-0"><span class="fas fa-times text-danger me-3"></span> Validation Testing Failed</p>
+                }
+                @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Passing)
+                {
+                    <p class="mb-0"><span class="fas fa-check text-success me-3"></span> Validation Testing Passed</p>
+                }
+                @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Pending)
+                {
+                    <p class="mb-0"><span class="fas fa-clock text-warning me-3"></span> Validation Testing Pending</p>
+                }
+                @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Unknown)
+                {
+                    <p class="mb-0"><span class="fas fa-question text-secondary me-3"></span> Validation Testing Unknown</p>
+                }
+                @if (Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Exempted)
+                {
+                    <p class="mb-0"><span class="fas fa-ban text-secondary me-3"></span> Validation Testing Exempt</p>
+                }
+            </div>
+            <hr />
+            @*Verification*@
+            <div class="d-flex @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>justify-content-between</text>} px-3 pb-3">
+                @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing)
+                {
+                    <p class="mb-0"><span class="fas fa-times text-danger me-3"></span> Verification Testing Failed</p>
+                    <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
+                }
+                @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing)
+                {
+                    <p class="mb-0"><span class="fas fa-check text-success me-3"></span> Verification Testing Passed</p>
+                    <a href="@Model.PackageTestResultsUrl" target="_blank" rel="noreferrer">Details</a>
+                }
+                @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending)
+                {
+                    <p class="mb-0"><span class="fas fa-clock text-warning me-3"></span> Verification Testing Pending</p>
+                }
+                @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown)
+                {
+                    <p class="mb-0"><span class="fas fa-question text-secondary me-3"></span> Verification Testing Unknown</p>
+                }
+                @if (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted)
+                {
+                    <span class="fas fa-ban text-secondary me-3"></span>
+                    <div>
+                        <p class="mb-0">Verification Testing Exempt:</p>
+                        @Html.Raw(Markdown.ToHtml(Model.ExemptedFromVerificationReason.clean_html() ?? string.Empty, MarkdownPipeline))
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @* Install Tabs *@
+    @if (Model.Title != "Chocolatey")
+    {
+        if (Model.Listed || anyPackageRole && Model.Status != PackageStatusType.Rejected)
+        {
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="individual-tab" data-bs-toggle="tab" href="#individual" role="tab" aria-controls="individual" aria-selected="true">Individual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="organization-tab" data-bs-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Organization</a>
+                </li>
+            </ul>
+            <div class="tab-content bg-theme-light p-3 shadow-sm mb-3 position-relative border-start border-end border-bottom">
+                @*Individual*@
+                <div class="tab-pane fade show active" id="individual" role="tabpanel" aria-labelledby="individual-tab">
+                    <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="individual-tab" data-toggle="tab" href="#individual" role="tab" aria-controls="individual" aria-selected="true">Individual</a>
+                            <a class="nav-link active" id="install-tab" data-bs-toggle="tab" href="#install" role="tab" aria-controls="install" aria-selected="true">Install</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="organization-tab" data-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Organization</a>
+                            <a class="nav-link" id="upgrade-tab" data-bs-toggle="tab" href="#upgrade" role="tab" aria-controls="upgrade" aria-selected="false">Upgrade</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="uninstall-tab" data-bs-toggle="tab" href="#uninstall" role="tab" aria-controls="uninstall" aria-selected="false">Uninstall</a>
                         </li>
                     </ul>
-                    <div class="tab-content bg-white p-3 shadow-sm mb-3 position-relative">
-                        @*Individual*@
-                        <div class="tab-pane fade show active" id="individual" role="tabpanel" aria-labelledby="individual-tab">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="install-tab" data-toggle="tab" href="#install" role="tab" aria-controls="install" aria-selected="true">Install</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="upgrade-tab" data-toggle="tab" href="#upgrade" role="tab" aria-controls="upgrade" aria-selected="false">Upgrade</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="uninstall-tab" data-toggle="tab" href="#uninstall" role="tab" aria-controls="uninstall" aria-selected="false">Uninstall</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content p-3">
-                                <div class="tab-pane fade show active" id="install" role="tabpanel" aria-labelledby="install-tab">
-                                    <p class="mb-3">To install @Model.Title, run the following command from the command line or from PowerShell:</p>
-                                    <div class="input-group copyBox">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">></div>
-                                        </div>
-                                        <input type="text" class="form-control"
-                                                value="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                                                aria-label="Install @Model.Title command"
-                                                readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary tt"
-                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                                    data-toggle="tooltip"
-                                                    title="Copy to Clipboard"
-                                                    data-clipboard-text="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                                                <i class="fas fa-clipboard" aria-hidden="true">
-                                                    <span class="sr-only">
-                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
-                                                        {<text> --pre </text>} to Clipboard
-                                                    </span>
-                                                </i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="upgrade" role="tabpanel" aria-labelledby="upgrade-tab">
-                                    <p class="mb-3">To upgrade @Model.Title, run the following command from the command line or from PowerShell:</p>
-                                    <div class="input-group copyBox">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">></div>
-                                        </div>
-                                        <input type="text" class="form-control"
-                                                value="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                                                aria-label="Upgrade @Model.Title command"
-                                                readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary tt"
-                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                                    data-toggle="tooltip"
-                                                    title="Copy to Clipboard"
-                                                    data-clipboard-text="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                                                <i class="fas fa-clipboard" aria-hidden="true">
-                                                    <span class="sr-only">
-                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
-                                                        {<text> --pre </text>} to Clipboard
-                                                    </span>
-                                                </i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="uninstall" role="tabpanel" aria-labelledby="uninstall-tab">
-                                    <p class="mb-3">To uninstall @Model.Title, run the following command from the command line or from PowerShell:</p>
-                                    <div class="input-group copyBox">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">></div>
-                                        </div>
-                                        <input type="text" class="form-control"
-                                                value="choco uninstall @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                                                aria-label="Uninstall @Model.Title command"
-                                                readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary tt"
-                                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                                    data-toggle="tooltip"
-                                                    title="Copy to Clipboard"
-                                                    data-clipboard-text="choco uninstall @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                                                <i class="fas fa-clipboard" aria-hidden="true">
-                                                    <span class="sr-only">
-                                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                                        {<text> --version @Model.Version</text>} @if (Model.Prerelease)
-                                                        {<text> --pre </text>} to Clipboard
-                                                    </span>
-                                                </i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="tab-content p-3">
+                        <div class="tab-pane fade show active" id="install" role="tabpanel" aria-labelledby="install-tab">
+                            <p class="mb-3">To install @Model.Title, run the following command from the command line or from PowerShell:</p>
+                            <div class="input-group">
+                                <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                                <input type="text" id="@copyId-install" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Install @Model.Title command" value="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}" readonly>
+                                <button data-clipboard-target="#@copyId-install" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
                             </div>
                         </div>
-                        @*Organizational*@
-                        <div class="tab-pane fade" id="organization" role="tabpanel" aria-labelledby="organization-tab">
-                            <p class="small font-weight-bold">NOTE: This applies to both open source and commercial editions of Chocolatey.</p>
-                            @*Step 1*@
-                            <h4>1. Ensure you are set for organizational deployment</h4>
-                            <p>Please see the <a href="https://docs.chocolatey.org/en-us/guides/organizations/organizational-deployment-guide">organizational deployment guide</a></p>
-                            @*Step 2*@
-                            <a class="h4 collapsed d-block" data-toggle="collapse" href="#install-step2" role="button" aria-expanded="false" aria-controls="install-step2" title="Install Step 2">2. Get the package into your environment</a>
-                            <div class="collapse" id="install-step2">
-                                <div class="p-3">
-                                    @*Option 1*@
-                                    <a class="h5 collapsed d-block" data-toggle="collapse" href="#install-step2-option1" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 1">Option 1: Cached Package (Unreliable, Requires Internet - Same As Community)</a>
-                                    <div class="collapse" id="install-step2-option1">
-                                        <ul>
-                                            <li>
-                                                Open Source or Commercial:
-                                                <ul>
-                                                    <li>Proxy Repository - Create a proxy nuget repository on Nexus, Artifactory Pro, or a proxy Chocolatey repository on ProGet. Point your upstream to <strong>https://chocolatey.org/api/v2</strong>. Packages cache on first access automatically. Make sure your choco clients are using your proxy repository as a source and NOT the default community repository. See <a href="https://docs.chocolatey.org/en-us/choco/commands/sources">source command</a> for more information.</li>
-                                                    <li>You can also just download the package and push it to a repository <a class="btn btn-secondary btn-sm" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    @*Option 2*@
-                                    <a class="h5 mt-3 collapsed d-block" data-toggle="collapse" href="#install-step2-option2" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 2">Option 2: Internalized Package (Reliable, Scalable)</a>
-                                    <div class="collapse" id="install-step2-option2">
-                                        <ul>
-                                            <li>
-                                                Open Source
-                                                <ul>
-                                                    <li>Download the Package <a class="btn btn-secondary btn-sm" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
-                                                    <li><a href="https://docs.chocolatey.org/en-us/guides/create/recompile-packages">Follow manual internalization instructions</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                Package Internalizer (C4B)
-                                                <ul>
-                                                    <li>Run <code>choco download @Model.Id.ToLower() --internalize @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed){<text> --version=@Model.Version</text>} --source=https://chocolatey.org/api/v2</code> <a href="https://docs.chocolatey.org/en-us/choco/commands/download">(additional options)</a></li>
-                                                    <li>Run <code>choco push --source=&quot;'http://internal/odata/repo'&quot;</code> for package and dependencies</li>
-                                                    <li><a href="https://docs.chocolatey.org/en-us/guides/organizations/automate-package-internalization">Automate package internalization</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="tab-pane fade" id="upgrade" role="tabpanel" aria-labelledby="upgrade-tab">
+                            <p class="mb-3">To upgrade @Model.Title, run the following command from the command line or from PowerShell:</p>
+                            <div class="input-group">
+                                <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                                <input type="text" id="@copyId-upgrade" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Upgrade @Model.Title command" value="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}" readonly>
+                                <button data-clipboard-target="#@copyId-upgrade" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
                             </div>
-                            @*Step 3*@
-                            <h4 class="mt-4">3. Enter your internal repository url</h4>
-                            <input class="form-control w-50" id="stepThreeUrl" type="text" placeholder="http://internal/odata/repo" />
-                            <p><small>(this should look similar to <a href="https://chocolatey.org/api/v2">https://chocolatey.org/api/v2</a>)</small></p>
-                            @*Step 4*@
-                            <h4 class="mt-4">4. Choose your deployment method:</h4>
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="generic-tab" data-toggle="tab" href="#generic" role="tab" aria-controls="generic" aria-selected="false">Generic</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="ansible-tab" data-toggle="tab" href="#ansible" role="tab" aria-controls="ansible" aria-selected="false">Ansible</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="ccm-tab" data-toggle="tab" href="#ccm" role="tab" aria-controls="ccm" aria-selected="false">Central Management</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="chef-tab" data-toggle="tab" href="#chef" role="tab" aria-controls="chef" aria-selected="false">Chef</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="otter-tab" data-toggle="tab" href="#otter" role="tab" aria-controls="otter" aria-selected="false">Otter</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="psdsc-tab" data-toggle="tab" href="#psdsc" role="tab" aria-controls="psdsc" aria-selected="false">PS DSC</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="puppet-tab" data-toggle="tab" href="#puppet" role="tab" aria-controls="puppet" aria-selected="false">Puppet</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="salt-tab" data-toggle="tab" href="#salt" role="tab" aria-controls="salt" aria-selected="false">Salt</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content stepThree p-3">
-                                <div class="tab-pane fade show active" id="generic" role="tabpanel" aria-labelledby="generic-tab">
+                        </div>
+                        <div class="tab-pane fade" id="uninstall" role="tabpanel" aria-labelledby="uninstall-tab">
+                            <p class="mb-3">To uninstall @Model.Title, run the following command from the command line or from PowerShell:</p>
+                            <div class="input-group">
+                                <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                                <input type="text" id="@copyId-uninstall" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Uninstall @Model.Title command" value="choco uninstall @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}" readonly>
+                                <button data-clipboard-target="#@copyId-uninstall" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Organizational*@
+                <div class="tab-pane fade" id="organization" role="tabpanel" aria-labelledby="organization-tab">
+                    <p class="small fw-bold">NOTE: This applies to both open source and commercial editions of Chocolatey.</p>
+                    @*Step 1*@
+                    <h4>1. Ensure you are set for organizational deployment</h4>
+                    <p>Please see the <a href="https://docs.chocolatey.org/en-us/guides/organizations/organizational-deployment-guide">organizational deployment guide</a></p>
+                    @*Step 2*@
+                    <a class="h4 collapsed d-block" data-bs-toggle="collapse" href="#install-step2" role="button" aria-expanded="false" aria-controls="install-step2" title="Install Step 2">2. Get the package into your environment</a>
+                    <div class="collapse" id="install-step2">
+                        <div class="p-3">
+                            @*Option 1*@
+                            <a class="h5 collapsed d-block" data-bs-toggle="collapse" href="#install-step2-option1" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 1">Option 1: Cached Package (Unreliable, Requires Internet - Same As Community)</a>
+                            <div class="collapse" id="install-step2-option1">
+                                <ul>
+                                    <li>
+                                        Open Source or Commercial:
+                                        <ul>
+                                            <li>Proxy Repository - Create a proxy nuget repository on Nexus, Artifactory Pro, or a proxy Chocolatey repository on ProGet. Point your upstream to <strong>https://chocolatey.org/api/v2</strong>. Packages cache on first access automatically. Make sure your choco clients are using your proxy repository as a source and NOT the default community repository. See <a href="https://docs.chocolatey.org/en-us/choco/commands/sources">source command</a> for more information.</li>
+                                            <li>You can also just download the package and push it to a repository <a class="btn btn-secondary btn-sm" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            @*Option 2*@
+                            <a class="h5 mt-3 collapsed d-block" data-bs-toggle="collapse" href="#install-step2-option2" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 2">Option 2: Internalized Package (Reliable, Scalable)</a>
+                            <div class="collapse" id="install-step2-option2">
+                                <ul>
+                                    <li>
+                                        Open Source
+                                        <ul>
+                                            <li>Download the Package <a class="btn btn-secondary btn-sm" href="@Url.PackageDownload(2, Model.Id, Model.Version)" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
+                                            <li><a href="https://docs.chocolatey.org/en-us/guides/create/recompile-packages">Follow manual internalization instructions</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Package Internalizer (C4B)
+                                        <ul>
+                                            <li>Run <code>choco download @Model.Id.ToLower() --internalize @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
+                                            {<text> --version=@Model.Version</text>} --source=https://chocolatey.org/api/v2</code> <a href="https://docs.chocolatey.org/en-us/choco/commands/download">(additional options)</a></li>
+                                            <li>Run <code>choco push --source=&quot;'http://internal/odata/repo'&quot;</code> for package and dependencies</li>
+                                            <li><a href="https://docs.chocolatey.org/en-us/guides/organizations/automate-package-internalization">Automate package internalization</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @*Step 3*@
+                    <h4 class="mt-4">3. Enter your internal repository url</h4>
+                    <input class="form-control w-50" id="stepThreeUrl" type="text" placeholder="http://internal/odata/repo" />
+                    <p><small>(this should look similar to <a href="https://chocolatey.org/api/v2">https://chocolatey.org/api/v2</a>)</small></p>
+                    @*Step 4*@
+                    <h4 class="mt-4">4. Choose your deployment method:</h4>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="generic-tab" data-bs-toggle="tab" href="#generic" role="tab" aria-controls="generic" aria-selected="false">Generic</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="ansible-tab" data-bs-toggle="tab" href="#ansible" role="tab" aria-controls="ansible" aria-selected="false">Ansible</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="ccm-tab" data-bs-toggle="tab" href="#ccm" role="tab" aria-controls="ccm" aria-selected="false">Central Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="chef-tab" data-bs-toggle="tab" href="#chef" role="tab" aria-controls="chef" aria-selected="false">Chef</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="otter-tab" data-bs-toggle="tab" href="#otter" role="tab" aria-controls="otter" aria-selected="false">Otter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="psdsc-tab" data-bs-toggle="tab" href="#psdsc" role="tab" aria-controls="psdsc" aria-selected="false">PS DSC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="puppet-tab" data-bs-toggle="tab" href="#puppet" role="tab" aria-controls="puppet" aria-selected="false">Puppet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="salt-tab" data-bs-toggle="tab" href="#salt" role="tab" aria-controls="salt" aria-selected="false">Salt</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content stepThree p-3">
+                        <div class="tab-pane fade show active" id="generic" role="tabpanel" aria-labelledby="generic-tab">
 <pre class="language-powershell border py-3"><code>
 choco upgrade @Model.Id.ToLower() -y --source=&quot;'STEP 3 URL'&quot; [other options]
 </code></pre>
-                                    <p class="mt-3">See <a href="https://docs.chocolatey.org/en-us/choco/commands/upgrade#options-and-switches">options you can pass to upgrade.</a></p>
-                                    <p>See <a href="https://docs.chocolatey.org/en-us/choco/commands/#scripting-integration-best-practices-style-guide">best practices for scripting.</a></p>
-                                    <p>Add this to a PowerShell script or use a Batch script with tools and in places where you are calling directly to Chocolatey. If you are integrating, keep in mind enhanced exit codes.</p>
-                                    <p>If you do use a PowerShell script, use the following to ensure bad exit codes are shown as failures:</p>
+                            <p class="mt-3">See <a href="https://docs.chocolatey.org/en-us/choco/commands/upgrade#options-and-switches">options you can pass to upgrade.</a></p>
+                            <p>See <a href="https://docs.chocolatey.org/en-us/choco/commands/#scripting-integration-best-practices-style-guide">best practices for scripting.</a></p>
+                            <p>Add this to a PowerShell script or use a Batch script with tools and in places where you are calling directly to Chocolatey. If you are integrating, keep in mind enhanced exit codes.</p>
+                            <p>If you do use a PowerShell script, use the following to ensure bad exit codes are shown as failures:</p>
 <pre class="language-powershell line-numbers border py-3"><code>
 choco upgrade @Model.Id.ToLower() -y --source="'STEP 3 URL'"
 $exitCode = $LASTEXITCODE
@@ -771,8 +714,8 @@ if ($validExitCodes -contains $exitCode) {
 
 Exit $exitCode
 </code></pre>
-                                </div>
-                                <div class="tab-pane fade" id="ansible" role="tabpanel" aria-labelledby="ansible-tab">
+                        </div>
+                        <div class="tab-pane fade" id="ansible" role="tabpanel" aria-labelledby="ansible-tab">
 <pre class="language-yaml line-numbers border py-3"><code>
 - name: Ensure @Model.Id.ToLower() installed
   win_chocolatey:
@@ -781,12 +724,12 @@ Exit $exitCode
     version: @Model.Version
     source: STEP 3 URL
 </code></pre>
-                                    <p>See docs at <a href="https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html" target="_blank" rel="noreferrer">https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="ccm" role="tabpanel" aria-labelledby="ccm-tab">
-                                    <p>Coming early 2020! Central Managment Reporting available now! <a href="https://docs.chocolatey.org/en-us/features/chocolatey-central-management">More information...</a></p>
-                                </div>
-                                <div class="tab-pane fade" id="chef" role="tabpanel" aria-labelledby="chef-tab">
+                            <p>See docs at <a href="https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html" target="_blank" rel="noreferrer">https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html</a>.</p>
+                        </div>
+                        <div class="tab-pane fade" id="ccm" role="tabpanel" aria-labelledby="ccm-tab">
+                            <p>Coming early 2020! Central Managment Reporting available now! <a href="https://docs.chocolatey.org/en-us/features/chocolatey-central-management">More information...</a></p>
+                        </div>
+                        <div class="tab-pane fade" id="chef" role="tabpanel" aria-labelledby="chef-tab">
 <pre class="language-ruby line-numbers border py-3"><code>
 chocolatey_package '@Model.Id.ToLower()' do
   action    :install
@@ -794,9 +737,9 @@ chocolatey_package '@Model.Id.ToLower()' do
   source   'STEP 3 URL'
 end
 </code></pre>
-                                    <p>See docs at <a href="https://docs.chef.io/resource_chocolatey_package.html" target="_blank" rel="noreferrer">https://docs.chef.io/resource_chocolatey_package.html</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="otter" role="tabpanel" aria-labelledby="otter-tab">
+                            <p>See docs at <a href="https://docs.chef.io/resource_chocolatey_package.html" target="_blank" rel="noreferrer">https://docs.chef.io/resource_chocolatey_package.html</a>.</p>
+                        </div>
+                        <div class="tab-pane fade" id="otter" role="tabpanel" aria-labelledby="otter-tab">
 <pre class="language-powershell line-numbers border py-3"><code>
 Chocolatey::Ensure-Package
 (
@@ -805,9 +748,9 @@ Chocolatey::Ensure-Package
     Source: STEP 3 URL
 );
 </code></pre>
-                                    <p>Requires Otter Chocolatey Extension. See docs at <a href="https://inedo.com/den/otter/chocolatey" target="_blank" rel="noreferrer">https://inedo.com/den/otter/chocolatey</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="psdsc" role="tabpanel" aria-labelledby="psdsc-tab">
+                            <p>Requires Otter Chocolatey Extension. See docs at <a href="https://inedo.com/den/otter/chocolatey" target="_blank" rel="noreferrer">https://inedo.com/den/otter/chocolatey</a>.</p>
+                        </div>
+                        <div class="tab-pane fade" id="psdsc" role="tabpanel" aria-labelledby="psdsc-tab">
 <pre class="language-powershell line-numbers border py-3"><code>
 cChocoPackageInstaller @Model.Id.ToLower()
 {
@@ -817,9 +760,9 @@ cChocoPackageInstaller @Model.Id.ToLower()
    Source   = 'STEP 3 URL'
 }
 </code></pre>
-                                    <p>Requires cChoco DSC Resource. See docs at <a href="https://github.com/chocolatey/cChoco" target="_blank" rel="noreferrer">https://github.com/chocolatey/cChoco</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="puppet" role="tabpanel" aria-labelledby="puppet-tab">
+                            <p>Requires cChoco DSC Resource. See docs at <a href="https://github.com/chocolatey/cChoco" target="_blank" rel="noreferrer">https://github.com/chocolatey/cChoco</a>.</p>
+                        </div>
+                        <div class="tab-pane fade" id="puppet" role="tabpanel" aria-labelledby="puppet-tab">
 <pre class="language-puppet line-numbers border py-3"><code>
 package { '@Model.Id.ToLower()':
   provider => 'chocolatey',
@@ -827,393 +770,386 @@ package { '@Model.Id.ToLower()':
   source   => 'STEP 3 URL',
 }
 </code></pre>
-                                    <p>Requires Puppet Chocolatey Provider module. See docs at <a href="https://forge.puppet.com/puppetlabs/chocolatey" target="_blank" rel="noreferrer">https://forge.puppet.com/puppetlabs/chocolatey</a>.</p>
-                                </div>
-                                <div class="tab-pane fade" id="salt" role="tabpanel" aria-labelledby="salt-tab">
+                            <p>Requires Puppet Chocolatey Provider module. See docs at <a href="https://forge.puppet.com/puppetlabs/chocolatey" target="_blank" rel="noreferrer">https://forge.puppet.com/puppetlabs/chocolatey</a>.</p>
+                        </div>
+                        <div class="tab-pane fade" id="salt" role="tabpanel" aria-labelledby="salt-tab">
 <pre class="language-powershell line-numbers border py-3"><code>
 salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source="STEP 3 URL"
 </code></pre>
-                                    <p>See docs at <a href="https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html" target="_blank" rel="noreferrer">https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html</a>.</p>
-                                </div>
-                            </div>
-                            @*Step 5*@
-                            <h4 class="mt-4">5. If applicable - Chocolatey configuration/installation</h4>
-                            <p>See <a href="https://docs.chocolatey.org/en-us/features/integrations#chocolatey-integration-implementation-with-common-configuration-managers">infrastructure management matrix</a> for Chocolatey configuration elements and examples.</p>
+                            <p>See docs at <a href="https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html" target="_blank" rel="noreferrer">https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html</a>.</p>
                         </div>
                     </div>
-                }
-            }
-            else
-            {
-                <div class="bg-white p-3 shadow-sm mb-3">
-                    <p><strong>Note: </strong> Please <a href="https://docs.chocolatey.org/en-us/choco/setup">visit our documentation</a> to learn how to install/uninstall @Model.Title.</p>
-                    <p class="mb-3">To upgrade @Model.Title, run the following command from the command line or from PowerShell:</p>
-                    <div class="input-group copyBox">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">></div>
-                        </div>
-                        <input type="text" class="form-control"
-                               value="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                               aria-label="Upgrade @Model.Title command"
-                               readonly>
-                        <div class="input-group-append">
-                            <button class="btn btn-primary tt"
-                                    aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                    data-toggle="tooltip"
-                                    title="Copy to Clipboard"
-                                    data-clipboard-text="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                                <i class="fas fa-clipboard" aria-hidden="true">
-                                    <span class="sr-only">
-                                        Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                        {<text> --version=@Model.Version</text>} @if (Model.Prerelease)
-                                        {<text> --pre </text>} to Clipboard
-                                    </span>
-                                </i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            }
-            @*  Package Status & Notices *@
-            @if (Model.IsDownloadCacheAvailable)
-            {
-                <div class="callout callout-secondary">
-                    <p>Private CDN cached downloads available for licensed customers. Never experience 404 breakages again! <a href="https://docs.chocolatey.org/en-us/features/private-cdn">Learn more...</a></p>
-                </div>
-            }
-            @if (Model.IsInstallOrPortable)
-            {
-                <div class="callout callout-primary">
-                    <p>This package is likely a meta/virtual (*) or an installer (*.install) or portable (*.portable) application package.</p>
-                    <ul>
-                        <li>Meta/virtual (*) - has a dependency on the *.install or the *.portable package - it is provided for discoverability and for other packages to take a dependency on.</li>
-                        <li>Portable (*.portable/*.commandline (deprecated naming convention)/*.tool (deprecated naming convention)) - usually zips or archives that require no administrative access to install.</li>
-                        <li>Install (*.install/*.app (deprecated naming convention)) - uses native installers, usually requires administrative access to install.</li>
-                    </ul>
-                    <p></p>
-                    <p>Learn more about chocolatey's distinction of <a href="@Url.RouteUrl(RouteName.FAQ)#what-distinction-does-chocolatey-make-between-an-installable-and-a-portable-application">installed versus portable apps</a> and/or learn about <a href="@Url.RouteUrl(RouteName.FAQ)#what-is-the-difference-between-packages-named-install-ie-autohotkeyinstall-portable-ie-autohotkeyportable-and--ie-autohotkey">this kind of package</a>.</p>
-                </div>
-            }
-            @if (Model.Status == PackageStatusType.Submitted && !anyPackageRole)
-            {
-                <div class="callout callout-danger">
-                    <p>This version is in <a href="@Url.RouteUrl(RouteName.FAQ)#what-is-moderation">moderation</a> and has not yet been approved. This means it doesn't show up under normal search.</p>
-                    <ul class="mb-0">
-                        <li>Until approved, you should consider this package version unsafe - it could do very bad things to your system (it probably doesn't but you have been warned, that's why we have moderation).</li>
-                        <li>This package version can change wildly over the course of moderation until it is approved. If you install it and it later has changes to this version, you will be out of sync with any changes that have been made to the package. Until approved, you should consider that this package version doesn't even exist.</li>
-                        <li>You cannot install this package under normal scenarios. See <a href="@Url.RouteUrl(RouteName.FAQ)#how-do-i-install-a-package-version-under-moderation">How to install package version under moderation</a> for more information.</li>
-                        <li>There are also no guarantees that it will be approved.</li>
-                    </ul>
-                </div>
-            }
-            @if (Model.PackageVersions.Any(pv => pv.Status == PackageStatusType.Submitted))
-            {
-                <div class="callout callout-warning">
-                    <p>There are versions of this package awaiting moderation @(Model.Status == PackageStatusType.Submitted ? "(possibly just this one)" : string.Empty). See the <a class="collapse-nav" href="#versionhistory">Version History section</a> below.</p>
-                </div>
-            }
-            @* Maintainers always see the review comments *@
-            @if (Model.Status == PackageStatusType.Approved)
-            {
-                <div class="callout callout-success">
-                    <p>This package was approved @Html.Raw(@reviewerComments) on @Model.ApprovedDate.GetValueOrDefault().ToString("dd MMM yyyy").</p>
-                </div>
-            }
-            @if (Model.Listed && Model.Status != PackageStatusType.Approved && Model.Status != PackageStatusType.Exempted)
-            {
-                <div class="callout callout-danger">
-                    <p>This package was submitted prior to moderation and has not been approved. While it is likely safe for you, there is more risk involved.</p>
-                </div>
-            }
-            @if (Model.Listed && Model.Status == PackageStatusType.Exempted)
-            {
-                <div class="callout callout-danger">
-                    This package is exempt from moderation. While it is likely safe for you, there is more risk involved.
-                </div>
-            }
-            @if (Model.Status == PackageStatusType.Rejected)
-            {
-                <div class="callout callout-danger position-relative z-index-1">
-                    <p>This package was rejected on @Model.ReviewedDate.GetValueOrDefault().ToString("dd MMM yyyy"). The reviewer @Model.ReviewerUserName has listed the following reason(s):</p>
-                    <div class="comments-list-container">
-                        <div class="comments-list @if (maintainer) {<text> user-maintainer </text>} else if (moderator) {<text> user-moderator</text>} else {<text >user-unknown</text>}">
-                            @Html.Raw(Markdown.ToHtml(Model.ReviewComments.clean_html() ?? string.Empty, MarkdownPipeline))
-                        </div>
-                    </div>
-                </div>
-            }
-            else if (maintainer && !Model.Listed && Model.Status != PackageStatusType.Approved && Model.Status != PackageStatusType.Exempted)
-            {
-                <div class="callout callout-danger">
-                    <p>
-                        This package will remain unlisted until it has been approved by a moderator.
-                        You can see the package because you are one of its maintainers. You should have received an email about moderation. If you need to update/respond to the package review, please do so in the form below. If you need to contact the moderators for other reasons, feel free to respond to the email you received.
-                        If you have not received that email, please <a href="@Url.RouteUrl(RouteName.PackageVersionAction, new { action = "ContactAdmins", id = Model.Id, version = Model.Version })" title="Contact Site Admins">contact Site Admins</a>.
-                    </p>
-                    @if (moderationRoleAndMaintaner)
-                    {
-                        <p>Since you are a maintainer of this package, you are not able to review it.</p>
-                    }
-                </div>
-            }
-            else if (maintainer && !Model.Listed)
-            {
-                <div class="callout callout-warning">
-                    This package is unlisted and hidden from package listings.
-                    You can see the package because you are one of its maintainers. To list the package
-                    again, <a href="@Url.DeletePackage(Model)">change its listing setting</a> (does not apply to unapproved packages).
-                </div>
-            }
-            else if (!Model.Listed && Model.Status != PackageStatusType.Submitted)
-            {
-                <div class="callout callout-warning">
-                    This package is unlisted and hidden from package listings.
-                </div>
-            }
-            @if (Model.Status == PackageStatusType.Submitted && !anyPackageRole)
-            {
-                if (!string.IsNullOrWhiteSpace(Model.ReviewComments))
-                {
-                    @*Not logged in moderator que*@
-                    <div class="bg-white shadow-sm p-3 mb-3">
-                        <div class="comments-list-container">
-                            <div class="comments-list user-unknown">
-                                @Html.Raw(Markdown.ToHtml(Model.ReviewComments.clean_html() ?? string.Empty, MarkdownPipeline))
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            else if (anyPackageRole && Model.Status != PackageStatusType.Rejected)
-            {
-                if (!string.IsNullOrWhiteSpace(Model.ReviewComments))
-                {
-                    <div class="bg-white shadow-sm p-3 mb-3 position-relative z-index-1">
-                        <div class="comments-list-container">
-                            <div class="comments-list @if (maintainer) {<text> user-maintainer </text>} else if (moderator) {<text> user-moderator</text>} else {<text> user-unknown</text>}">
-                                @Html.Raw(Markdown.ToHtml(Model.ReviewComments.clean_html() ?? string.Empty, MarkdownPipeline))
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            @*Logged in*@
-            @if (anyPackageRole)
-            {
-                <div class="bg-white shadow-sm p-3 mb-3 mt-n3 position-relative z-index-2">
-                    @if (Model.Listed || Model.Status == PackageStatusType.Rejected)
-                    {
-
-                        if (Model.Status == PackageStatusType.Approved)
-                        {
-                            <button class="btn btn-secondary d-flex mx-auto mt-3" type="button" data-toggle="collapse" data-target="#add-comment" aria-expanded="false" aria-controls="add-comment">Show Package Communication / Package Test Rerun</button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-secondary d-flex mx-auto mt-3" type="button" data-toggle="collapse" data-target="#add-comment" aria-expanded="false" aria-controls="add-comment">Hide Package Review</button>
-                        }
-                    }
-                    <div class="collapse @if (Model.Status != PackageStatusType.Approved) {<text>show</text>} " id="add-comment">
-                        <hr />
-                        <a class="h3 d-hash-none @if(Request.Cookies["chocolatey_hide_comment_instructions"] == null){<text>collapse show</text>}else{<text>collapsed</text>}" data-toggle="collapse" href="#instructions" role="button" aria-expanded="true" aria-controls="instructions" title="Instructions for @if(moderationRole){<text>Review</text>}else{<text>Comments</text>}">Instructions for @if(moderationRole){<text>Review</text>}else{<text>Comments</text>}</a>
-                        <div class="ml-0 collapse @if(Request.Cookies["chocolatey_hide_comment_instructions"] == null){<text>show</text>}" id="instructions">
-                        @if (moderationRole)
-                        {
-                            <ul>
-                                <li>Reviewers/Moderators must follow review process at <a href="https://docs.chocolatey.org/en-us/community-repository/moderation#reviewer-moderator-process">moderation</a>.
-                                <li>**Please do not reject a package until the end of the conversation.**</li>
-                                <li>Check over the powershell scripts - anything look unsafe? Download urls should be official distro</li>
-                                @if (Model.Status == PackageStatusType.Approved || Model.Status == PackageStatusType.Exempted)
-                                {
-                                    <li>Moderators: Be very careful about moving a package from approved/exempt into submitted status. A package may be repushed when in this status (no matter how many downloads).</li>
-                                }
-                                @if (Model.Dependencies.DependencySets.Any())
-                                {
-                                    <li>Check dependencies, make sure they are listed on the site (approved if they needed to be moderated first).</li>
-                                }
-                                @if (!hasPreviousExistingVersions)
-                                {
-                                    <li>NOTE! This is a brand new package with no previous existing versions (prereleases do not count): check the name of the package. Does it meet the guidelines? This makes a package immediately rejectable as new package id will be submitted as a different package.</li>
-                                }
-                                <li>Check tags</li>
-                                <li>Keep in mind this is publicly visible, so do not share any sensitive data or anything you wouldn't want to share with the world.</li>
-                                <li>Be Nice! :)</li>
-                            </ul>
-                        }
-                        else
-                        {
-                            <ul>
-                                <li>You can respond to review comments here.</li>
-                                <li>Keep in mind this is publicly visible, so do not share any sensitive data or anything you wouldn't want to share with the world.</li>
-                                @if (Model.Status == PackageStatusType.Submitted)
-                                {
-                                    <li>You are also able to self-reject packages that may be out of date or incorrect (if the verifier fails the install). See <a href="@Url.RouteUrl(RouteName.FAQ)#how-do-i-self-reject-a-package">self-reject</a> for more information.</li>
-                                }
-                            </ul>
-                        }
-                        </div>
-                        @using (Html.BeginForm())
-                        {
-                            <fieldset class="form mt-3">
-                                <div class="form-field d-label-none">
-                                    @Html.LabelFor(m => m.NewReviewComments)
-                                    @Html.TextAreaFor(m => m.NewReviewComments, new {@class = "text-editor"})
-                                    @Html.ValidationMessageFor(m => m.NewReviewComments)
-                                    <span class="field-hint-message"></span>
-                                </div>
-                                <div class="form-field mt-2 font-weight-bold">
-                                    @Html.LabelFor(m => m.Status)
-                                    @if (moderator)
-                                    {
-                                        @Html.DropDownListFor(m => m.Status, statuses)
-                                    }
-                                    else
-                                    {
-                                        @Html.DisplayTextFor(m => m.Status)
-                                    }
-                                    @Html.ValidationMessageFor(m => m.Status)
-                                    <span class="field-hint-message"></span>
-                                </div>
-                                @if (moderator || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing)
-                                {
-                                    <div class="form-field">
-                                        <input id="RerunTests" name="RerunTests" type="checkbox" value="true" />
-                                        <label for="RerunTests" class="for-checkbox" title="Only necessary if there was a mistake in the test run. A package repush will trigger test reruns.">Rerun verification tests?</label>
-                                    </div>
-                                }
-                                @if (moderator && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
-                                {
-                                    <div class="form-field">
-                                        <input id="RerunValidation" name="RerunValidation" type="checkbox" value="true" />
-                                        <label for="RerunValidation" class="for-checkbox" title="Rerun package validation tests.">Rerun validation tests?</label>
-                                    </div>
-                                    <div class="form-field">
-                                        <input id="ExemptPackageFromValidation" name="ExemptPackageFromValidation" type="checkbox" value="true" />
-                                        <label for="ExemptPackageFromValidation" class="for-checkbox" title="Exempt the package from validation testing.">Exempt the package from validation testing?</label>
-                                    </div>
-                                }
-                                @if (moderator)
-                                {
-                                    <div class="form-field">
-                                        <input id="RerunVirusScanner" name="RerunVirusScanner" type="checkbox" value="true" />
-                                        <label for="RerunVirusScanner" class="for-checkbox" title="Rerun virus scanner to get latest reports.">Rerun virus scanner?</label>
-                                    </div>
-                                }
-                                @if (admin & !maintainer)
-                                {
-                                    <div class="form-field">
-                                        <input id="RerunPackageCacher" name="RerunPackageCacher" type="checkbox" value="true" />
-                                        <label for="RerunPackageCacher" class="for-checkbox" title="Rerun Customer CDN cacher to update cache.">Rerun package CDN cacher?</label>
-                                    </div>
-                                }
-                                @if (moderationRole)
-                                {
-                                    <div class="form-field">
-                                        <input id="SendEmail" name="SendEmail" type="checkbox" checked="checked" value="true" />
-                                        <label for="SendEmail" class="for-checkbox" title="Send an email to the maintainer? They won't receive notice of your action otherwise. With normal review operations, it is normal to leave this checked.">Send Maintainer email?</label>
-                                    </div>
-                                    <div class="form-field">
-                                        <input id="ChangeSubmittedStatus" name="ChangeSubmittedStatus" type="checkbox" checked="checked" value="true" />
-                                        <label for="ChangeSubmittedStatus" class="for-checkbox" title="If just rerunning tests or leaving a non-flagging comment (e.g. not requiring changes by the maintainer(s)), uncheck this box.">If Submitted status, require maintainer to make changes?</label>
-                                    </div>
-                                }
-                                else if (maintainer && Model.Status == PackageStatusType.Submitted && (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing || Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing))
-                                {
-                                    <div class="form-field">
-                                        <input id="MaintainerReject" name="MaintainerReject" type="checkbox" value="true" onclick="if (this.checked) { return confirm('Are you sure? It is not normal to reject a package.'); }" />
-                                        <label for="MaintainerReject" class="for-checkbox" title="If the download link is always the same and you have some older versions under review, the older versions can be rejected without issue. Under normal circumstances this should not be used.">Reject Package? Not for <a href="@Url.RouteUrl(RouteName.FAQ)#how-do-i-self-reject-a-package">normal scenarios or obsoletion</a>.</label>
-                                    </div>
-                                }
-                                @Html.ValidationSummary(true)
-                                @if (moderationRole)
-                                {
-                                    <button class="btn btn-sm btn-secondary mt-2" type="button" data-toggle="collapse" data-target="#test-trusted" aria-expanded="false" aria-controls="test-trusted">Show Trusted Section</button>
-                                    <div class="collapse form-field" id="test-trusted">
-                                        <ul class="mb-0 mt-3">
-                                            <li>Trusted package ids are packages where we have built trust in the package maintainer(s).</li>
-                                            <li>This usually happens after we have seen several iterations of a package without issues.</li>
-                                            <li>All package *versions* submitted from now on will automatically be approved.</li>
-                                            <li>This also happens when maintainer is also the author of the software.</li>
-                                            @if (moderator)
-                                            {
-                                                <li>Use with care.</li>
-                                                <li>Use "Save" below to make this change. You may want to uncheck Send Email.</li>
-                                            }
-                                        </ul>
-                                        @if (moderator)
-                                        {
-                                            @Html.EditorFor(m => m.IsTrusted)
-                                            <label for="IsTrusted" class="mt-2 mb-0 pb-2">Trust this package id?</label>
-                                        }
-                                        else
-                                        {
-                                            var trustedText = @Model.IsTrusted ? "is trusted" : "follows normal workflow";
-                                            <p class="mt-2 mb-0 pb-2">This package @trustedText.</p>
-                                        }
-                                    </div>
-                                    <button class="btn btn-sm btn-secondary mt-2" type="button" data-toggle="collapse" data-target="#test-exemptions" aria-expanded="false" aria-controls="test-exemptions">Show Testing Exemption Section</button>
-                                    <div class="collapse form-field text-editor-refresh" id="test-exemptions">
-                                        <ul class="mb-0 mt-3">
-                                            <li>Exempting a package id from testing requires a reason.</li>
-                                            @if (moderator)
-                                            {
-                                                <li>Use with care.</li>
-                                                <li>Typically this is done when a package is installing drivers the testing computer does not have</li>
-                                                <li>This is NOT done just because a maintainer doesn't know how to make a program silent with Auto Hot Key.</li>
-                                                <li>Use "Save" below to make this change. You may want to uncheck Send Email.</li>
-                                            }
-                                        </ul>
-                                        @if (moderator)
-                                        {
-                                            @Html.EditorFor(m => m.IsExemptedFromVerification)
-                                            <label for="IsExemptedFromVerification" class="mt-2 mb-3">Exempt the package from verification testing?</label>
-                                            <div class="form-field d-label-none pb-2">
-                                                @Html.LabelFor(m => m.ExemptedFromVerificationReason)
-                                                @Html.TextAreaFor(m => m.ExemptedFromVerificationReason, new {@class = "text-editor"})
-                                                @Html.ValidationMessageFor(m => m.ExemptedFromVerificationReason)
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            var testInformation = @Model.IsExemptedFromVerification ? "skips automatic verification (testing)" : "follows normal workflow";
-                                            <p class="mt-2 mb-0 pb-2">This package @testInformation.</p>
-                                        }
-                                    </div>
-                                }
-                                <button class="btn btn-success d-block mt-2" type="submit" value="Save" title="Save Changes"><i class="fas fa-save" alt="Save"></i> Save</button>
-                            </fieldset>
-                        }
-                    </div>
-                </div>
-            }
-            @*  Description  *@
-            <div class="mb-4">
-                <a class="h2 collapse show" data-toggle="collapse" href="#description" role="button" aria-expanded="true" aria-controls="description" title="Nuspec reference: description">Description</a>
-                <div class="collapse show" id="description">
-                    <hr />
-                    @Html.Raw(Markdown.ToHtml(Model.Description.clean_html() ?? string.Empty, MarkdownPipeline))
+                    @*Step 5*@
+                    <h4 class="mt-4">5. If applicable - Chocolatey configuration/installation</h4>
+                    <p>See <a href="https://docs.chocolatey.org/en-us/features/integrations#chocolatey-integration-implementation-with-common-configuration-managers">infrastructure management matrix</a> for Chocolatey configuration elements and examples.</p>
                 </div>
             </div>
-            @*  Files  *@
-            <div class="mb-4">
-                <a class="h2 @if (expandForModeration && moderator) {<text> collapse show</text>} else {<text>collapsed</text>}" data-toggle="collapse" href="#files" role="button" aria-expanded="false" aria-controls="files" title="Nuspec reference: files, optional - will default to all files next to nuspec">Files</a>
-                <div class="collapse @if (expandForModeration && moderator) {<text> show moderation-view</text>}" id="files">
-                    <hr />
-                    @if (expandForModeration)
+        }
+    }
+    else
+    {
+        <div class="bg-theme-light p-3 shadow-sm mb-3">
+            <p><strong>Note: </strong> Please <a href="https://docs.chocolatey.org/en-us/choco/setup">visit our documentation</a> to learn how to install/uninstall @Model.Title.</p>
+            <p class="mb-3">To upgrade @Model.Title, run the following command from the command line or from PowerShell:</p>
+            <div class="input-group">
+                <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                <input type="text" id="@copyId-upgrade2" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Upgrade @Model.Title command" value="choco upgrade @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version=@Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}" readonly>
+                <button data-clipboard-target="#@copyId-upgrade2" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    }
+    @*  Package Status & Notices *@
+    @if (Model.IsDownloadCacheAvailable)
+    {
+        <div class="callout callout-secondary">
+            <p>Private CDN cached downloads available for licensed customers. Never experience 404 breakages again! <a href="https://docs.chocolatey.org/en-us/features/private-cdn">Learn more...</a></p>
+        </div>
+    }
+    @if (Model.IsInstallOrPortable)
+    {
+        <div class="callout callout-primary">
+            <p>This package is likely a meta/virtual (*) or an installer (*.install) or portable (*.portable) application package.</p>
+            <ul>
+                <li>Meta/virtual (*) - has a dependency on the *.install or the *.portable package - it is provided for discoverability and for other packages to take a dependency on.</li>
+                <li>Portable (*.portable/*.commandline (deprecated naming convention)/*.tool (deprecated naming convention)) - usually zips or archives that require no administrative access to install.</li>
+                <li>Install (*.install/*.app (deprecated naming convention)) - uses native installers, usually requires administrative access to install.</li>
+            </ul>
+            <p></p>
+            <p>Learn more about chocolatey's distinction of <a href="@Url.RouteUrl(RouteName.FAQ)#what-distinction-does-chocolatey-make-between-an-installable-and-a-portable-application">installed versus portable apps</a> and/or learn about <a href="@Url.RouteUrl(RouteName.FAQ)#what-is-the-difference-between-packages-named-install-ie-autohotkeyinstall-portable-ie-autohotkeyportable-and--ie-autohotkey">this kind of package</a>.</p>
+        </div>
+    }
+    @if (Model.Status == PackageStatusType.Submitted && !anyPackageRole)
+    {
+        <div class="callout callout-danger">
+            <p>This version is in <a href="@Url.RouteUrl(RouteName.FAQ)#what-is-moderation">moderation</a> and has not yet been approved. This means it doesn't show up under normal search.</p>
+            <ul class="mb-0">
+                <li>Until approved, you should consider this package version unsafe - it could do very bad things to your system (it probably doesn't but you have been warned, that's why we have moderation).</li>
+                <li>This package version can change wildly over the course of moderation until it is approved. If you install it and it later has changes to this version, you will be out of sync with any changes that have been made to the package. Until approved, you should consider that this package version doesn't even exist.</li>
+                <li>You cannot install this package under normal scenarios. See <a href="@Url.RouteUrl(RouteName.FAQ)#how-do-i-install-a-package-version-under-moderation">How to install package version under moderation</a> for more information.</li>
+                <li>There are also no guarantees that it will be approved.</li>
+            </ul>
+        </div>
+    }
+    @if (Model.PackageVersions.Any(pv => pv.Status == PackageStatusType.Submitted))
+    {
+        <div class="callout callout-warning">
+            <p>There are versions of this package awaiting moderation @(Model.Status == PackageStatusType.Submitted ? "(possibly just this one)" : string.Empty). See the <a class="collapse-nav" href="#versionhistory">Version History section</a> below.</p>
+        </div>
+    }
+    @* Maintainers always see the review comments *@
+    @if (Model.Status == PackageStatusType.Approved)
+    {
+        <div class="callout callout-success">
+            <p>This package was approved @Html.Raw(@reviewerComments) on @Model.ApprovedDate.GetValueOrDefault().ToString("dd MMM yyyy").</p>
+        </div>
+    }
+    @if (Model.Listed && Model.Status != PackageStatusType.Approved && Model.Status != PackageStatusType.Exempted)
+    {
+        <div class="callout callout-danger">
+            <p>This package was submitted prior to moderation and has not been approved. While it is likely safe for you, there is more risk involved.</p>
+        </div>
+    }
+    @if (Model.Listed && Model.Status == PackageStatusType.Exempted)
+    {
+        <div class="callout callout-danger">
+            This package is exempt from moderation. While it is likely safe for you, there is more risk involved.
+        </div>
+    }
+    @if (Model.Status == PackageStatusType.Rejected)
+    {
+        <div class="callout callout-danger position-relative z-index-1">
+            <p>This package was rejected on @Model.ReviewedDate.GetValueOrDefault().ToString("dd MMM yyyy"). The reviewer @Model.ReviewerUserName has listed the following reason(s):</p>
+            <div class="comments-list-container">
+                <div class="comments-list @if (maintainer) {<text> user-maintainer </text>} else if (moderator) {<text> user-moderator</text>} else {<text >user-unknown</text>}">
+                    @Html.Raw(Markdown.ToHtml(Model.ReviewComments.clean_html() ?? string.Empty, MarkdownPipeline))
+                </div>
+            </div>
+        </div>
+    }
+    else if (maintainer && !Model.Listed && Model.Status != PackageStatusType.Approved && Model.Status != PackageStatusType.Exempted)
+    {
+        <div class="callout callout-danger">
+            <p>
+                This package will remain unlisted until it has been approved by a moderator.
+                You can see the package because you are one of its maintainers. You should have received an email about moderation. If you need to update/respond to the package review, please do so in the form below. If you need to contact the moderators for other reasons, feel free to respond to the email you received.
+                If you have not received that email, please <a href="@Url.RouteUrl(RouteName.PackageVersionAction, new { action = "ContactAdmins", id = Model.Id, version = Model.Version })" title="Contact Site Admins">contact Site Admins</a>.
+            </p>
+            @if (moderationRoleAndMaintaner)
+            {
+                <p>Since you are a maintainer of this package, you are not able to review it.</p>
+            }
+        </div>
+    }
+    else if (maintainer && !Model.Listed)
+    {
+        <div class="callout callout-warning">
+            This package is unlisted and hidden from package listings.
+            You can see the package because you are one of its maintainers. To list the package
+            again, <a href="@Url.DeletePackage(Model)">change its listing setting</a> (does not apply to unapproved packages).
+        </div>
+    }
+    else if (!Model.Listed && Model.Status != PackageStatusType.Submitted)
+    {
+        <div class="callout callout-warning">
+            This package is unlisted and hidden from package listings.
+        </div>
+    }
+    @if (Model.Status == PackageStatusType.Submitted && !anyPackageRole)
+    {
+        if (!string.IsNullOrWhiteSpace(Model.ReviewComments))
+        {
+            @*Not logged in moderator que*@
+            <div class="bg-theme-light shadow-sm p-3 mb-3">
+                <div class="comments-list-container">
+                    <div class="comments-list user-unknown">
+                        @Html.Raw(Markdown.ToHtml(Model.ReviewComments.clean_html() ?? string.Empty, MarkdownPipeline))
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else if (anyPackageRole && Model.Status != PackageStatusType.Rejected)
+    {
+        if (!string.IsNullOrWhiteSpace(Model.ReviewComments))
+        {
+            <div class="bg-theme-light shadow-sm p-3 mb-3 position-relative z-index-1">
+                <div class="comments-list-container">
+                    <div class="comments-list @if (maintainer) {<text> user-maintainer </text>} else if (moderator) {<text> user-moderator</text>} else {<text> user-unknown</text>}">
+                        @Html.Raw(Markdown.ToHtml(Model.ReviewComments.clean_html() ?? string.Empty, MarkdownPipeline))
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    @*Logged in*@
+    @if (anyPackageRole)
+    {
+        <div class="bg-theme-light shadow-sm p-3 mb-3 mt-n3 position-relative z-index-2">
+            <div class="text-center">
+            @if (Model.Listed || Model.Status == PackageStatusType.Rejected)
+            {
+
+                if (Model.Status == PackageStatusType.Approved)
+                {
+                    <button class="btn btn-secondary btn-show-hide btn-collapse mx-auto mt-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#add-comment" aria-expanded="false" aria-controls="add-comment">Show Package Communication / Package Test Rerun</button>
+                }
+                else
+                {
+                    <button class="btn btn-secondary btn-show-hide btn-collapse mx-auto mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#add-comment" aria-expanded="true" aria-controls="add-comment">Hide Package Review</button>
+                }
+            }
+            </div>
+            <div class="collapse @if (Model.Status != PackageStatusType.Approved){<text>show</text>}" id="add-comment">
+                <hr />
+                <a class="h3 d-hash-none @if(Request.Cookies["chocolatey_hide_comment_instructions"] != null){<text>collapsed</text>}" data-bs-toggle="collapse" href="#instructions" role="button" aria-expanded="@if(Request.Cookies["chocolatey_hide_comment_instructions"] != null){<text>false</text>}else{<text>true</text>}" aria-controls="instructions" title="Instructions for @if(moderationRole){<text>Review</text>}else{<text>Comments</text>}">Instructions for @if (moderationRole)
+                {<text>Review</text>}
+            else
+            {<text>Comments</text>}</a>
+                <div class="ms-0 collapse @if(Request.Cookies["chocolatey_hide_comment_instructions"] == null){<text>show</text>}" id="instructions">
+                    @if (moderationRole)
                     {
-                        if (Model.Files.Any())
+                        <ul>
+                            <li>Reviewers/Moderators must follow review process at <a href="https://docs.chocolatey.org/en-us/community-repository/moderation#reviewer-moderator-process">moderation</a>.
+                            <li>**Please do not reject a package until the end of the conversation.**</li>
+                            <li>Check over the powershell scripts - anything look unsafe? Download urls should be official distro</li>
+                            @if (Model.Status == PackageStatusType.Approved || Model.Status == PackageStatusType.Exempted)
+                            {
+                                <li>Moderators: Be very careful about moving a package from approved/exempt into submitted status. A package may be repushed when in this status (no matter how many downloads).</li>
+                            }
+                            @if (Model.Dependencies.DependencySets.Any())
+                            {
+                                <li>Check dependencies, make sure they are listed on the site (approved if they needed to be moderated first).</li>
+                            }
+                            @if (!hasPreviousExistingVersions)
+                            {
+                                <li>NOTE! This is a brand new package with no previous existing versions (prereleases do not count): check the name of the package. Does it meet the guidelines? This makes a package immediately rejectable as new package id will be submitted as a different package.</li>
+                            }
+                            <li>Check tags</li>
+                            <li>Keep in mind this is publicly visible, so do not share any sensitive data or anything you wouldn't want to share with the world.</li>
+                            <li>Be Nice! :)</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul>
+                            <li>You can respond to review comments here.</li>
+                            <li>Keep in mind this is publicly visible, so do not share any sensitive data or anything you wouldn't want to share with the world.</li>
+                            @if (Model.Status == PackageStatusType.Submitted)
+                            {
+                                <li>You are also able to self-reject packages that may be out of date or incorrect (if the verifier fails the install). See <a href="@Url.RouteUrl(RouteName.FAQ)#how-do-i-self-reject-a-package">self-reject</a> for more information.</li>
+                            }
+                        </ul>
+                    }
+                </div>
+                @using (Html.BeginForm())
+                {
+                    <fieldset class="form mt-3">
+                        <div class="d-label-none">
+                            @Html.LabelFor(m => m.NewReviewComments)
+                            @Html.TextAreaFor(m => m.NewReviewComments, new { @class = "text-editor form-control" })
+                            @Html.ValidationMessageFor(m => m.NewReviewComments)
+                        </div>
+                        <div class="mt-2 fw-bold">
+                            @Html.LabelFor(m => m.Status)
+                            @if (moderator)
+                            {
+                                @Html.DropDownListFor(m => m.Status, statuses, new { @class = "form-select mt-2 w-50" })
+                            }
+                            else
+                            {
+                                @Html.DisplayTextFor(m => m.Status)
+                            }
+                            @Html.ValidationMessageFor(m => m.Status)
+                        </div>
+                        @if (moderator || Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing)
                         {
-                            var fileCount = Model.Files.Count();
-                            <button type="button" class="btn btn-collapse-files mb-2 @if(fileCount <= 9){<text>btn-danger</text>}else if(fileCount > 9 && fileCount < 30){<text>btn-success</text>}else{<text>d-none</text>}">
-                                @if(fileCount <= 9){<text>Collapse</text>}else{<text>Expand</text>} All Files
-                            </button>
+                            <div class="form-check mt-3">
+                                <input id="RerunTests" class="form-check-input" name="RerunTests" type="checkbox" value="true" />
+                                <label class="form-check-label" for="RerunTests" title="Only necessary if there was a mistake in the test run. A package repush will trigger test reruns.">Rerun verification tests?</label>
+                            </div>
                         }
-                        var packageFile = "file-path-" + @Model.Id.Replace(".", "-");
-                        <div class="mb-1">
-                            <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".@packageFile" role="button" aria-expanded="true">Hide</button>
-                            @Model.Id<span>.nuspec</span>
-                            <div class="@packageFile collapse show">
-<pre class="line-numbers"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+                        @if (moderator && Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing)
+                        {
+                            <div class="form-check">
+                                <input id="RerunValidation" class="form-check-input" name="RerunValidation" type="checkbox" value="true" />
+                                <label for="RerunValidation" class="form-check-label" title="Rerun package validation tests.">Rerun validation tests?</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="ExemptPackageFromValidation" class="form-check-input" name="ExemptPackageFromValidation" type="checkbox" value="true" />
+                                <label for="ExemptPackageFromValidation" class="form-check-label" title="Exempt the package from validation testing.">Exempt the package from validation testing?</label>
+                            </div>
+                        }
+                        @if (moderator)
+                        {
+                            <div class="form-check">
+                                <input id="RerunVirusScanner" class="form-check-input" name="RerunVirusScanner" type="checkbox" value="true" />
+                                <label for="RerunVirusScanner" class="form-check-label" title="Rerun virus scanner to get latest reports.">Rerun virus scanner?</label>
+                            </div>
+                        }
+                        @if (admin & !maintainer)
+                        {
+                            <div class="form-check">
+                                <input id="RerunPackageCacher" class="form-check-input" name="RerunPackageCacher" type="checkbox" value="true" />
+                                <label for="RerunPackageCacher" class="form-check-label" title="Rerun Customer CDN cacher to update cache.">Rerun package CDN cacher?</label>
+                            </div>
+                        }
+                        @if (moderationRole)
+                        {
+                            <div class="form-check">
+                                <input id="SendEmail" class="form-check-input" name="SendEmail" type="checkbox" checked="checked" value="true" />
+                                <label for="SendEmail" class="form-check-label" title="Send an email to the maintainer? They won't receive notice of your action otherwise. With normal review operations, it is normal to leave this checked.">Send Maintainer email?</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="ChangeSubmittedStatus" class="form-check-input" name="ChangeSubmittedStatus" type="checkbox" checked="checked" value="true" />
+                                <label for="ChangeSubmittedStatus" class="form-check-label" title="If just rerunning tests or leaving a non-flagging comment (e.g. not requiring changes by the maintainer(s)), uncheck this box.">If Submitted status, require maintainer to make changes?</label>
+                            </div>
+                        }
+                        else if (maintainer && Model.Status == PackageStatusType.Submitted && (Model.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing || Model.PackageValidationResultStatus == PackageAutomatedReviewResultStatusType.Failing))
+                        {
+                            <div class="form-check">
+                                <input id="MaintainerReject" class="form-check-input" name="MaintainerReject" type="checkbox" value="true" onclick="if (this.checked) { return confirm('Are you sure? It is not normal to reject a package.'); }" />
+                                <label for="MaintainerReject" class="form-check-label" title="If the download link is always the same and you have some older versions under review, the older versions can be rejected without issue. Under normal circumstances this should not be used.">Reject Package? Not for <a href="@Url.RouteUrl(RouteName.FAQ)#how-do-i-self-reject-a-package">normal scenarios or obsoletion</a>.</label>
+                            </div>
+                        }
+                        @Html.ValidationSummary(true)
+                        @if (moderationRole)
+                        {
+                            <button class="btn btn-sm btn-secondary btn-show-hide btn-collapse collapsed mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#test-trusted" aria-expanded="false" aria-controls="test-trusted">Show Trusted Section</button>
+                            <div class="collapse form-field" id="test-trusted">
+                                <ul class="mb-0 mt-3">
+                                    <li>Trusted package ids are packages where we have built trust in the package maintainer(s).</li>
+                                    <li>This usually happens after we have seen several iterations of a package without issues.</li>
+                                    <li>All package *versions* submitted from now on will automatically be approved.</li>
+                                    <li>This also happens when maintainer is also the author of the software.</li>
+                                    @if (moderator)
+                                    {
+                                        <li>Use with care.</li>
+                                        <li>Use "Save" below to make this change. You may want to uncheck Send Email.</li>
+                                    }
+                                </ul>
+                                @if (moderator)
+                                {
+                                    <div class="form-check mt-3">
+                                        @Html.CheckBoxFor(m => m.IsTrusted, new { @class = "form-check-input" })
+                                        <label class="form-check-label" for="IsTrusted">Trust this package id?</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    var trustedText = @Model.IsTrusted ? "is trusted" : "follows normal workflow";
+                                    <p class="mt-2 mb-0 pb-2">This package @trustedText.</p>
+                                }
+                            </div>
+                            <button class="btn btn-sm btn-secondary btn-show-hide btn-collapse collapsed mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#test-exemptions" aria-expanded="false" aria-controls="test-exemptions">Show Testing Exemption Section</button>
+                            <div class="collapse form-field text-editor-refresh" id="test-exemptions">
+                                <ul class="mb-0 mt-3">
+                                    <li>Exempting a package id from testing requires a reason.</li>
+                                    @if (moderator)
+                                    {
+                                        <li>Use with care.</li>
+                                        <li>Typically this is done when a package is installing drivers the testing computer does not have</li>
+                                        <li>This is NOT done just because a maintainer doesn't know how to make a program silent with Auto Hot Key.</li>
+                                        <li>Use "Save" below to make this change. You may want to uncheck Send Email.</li>
+                                    }
+                                </ul>
+                                @if (moderator)
+                                {
+                                    <div class="form-check my-3">
+                                        @Html.CheckBoxFor(m => m.IsExemptedFromVerification, new { @class = "form-check-input" })
+                                        <label class="form-check-label" for="IsExemptedFromVerification">Exempt the package from verification testing?</label>
+                                    </div>
+                                    <div class="d-label-none pb-2">
+                                        @Html.LabelFor(m => m.ExemptedFromVerificationReason)
+                                        @Html.TextAreaFor(m => m.ExemptedFromVerificationReason, new { @class = "text-editor form-control" })
+                                        @Html.ValidationMessageFor(m => m.ExemptedFromVerificationReason)
+                                    </div>
+                                }
+                                else
+                                {
+                                    var testInformation = @Model.IsExemptedFromVerification ? "skips automatic verification (testing)" : "follows normal workflow";
+                                    <p class="mt-2 mb-0 pb-2">This package @testInformation.</p>
+                                }
+                            </div>
+                        }
+                        <button class="btn btn-success d-block mt-2" type="submit" value="Save" title="Save Changes"><i class="fas fa-save" alt="Save"></i> Save</button>
+                    </fieldset>
+                }
+            </div>
+        </div>
+    }
+    @*  Description  *@
+    <div class="mb-4 pb-4">
+        <a class="h2 btn-collapse d-block mb-n5" data-bs-toggle="collapse" href="#description" role="button" aria-expanded="true" aria-controls="description" title="Nuspec reference: description">Description</a>
+        <div class="collapse show mb-n4" id="description">
+            <span class="pt-5 d-block"></span>
+            <hr />
+            @Html.Raw(Markdown.ToHtml(Model.Description.clean_html() ?? string.Empty, MarkdownPipeline))
+        </div>
+    </div>
+    @*  Files  *@
+    <div class="mb-4 pb-4">
+        <a class="h2 btn-collapse d-block mb-n5 @if (!expandForModeration && !moderator) {<text>collapsed</text>}" data-bs-toggle="collapse" href="#files" role="button" aria-expanded="@if (expandForModeration && moderator) {<text>true</text>} else {<text>false</text>}" aria-controls="files" title="Nuspec reference: files, optional - will default to all files next to nuspec">Files</a>
+        <div class="collapse mb-n4 @if (expandForModeration && moderator) {<text> show moderation-view</text>}" id="files">
+            <span class="pt-5 d-block"></span>
+            <hr />
+            @if (expandForModeration)
+            {
+                if (Model.Files.Any())
+                {
+                    var fileCount = Model.Files.Count();
+                    <button type="button" class="btn btn-collapse-files mb-2 @if(fileCount <= 9){<text>btn-danger</text>}else if(fileCount > 9 && fileCount < 30){<text>btn-success</text>}else{<text>d-none</text>}">
+                        @if (fileCount <= 9)
+                        {<text>Collapse</text>}
+                    else
+                    {<text>Expand</text>} All Files
+                    </button>
+                }
+                var packageFile = "file-path-" + @Model.Id.Replace(".", "-");
+                <div class="mb-1">
+                    <button type="button" class="btn btn-sm btn-secondary btn-show-hide me-2" data-bs-toggle="collapse" data-bs-target=".@packageFile" role="button" aria-expanded="true">Hide</button>
+                    @Model.Id<span>.nuspec</span>
+                    <div class="@packageFile collapse show">
+<pre class="line-numbers language-xml"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;!-- This is not exact, it's only based on what is stored about the package --&gt;
 &lt;!-- description and releaseNotes left out for brevity --&gt;
 &lt;package&gt;
@@ -1301,256 +1237,252 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
 }
 &lt;/metadata&gt;
 &lt;/package&gt;</code></pre>
+                    </div>
+                </div>
+            }
+            @if (Model.Files.Any())
+            {
+                var random = new Random();
+                var fileCount = Model.Files.Count();
+                foreach (var file in Model.Files)
+                {
+                    var packageFile = "file-path-" + Path.GetFileName(file.FilePath.ToLower()).Replace(".", "-").Replace(" ", string.Empty) + "-" + random.Next();
+                    var alwaysExpand = file.FilePath.ToLower().Contains("chocolateyinstall.ps1") || file.FilePath.ToLower().Contains("chocolateyuninstall.ps1") || file.FilePath.ToLower().Contains("chocolateybeforemodify.ps1") || file.FilePath.ToLower().Contains("verification.txt") || file.FilePath.ToLower().Contains("license.txt");
+                    var expandFile = expandForModeration && fileCount <= 9 || expandForModeration && alwaysExpand;
+                    <div class="mb-1">
+                        @if (!string.IsNullOrWhiteSpace(file.FileContent))
+                        {
+                            if (expandFile)
+                            {
+                                <button type="button" class="btn btn-sm btn-secondary btn-show-hide me-2" data-bs-toggle="collapse" data-bs-target=".@packageFile" role="button" aria-expanded="true">Hide</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-sm btn-secondary btn-show-hide me-2" data-bs-toggle="collapse" data-bs-target=".@packageFile" role="button" aria-expanded="false">Show</button>
+                            }
+                        }
+                        <span class="file-name">@file.FilePath</span>
+                        <div class="@packageFile collapse @if(expandFile){<text>show</text>}">
+                            @{ var langBrush = ""; }
+                            @switch (Path.GetExtension(file.FilePath))
+                            {
+                                case ".ps1":
+                                case ".psm1":
+                                    langBrush = "powershell";
+                                    break;
+                                case ".xml":
+                                case ".config":
+                                case ".nuspec":
+                                    langBrush = "xml";
+                                    break;
+                                case ".js":
+                                case ".json":
+                                    langBrush = "js";
+                                    break;
+                                case ".template":
+                                    langBrush = "none";
+                                    if (file.FilePath.EndsWith(".nuspec.template"))
+                                    {
+                                        langBrush = "xml";
+                                    }
+                                    break;
+                                default:
+                                    langBrush = "none";
+                                    break;
+                            }
+                            <pre class="@if(expandFile){<text>line-numbers</text>}else{<text>highlight-delay</text>}"><code class="@if(expandFile){<text>language-</text>@langBrush}">@file.FileContent</code></pre>
                         </div>
                     </div>
-                    }
-                    @if (Model.Files.Any())
+                }
+            }
+        </div>
+    </div>
+    @*  Virus Scan  *@
+    <div class="mb-4 pb-4">
+        <a class="h2 btn-collapse d-block mb-n5 @if (!expandForModeration && !moderator) {<text>collapsed</text>}" data-bs-toggle="collapse" href="#virus" role="button" aria-expanded="@if (expandForModeration && moderator) {<text>true</text>} else {<text>false</text>}" aria-controls="virus" title="Virus Scan Results">Virus Scan Results</a>
+        <div class="collapse mb-n4 @if (expandForModeration && moderator) {<text>show</text>}" id="virus">
+            <span class="pt-5 d-block"></span>
+            @if (Model.ScanResults.AnySafe())
+            {
+                <hr />
+                if (User != null && HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">Legend:</li>
+                        <li class="list-inline-item">
+                            <span class="badge rounded-pill bg-warning text-dark">1-5</span>
+                        </li>
+                        <li class="list-inline-item">
+                            <span class="badge rounded-pill bg-orange text-dark">6-10</span>
+                        </li>
+                        <li class="list-inline-item">
+                            <span class="badge rounded-pill bg-danger">11+</span>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <p class="fw-bold"><a href="@Url.LogOn()">Log in</a> or click on link to see number of positives.</p>
+                }
+                <ul class="list-unstyled">
+                    @foreach (var fileScan in Model.ScanResults.OrEmptyListIfNull())
                     {
-                        var random = new Random();
-                        var fileCount = Model.Files.Count();
-                        foreach (var file in Model.Files)
-                        {
-                            var packageFile = "file-path-" + Path.GetFileName(file.FilePath.ToLower()).Replace(".", "-").Replace(" ", string.Empty) + "-" + random.Next();
-                            var alwaysExpand = file.FilePath.ToLower().Contains("chocolateyinstall.ps1") || file.FilePath.ToLower().Contains("chocolateyuninstall.ps1") || file.FilePath.ToLower().Contains("chocolateybeforemodify.ps1") || file.FilePath.ToLower().Contains("verification.txt") || file.FilePath.ToLower().Contains("license.txt");
-                            var expandFile = expandForModeration && fileCount <= 9 || expandForModeration && alwaysExpand;
-                            <div class="mb-1">
-                                @if (!string.IsNullOrWhiteSpace(file.FileContent))
-                                {
-                                    if (expandFile)
-                                    {
-                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".@packageFile" role="button" aria-expanded="true">Hide</button>
-                                    }
-                                    else
-                                    {
-                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".@packageFile" role="button" aria-expanded="false">Show</button>
-                                    }
-                                }
-                                <span class="file-name">@file.FilePath</span>
-                                <div class="@packageFile collapse @if(expandFile){<text>show</text>}">
-                                    @{ var langBrush = ""; }
-                                    @switch (Path.GetExtension(file.FilePath))
-                                    {
-                                        case ".ps1":
-                                        case ".psm1":
-                                            langBrush = "powershell";
-                                            break;
-                                        case ".xml":
-                                        case ".config":
-                                        case ".nuspec":
-                                            langBrush = "xml";
-                                            break;
-                                        case ".js":
-                                        case ".json":
-                                            langBrush = "js";
-                                        break;
-                                        case ".template":
-                                            langBrush = "none";
-                                            if (file.FilePath.EndsWith(".nuspec.template"))
-                                            {
-                                                langBrush = "xml";
-                                            }
-                                            break;
-                                        default:
-                                            langBrush = "none";
-                                            break;
-                                    }
-                                    <pre class="@if(expandFile){<text>line-numbers</text>}"><code class="@if(expandFile){<text>language-</text>@langBrush}">@file.FileContent</code></pre>
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
-            @*  Virus Scan  *@
-            <div class="mb-4">
-                <a class="h2 @if (expandForModeration && moderator) {<text> collapse show</text>} else {<text>collapsed</text>}" data-toggle="collapse" href="#virus" role="button" aria-expanded="false" aria-controls="virus" title="Virus Scan Results">Virus Scan Results</a>
-                <div class="collapse @if (expandForModeration && moderator) {<text> show </text>}" id="virus">
-                    @if (Model.ScanResults.AnySafe())
-                    {
-                        <hr />
+                        var fileScanHighlight = string.Empty;
                         if (User != null && HttpContext.Current.User.Identity.IsAuthenticated)
                         {
-                            <ul class="list-unstyled list-inline">
-                                <li class="list-inline-item">Legend:</li>
-                                <li class="list-inline-item virus-scan virus-scan-light">
-                                    <span>1-5</span>
-                                </li>
-                                <li class="list-inline-item virus-scan virus-scan-medium">
-                                    <span>6-10</span>
-                                </li>
-                                <li class="list-inline-item virus-scan virus-scan-dark">
-                                    <span>11+</span>
-                                </li>
-                            </ul>
-                        }
-                        else
-                        {
-                            <p class="font-weight-bold"><a href="@Url.LogOn()">Log in</a> or click on link to see number of positives.</p>
-                        }
-                        <ul class="list-unstyled list-virus-scan">
-                            @foreach (var fileScan in Model.ScanResults.OrEmptyListIfNull())
+                            if (fileScan.Positives >= 1 && fileScan.Positives <= 5)
                             {
-                                var fileScanHighlight = string.Empty;
-                                if (User != null && HttpContext.Current.User.Identity.IsAuthenticated)
-                                {
-                                    if (fileScan.Positives >= 1 && fileScan.Positives <= 5)
-                                    {
-                                        fileScanHighlight = "virus-scan-light";
-                                    }
-                                    else if (fileScan.Positives >= 6 && fileScan.Positives <= 10)
-                                    {
-                                        fileScanHighlight = "virus-scan-medium";
-                                    }
-                                    else if (fileScan.Positives >= 11)
-                                    {
-                                        fileScanHighlight = "virus-scan-dark";
-                                    }
-                                }
-
-                                <li class="@fileScanHighlight">
-                                    <a title="full sha256: @fileScan.Sha256Checksum" href="@fileScan.ScanDetailsUrl">@fileScan.FileName (@fileScan.Sha256Checksum.Substring(0, 12))</a>
-                                    @if (User != null && HttpContext.Current.User.Identity.IsAuthenticated)
-                                    {
-                                        <text>-</text><span><span>@fileScan.Positives</span>/@fileScan.TotalScans</span>
-                                    }
-                                    else
-                                    {
-                                        <text>- ## / </text> @fileScan.TotalScans
-                                    }
-                                </li>
+                                fileScanHighlight = "bg-warning text-dark";
                             }
-                        </ul>
-                        <div class="callout callout-warning">
-                            <p>In cases where actual malware is found, the packages are subject to removal. Software sometimes has false positives. Moderators do not necessarily validate the safety of the underlying software, only that a package retrieves software from the official distribution point and/or validate embedded software against official distribution point (where distribution rights allow redistribution).</p>
-                            <p>Chocolatey Pro provides <a href="https://docs.chocolatey.org/en-us/features/virus-check">runtime protection</a> from possible malware.</p>
-                        </div>
+                            else if (fileScan.Positives >= 6 && fileScan.Positives <= 10)
+                            {
+                                fileScanHighlight = "bg-orange text-dark";
+                            }
+                            else if (fileScan.Positives >= 11)
+                            {
+                                fileScanHighlight = "bg-danger";
+                            }
+                        }
+                        <li class="d-flex align-items-center">
+                            <a title="full sha256: @fileScan.Sha256Checksum" href="@fileScan.ScanDetailsUrl">@fileScan.FileName (@fileScan.Sha256Checksum.Substring(0, 12))</a>
+                            @if (User != null && HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <text>-</text><span class="badge rounded-pill @fileScanHighlight"><span>@fileScan.Positives</span>/@fileScan.TotalScans</span>
+                            }
+                            else
+                            {
+                                <text>- ## / </text> @fileScan.TotalScans
+                            }
+                        </li>
                     }
-                    else
-                    {
-                        <div class="callout callout-warning mt-3">
-                            <p>No results available for this package. We are building up results for older packages over time so expect to see results. If this is a new package, it should have results within a day or two.</p>
-                        </div>
-                    }
+                </ul>
+                <div class="callout callout-warning">
+                    <p>In cases where actual malware is found, the packages are subject to removal. Software sometimes has false positives. Moderators do not necessarily validate the safety of the underlying software, only that a package retrieves software from the official distribution point and/or validate embedded software against official distribution point (where distribution rights allow redistribution).</p>
+                    <p>Chocolatey Pro provides <a href="https://docs.chocolatey.org/en-us/features/virus-check">runtime protection</a> from possible malware.</p>
                 </div>
-            </div>
-            @*  Version History  *@
-            <div class="mb-4">
-                <a class="h2 @if(expandForModeration && moderator){<text> collapse show</text>}else{<text>collapsed</text>}" data-toggle="collapse" href="#versionhistory" role="button" aria-expanded="false" aria-controls="versionhistory" title="Version History">Version History</a>
-                <div class="collapse @if(expandForModeration && moderator){<text> show</text>}" id="versionhistory">
-                    <div class="table-responsive-sm">
-                        <table class="table table-hover mt-3">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Version</th>
-                                    <th scope="col">Downloads</th>
-                                    <th scope="col">Last Updated</th>
-                                    @if (Model.IsOwner(User))
-                                    {
-                                        <th scope="col @(moderationRole ? "" : "last")">Listed</th>
-                                    }
-                                    <th scope="col" @(moderationRole ? "" : "last")>Status</th>
-                                    @if (moderationRole)
-                                    {
-                                        <th scope="col">Notes</th>
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var packageVersion in Model.PackageVersions.Take(packageVersions < packageVersionsDefaultDisplay ? packageVersions : packageVersionsDefaultDisplay))
-                                {
-                                    var packageVersionList = new ListPackageVersionViewModel(packageVersion, Model, moderationRole, displayVersion: true);
-                                    @Html.Partial("_ListVersion", packageVersionList)
-                                }
-                                @if (packageVersions > packageVersionsDefaultDisplay)
-                                {
-                                    foreach (var packageVersion in Model.PackageVersions.Skip(packageVersionsDefaultDisplay))
-                                    {
-                                        var packageVersionList = new ListPackageVersionViewModel(packageVersion, Model, moderationRole, displayVersion: false);
-                                        @Html.Partial("_ListVersion", packageVersionList)
-                                    }
-                                }
-                            </tbody>
-                        </table>
+            }
+            else
+            {
+                <div class="callout callout-warning mt-3">
+                    <p>No results available for this package. We are building up results for older packages over time so expect to see results. If this is a new package, it should have results within a day or two.</p>
+                </div>
+            }
+        </div>
+    </div>
+    @*  Version History  *@
+    <div class="mb-4 pb-4">
+        <a class="h2 btn-collapse d-block mb-n5 @if (!expandForModeration && !moderator) {<text>collapsed</text>}" data-bs-toggle="collapse" href="#versionhistory" role="button" aria-expanded="@if (expandForModeration && moderator) {<text>true</text>} else {<text>false</text>}" aria-controls="versionhistory" title="Version History">Version History</a>
+        <div class="collapse mb-n4 @if(expandForModeration && moderator){<text>show</text>}" id="versionhistory">
+            <span class="pt-5 d-block"></span>
+            <div class="table-responsive-sm">
+                <table class="table table-bordered table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Version</th>
+                            <th scope="col">Downloads</th>
+                            <th scope="col">Last Updated</th>
+                            @if (Model.IsOwner(User))
+                            {
+                                <th scope="col @(moderationRole ? "" : "last")">Listed</th>
+                            }
+                            <th scope="col" @(moderationRole ? "" : "last")>Status</th>
+                            @if (moderationRole)
+                            {
+                                <th scope="col">Notes</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var packageVersion in Model.PackageVersions.Take(packageVersions < packageVersionsDefaultDisplay ? packageVersions : packageVersionsDefaultDisplay))
+                        {
+                            var packageVersionList = new ListPackageVersionViewModel(packageVersion, Model, moderationRole, displayVersion: true);
+                            @Html.Partial("_ListVersion", packageVersionList)
+                        }
                         @if (packageVersions > packageVersionsDefaultDisplay)
                         {
-                            <button type="button" class="btn btn-sm btn-secondary" onclick="if($(this).is(':contains(&quot;Hide&quot;)')){$('.versionTableRowMore').hide();}else{$('.versionTableRowMore').show();}">Show Additional Versions</button>
+                            foreach (var packageVersion in Model.PackageVersions.Skip(packageVersionsDefaultDisplay))
+                            {
+                                var packageVersionList = new ListPackageVersionViewModel(packageVersion, Model, moderationRole, displayVersion: false);
+                                @Html.Partial("_ListVersion", packageVersionList)
+                            }
                         }
-                    </div>
-                </div>
-            </div>
-            @*  Copyright  *@
-            @if (!String.IsNullOrEmpty(Model.Copyright))
-            {
-                <div class="mb-4">
-                    <a class="h2 collapsed" data-toggle="collapse" href="#copyright" role="button" aria-expanded="false" aria-controls="copyright" title="Nuspec reference: copyright">Copyright</a>
-                    <div class="collapse" id="copyright">
-                        <hr />
-                        <p class="mb-0">@Model.Copyright</p>
-                    </div>
-                </div>
-            }
-            @*  Release Notes  *@
-            @if (!String.IsNullOrWhiteSpace(Model.ReleaseNotes))
-            {
-                <div class="mb-4">
-                    <a class="h2 collapsed" data-toggle="collapse" href="#releasenotes" role="button" aria-expanded="false" aria-controls="releasenotes" title="Nuspec reference: releaseNotes">Release Notes</a>
-                    <div class="collapse" id="releasenotes">
-                        <hr />
-                        @Html.Raw(Markdown.ToHtml(Model.ReleaseNotes.clean_html() ?? string.Empty, MarkdownPipeline))
-                    </div>
-                </div>
-            }
-            @*  Dependencies  *@
-            <div class="mb-4">
-                <a class="h2 @if(expandForModeration && moderator){<text> collapse show</text>}else{<text>collapsed</text>}" data-toggle="collapse" href="#dependencies" role="button" aria-expanded="false" aria-controls="dependencies" title="Nuspec reference: dependencies">Dependencies</a>
-                <div class="collapse @if(expandForModeration && moderator){<text> show</text>}" id="dependencies">
-                    <hr />
-                    @Html.Partial("_PackageDependencies", Model.Dependencies)
-                </div>
-            </div>
-            @*  Discussion  *@
-            <div>
-                <a class="h2 collapse show" data-toggle="collapse" href="#discussion" role="button" aria-expanded="true" aria-controls="discussion" title=">Discussion for the @Model.Title Package">Discussion for the @Model.Title Package</a>
-                <div class="collapse show" id="discussion">
-                    <hr />
-                    <h3>Ground Rules:</h3>
-                    <ul>
-                        <li>This discussion is only about @Model.Title and the @Model.Title package. If you have feedback for Chocolatey, please contact the <a href="http://groups.google.com/group/chocolatey">Google Group</a>.</li>
-                        <li>This discussion will carry over multiple versions. If you have a comment about a particular version, please note that in your comments.</li>
-                        <li>
-                            The maintainers of this Chocolatey Package will be notified about new comments that are posted to this Disqus thread, however, it is NOT a guarantee that you
-                            will get a response. If you do not hear back from the maintainers after posting a message below, please follow up by using the link
-                            on the left side of this page or follow this link to <a href="@Url.Action(MVC.Packages.ContactOwners(Model.Id))">contact maintainers</a>.
-                            If you still hear nothing back, please follow the <a href="https://docs.chocolatey.org/en-us/community-repository/users/package-triage-process">package triage process</a>.
-                        </li>
-                        <li>Tell us what you love about the package or @Model.Title, or tell us what needs improvement.</li>
-                        <li>Share your experiences with the package, or extra configuration or gotchas that you've found.</li>
-                        <li>If you use a url, the comment will be flagged for moderation until you've been whitelisted. Disqus moderated comments are approved on a weekly schedule if not sooner. It could take between 1-5 days for your comment to show up.</li>
-                    </ul>
-                    @{
-                        var disqusUrl = "http://" + Request.Url.Host + @Url.Package(Model.Id);
-                        var disqusShortname = System.Configuration.ConfigurationManager.AppSettings["DisqusShortname"];
-                        bool forceSsl = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["ForceSSL"]);
-                        var commentPostUrl = (forceSsl ? "https" : Request.Url.Scheme) + "://" + Request.Url.Authority + @Url.Package(Model.Id) + "/notify-comment";
-                    }
-                    <a name="disqus"></a>
-                    <div id="disqus_thread"></div>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    </tbody>
+                </table>
+                @if (packageVersions > packageVersionsDefaultDisplay)
+                {
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="if($(this).is(':contains(&quot;Hide&quot;)')){$('.versionTableRowMore').hide();}else{$('.versionTableRowMore').show();}">Show Additional Versions</button>
+                }
             </div>
         </div>
     </div>
+    @*  Copyright  *@
+    @if (!String.IsNullOrEmpty(Model.Copyright))
+    {
+        <div class="mb-4 pb-4">
+            <a class="h2 btn-collapse mb-n5 d-block collapsed" data-bs-toggle="collapse" href="#copyright" role="button" aria-expanded="false" aria-controls="copyright" title="Nuspec reference: copyright">Copyright</a>
+            <div class="collapse mb-n4" id="copyright">
+                <span class="pt-5 d-block"></span>
+                <hr />
+                <p class="mb-0">@Model.Copyright</p>
+            </div>
+        </div>
+    }
+    @*  Release Notes  *@
+    @if (!String.IsNullOrWhiteSpace(Model.ReleaseNotes))
+    {
+        <div class="mb-4 pb-4">
+            <a class="h2 btn-collapse d-block mb-n5 collapsed" data-bs-toggle="collapse" href="#releasenotes" role="button" aria-expanded="false" aria-controls="releasenotes" title="Nuspec reference: releaseNotes">Release Notes</a>
+            <div class="collapse mb-n4" id="releasenotes">
+                <span class="pt-5 d-block"></span>
+                <hr />
+                @Html.Raw(Markdown.ToHtml(Model.ReleaseNotes.clean_html() ?? string.Empty, MarkdownPipeline))
+            </div>
+        </div>
+    }
+    <div class="mb-4 pb-4">
+        <a class="h2 btn-collapse d-block mb-n5 @if (!expandForModeration && !moderator) {<text>collapsed</text>}" data-bs-toggle="collapse" href="#dependencies" role="button" aria-expanded="@if (expandForModeration && moderator) {<text>true</text>} else {<text>false</text>}" aria-controls="dependencies" title="Nuspec reference: dependencies">Dependencies</a>
+        <div class="collapse mb-n4 @if(expandForModeration && moderator){<text>show</text>}" id="dependencies">
+            <span class="pt-5 d-block"></span>
+            <hr />
+            @Html.Partial("_PackageDependencies", Model.Dependencies)
+        </div>
+    </div>
+    @*  Discussion  *@
+    <div class="mb-4 pb-4">
+        <a class="h2 btn-collapse d-block mb-n5" data-bs-toggle="collapse" href="#discussion" role="button" aria-expanded="true" aria-controls="discussion" title=">Discussion for the @Model.Title Package">Discussion for the @Model.Title Package</a>
+        <div class="collapse show" id="discussion">
+            <span class="pt-5 d-block"></span>
+            <hr />
+            <h3>Ground Rules:</h3>
+            <ul>
+                <li>This discussion is only about @Model.Title and the @Model.Title package. If you have feedback for Chocolatey, please contact the <a href="http://groups.google.com/group/chocolatey">Google Group</a>.</li>
+                <li>This discussion will carry over multiple versions. If you have a comment about a particular version, please note that in your comments.</li>
+                <li>
+                    The maintainers of this Chocolatey Package will be notified about new comments that are posted to this Disqus thread, however, it is NOT a guarantee that you
+                    will get a response. If you do not hear back from the maintainers after posting a message below, please follow up by using the link
+                    on the left side of this page or follow this link to <a href="@Url.Action(MVC.Packages.ContactOwners(Model.Id))">contact maintainers</a>.
+                    If you still hear nothing back, please follow the <a href="https://docs.chocolatey.org/en-us/community-repository/users/package-triage-process">package triage process</a>.
+                </li>
+                <li>Tell us what you love about the package or @Model.Title, or tell us what needs improvement.</li>
+                <li>Share your experiences with the package, or extra configuration or gotchas that you've found.</li>
+                <li>If you use a url, the comment will be flagged for moderation until you've been whitelisted. Disqus moderated comments are approved on a weekly schedule if not sooner. It could take between 1-5 days for your comment to show up.</li>
+            </ul>
+            @{
+                var disqusUrl = "http://" + Request.Url.Host + @Url.Package(Model.Id);
+                var disqusShortname = System.Configuration.ConfigurationManager.AppSettings["DisqusShortname"];
+                bool forceSsl = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["ForceSSL"]);
+                var commentPostUrl = (forceSsl ? "https" : Request.Url.Scheme) + "://" + Request.Url.Authority + @Url.Package(Model.Id) + "/notify-comment";
+            }
+            <a name="disqus"></a>
+            <div id="disqus_thread"></div>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+    </div>
+</div>
+</div>
 </section>
 
 @section BottomScripts {
-    <script type="text/javascript" language="javascript">
-        $(function () {
-            Closeable.modal("chocolatey_hide_packages_disclaimer");
-            if (!getCookie('chocolatey_hide_packages_disclaimer')) {
-                $(".modal-closeable").css('display', 'block');
-            }
-        });
-    </script>
     <script language="javascript" type="text/javascript">
         ((window.gitter = {}).chat = {}).options = {
             room: 'chocolatey/chocolatey.org'
@@ -1577,6 +1509,7 @@ salt '*' chocolatey.install @Model.Id.ToLower() version="@Model.Version" source=
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
+
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 }

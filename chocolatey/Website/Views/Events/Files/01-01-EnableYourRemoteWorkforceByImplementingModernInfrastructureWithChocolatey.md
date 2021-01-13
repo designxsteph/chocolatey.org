@@ -7,7 +7,7 @@ Duration: 1 hour
 Title: Enable Your Remote Workforce by Implementing Modern Infrastructure with Chocolatey
 Tagline: Empower Your Remote Users While Maintaining Security Policies
 Speakers: Rob Reynolds, Paul Broadwith
-Image: <img class="lazy img-fluid" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/content/images/events/01-01.jpg" alt="Enable Your Remote Workforce by Implementing Modern Infrastructure with Chocolatey" title="Enable Your Remote Workforce by Implementing Modern Infrastructure with Chocolatey" />
+Image: <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/content/images/events/01-01.jpg" alt="Enable Your Remote Workforce by Implementing Modern Infrastructure with Chocolatey" title="Enable Your Remote Workforce by Implementing Modern Infrastructure with Chocolatey" />
 RegisterLink: https://chocolatey.zoom.us/webinar/register/WN_1U91f_LiR8uLiQXJtVwlKg
 Tags: 2020, c4b, chocolatey-for-business, self-service remote, remote-work, quick-deployment, qde
 Summary: Deploying software to remote desktop and endpoint devices is not always easy, especially in highly regulated and locked down environments. This can be even more challenging if your IT team is overworked, and you need to ensure your users are productive with no vulnerabilities.

@@ -9,8 +9,8 @@
     {
         ViewBag.Title = Model.Type + "- " + Model.Title;
     }
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
 @section ExtraHeaders {
@@ -53,9 +53,7 @@
     <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
 }
 
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_ResourceSubNavigation.cshtml")
-</section>
+@Html.Partial("~/Views/Shared/_ResourceSubNavigation.cshtml")
 <section class="py-3 py-lg-5">
     <div class="container">
         @if (Model.Type.Contains("Customer Success Story"))
@@ -66,71 +64,54 @@
         {
             <h1>@Model.Title</h1>
         }
-        <hr />
-        <div class="d-sm-flex justify-content-between align-items-center pb-3 pb-lg-5">
-            <p class="text-muted mb-2 mb-md-0 d-none">With @Model.Name at @Model.Company | @Model.Published.GetValueOrDefault().ToLongDateString()</p>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "home"})">Resources</a></li>
-                    @if (Model.Type.Contains("Customer Success Story"))
-                    {
-                        <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">Customer Success Stories</a></li>
-                    }
-                    else if (Model.Type.Contains("Video"))
-                    {
-                        <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">Videos</a></li>
-                    }
-                    else if (Model.Type.Contains("Case Study"))
-                    {
-                        <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">Case Studies</a></li>
-                    }
-                    else if (Model.Type.Contains("Feature") && Model.Tags.Contains("c4b-feature"))
-                    {
-                        <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "features"})#c4b">C4B Features</a></li>
-                    }
-                    else if (Model.Type.Contains("Feature") && Model.Tags.Contains("open-source-feature"))
-                    {
-                        <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "features"})#open-source">Open Source Features</a></li>
-                    }
-                    else if (Model.Type.Contains("Feature") && Model.Tags.Contains("12-days-of-chocolatey"))
-                    {
-                        <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "12-days-of-chocolatey"})">12 Days of Chocolatey</a></li>
-                    }
-                    @if (Model.Type.Contains("Customer Success Story"))
-                    {
-                        <li class="breadcrumb-item active" aria-current="page">@Model.Name at @Model.Company</li>
-                    }
-                    else
-                    {
-                        <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
-                    }
-                </ol>
-            </nav>
-            <hr class="d-sm-none" />
-            <ul class="list-unstyled mb-0 d-flex justify-content-center">
-                <li class="mr-2" style="margin-top: -1px;">
-                    <div class="fb-share-button" data-href="https://chocolatey.org/@Request.RawUrl" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fchocolatey.org%2F@Request.RawUrl&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size="large">Tweet</a>
-                </li>
-                <li class="list-inline-item">
-                    <script type="IN/Share" data-url="https://chocolatey.org/@Request.RawUrl">
-                    </script>
-                </li>
-            </ul>
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "home"})">Resources</a></li>
+                @if (Model.Type.Contains("Customer Success Story"))
+                {
+                    <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">Customer Success Stories</a></li>
+                }
+                else if (Model.Type.Contains("Video"))
+                {
+                    <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">Videos</a></li>
+                }
+                else if (Model.Type.Contains("Case Study"))
+                {
+                    <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">Case Studies</a></li>
+                }
+                else if (Model.Type.Contains("Feature") && Model.Tags.Contains("c4b-feature"))
+                {
+                    <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "features"})#c4b">C4B Features</a></li>
+                }
+                else if (Model.Type.Contains("Feature") && Model.Tags.Contains("open-source-feature"))
+                {
+                    <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "features"})#open-source">Open Source Features</a></li>
+                }
+                else if (Model.Type.Contains("Feature") && Model.Tags.Contains("12-days-of-chocolatey"))
+                {
+                    <li class="breadcrumb-item"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "12-days-of-chocolatey"})">12 Days of Chocolatey</a></li>
+                }
+                @if (Model.Type.Contains("Customer Success Story"))
+                {
+                    <li class="breadcrumb-item active" aria-current="page">@Model.Name at @Model.Company</li>
+                }
+                else
+                {
+                    <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+                }
+            </ol>
+        </nav>
         <div class="row">
             <div class="col-12 mx-auto">
                 @if (!String.IsNullOrEmpty(Model.Video))
                 {
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@Model.Video" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/@Model.Video" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 }
                 else if (!String.IsNullOrEmpty(Model.InternalVideo))
                 {
-                    <video class="embed-responsive embed-responsive-16by9" controls>
+                    <video class="ratio ratio-16x9" controls>
                         <source src="@Url.Content("~/content/images/" + Model.InternalVideo)" type="video/mp4">
                     </video>
                 }

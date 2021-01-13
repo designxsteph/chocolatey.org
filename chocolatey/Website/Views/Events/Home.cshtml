@@ -2,9 +2,9 @@
 @using System.Linq
 @{
     ViewBag.Title = "Events";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/jquery-countdown");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
+    Bundles.Reference("Scripts/events");
 
     var description = "Find past and upcoming webinars, workshops, and conferences by Chocolatey.";
 }
@@ -13,14 +13,14 @@
     <meta property="description" content="@description" />
 }
 
-<div id="header" class="bg-medium-dark">
+<div class="bg-theme-primary">
     <section class="py-3 py-lg-5">
         <div class="container py-3 text-center">
             <h1 class="display-3">Chocolatey Events</h1>
             <h3 class="mb-0">Find past and upcoming webinars, workshops, and conferences.</h3>
         </div>
     </section>
-    <div class="shape-border shape-border-bottom"></div>
+    <div class="curve curve-bottom curve-bg-theme"></div>
 </div>
 <section id="events" class="pb-3 pb-lg-5">
     <div class="container">
@@ -35,16 +35,16 @@
                     switch (post.Type)
                     {
                         case "workshop":
-                            badgeClass = "badge-purple";
+                            badgeClass = "bg-purple";
                             break;
                         case "conference":
-                            badgeClass = "badge-warning";
+                            badgeClass = "bg-warning text-dark";
                             break;
                         case "webinar":
-                            badgeClass = "badge-success";
+                            badgeClass = "bg-success";
                             break;
                         default:
-                            badgeClass = "badge-secondary";
+                            badgeClass = "bg-secondary";
                             break;
                     }
                     <li>
@@ -56,14 +56,14 @@
                                 <div class="d-flex justify-content-between align-items-md-center mb-3">
                                     @if (!String.IsNullOrEmpty(post.EventDateRange))
                                     {
-                                        <p class="mb-0"><i class="fas fa-calendar text-secondary mr-1"></i>@post.EventDateRange<br /><i class="fas fa-clock text-secondary mr-1"></i>Daily from @post.Time</p>
+                                        <p class="mb-0"><i class="fas fa-calendar text-secondary me-1"></i>@post.EventDateRange<br /><i class="fas fa-clock text-secondary me-1"></i>Daily from @post.Time</p>
                                     }
                                     else
                                     {
-                                        <p class="mb-0"><i class="fas fa-calendar text-secondary mr-1"></i>@post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")<br class="d-md-none" /><i class="fas fa-clock text-secondary ml-md-3 mr-1"></i>@post.Time</p>
+                                        <p class="mb-0"><i class="fas fa-calendar text-secondary me-1"></i>@post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")<br class="d-md-none" /><i class="fas fa-clock text-secondary ms-md-3 me-1"></i>@post.Time</p>
                                     }
                                     <div>
-                                        <span class="badge badge-pill text-right text-capitalize @badgeClass">@post.Type</span>
+                                        <span class="badge rounded-pill text-end text-capitalize @badgeClass">@post.Type</span>
                                     </div>
                                 </div>
                                 <h4>@post.Title</h4>
@@ -78,14 +78,14 @@
                                 @if (post.Speakers != null)
                                 {
                                     <ul class="list-unstyled list-inline list-speaker mt-3">
-                                        <li class="list-inline-item mr-0"><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: </li>
+                                        <li class="list-inline-item me-0"><i class="fas fa-microphone text-secondary me-1"></i>Speakers: </li>
                                         @foreach (var speaker in post.Speakers)
                                         {
-                                            <li class="list-inline-item mr-0">@speaker</li>
+                                            <li class="list-inline-item me-0">@speaker</li>
                                         }
                                     </ul>
                                 }
-                                <div class="mt-3 text-center text-md-right">
+                                <div class="mt-3 text-center text-md-end">
                                     @if (post.IncludeRegisterPage == "true")
                                     {
                                         <a href="@Url.RouteUrl(RouteName.Events, new { eventName = post.UrlPath })" class="btn btn-outline-primary">Learn More</a>
@@ -113,16 +113,16 @@
                     switch (post.Type)
                     {
                         case "workshop":
-                            badgeClass = "badge-purple";
+                            badgeClass = "bg-purple";
                             break;
                         case "conference":
-                            badgeClass = "badge-warning";
+                            badgeClass = "bg-warning text-dark";
                             break;
                         case "webinar":
-                            badgeClass = "badge-success";
+                            badgeClass = "bg-success";
                             break;
                         default:
-                            badgeClass = "badge-secondary";
+                            badgeClass = "bg-secondary";
                             break;
                     }
                     <li>
@@ -134,14 +134,14 @@
                                 <div class="d-flex justify-content-between align-items-md-center mb-3">
                                     @if (!String.IsNullOrEmpty(post.EventDateRange))
                                     {
-                                        <p class="mb-0"><i class="fas fa-calendar text-secondary mr-1"></i>Past event from @post.EventDateRange</p>
+                                        <p class="mb-0"><i class="fas fa-calendar text-secondary me-1"></i>Past event from @post.EventDateRange</p>
                                     }
                                     else
                                     {
-                                        <p class="mb-0"><i class="fas fa-calendar text-secondary mr-1"></i>Past event from @post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")</p>
+                                        <p class="mb-0"><i class="fas fa-calendar text-secondary me-1"></i>Past event from @post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")</p>
                                     }
                                     <div>
-                                        <span class="badge badge-pill text-right text-capitalize @badgeClass">@post.Type</span>
+                                        <span class="badge rounded-pill text-end text-capitalize @badgeClass">@post.Type</span>
                                     </div>
                                 </div>
                                 <h4>@post.Title</h4>
@@ -156,14 +156,14 @@
                                 @if (post.Speakers != null)
                                 {
                                     <ul class="list-unstyled list-inline list-speaker mt-3">
-                                        <li class="list-inline-item mr-0"><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: </li>
+                                        <li class="list-inline-item me-0"><i class="fas fa-microphone text-secondary me-1"></i>Speakers: </li>
                                         @foreach (var speaker in post.Speakers)
                                         {
-                                            <li class="list-inline-item mr-0">@speaker</li>
+                                            <li class="list-inline-item me-0">@speaker</li>
                                         }
                                     </ul>
                                 }
-                                <div class="mt-3 text-center text-md-right">
+                                <div class="mt-3 text-center text-md-end">
                                     @if (post.IsOnDemand == "true")
                                     {
                                         if (post.IncludeRegisterPage == "true")
@@ -177,7 +177,7 @@
                                     }
                                     else
                                     {
-                                        <p class="font-weight-bold">Replay Coming Soon!</p>
+                                        <p class="fw-bold">Replay Coming Soon!</p>
                                     }
                                 </div>
                             </div>

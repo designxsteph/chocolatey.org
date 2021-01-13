@@ -98,7 +98,6 @@ namespace NuGetGallery
         public const string CuratedPackages = "CuratedPackages";
         public const string CuratedPackage = "CuratedPackage";
         public const string SearchResults = "search";
-        public const string Styleguide = "Styleguide";
         public const string Business = "Business";
         public const string Solutions = "Solutions";
         public const string SelfService = "SelfService";

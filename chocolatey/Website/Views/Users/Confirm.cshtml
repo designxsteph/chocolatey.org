@@ -1,9 +1,8 @@
 ﻿@model EmailConfirmationModel
 @{
     Layout = "~/Views/Shared/MinimalLayout.cshtml";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
     Bundles.Reference("Scripts/validation");
 }
 
@@ -34,6 +33,6 @@
 else
 {
     <h3 class="text-center">Confirmation Error</h3>
-    <p class="text-danger font-weight-bold">Could not confirm your email address. Make sure you clicked on the confirmation URL in the email we sent.</p>
+    <p class="text-danger fw-bold">Could not confirm your email address. Make sure you clicked on the confirmation URL in the email we sent.</p>
     <p>If you see this screen and you are logged in, you can likely safely ignore it.</p>
 }

@@ -1,17 +1,277 @@
 ﻿@{
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "Support";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
 <div class="container-fluid">
     <div class="row">
+        <div class="col-md-3 col-xl-2 p-0 bg-theme-light">
+            <div id="leftSidebarNav" class="sticky-md-top collapse-y-height">
+                <nav class="navbar navbar-expand-md p-0">
+                    <div id="leftSidebar" class="collapse navbar-collapse">
+                        <ul class="navbar-nav nav-scrollspy">
+                            <li class="nav-item"><a class="nav-link" href="#package">Package Support</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#foss">Open Source Support</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#support-schedule">Compare Support Schedules</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#office-closures">Company Office Closures</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#professional">Chocolatey Pro Support</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#msp">MSP Support (for existing MSP edition customers only)</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#business">Business Support</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#support-terms">Business Support - Terms</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#business-legal">Business - Legal</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="col-md-9 col-xl-10 py-3 py-md-5 mx-auto">
+            <div class="row">
+                <div id="mainContent" class="col-xl-10 ps-md-5 order-2 order-xl-1">
+                    <div id="package">
+                        <h1 class="mb-4">Support for a Package</h1>
+                        <p class="mb-0">We do not have support for packages found on Chocolatey.org - those are considered community packages and should not be used for commercial purposes. Package issues should follow the package triage process. <a href="https://docs.chocolatey.org/en-us/community-repository/community-packages-disclaimer">Read more...</a></p>
+                    </div>
+                    <div class="pt-3 pt-lg-5" id="foss">
+                        <h1 class="mb-4">Open Source</h1>
+                        <div class="callout callout-warning mt-3">
+                            <p>
+                                For open source users, please remember the <a href="https://github.com/chocolatey/choco/blob/master/README.md#etiquette-regarding-communication">etiquette guidelines</a> when requesting support.
+                                If we've broken something and have acknowledged that we will fix it immediately, that is one thing.
+                                However "urgent" situations only apply to commercial editions (that include support).
+                                If you find yourself in an "urgent" situation, it may be time to look at <a href="@Url.RouteUrl(RouteName.Compare)">our commercial options</a>.
+                            </p>
+                        </div>
+                        <p>Unfortunately we are unable to provide private support for open source users. However there are a lot of avenues that open source users can work within the community to get the help they need.</p>
+                        <p>If you are an open-source user, you have the following channels for support:</p>
+                        <ul>
+                            <li><a href="https://docs.chocolatey.org/en-us/">Documentation</a></li>
+                            <li><a href="@Url.RouteUrl(RouteName.ReportIssue)">Found an issue?</a></li>
+                            <li><a href="https://groups.google.com/group/chocolatey">Mailing List</a></li>
+                            <li><a href="https://twitter.com/chocolateynuget">Twitter</a></li>
+                            <li><a href="https://gitter.im/chocolatey/choco">Gitter</a></li>
+                        </ul>
+                        <div class="callout callout-secondary">
+                            <p>Commercial customers (Pro, MSP, Business, Architect) are welcome to use these forms of support as well, but you have an additional, private line directly back to Chocolatey Software for support that has a much higher priority over open source support routes.</p>
+                        </div>
+                    </div>
+                    <div class="pt-3 pt-lg-5" id="support-schedule">
+                        <a id="faq-support-schedule"></a>
+                        <h1 class="mb-4">Compare Support Schedules</h1>
+                        <div class="table-responsive-sm">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="h4" scope="col"></th>
+                                        <th class="h4" scope="col">Pro/MSP</th>
+                                        <th class="h4" scope="col" colspan="3">Business Edition (C4B)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td></td>
+                                        <td class="h4">Standard Plan</td>
+                                        <td class="h4">Standard + Plan</td>
+                                        <td class="h4">Premium Plan</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Licenses</th>
+                                        <td>n/a</td>
+                                        <td>Under 300 Licenses</td>
+                                        <td>300 +</td>
+                                        <td>1,500+ or minimum $30,000 purchase if multi-year required to purchase premium support</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Included Automatically?</th>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td>Premium is available for an additional cost</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Support Hours</th>
+                                        <td>Monday &ndash; Friday 8AM &ndash; 5PM <a href="http://everytimezone.com/" title="See Chicago">Central Std Time</a>*</td>
+                                        <td>Monday &ndash; Friday 8AM &ndash; 5PM <a href="http://everytimezone.com/" title="See Chicago">Central Std Time</a>*</td>
+                                        <td>Monday &ndash; Friday 7AM &ndash; 6PM <a href="http://everytimezone.com/" title="See Chicago">Central Std Time</a>*</td>
+                                        <td>24 /7*</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Response Times<br />(P = Priority level, as defined in <a href="#support-terms">support terms</a> below)</th>
+                                        <td>
+                                            <strong>Pro:</strong> 2 Business Days
+                                            <hr />
+                                            <strong>MSP:</strong>
+                                            <ul class="mb-0 text-start">
+                                                <li>P1: 6 Business Hours</li>
+                                                <li>P2: 10 Business Hours</li>
+                                                <li>P3: 2 Business Days</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="mb-0 text-start">
+                                                <li>P1: 4 Business Hours</li>
+                                                <li>P2: 8 Business Hours</li>
+                                                <li>P3: 12 Business Hours</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="mb-0 text-start">
+                                                <li>P1: 3 Business Hours</li>
+                                                <li>P2: 6 Business Hours</li>
+                                                <li>P3: 12 Business Hours</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="mb-0 text-start">
+                                                <li>P1: 2 Hours</li>
+                                                <li>P2: 4 Hours</li>
+                                                <li>P3: 6 Hours</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Phone Support</th>
+                                        <td>n/a</td>
+                                        <td>n/a</td>
+                                        <td>n/a</td>
+                                        <td>Available Add On</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Online Support</th>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Number of Cases</th>
+                                        <td>8 per Year</td>
+                                        <td>4 per Month</td>
+                                        <td>8 per Month</td>
+                                        <td>20 per Month</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Status Meetings</th>
+                                        <td>n/a</td>
+                                        <td>n/a</td>
+                                        <td>Every 2 Months by Customer Request</td>
+                                        <td>Bi-weekly by Customer Request</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Number of Technical Contacts</th>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>2 (Negotiable)</td>
+                                        <td>6 (Negotiable)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Access to All Updates & Upgrades</th>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                        <td><span class="fas fa-check text-success"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Support System</th>
+                                        <td>Email Addresses Provided in Licensing Email</td>
+                                        <td>Email Addresses Provided in Licensing Email</td>
+                                        <td>Email Addresses Provided in Licensing Email</td>
+                                        <td>Email Addresses Provided in Licensing Email</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="mb-0"><small><strong>* Notice: </strong>Company <a href="#office-closures">holidays</a> are observed and local offices are closed. During closures, C4B Premium Plan customers have the following support response times - within 3, 6, and 12 hours, respectively based on priority.</small></p>
+                    </div>
+                    <div class="pt-3 pt-lg-5" id="office-closures">
+                        <h1 class="mb-4">Company Office Closures</h1>
+                        <p class="mb-0">Chocolatey Software observes United States Bank holidays. As dates are not always the same every year, the following list should help you calculate our closures. If you need exact dates and are a customer, please note our support team will only be able to provide the current year.</p>
+                        <ul class="pt-3">
+                            <li>January 1<strong>*</strong> - New Years Day</li>
+                            <li>3rd Monday in January - Martin Luther King Day</li>
+                            <li>3rd Monday in February - Presidents Day</li>
+                            <li>Last Monday in May - Memorial Day</li>
+                            <li>July 4<strong>*</strong> - Independence Day</li>
+                            <li>First Monday in September - Labor Day</li>
+                            <li>Second Monday in October - Columbus Day</li>
+                            <li>November 11<strong>*</strong> - Veterans Day</li>
+                            <li>Fourth Thursday in November & the Friday following - Thanksgiving Holiday</li>
+                            <li>December 24<strong>*</strong> - first weekday after January 1 holiday - Christmas Holiday</li>
+                        </ul>
+                        <p class="mb-0"><small><strong>* Notice: </strong>If day falls on a weekend, it is observed either the Friday before (Saturday) or Monday (Sunday or another holiday already observed on the Friday).</small></p>
+                        <p class="mb-0"><small><strong>Notice: </strong>Chocolatey Software reserves the right to close the offices on other days, with or without notice. Chocolatey will make attempts to provide notice, but is not able to guarantee you will receive the notice.</small></p>
+                    </div>
+                    <div class="pt-3 pt-lg-5" id="professional">
+                        <h1 class="mb-4">Chocolatey Professional</h1>
+                        <p class="mb-0">Chocolatey Pro is a personal license for individuals. We are happy to extend support to help out our community users. <a href="#support-schedule">Above is a support schedule for our Pro users.</a></p>
+                    </div>
+                    <div class="pt-3 pt-lg-5" id="msp">
+                        <h1 class="mb-4">Chocolatey for Managed Service Providers (MSP)</h1>
+                        <p class="mb-0"><strong>NOTE:</strong> MSP edition is no longer offered - support information is for reference for existing MSP customers.</p>
+                        <p class="mb-0">Chocolatey MSP edition is similar to features found in Pro, but offered for managed service providers at a much more competitive cost than Chocolatey for Business (and less features than C4B). MSP edition also has a slightly reduced support matrix as part of that competitive pricing. <a href="#support-schedule">Above is a support schedule for our MSP users.</a></p>
+                    </div>
+                    <div class="pt-3 pt-lg-5" id="business">
+                        <h1 class="mb-4">Chocolatey for Business (C4B)</h1>
+                        <p>The business edition has 3 levels of support - Standard, Standard+, and Premium. Standard and Standard+ are based on the number of licenses you purchase. Premium is an additional cost, but also requires a minimum number of licenses (details are listed in schedule above).</p>
+                        <p>You can also log issues at <a href="https://github.com/chocolatey/chocolatey-licensed-issues">Licensed Issues</a> and we will route the requests to the proper repositories.</p>
+                    </div>
+                    <div class="pt-3 pt-lg-5" id="support-terms">
+                        <h1 class="mb-4">Chocolatey for Business - Support Terms</h1>
+                        <p>Chocolatey Software, Inc. &ndash; Chocolatey for Business Support and Maintenance Services Terms</p>
+                        <p>These Support Services Terms describe the Support Services which current, compliant subscribers of Support Services are entitled to receive pursuant to the License Agreement between Chocolatey Software, Inc. ("Chocolatey") and Customer. These Support Services Terms form an integral part of, and are incorporated by reference into, the License Agreement.</p>
+                        <ol class="mb-0">
+                            <li>
+                                <strong>Definitions.</strong>
+                                <ul>
+                                    <li><strong>"Software"</strong> means any of the following: Chocolatey for Business, Chocolatey for Architect, Chocolatey for MSP, or any other offerings as defined in a License agreement between Chocolatey and Customer.</li>
+                                    <li><strong>"Error"</strong> means a malfunction in Software that can be duplicated by Chocolatey that materially degrades the use or performance of the Customer business system the Software manages ("Business System").</li>
+                                    <li><strong>"Fix"</strong> means the repair or replacement of object code versions of Software to remedy an Error.</li>
+                                    <li><strong>"Priority 1 Error"</strong> means an Error that renders Software inoperative or materially degraded with respect to the Business System, such that: (i) the Business System's production system is severely impacted or completely shut down, or (ii) the Business System's system operations or mission-critical applications are down.</li>
+                                    <li><strong>"Priority 2 Error"</strong> means an Error that degrades Software performance with respect to the Business System.</li>
+                                    <li><strong>"Priority 3 Error"</strong> means an Error that affects Company's use of Software, but does not materially degrade Software performance with respect to the Business System or has a workaround that could include installing a previous version of Software.</li>
+                                    <li><strong>"Ticket"</strong> means the tracking of a Fix for an Error or requested feature in the Software has been noted by Customer, that is typically tracked in an issue tracking system.</li>
+                                    <li><strong>"Technical Contact"</strong> means an employee or authorized representative of Customer that is technically familiar and competent with Customer's systems (including the Business System), infrastructure and use of the Software, who: (i) has "read, write, and execute" access to the necessary files, English language communication skills and relevant technical knowledge; and (ii) is a designated Customer contact to receive Support Services, and to resolve Customer technical issues related to the Software. The permitted number of Technical Contacts is based on the level of Support Services purchased by Company, and is set forth in the tables above. Technical Contacts may be changed by the Customer upon five (5) business days prior written notice to Chocolatey, which can be executed electronically by email whereas the 5 days is the date of confirmation of receipt from Chocolatey.</li>
+                                    <li><strong>"Update"</strong> means subsequent releases of the Software that are generally made available by Chocolatey to customers using the Software as part of Support Services at no additional charge, other than any applicable media and handling charges. Updates may include updated code to accommodate changes in applicable industry standards. Updates shall not include any releases, enhancements, functionality or products which Chocolatey licenses separately or provides at a fee separate from the Support Services fee. Updates are delivered only on an as if and when available basis.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Support Services Coverage.</strong> Subject to the terms of these Support Services Terms, including the support schedule table(s) set forth above, and the other terms of the License Agreement (including, without limitation, Customer's payment of the applicable Support Services fees to Chocolatey), Chocolatey will provide Customer with the Support Services described herein for the Software, exclusive of any integration issues between the Software and applicable Third Party Software. Customer shall designate the permitted number of Technical Contacts who are responsible for resolving user issues, and only such Technical Contacts may contact Chocolatey for the provision of Support Services. Support Services do not include anything not set forth in these Support Services Terms, and specifically excludes support of any hardware or any software other than the Software, including and without limitation, any integration with Third Party Software (other than the Third Party Software (as defined in the License Agreement) to the extent of its function within the Software). The Support Services telephone numbers, email address and Chocolatey Support Portal are located in the tables above as applicable.</li>
+                            <li><strong>Chocolatey Software Maintenance.</strong> Chocolatey will periodically, and at its sole discretion, provide Customer with Fixes to Errors and Updates to the Software.</li>
+                            <li><strong>Customer Obligations.</strong> Customer and its Technical Contacts shall: (i) make reasonable efforts to resolve Customer issues or identify issues as relating to the Software prior to contacting Chocolatey for Support Services; and (ii) provide Chocolatey with sufficient information and resources to address the Error, and access to the personnel, hardware, and any additional software as reasonably necessary to enable Chocolatey to reproduce, analyze and address the Error.</li>
+                            <li><strong>Process.</strong> Customer will contact Chocolatey Support by email or phone number, as noted in Support Services contract. Customer may also follow up on interested Ticket, if pre-existing or after creation, but for Support Services, Customer must contact Support through Support channels. If Ticket is public, Chocolatey Support will adjust the priority and identified release to resolve Ticket. Chocolatey Support will work to resolve Ticket. Ticket is closed when Fix is complete in code. For Priority 1, Fix will be provided out of band and Chocolatey Support will move up release schedule to provide a wider release quickly. On Priority 2, Customer and Chocolatey Support will determine if out of band Fix is provided and whether release schedule is moved up to support Customer necessity. For Priority 3, Fixes will normally wait until next release on normal release schedule. Chocolatey may provide Customer with Fix at Customer discretion.</li>
+                            <li><strong>Status Updates.</strong> Customer may have certain Tickets for Software that they are interested in seeing resolved. These could be bugs or features that Chocolatey has noted and has plans to resolve. On Customer request based on Support Schedule, Chocolatey will provide updates on prioritization and status for Tickets.</li>
+                            <li><strong>Exclusions.</strong> Chocolatey is not obligated to provide Support Services when: (i) the Software has been changed, modified, or damaged; (ii) the issue is caused by Customer's negligence, misuse of software or hardware, hardware malfunction, or other causes other than the Software; (iii) the issue is caused by hardware, third party software or infrastructure; (iv) the Customer is using packages from the community package repository source, located at <a href="https://chocolatey.org/packages">https://chocolatey.org/packages</a> (through <a href="https://chocolatey.org/api/v2)">https://chocolatey.org/api/v2)</a> or any repositories that are not controlled exclusively by Customer; or (v) the version of the Software is not a currently supported version, as determined by Chocolatey's announced policies regarding the support of such versions.</li>
+                            <li><strong>Changes.</strong> Chocolatey reserves the right to change these Support Services at any time; provided however, that any such changes which occur during the then current Support Services term for which Customer has paid fees to Chocolatey, will not materially diminish the Support Services to be provided during the remainder of such Support Services term. Please check the Support Services Terms periodically for changes. While Chocolatey will provide written notice electronically (via the customer mailing list) for significant changes to the Support Terms, Chocolatey is not obligated to ensure confirmation of receipt and acceptance by Customer. By continuing to use Support Services, Customer indicates acceptance of such changes to Support Terms.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-3 pt-lg-5" id="business-legal">
+                        <h1 class="mb-4">Chocolatey for Business - Legal</h1>
+                        <p>Chocolatey Software is a US-based Delaware Corporation founded in 2016 as a spin off of RealDimensions Software, LLC. RealDimensions Software, LLC was founded in 2012 for managing and funding open source initiatives. As of January 1, 2017, Chocolatey Software manages all aspects of Chocolatey and will continue to see its growth with both open source and business initiatives.</p>
+                        <ul class="mb-0">
+                            <li>Master Software License Agreement - <a href="https://chocolatey.box.com/shared/static/juxrqlamujp9llm2x90m5ah9jp89megf.pdf">PDF</a> (redline signature format available on request)</li>
+                            <li>Third Party Licenses - <a href="https://chocolatey.box.com/shared/static/dbdc1uu3mixhfgyx8whsg6uipasxvxdr.pdf">PDF</a></li>
+                            <li>Support and Maintenance terms PDF available on request</li>
+                            <li>D-U-N-S (DUNS) number available on request</li>
+                            <li>W9 available on request</li>
+                            <li>Liability Insurance (Acord) available on request</li>
+                            <li>Liability limited in license agreement to cost of licenses - if you need higher, the price of licensing will increase based on added risk exposure</li>
+                            <li>We can amend the license agreement for transferability of licensing - please <a href="@Url.RouteUrl(RouteName.ContactUs)">contact "Sales"</a> to address your need</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="container-fluid">
+    <div class="row">
         <div class="d-none d-lg-block col-lg-2 docs-left p-0">
             <div class="vertical-nav sticky-top">
                 <ul class="pt-3 pt-lg-5 list-unstyled">
-                    <li class="pl-2"><strong>Table of Contents:</strong></li>
+                    <li class="ps-2"><strong>Table of Contents:</strong></li>
                     <li><a href="#package">Package Support</a></li>
                     <li><a href="#foss">Open Source Support</a></li>
                     <li><a href="#support-schedule">Compare Support Schedules</a></li>
@@ -24,7 +284,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-lg-10 py-3 py-lg-5 pl-lg-5">
+        <div class="col-lg-10 py-3 py-lg-5 ps-lg-5">
             <div id="package">
                 <h1 class="mb-4">Support for a Package</h1>
                 <p class="mb-0">We do not have support for packages found on Chocolatey.org - those are considered community packages and should not be used for commercial purposes. Package issues should follow the package triage process. <a href="https://docs.chocolatey.org/en-us/community-repository/community-packages-disclaimer">Read more...</a></p>
@@ -56,7 +316,7 @@
                 <a id="faq-support-schedule" ></a>
                 <h1 class="mb-4">Compare Support Schedules</h1>
                 <div class="table-responsive-sm">
-                    <table class="table table-bordered border-0">
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th class="h4 border-0" scope="col"></th>
@@ -81,9 +341,9 @@
                             </tr>
                             <tr>
                                 <th scope="row">Included Automatically?</th>
-                                <td><span class="fas fa-check"></span></td>
-                                <td><span class="fas fa-check"></span></td>
-                                <td><span class="fas fa-check"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
                                 <td>Premium is available for an additional cost</td>
                             </tr>
                             <tr>
@@ -99,28 +359,28 @@
                                     <strong>Pro:</strong> 2 Business Days
                                     <hr />
                                     <strong>MSP:</strong>
-                                    <ul class="mb-0 text-left">
+                                    <ul class="mb-0 text-start">
                                         <li>P1: 6 Business Hours</li>
                                         <li>P2: 10 Business Hours</li>
                                         <li>P3: 2 Business Days</li>
                                     </ul>
                                 </td>
                                 <td>
-                                    <ul class="mb-0 text-left">
+                                    <ul class="mb-0 text-start">
                                         <li>P1: 4 Business Hours</li>
                                         <li>P2: 8 Business Hours</li>
                                         <li>P3: 12 Business Hours</li>
                                     </ul>
                                 </td>
                                 <td>
-                                    <ul class="mb-0 text-left">
+                                    <ul class="mb-0 text-start">
                                         <li>P1: 3 Business Hours</li>
                                         <li>P2: 6 Business Hours</li>
                                         <li>P3: 12 Business Hours</li>
                                     </ul>
                                 </td>
                                 <td>
-                                    <ul class="mb-0 text-left">
+                                    <ul class="mb-0 text-start">
                                         <li>P1: 2 Hours</li>
                                         <li>P2: 4 Hours</li>
                                         <li>P3: 6 Hours</li>
@@ -136,10 +396,10 @@
                             </tr>
                             <tr>
                                 <th scope="row">Online Support</th>
-                                <td><span class="fas fa-check"></span></td>
-                                <td><span class="fas fa-check"></span></td>
-                                <td><span class="fas fa-check"></span></td>
-                                <td><span class="fas fa-check"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
                             </tr>
                             <tr>
                                 <th scope="row">Number of Cases</th>
@@ -164,10 +424,10 @@
                             </tr>
                             <tr>
                                 <th scope="row">Access to All Updates & Upgrades</th>
-                                <td><span class="fas fa-check"></span></td>
-                                <td><span class="fas fa-check"></span></td>
-                                <td><span class="fas fa-check"></span></td>
-                                <td><span class="fas fa-check"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
+                                <td><span class="fas fa-check text-success"></span></td>
                             </tr>
                             <tr>
                                 <th scope="row">Support System</th>
@@ -257,4 +517,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@

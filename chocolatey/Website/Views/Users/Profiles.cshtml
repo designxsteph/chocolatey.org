@@ -3,47 +3,49 @@
 @model UserProfileModel
 @{
     ViewBag.Title = @Model.Username;
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
     var MarkdownPipeline = new MarkdownPipelineBuilder()
                  .UseSoftlineBreakAsHardlineBreak()
                  .UseAdvancedExtensions()
                  .Build();
 }
 
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-</section>
-<div id="header" class="bg-primary profile-header"></div>
-<section class="container pb-3 pb-md-5">
+@Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
+<div class="bg-theme-primary py-5"><div class="py-3 py-md-5"></div></div>
+<section class="container pb-3 pb-md-5 mt-n5">
     <div class="card card-bio">
-        <div class="card-header text-center bg-white pt-0 pb-3">
-            @ViewHelpers.GravatarImage(Model.EmailAddress, Model.Username, 128)
+        <div class="card-header text-center bg-theme-light pt-0 pb-3">
+            <div class="mt-n5">@ViewHelpers.GravatarImage(Model.EmailAddress, Model.Username, 128)</div>
             <h1>@Model.Username</h1>
-            <ul class="list-inline text-center mb-0 divider-list">
-                <li class="list-inline-item py-3 py-md-0 pr-md-3 mr-0">
-                    <a href="#profile-moderation" class="text-dark">
-                        <h4 class="mb-0">@Model.PackagesModerationQueue.Count.ToString("n0")</h4>
-                        Packages in Queue
-                    </a>
-                </li>
-                <li class="list-inline-item py-3 py-md-0 px-md-3 mr-0">
-                    <a href="#profile-packages" class="text-dark">
-                        <h4 class="mb-0">@Model.Packages.Count.ToString("n0")</h4>
-                        Published Packages
-                    </a>
-                </li>
-                <li class="list-inline-item py-3 py-md-0 px-md-3 mr-0">
-                    <h4 class="mb-0">@Model.TotalPackageDownloadCount.ToString("n0")</h4>
-                    <p class="font-weight-bold mb-0">Downloads of Packages</p>
-                </li>
-                <li class="list-inline-item py-3 py-md-0 pl-md-3 mr-0">
-                    <a href="#profile-badges" class="text-dark">
-                        <h4 class="mb-0">@Model.CompletedCourses.Count.ToString("n0")</h4>
-                        Course Badges
-                    </a>
-                </li>
-            </ul>
+            <div class="row row-divider row-md-divider">
+                <div class="col-lg-10 mx-auto">
+                    <div class="row">
+                        <div class="col-md-3 pb-3 pb-md-0">
+                            <a href="#profile-moderation" class="text-reset">
+                                <h4 class="mb-0">@Model.PackagesModerationQueue.Count.ToString("n0")</h4>
+                                Packages in Queue
+                            </a>
+                        </div>
+                        <div class="col-md-3 py-3 py-md-0">
+                            <a href="#profile-packages" class="text-reset">
+                                <h4 class="mb-0">@Model.Packages.Count.ToString("n0")</h4>
+                                Published Packages
+                            </a>
+                        </div>
+                        <div class="col-md-3 py-3 py-md-0">
+                            <h4 class="mb-0">@Model.TotalPackageDownloadCount.ToString("n0")</h4>
+                            <p class="mb-0">Downloads of Packages</p>
+                        </div>
+                        <div class="col-md-3 pt-3 pt-md-0">
+                            <a href="#profile-badges" class="text-reset">
+                                <h4 class="mb-0">@Model.CompletedCourses.Count.ToString("n0")</h4>
+                                Course Badges
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-body pt-0">
             @if (Model.UserProfiles.Count >= 1)
@@ -52,7 +54,7 @@
                     <i class="d-none btn-twitter btn-stackexchange btn-github"></i>
                     @foreach (var siteProfile in Model.UserProfiles.Where(x => !x.Name.Equals("Codeplex")))
                     {
-                        <a class="btn btn-sm btn-@if(siteProfile.Name.Contains("Repository")){<text>primary</text>}else{<text>secondary</text>} btn-@siteProfile.Name.ToLower().Replace(" ", "")" href="@siteProfile.Url" target="_blank" title="View more about @Model.Username at @siteProfile.Name">
+                        <a class="btn btn-sm btn-@if(siteProfile.Name.Contains("Repository")){<text>primary</text>}else if(siteProfile.Name.Contains("Personal")){<text>secondary</text>}else if(siteProfile.Name.Contains("Twitter")){<text> bg-twitter text-white</text>}else{<text> bg-github text-bg-theme-light</text>}" href="@siteProfile.Url" target="_blank" title="View more about @Model.Username at @siteProfile.Name">
                             <i class="@if(siteProfile.Name == SiteProfileConstants.Twitter){<text>fab fa-twitter</text>}
                                 else if(siteProfile.Name == SiteProfileConstants.Github){<text>fab fa-github</text>}
                                 else if(siteProfile.Name == SiteProfileConstants.StackExchange){<text>fab fa-stack-exchange</text>}
@@ -69,7 +71,7 @@
     @if (Model.PackagesModerationQueue.Any())
     {
         <h3 id="profile-moderation" class="my-4">Packages in Moderation:</h3>
-        <div class="row profile-packages card-row">
+        <div class="row card-row">
             @foreach (var package in Model.PackagesModerationQueue)
             {
                 var submittedStatus = "Waiting for Maintainer";
@@ -93,10 +95,10 @@
                 }
                 var packageImage = Url.ImageUrl(package.Id, package.Version, package.IconUrl);
                 <div class="col-lg-6 col-xl-4 mb-4">
-                    <a href="@Url.Package(package.Id, package.Version)" title="View more about @package.Title" target="_blank">
-                        <div class="card border-0 rounded-0 shadow h-100">
-                            <div class="card-header bg-white border-0 d-flex align-items-center pt-3">
-                                <img width="35" class="mr-3" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_50x50_png))" alt="@package.Id icon" onerror="this.src='@Links.Content.Images.packageDefaultIcon_50x50_png';" />
+                    <a class="text-reset" href="@Url.Package(package.Id, package.Version)" title="View more about @package.Title" target="_blank">
+                        <div class="card h-100">
+                            <div class="card-header bg-theme-light border-0 d-flex align-items-center pt-3">
+                                <img width="35" class="me-3" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_50x50_png))" alt="@package.Id icon" onerror="this.src='@Links.Content.Images.packageDefaultIcon_50x50_png';" />
                                 <div class="d-flex">
                                     <span class="status status-sm @if(package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>bg-success</text>}else if(package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing){<text>bg-danger</text>}else if(package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending){<text>bg-warning</text>}else if(package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted || package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown){<text>bg-secondary</text>}">
                                         <span class="@package.PackageValidationResultStatus"></span>
@@ -140,9 +142,9 @@
                 var packageImage = Url.ImageUrl(package.Id, package.Version, package.IconUrl);
                 <div class="col-lg-4 mb-4">
                     <a href="@Url.Package(package.Id)" title="View more about @package.Title" target="_blank">
-                        <div class="card border-0 rounded-0 shadow h-100">
-                            <div class="card-header bg-white border-0 d-flex align-items-center pt-3">
-                                <img width="35" class="mr-3" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_50x50_png))" alt="@package.Id icon" onerror="this.src='@Links.Content.Images.packageDefaultIcon_50x50_png';" />
+                        <div class="card h-100">
+                            <div class="card-header bg-theme-light border-0 d-flex align-items-center pt-3">
+                                <img width="35" class="me-3" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_50x50_png))" alt="@package.Id icon" onerror="this.src='@Links.Content.Images.packageDefaultIcon_50x50_png';" />
                                 <div class="d-flex">
                                     <span class="status status-sm @if(package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Passing){<text>bg-success</text>}else if(package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Failing){<text>bg-danger</text>}else if(package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Pending){<text>bg-warning</text>}else if(package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Exempted || package.PackageTestResultsStatus == PackageAutomatedReviewResultStatusType.Unknown){<text>bg-secondary</text>}">
                                         <span class="@package.PackageValidationResultStatus"></span>
@@ -158,7 +160,7 @@
                                 }
                             </div>
                             <div class="card-footer">
-                                <p class="mb-0 font-weight-bold">@package.TotalDownloadCount.ToString("n0") downloads</p>
+                                <p class="mb-0 fw-bold">@package.TotalDownloadCount.ToString("n0") downloads</p>
                             </div>
                         </div>
                     </a>
@@ -171,7 +173,7 @@
     {
         <hr class="mb-4" />
         <h3 id="profile-badges" class="mb-4">Badges:</h3>
-        <div class="row">
+        <div class="row card-row">
             @foreach (var courseAchievement in Model.CompletedCourses)
             {
                 if (courseAchievement.Completed)
@@ -187,7 +189,7 @@
                                             <li class="mod-completed d-flex align-items-center h6 mb-0">Course Completed</li>
                                         </ul>
                                     </div>
-                                    <div class="bg-light h-100 d-flex align-items-center p-3 w-25">
+                                    <div class="bg-theme h-100 d-flex align-items-center p-3 w-25">
                                         <img class="w-100" src="@CourseConstants.GetBadgeUrl(courseAchievement.CourseKey)" alt="@CourseConstants.GetCourseName(courseAchievement.CourseKey)" />
                                     </div>
                                 </div>

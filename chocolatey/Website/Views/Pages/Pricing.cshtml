@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "Pricing";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 <section id="editions" class="py-3 py-lg-5">
     <div class="container">
@@ -14,77 +13,77 @@
         <div class="row">
             <div class="col-lg-4 pt-lg-5">
                 <div class="card h-100">
-                    <div class="card-header bg-medium p-0 text-center">
-                        <h3 class="p-3 text-white mb-0"><strong>Open Source</strong></h3>
-                        <p class="p-2 mb-0"><strong>For Everyone (Organizations as well)</strong></p>
+                    <div class="card-header p-0 text-center">
+                        <h3 class="p-3 text-white mb-0 bg-theme-primary-light"><strong>Open Source</strong></h3>
+                        <p class="p-2 mb-0 bg-theme-light-2"><strong>For Everyone (Organizations as well)</strong></p>
                     </div>
                     <div class="card-body">
                         <h1 class="text-center display-4 pt-2"><strong>Free</strong></h1>
                         <p class="text-center pb-2">No Limit on Machines</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/create/create-packages">Create Packages</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/host-packages">Host Your Own Package Repository</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/integrations">Integration with Other Tools</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/shim">Package Shims</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/choco/commands/upgrade">Upgrade all software with one command</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/create/functions/">30+ Built-in PowerShell Functions</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/extensions">Package Extensions</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/create/create-packages">Create Packages</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/host-packages">Host Your Own Package Repository</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/integrations">Integration with Other Tools</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/shim">Package Shims</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/choco/commands/upgrade">Upgrade all software with one command</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/create/functions/">30+ Built-in PowerShell Functions</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/extensions">Package Extensions</a></li>
                         </ul>
                     </div>
-                    <div class="card-footer pt-0 text-center bg-white">
+                    <div class="card-footer pt-0 text-center bg-theme-light">
                         <a href="@Url.RouteUrl(RouteName.Install)" class="btn btn-outline-secondary" target="_blank">Install Now</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 pt-3 pt-lg-5">
                 <div class="card h-100">
-                    <div class="card-header bg-medium-dark p-0 text-center">
-                        <h3 class="p-3 mb-0"><strong>Pro (Individual)</strong></h3>
-                        <p class="p-2 mb-0"><strong>Personal, Named License for Individuals</strong></p>
+                    <div class="card-header p-0 text-center">
+                        <h3 class="p-3 mb-0 bg-primary-light"><strong>Pro (Individual)</strong></h3>
+                        <p class="p-2 mb-0 bg-theme-light-2"><strong>Personal, Named License for Individuals</strong></p>
                     </div>
                     <div class="card-body">
                         <h1 class="text-center display-4 pt-2"><strong>$96<span class="h6 align-top">/year</span></strong></h1>
                         <p class="text-center pb-2">Up to 8 of Your Own Personal Machines</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span class="fas fa-check"></span> <strong class="text-success">All Open Source Features plus:</strong></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> Enhanced Functionality & Additional PowerShell Functions</li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/package-reducer">Package Reducer</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/package-throttle">Package Throttle</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/virus-check">Runtime Malware / Virus Protection</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/private-cdn">Download CDN Cache</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="@Url.RouteUrl(RouteName.Discount)">Student Pricing Available</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="@Url.RouteUrl(RouteName.Compare)">& More!</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <strong class="text-success">All Open Source Features plus:</strong></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> Enhanced Functionality & Additional PowerShell Functions</li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/package-reducer">Package Reducer</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/package-throttle">Package Throttle</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/virus-check">Runtime Malware / Virus Protection</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/private-cdn">Download CDN Cache</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="@Url.RouteUrl(RouteName.Discount)">Student Pricing Available</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="@Url.RouteUrl(RouteName.Compare)">& More!</a></li>
                         </ul>
                     </div>
-                    <div class="card-footer pt-0 text-center bg-white">
+                    <div class="card-footer pt-0 text-center bg-theme-light">
                         <a href="https://checkout.bluesnap.com/buynow/checkout?sku3284622=1&storeid=269004" rel="noreferrer" title="Secure Online Payments by BlueSnap" alt="Secure Online Payments and Credit Card Processing by BlueSnap" class="btn btn-dark" target="_blank">Purchase</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 pt-3 pt-lg-0">
                 <div class="card h-100">
-                    <div class="card-header bg-primary p-0 text-center">
-                        <h3 class="p-3 mb-0"><strong>Business (C4B)</strong></h3>
-                        <p class="p-2 mb-0"><strong>For Organizations - Chocolatey for Business</strong></p>
+                    <div class="card-header p-0 text-center">
+                        <h3 class="p-3 mb-0 bg-theme-primary"><strong>Business (C4B)</strong></h3>
+                        <p class="p-2 mb-0 bg-theme-light-2"><strong>For Organizations - Chocolatey for Business</strong></p>
                     </div>
                     <div class="card-body">
                         <h6 class="pt-2 text-center"><i>Prices Starting at</i></h6>
                         <h1 class="text-center display-4 pb-4"><strong>$16<span class="h6 align-top">/license per year</span></strong></h1>
                         @*<p class="text-center pb-2"><a href="#faq-pricing">Click to See Pricing Matrix</a></p>*@
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span class="fas fa-check"></span> <strong class="text-success">All Pro Features plus:</strong></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/chocolatey-central-management">Central Management</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/self-service-anywhere">Self-Service Install Management</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/package-synchronization/packages-to-programs">Full Package Synchronization</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/guides/organizations/set-up-chocolatey-server">Package Internalizer</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="https://docs.chocolatey.org/en-us/features/package-audit">Package Audit</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="@Url.RouteUrl(RouteName.Support)">Support</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> Packaging Services Available</li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="@Url.RouteUrl(RouteName.ContactSales)">Discounts & Perpetual Pricing Available</a></li>
-                            <li class="list-group-item"><span class="fas fa-check"></span> <a href="@Url.RouteUrl(RouteName.Compare)">& More!</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <strong class="text-success">All Pro Features plus:</strong></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/chocolatey-central-management">Central Management</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/self-service-anywhere">Self-Service Install Management</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/package-synchronization/packages-to-programs">Full Package Synchronization</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/guides/organizations/set-up-chocolatey-server">Package Internalizer</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="https://docs.chocolatey.org/en-us/features/package-audit">Package Audit</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="@Url.RouteUrl(RouteName.Support)">Support</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> Packaging Services Available</li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="@Url.RouteUrl(RouteName.ContactSales)">Discounts & Perpetual Pricing Available</a></li>
+                            <li class="list-group-item"><span class="fas fa-check text-success"></span> <a href="@Url.RouteUrl(RouteName.Compare)">& More!</a></li>
                         </ul>
                     </div>
-                    <div class="card-footer pt-0 text-center bg-white">
+                    <div class="card-footer pt-0 text-center bg-theme-light">
                         <a href="@Url.RouteUrl(RouteName.ContactSales)" class="btn btn-outline-secondary">Contact Sales</a>
                         <a href="@Url.RouteUrl(RouteName.ContactTrial)" class="btn btn-outline-secondary">Start Trial</a>
                         <a href="https://checkout.bluesnap.com/buynow/checkout?sku3343184=1&storeid=269004&quantity=100" rel="noreferrer" title="Secure Online Payments by BlueSnap" alt="Secure Online Payments and Credit Card Processing by BlueSnap" class="btn btn-primary" target="_blank">Purchase</a>
@@ -99,19 +98,20 @@
         </div>
     </div>
 </section>
-<section class="pb-3 pb-lg-5 bg-white" id="pricing-faq">
-    <ul class="bg-white list-unstyled list-inline sticky-nav sticky-top py-3 text-center border-bottom d-none d-md-block">
-        <li class="list-inline-item px-3"><a class="collapse-nav active" href="#faq-pricing">Pricing</a></li>
-        <li class="list-inline-item px-3"><a class="collapse-nav" href="#faq-licensing">Licensing</a></li>
-        <li class="list-inline-item px-3"><a class="collapse-nav" href="#faq-purchasing">Purchasing</a></li>
-        <li class="list-inline-item px-3"><a class="collapse-nav" href="#faq-renewing">Renewing</a></li>
-        <li class="list-inline-item px-3"><a class="collapse-nav" href="#faq-support">Support</a></li>
+<section class="pb-3 pb-lg-5 bg-theme-light" id="pricing-faq">
+    <ul class="nav d-none d-sm-flex fw-bold justify-content-center align-items-center border-bottom bg-theme-light sticky-top">
+        <li class="nav-item"><a class="nav-link active" href="#faq-pricing">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq-licensing">Licensing</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq-purchasing">Purchasing</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq-renewing">Renewing</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq-support">Support</a></li>
     </ul>
     <div class="container pt-3 pt-lg-5">
         @*Pricing*@
-        <div class="mb-4">
-            <a class="h2 collapse show" data-toggle="collapse" href="#faq-pricing" role="button" aria-expanded="true" aria-controls="faq-pricing" title="Pricing">Pricing Overview</a>
-            <div class="collapse show" id="faq-pricing">
+        <div class="mb-4 pb-4">
+            <a class="h2 btn-collapse d-block mb-nc6" data-bs-toggle="collapse" href="#faq-pricing" role="button" aria-expanded="true" aria-controls="faq-pricing" title="Pricing">Pricing Overview</a>
+            <div class="collapse mb-n4 show" id="faq-pricing">
+                <span class="pt-c6 d-block"></span>
                 <hr />
                 <h3>How is Chocolatey priced?</h3>
                 <p>Chocolatey is priced on a per node basis. Please see <a href="#Licensing">"What counts as a license?" (below)</a> for more information.</p>
@@ -146,9 +146,10 @@
             </div>
         </div>
         @*Licensing*@
-        <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#faq-licensing" role="button" aria-expanded="false" aria-controls="faq-licensing" title="Licensing">Licensing</a>
-            <div class="collapse" id="faq-licensing">
+        <div class="mb-4 pb-4">
+            <a class="h2 btn-collapse collapsed d-block mb-nc6" data-bs-toggle="collapse" href="#faq-licensing" role="button" aria-expanded="false" aria-controls="faq-licensing" title="Licensing">Licensing</a>
+            <div class="collapse mb-n4" id="faq-licensing">
+                <span class="pt-c6 d-block"></span>
                 <hr />
                 <h3>What counts as a license?</h3>
                 <p>Our licensing is per node (machine).</p>
@@ -187,9 +188,10 @@
             </div>
         </div>
         @*Purchasing*@
-        <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#faq-purchasing" role="button" aria-expanded="false" aria-controls="faq-purchasing" title="Purchasing">Purchasing</a>
-            <div class="collapse" id="faq-purchasing">
+        <div class="mb-4 pb-4">
+            <a class="h2 btn-collapse collapsed d-block mb-nc6" data-bs-toggle="collapse" href="#faq-purchasing" role="button" aria-expanded="false" aria-controls="faq-purchasing" title="Purchasing">Purchasing</a>
+            <div class="collapse mb-n4" id="faq-purchasing">
+                <span class="pt-c6 d-block"></span>
                 <hr />
                 <h3>Can we get an official quote?</h3>
                 <p>If you are ready to move forward with an official quote or need budgetary pricing simply <a href="@Url.RouteUrl(RouteName.ContactSales)">reach out to our team</a> and we will be back in touch.</p>
@@ -217,9 +219,10 @@
             </div>
         </div>
         @*Renewals*@
-        <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#faq-renewing" role="button" aria-expanded="false" aria-controls="faq-renewing" title="Renewing">Renewing</a>
-            <div class="collapse" id="faq-renewing">
+        <div class="mb-4 pb-4">
+            <a class="h2 btn-collapse collapsed d-block mb-nc6" data-bs-toggle="collapse" href="#faq-renewing" role="button" aria-expanded="false" aria-controls="faq-renewing" title="Renewing">Renewing</a>
+            <div class="collapse mb-n4" id="faq-renewing">
+                <span class="pt-c6 d-block"></span>
                 <hr />
                 <h3>How do renewals work?</h3>
                 <p>Typically you would purchase again using the same method as you used previously. The expiry date for the new license will take the old expiration date into account.</p>
@@ -242,9 +245,10 @@
             </div>
         </div>
         @*Support*@
-        <div class="mb-4">
-            <a class="h2 collapsed" data-toggle="collapse" href="#faq-support" role="button" aria-expanded="false" aria-controls="faq-support" title="Support">Support</a>
-            <div class="collapse" id="faq-support">
+        <div class="mb-4 pb-4">
+            <a class="h2 btn-collapse collapsed d-block mb-nc6" data-bs-toggle="collapse" href="#faq-support" role="button" aria-expanded="false" aria-controls="faq-support" title="Support">Support</a>
+            <div class="collapse mb-n4" id="faq-support">
+                <span class="pt-c6 d-block"></span>
                 <hr />
                 <h3>How does support work?</h3>
                 <p>See our <a href="@Url.RouteUrl(RouteName.Support)">support page</a> for details.</p>
@@ -270,7 +274,7 @@
     </div>
 </section>
 @* Price Table
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
     <thead class="thead-dark">
         <tr>
             <th class=" h4 first" scope="col" style="width: 40%;">Retail Cost Per License</th>

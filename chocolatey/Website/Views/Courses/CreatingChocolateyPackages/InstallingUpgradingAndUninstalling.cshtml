@@ -7,10 +7,10 @@
     @Html.Partial("~/Views/Courses/_LeftSideColumn.cshtml", new CourseLeftViewModel() { CourseNameType = Model.CourseNameType, CourseModules = Model.CourseModules, UserCourseAchievements = Model.UserCourseAchievements })
 }
 @section RightSideColumn {
-    <li><a href="#installation-paths">Installation Paths</a></li>
-    <li><a href="#limiting-installation">Limiting Installation</a></li>
-    <li><a href="#upgrading">Upgrading Your Package</a></li>
-    <li><a href="#uninstalling">Uninstalling Your Package</a></li>
+    <li class="nav-item"><a class="nav-link" href="#installation-paths">Installation Paths</a></li>
+    <li class="nav-item"><a class="nav-link" href="#limiting-installation">Limiting Installation</a></li>
+    <li class="nav-item"><a class="nav-link" href="#upgrading">Upgrading Your Package</a></li>
+    <li class="nav-item"><a class="nav-link" href="#uninstalling">Uninstalling Your Package</a></li>
 }
 
 <h2 id="installation-paths" class="mb-3">Installation Paths</h2>
@@ -59,7 +59,7 @@
     else
     {
         @Html.ValidationSummary(true)
-        using (Html.BeginForm())
+        using (Html.BeginForm("CourseName", "Courses", FormMethod.Post, new { id = "quiz" }))
         {
             @Html.AntiForgeryToken()
             <fieldset class="form @if (Model.UserCourseAchievements != null)
@@ -78,7 +78,7 @@
                 @Html.HiddenFor(m => m.CourseName)
                 @Html.HiddenFor(m => m.CourseKey)
                 @Html.HiddenFor(m => m.CourseModuleKey)
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>Who is responsible for a Chocolatey Package only being installed on the correct Operating System for the underlying software of the package?</h5>
                     @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionOne" })
                     <label for="QuestOneOptionOne">Chocolatey</label><br />
@@ -87,7 +87,7 @@
                     @Html.RadioButtonFor(m => m.QuestionOne, "1", new { id = "QuestOneOptionThree" })
                     <label for="QuestOneOptionThree">Package Maintainer</label>
                 </div>
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>In what version of Chocolatey was the chocolateyBeforeModify.ps1 file introduced?</h5>
                     @Html.RadioButtonFor(m => m.QuestionTwo, "1", new { id = "QuestTwoOptionOne" })
                     <label for="QuestTwoOptionOne">0.9.10</label><br />
@@ -96,7 +96,7 @@
                     @Html.RadioButtonFor(m => m.QuestionTwo, "0", new { id = "QuestTwoOptionThree" })
                     <label for="QuestTwoOptionThree">0.8.0</label>
                 </div>
-                <input class="btn btn-primary mt-3 disabled" data-toggle="modal" data-target="#quiz-modal" type="submit" value="Check Answers" title="Check Answers" />
+                <input class="btn btn-primary mt-3 disabled" type="submit" value="Check Answers" title="Check Answers" />
             </fieldset>
         }
 

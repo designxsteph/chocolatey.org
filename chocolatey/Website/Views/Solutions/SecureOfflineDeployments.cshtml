@@ -1,10 +1,10 @@
 ﻿@{
     ViewBag.Title = "Solutions | Secure Offline Deployments";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
-<div id="header" class="bg-medium-dark">
+<div class="bg-theme-primary">
     <section class="py-3 py-lg-5">
         <div class="container-fluid py-3">
             <div class="row">
@@ -71,7 +71,7 @@
         </ol>
     </div>
 </section>
-<section id="introducing-qde" class="bg-white py-3 py-lg-5">
+<section id="introducing-qde" class="bg-theme-light py-3 py-lg-5">
     <div class="container">
         <h2 class="text-center mb-4">Introducing the Quick Deployment Environment</h2>
         <div class="row align-items-center">
@@ -83,13 +83,13 @@
             </div>
             <div class="col-lg-6">
                 <div class="text-center">
-                    <img class="lazy img-fluid" src="@Links.Content.Images.blankImage" data-src="https://docs.chocolatey.org/assets/images/quickdeploy/QDE-architecture.gif" alt="Quick Deployment Environment Architecture" title="Quick Deployment Environment Architecture" />
+                    <img class="lazy" src="@Links.Content.Images.blankImage" data-src="https://docs.chocolatey.org/assets/images/quickdeploy/QDE-architecture.gif" alt="Quick Deployment Environment Architecture" title="Quick Deployment Environment Architecture" />
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="py-3 py-lg-5 bg-dark text-white">
+<section class="py-3 py-lg-5 bg-dark text-light">
     <div class="container">
         <h2 class="text-center">Which offline deployment solution do you need?</h2>
         <h4 class="text-center mb-4">There are three slightly varied patterns to solve the same solution, depending on the constraints you have.</h4>
@@ -99,7 +99,7 @@
                     <h4 class="btn-link text-white">1. Internal</h4>
                     <img class="img-fluid" width="200" src="@Url.Content("~/content/images/deployment-pattern-internal-dark.png")" alt="Internal Deployment Pattern" title="Internal Deployment Pattern" />
                 </a>
-                <ul class="d-flex flex-column align-items-center mt-3 pl-0 fa-ul">
+                <ul class="d-flex flex-column align-items-center mt-3 ps-0 fa-ul">
                     <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Private repository</li>
                     <li><span class="fa-li"><i class="fas fa-times text-danger"></i></span>Offline location</li>
                     <li><span class="fa-li"><i class="fas fa-times text-danger"></i></span>Air-gapped endpoint</li>
@@ -110,7 +110,7 @@
                     <h4 class="btn-link text-white">2. Remote</h4>
                     <img class="img-fluid lazy" width="200" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-remote-dark.png")" alt="Remote Deployment Pattern" title="Remote Deployment Pattern" />
                 </a>
-                <ul class="d-flex flex-column align-items-center mt-3 pl-0 fa-ul">
+                <ul class="d-flex flex-column align-items-center mt-3 ps-0 fa-ul">
                     <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Private repository</li>
                     <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Offline location</li>
                     <li><span class="fa-li"><i class="fas fa-times text-danger"></i></span>Air-gapped endpoint</li>
@@ -121,7 +121,7 @@
                     <h4 class="btn-link text-white">3. Isolated</h4>
                     <img class="img-fluid lazy" width="200" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-isolated-dark.png")" alt="Isolated Deployment Pattern" title="Isolated Deployment Pattern" />
                 </a>
-                <ul class="d-flex flex-column align-items-center mt-3 pl-0 fa-ul">
+                <ul class="d-flex flex-column align-items-center mt-3 ps-0 fa-ul">
                     <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Private repository</li>
                     <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Offline location</li>
                     <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Air-gapped endpoint</li>
@@ -130,10 +130,11 @@
         </div>
     </div>
 </section>
-<section id="internal-deployment" class="bg-white py-3 py-lg-5">
+<section id="internal-deployment" class="bg-theme-light py-3 py-lg-5">
     <div class="container">
         <div class="d-flex mb-3 align-items-center">
-            <img class="img-fluid mr-3 lazy" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-internal-light.png")" alt="Internal Deployment Pattern" title="Internal Deployment Pattern" />
+            <img class="img-fluid me-3 lazy d-light-mode" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-internal-light.png")" alt="Internal Deployment Pattern" title="Internal Deployment Pattern" />
+            <img class="img-fluid me-3 lazy d-dark-mode" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-internal-dark.png")" alt="Internal Deployment Pattern" title="Internal Deployment Pattern" />
             <div>
                 <h2>1. Internal Deployment</h2>
                 <h4 class="mb-0">It is the default for most Chocolatey for Business customers to secure their software deployments by using an internal (private, secure and self-curated) software repository.</h4>
@@ -163,7 +164,8 @@
 <section id="remote-deployment" class="py-3 py-lg-5">
     <div class="container">
         <div class="d-flex mb-3 align-items-center">
-            <img class="img-fluid mr-3 lazy" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-remote-light.png")" alt="Remote Deployment Pattern" title="Remote Deployment Pattern" />
+            <img class="img-fluid me-3 lazy d-light-mode" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-remote-light.png")" alt="Remote Deployment Pattern" title="Remote Deployment Pattern" />
+            <img class="img-fluid me-3 lazy d-dark-mode" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-remote-dark.png")" alt="Remote Deployment Pattern" title="Remote Deployment Pattern" />
             <div>
                 <h2>2. Remote Deployment</h2>
                 <h4 class="mb-0">Some organizations need to do a little more than the Internal Deployment pattern because they have an additional constraint: they need to deploy Chocolatey for Business to secure remote locations where no internet connectivity is limited or not available.</h4>
@@ -207,10 +209,11 @@
         </div>*@
     </div>
 </section>
-<section id="isolated-deployment" class="py-3 py-lg-5 bg-white">
+<section id="isolated-deployment" class="py-3 py-lg-5 bg-theme-light">
     <div class="container">
         <div class="d-flex mb-3 align-items-center">
-            <img class="img-fluid mr-3 lazy" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-isolated-light.png")" alt="Isolated Deployment Pattern" title="Isolated Deployment Pattern" />
+            <img class="img-fluid me-3 lazy d-light-mode" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-isolated-light.png")" alt="Isolated Deployment Pattern" title="Isolated Deployment Pattern" />
+            <img class="img-fluid me-3 lazy d-dark-mode" width="150" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/deployment-pattern-isolated-dark.png")" alt="Isolated Deployment Pattern" title="Isolated Deployment Pattern" />
             <div>
                 <h2>3. Isolated Deployment</h2>
                 <h4 class="mb-0">In the most secure organizations, not only a secure remote locations not connected to the internet, but each individual endpoint is air-gapped from the network and each other.</h4>

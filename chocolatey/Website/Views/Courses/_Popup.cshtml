@@ -2,39 +2,35 @@
 @model CourseViewModel
 @{ 
   var nextUrlViewLocation = "~/Views/Courses/{0}/_NextUrl.cshtml".format_with(CourseConstants.GetCourseUrl(Model.CourseNameType).Replace("-",""));
- }
-
-@if (TempData.ContainsKey("Message"))
-{
-    <div class="modal fade" id="quiz-modal" tabindex="-1" role="dialog" aria-labelledby="quiz-modal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            @{
-             var courseAchievement = Model.UserCourseAchievements.OrEmptyListIfNull().FirstOrDefault(a => a.CourseKey == Model.CourseKey);
-             if (courseAchievement != null) {
-               if (courseAchievement.Completed) {  
-                <div class="modal-body text-center">
-                    <h3>You've Completed the Course "@Model.CourseName"</h3>
-                  <img width="200" src="@CourseConstants.GetBadgeUrl(Model.CourseNameType)" alt="@Model.CourseName" />
-                </div>
-                <div class="modal-footer justify-content-center">
-                  <a href="#quiz" class="btn btn-secondary mt-3 btn-results" data-dismiss="modal">Review Answers</a>
-                  <a href="@Url.Action(MVC.Users.Profiles(Model.Username))" class="btn btn-success mt-3">See Badges<span class="fas fa-angle-right"></span></a>
-                </div>
-               } else {
-                <div class="modal-body text-center">
-                  <h3>You've completed the module "@ViewBag.Title"</h3>
-                  <i class="fas fa-check-circle display-1 text-success"></i>
-                </div>
-                <div class="modal-footer justify-content-center">
-                  <a href="#quiz" class="btn btn-secondary mt-3 btn-results" data-dismiss="modal">Review Answers</a>
-
-                  @Html.Partial(nextUrlViewLocation) 
-                </div>
-               }
-             }
-             }
+}
+<div class="modal fade" id="quiz-modal" tabindex="-1" role="dialog" aria-labelledby="quiz-modal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        @{
+            var courseAchievement = Model.UserCourseAchievements.OrEmptyListIfNull().FirstOrDefault(a => a.CourseKey == Model.CourseKey);
+            if (courseAchievement != null) {
+            if (courseAchievement.Completed) {  
+            <div class="modal-body text-center">
+                <h3>You've Completed the Course "@Model.CourseName"</h3>
+                <img width="200" src="@CourseConstants.GetBadgeUrl(Model.CourseNameType)" alt="@Model.CourseName" />
             </div>
+            <div class="modal-footer justify-content-center">
+                <a href="#quiz" class="btn btn-secondary mt-3 btn-results" data-bs-dismiss="modal">Review Answers</a>
+                <a href="@Url.Action(MVC.Users.Profiles(Model.Username))" class="btn btn-success mt-3">See Badges<span class="fas fa-angle-right"></span></a>
+            </div>
+            } else {
+            <div class="modal-body text-center">
+                <h3>You've completed the module "@ViewBag.Title"</h3>
+                <i class="fas fa-check-circle display-1 text-success"></i>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a href="#quiz" class="btn btn-secondary mt-3 btn-results" data-bs-dismiss="modal">Review Answers</a>
+
+                @Html.Partial(nextUrlViewLocation) 
+            </div>
+            }
+            }
+            }
         </div>
     </div>
-}
+</div>

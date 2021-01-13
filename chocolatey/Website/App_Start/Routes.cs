@@ -296,12 +296,6 @@ namespace NuGetGallery
                 });
 
             routes.MapRouteSeo(
-                RouteName.Styleguide,
-                "styleguide/{styleguideName}",
-                new { controller = "Styleguide", action = "Styleguide", styleguideName = "home" }
-                );
-
-            routes.MapRouteSeo(
                 RouteName.Resources,
                 "resources/{resourceType}",
                 new { controller = "Resource", action = "Resources", resourceType = "home" }

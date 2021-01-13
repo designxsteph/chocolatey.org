@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Contact";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
 <section>
@@ -10,7 +10,7 @@
         <h3 class="text-center pb-4">Choose a category below and we'll get back to you as soon as possible.</h3>
         <div class="row card-row">
             <div class="col-lg-4 col-sm-6 mb-4">
-                <a href="#" data-toggle="modal" data-target="#sales-popup">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#sales-popup">
                     <div class="card h-100">
                         <div class="card-body">
                             <div class="text-center">
@@ -24,10 +24,10 @@
                 <div class="modal fade" id="sales-popup" tabindex="-1" role="dialog" aria-labelledby="salesLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl" role="document">
                         <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fas fa-times"></span></button>
+                            </div>
                             <div class="modal-body">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
                                 <h2 class="modal-title text-center mb-3" id="salesLabel">Please Choose a Category Below</h2>
                                 <div class="row">
                                     <div class="col-sm-6 mb-4 mb-sm-0">
@@ -137,8 +137,8 @@
                 <img class="img-fluid mb-3 rounded shadow" src="@Url.Content("~/content/images/chocolateyHeadquarters.jpg")" alt="Chocolatey Software" />
             </div>
             <div class="col-md-8">
-                <div class="embed-responsive embed-responsive-16by9 shadow">
-                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3100.576826185883!2d-95.74600428386569!3d39.00215334836595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87bee2ba65472b9d%3A0xf151f2c260ed0eb8!2s3620+SW+Fairlawn+Rd+%23220%2C+Topeka%2C+KS+66614!5e0!3m2!1sen!2sus!4v1560177899028!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <div class="ratio ratio-16x9 shadow">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3100.576826185883!2d-95.74600428386569!3d39.00215334836595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87bee2ba65472b9d%3A0xf151f2c260ed0eb8!2s3620+SW+Fairlawn+Rd+%23220%2C+Topeka%2C+KS+66614!5e0!3m2!1sen!2sus!4v1560177899028!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<EventViewModel>
 @{
     ViewBag.Title = "Webinar: Accelerate Automation of Windows with Ansible + Chocolatey";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/jquery-countdown");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
+    Bundles.Reference("Scripts/events");
 
     var description = "Together, Ansible and Chocolatey bring faster and more secure deployments to your Windows environments. Use Chocolatey for software/package management and Ansible to automate and guarantee the desired state of your Windows infrastructure, allowing your team to securely deploy applications faster than ever.";
 }
@@ -21,7 +21,7 @@
             <input class="countdown-date-time" type="hidden" value="@post.EventDate.GetValueOrDefault().ToString("yyyy/MM/dd HH:mm:ss") UTC" />
         </div>
 
-        <div id="countdown-header" class="bg-dark text-white border-top-dark text-center">
+        <div id="countdown-header" class="bg-primary-900 text-center">
             <section class="pt-3 pt-lg-5 pb-5">
                 <div class="container-fluid pt-lg-3">
                     <h4 class="mb-0 text-muted-dark">WEBINAR</h4>
@@ -33,15 +33,15 @@
                         <img class="img-fluid" width="150" height="150" src="@Url.Content("~/content/images/businesses/Ansible-red-sm.png")" />
                     </div>
                     <h5 class="countdown-date">
-                        <span class="mr-lg-4 mb-3 mb-lg-0 d-inline-block"><i class="fas fa-calendar"></i> @post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")</span>
+                        <span class="me-lg-4 mb-3 mb-lg-0 d-inline-block"><i class="fas fa-calendar"></i> @post.EventDate.GetValueOrDefault().ToString("dddd, %d MMMM yyyy")</span>
                         <br class="d-lg-none" />
                         <span><i class="fas fa-clock"></i> @post.Time</span>
                     </h5>
-                    <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-success btn-lg my-4 mb-md-5"><span class="h2 font-weight-bold">Reserve My Spot Now</span></a>
+                    <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-success btn-lg my-4 mb-md-5">Reserve My Spot Now</a>
                 </div>
             </section>
             <div class="position-relative"><div class="countdown-container countdown-container-blocks countdown-container-absolute-center"></div></div>
-            <div class="shape-border shape-border-bottom"></div>
+            <div class="curve curve-bottom curve-bg-theme"></div>
         </div>
         <section class="pb-3 pt-lg-3 pb-lg-5">
             <div class="container">
@@ -71,63 +71,63 @@
                             </div>
                         </div>
                         <div class="text-center d-none d-sm-block">
-                            <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-success btn-lg mt-3"><span class="h2 font-weight-bold">Reserve My Spot Now</span></a>
+                            <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-success btn-lg mt-3">Reserve My Spot Now</a>
                         </div>
                     </div>
                     <div class="col-lg-4 mt-sm-4 mt-lg-0">
                         <hr class="my-4 d-sm-none" />
                         <h3>Speakers:</h3>
-                        <div class="event-speaker">
+                        <div class="mb-4">
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/paul-broadwith.jpg")" alt="Paul Broadwith" title="Paul Broadwith" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-primary mb-0">Paul Broadwith</h5>
+                                    <h5 class="fw-bold text-primary mb-0">Paul Broadwith</h5>
                                     <p class="mb-0"><strong>Senior Technical Engineer at Chocolatey</strong></p>
                                 </div>
                             </div>
-                            <p class="mb-2">Paul Broadwith of Glasgow Scotland has 25+ years in IT in financial, government, manufacturing and services sectors. He is the Lead Engineer on Boxstarter and cChoco DSC Resource.</p>
-                            <div class="d-flex">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/paulbroadwith" target="_blank" rel="noreferrer" title="View more about Paul Broadwith on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/pauby" target="_blank" rel="noreferrer" title="View more about Paul Broadwith on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                            <div class="d-flex my-3">
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/paulbroadwith" target="_blank" rel="noreferrer" title="View more about Paul Broadwith on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/pauby" target="_blank" rel="noreferrer" title="View more about Paul Broadwith on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
+                            <p class="mb-0">Paul Broadwith of Glasgow Scotland has 25+ years in IT in financial, government, manufacturing and services sectors. He is the Lead Engineer on Boxstarter and cChoco DSC Resource.</p>
                         </div>
-                        <div class="event-speaker">
+                        <div class="mb-4">
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/adil-leghari.jpg")" alt="Adil Leghari" title="Adil Leghari" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-primary mb-0">Adil Leghari</h5>
+                                    <h5 class="fw-bold text-primary mb-0">Adil Leghari</h5>
                                     <p class="mb-0"><strong>Senior Solutions Engineer at Chocolatey Software</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/adilio" target="_blank" rel="noreferrer" title="View more about Adil Leghari on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/adilio" target="_blank" rel="noreferrer" title="View more about Adil Leghari on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/adilio" target="_blank" rel="noreferrer" title="View more about Adil Leghari on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/adilio" target="_blank" rel="noreferrer" title="View more about Adil Leghari on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
                             <p class="mb-0">Adil Leghari is a 15-year Sysadmin who is super-passionate about PowerShell and automation. He is a co-founder of the Pacific Northwest PowerShell User Group and a co-host of BridgeConf. When not working at Chocolatey, he enjoys long walks on the beach, candlelit dinners, and designing stickers.</p>
                         </div>
-                        <div class="event-speaker">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/george-james.jpg")" alt="George James" title="George James" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-primary mb-0">George James</h5>
+                                    <h5 class="fw-bold text-primary mb-0">George James</h5>
                                     <p class="mb-0"><strong>Solutions Architect (Global Partner, Solutions Architecture) at Red Hat</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin" href="https://www.linkedin.com/in/george-james-171696168" target="_blank" rel="noreferrer" title="View more about George James on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-linkedin text-white" href="https://www.linkedin.com/in/george-james-171696168" target="_blank" rel="noreferrer" title="View more about George James on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
                             </div>
                             <p class="mb-0">George is a Solutions Architect for Red Hat (Global Partner, Solution Architecture). He has over 20 years experience in IT for a large financial services company. George Specializes in Network and Windows Automation with Ansible.</p>
                         </div>
                     </div>
                 </div>
                 <div class="text-center d-lg-none">
-                    <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-success btn-lg mt-3"><span class="h2 font-weight-bold">Reserve My Spot Now</span></a>
+                    <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-success btn-lg mt-3">Reserve My Spot Now</a>
                 </div>
             </div>
         </section>

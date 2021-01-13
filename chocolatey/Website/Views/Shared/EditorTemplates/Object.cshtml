@@ -18,7 +18,7 @@ else
             {
                 className = "invalid";
             }    
-            <div class="form-field @className">
+            <div class="@className">
                 @Html.Label(prop.PropertyName)
                 @Html.Editor(prop.PropertyName)
                 
@@ -26,10 +26,8 @@ else
                 
                 @if (prop.AdditionalValues.ContainsKey("Hint"))
                 {
-                    <span class="field-hint-message">@prop.AdditionalValues["Hint"]</span>
+                    <div class="form-text">@prop.AdditionalValues["Hint"]</div>
                 }
-                
-                
             </div>
         }
     }

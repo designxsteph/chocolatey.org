@@ -664,7 +664,6 @@
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Controllers\SolutionsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\StyleguideController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Entities\Course.cs" />
     <Compile Include="Entities\CourseModule.cs" />
@@ -1053,9 +1052,8 @@
     <Content Include="apple-touch-icon-76x76.png" />
     <Content Include="apple-touch-icon.png" />
     <Content Include="cloudflare-ratelimited.html" />
-    <Content Include="Content\account.css" />
+    <Content Include="Content\css\chocolatey.bundle.min.css" />
     <Content Include="Content\dist\chocolatey.slim.css" />
-    <Content Include="Content\easymde.min.css" />
     <Content Include="Content\fonts\fa-brands-400.svg" />
     <Content Include="Content\fonts\fa-solid-900.svg" />
     <Content Include="Content\Images\12-days-logo-light.svg" />
@@ -1162,6 +1160,12 @@
     <Content Include="Content\Images\gene.svg" />
     <Content Include="Content\Images\genes.jpg" />
     <Content Include="Content\Images\github.jpg" />
+    <Content Include="Content\Images\global-shared\404.svg" />
+    <Content Include="Content\Images\global-shared\facebook-share.png" />
+    <Content Include="Content\Images\global-shared\logo-square.svg" />
+    <Content Include="Content\Images\global-shared\logo.svg" />
+    <Content Include="Content\Images\global-shared\twitter-share.png" />
+    <Content Include="Content\Images\global-shared\use.svg" />
     <Content Include="Content\Images\greenArrow.png" />
     <Content Include="Content\Images\gui.png" />
     <Content Include="Content\Images\ChocolateyGUI_main_screen.png" />
@@ -1257,9 +1261,6 @@
     <Content Include="Content\Images\userIconWhite.png" />
     <Content Include="Content\Images\xmark.png" />
     <Content Include="Content\Images\YourPackage.png" />
-    <Content Include="Content\packages.css" />
-    <Content Include="Content\pages.css" />
-    <Content Include="Content\prism\prism.css" />
     <Content Include="..\..\nugetgallery\Website\api\Web.config">
       <Link>api\Web.config</Link>
     </Content>
@@ -1271,25 +1272,9 @@
     <Content Include="googled7980ca724c3d811.html" />
     <Content Include="gulpfile.js" />
     <Content Include="Install-LastPoshClient.ps1" />
+    <Content Include="bundleconfig.json" />
     <None Include="Cassette.targets" />
     <Content Include="chocolatey-media-kit.zip" />
-    <Content Include="chocolatey-styleguide.zip" />
-    <Content Include="Content\scss\chocolatey.scss" />
-    <Content Include="Content\scss\purge.scss" />
-    <Content Include="Content\scss\_base.scss" />
-    <Content Include="Content\scss\_callouts.scss" />
-    <Content Include="Content\scss\_chocolatey-variables.scss" />
-    <Content Include="Content\scss\_icons.scss" />
-    <Content Include="Content\scss\_preloader.scss" />
-    <Content Include="Content\scss\_testimonials.scss" />
-    <Content Include="Content\scss\_navigation.scss" />
-    <Content Include="Content\scss\_carousels.scss" />
-    <Content Include="Content\scss\_backgrounds.scss" />
-    <Content Include="Content\scss\_resources.scss" />
-    <Content Include="Content\scss\_courses.scss" />
-    <Content Include="Content\scss\_cards.scss" />
-    <Content Include="Content\scss\_tabs.scss" />
-    <Content Include="Content\scss\_status-icons.scss" />
     <Content Include="Content\fonts\fa-brands-400.eot" />
     <Content Include="Content\fonts\fa-brands-400.ttf" />
     <Content Include="Content\fonts\fa-brands-400.woff" />
@@ -1298,13 +1283,7 @@
     <Content Include="Content\fonts\fa-solid-900.ttf" />
     <Content Include="Content\fonts\fa-solid-900.woff" />
     <Content Include="Content\fonts\fa-solid-900.woff2" />
-    <Content Include="Content\scss\_search.scss" />
-    <Content Include="Content\scss\_lists.scss" />
     <Content Include="Import-QuickDeployCertificate.ps1" />
-    <Content Include="Content\scss\_ribbons.scss" />
-    <Content Include="Content\scss\_countdown.scss" />
-    <Content Include="Content\scss\_collapsing-sidebar.scss" />
-    <Content Include="Content\scss\_alerts.scss" />
     <Content Include="Content\calendars\12DaysOfChocolatey-01December2020.ics" />
     <Content Include="Content\calendars\12DaysOfChocolatey-02December2020.ics" />
     <Content Include="Content\calendars\12DaysOfChocolatey-04December2020.ics" />
@@ -1319,27 +1298,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="opensearch.xml" />
-    <Content Include="Scripts\anchorjs\anchor.min.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bundle.txt" />
-    <Content Include="Scripts\clipboard.js" />
-    <Content Include="Scripts\closeable\index.js" />
-    <Content Include="Scripts\courses\courses.js" />
-    <Content Include="Scripts\custom.js" />
-    <Content Include="Scripts\easymde\easymde.min.js" />
-    <Content Include="Scripts\header\bundle.txt" />
-    <Content Include="Scripts\header\modernizr-2.6.2.js" />
-    <Content Include="Scripts\home\bundle.txt" />
-    <Content Include="Scripts\install-steps\install-steps.js" />
-    <Content Include="Scripts\jquery-3.5.1.js" />
-    <Content Include="Scripts\jquery-countdown\jquery.countdown.js" />
-    <Content Include="Scripts\manageowners\knockout-latest.js" />
-    <Content Include="Scripts\package-list\package-list.js" />
-    <Content Include="Scripts\packages\package-details.js" />
-    <Content Include="Scripts\prism\prism.js" />
+    <Content Include="Scripts\courses\chocolatey-courses.min.js" />
+    <Content Include="Scripts\events\chocolatey-events.bundle.min.js" />
+    <Content Include="Scripts\knockout\knockout-latest.min.js" />
+    <Content Include="Scripts\main\chocolatey.bundle.min.js" />
+    <Content Include="Scripts\packages\chocolatey-packages.bundle.min.js" />
+    <Content Include="Scripts\stats\chocolatey-stats.min.js" />
     <Content Include="Scripts\validation\bundle.txt" />
+    <Content Include="Scripts\validation\chocolatey-validation.js" />
     <Content Include="Scripts\validation\jquery.validate.js" />
-    <Content Include="Scripts\home\stats.js" />
     <Content Include="Scripts\validation\MicrosoftAjax.js" />
     <Content Include="Scripts\validation\MicrosoftMvcAjax.js" />
     <Content Include="Scripts\validation\MicrosoftMvcValidation.js" />
@@ -1381,18 +1348,6 @@
     <Content Include="Views\Shared\_CopyrightNavigation.cshtml" />
     <Content Include="Views\Shared\_TopNavigation.cshtml" />
     <Content Include="Views\Shared\_BottomNavigation.cshtml" />
-    <Content Include="Views\Styleguide\Home.cshtml" />
-    <Content Include="Views\Styleguide\_Layout.cshtml" />
-    <Content Include="Views\Styleguide\_ViewStart.cshtml" />
-    <Content Include="Views\Styleguide\Colors.cshtml" />
-    <Content Include="Views\Styleguide\Alerts.cshtml" />
-    <Content Include="Views\Styleguide\Buttons.cshtml" />
-    <Content Include="Views\Styleguide\Cards.cshtml" />
-    <Content Include="Views\Styleguide\Sections.cshtml" />
-    <Content Include="Views\Styleguide\Testimonials.cshtml" />
-    <Content Include="Views\Styleguide\Font.cshtml" />
-    <Content Include="Views\Styleguide\Logo.cshtml" />
-    <Content Include="Views\Styleguide\Carousels.cshtml" />
     <Content Include="Views\Resources\Files\01-02-Puppet.md" />
     <Content Include="Views\Resources\Home.cshtml" />
     <Content Include="Views\Resources\CaseStudies.cshtml" />
@@ -1545,6 +1500,12 @@
     <Content Include="Views\Resources\Files\004-10-ExploringSelfServiceAnywhere.md" />
     <Content Include="Views\Resources\Files\004-11-ShowAndTell.md" />
     <Content Include="Views\Resources\Files\004-12-QAndAPanelSession.md" />
+    <Content Include="Views\Shared\_TopNavigationCollapse.cshtml" />
+    <Content Include="Views\Shared\_TopNavigationLinks.cshtml" />
+    <Content Include="Views\GlobalPartials\_globalnavigation.cshtml" />
+    <Content Include="Views\GlobalPartials\_socialmedia.cshtml" />
+    <Content Include="yarn.lock" />
+    <Content Include="Views\Shared\_Terminal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\videos\**\*.jpg" />
@@ -1564,7 +1525,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
-    <Content Include="package-lock.json" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
@@ -1662,11 +1622,11 @@
   </Target>
   <PropertyGroup>
     <PreBuildEvent>if "%25USERNAME:~0,5%25"=="apphb" (
-  call npm install gulp -g
+  call yarn global add gulp
 )
 
 cd $(SolutionDir)chocolatey\Website
-call npm install
-call "%25appdata%25\npm\gulp"</PreBuildEvent>
+call yarn install --frozen-lockfile
+call "%25LocalAppData%25\Yarn\bin\gulp"</PreBuildEvent>
   </PropertyGroup>
 </Project>

@@ -7,7 +7,7 @@
     @Html.Partial("~/Views/Courses/_LeftSideColumn.cshtml", new CourseLeftViewModel() { CourseNameType = Model.CourseNameType, CourseModules = Model.CourseModules, UserCourseAchievements = Model.UserCourseAchievements })
 }
 @section RightSideColumn {
-    <li><a href="#package-maintainer-handover">Package Maintainer Handover</a></li>
+    <li class="nav-item"><a class="nav-link" href="#package-maintainer-handover">Package Maintainer Handover</a></li>
 }
 
 <h2 id="package-maintainer-handover" class="mb-3">Package Maintainer Handover</h2>
@@ -56,7 +56,7 @@
     else
     {
         @Html.ValidationSummary(true)
-        using (Html.BeginForm())
+        using (Html.BeginForm("CourseName", "Courses", FormMethod.Post, new { id = "quiz" }))
         {
             @Html.AntiForgeryToken()
             <fieldset class="form @if (Model.UserCourseAchievements != null)
@@ -75,7 +75,7 @@
                 @Html.HiddenFor(m => m.CourseName)
                 @Html.HiddenFor(m => m.CourseKey)
                 @Html.HiddenFor(m => m.CourseModuleKey)
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>If a Chocolatey package is not being maintained, who can take over maintenance of a package?</h5>
                     @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionOne" })
                     <label for="QuestOneOptionOne">Only Chocolatey Software, Inc. Employees</label><br />
@@ -84,7 +84,7 @@
                     @Html.RadioButtonFor(m => m.QuestionOne, "1", new { id = "QuestOneOptionThree" })
                     <label for="QuestOneOptionThree">Anyone</label>
                 </div>
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>Who has the necessary permissions on the chocolatey.org website to change the maintainer of a Chocolatey package?</h5>
                     @Html.RadioButtonFor(m => m.QuestionTwo, "1", new { id = "QuestTwoOptionOne" })
                     <label for="QuestTwoOptionOne">Chocolatey.org moderators, administrators and current package maintainers.</label><br />
@@ -93,7 +93,7 @@
                     @Html.RadioButtonFor(m => m.QuestionTwo, "0", new { id = "QuestTwoOptionThree" })
                     <label for="QuestTwoOptionThree">Anyone</label>
                 </div>
-                <input class="btn btn-primary mt-3 disabled" data-toggle="modal" data-target="#quiz-modal" type="submit" value="Check Answers" title="Check Answers" />
+                <input class="btn btn-primary mt-3 disabled" type="submit" value="Check Answers" title="Check Answers" />
             </fieldset>
         }
 

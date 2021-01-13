@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Sitemap";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
 <section class="py-3 py-lg-5">
@@ -103,23 +103,8 @@
                             <li><a href="@Url.RouteUrl(RouteName.ReportIssue)">Report a Bug</a></li>
                             <li><a href="https://status.chocolatey.org">Status</a></li>
                             <li><a href="@Url.RouteUrl(RouteName.Careers)">Careers</a></li>
-                            <li class="list-unstyled">
-                                <a href="https://twitter.com/chocolateynuget" target="_blank" rel="noreferrer">
-                                    <i aria-hidden="true" class="fab fa-twitter mr-2 h3"></i>
-                                    <span class="sr-only">Follow Chocolatey Software on Twitter</span>
-                                </a>
-                                <a href="https://facebook.com/ChocolateySoftware" target="_blank" rel="noreferrer">
-                                    <i aria-hidden="true" class="fab fa-facebook mr-2 h3"></i>
-                                    <span class="sr-only">Follow Chocolatey Software on Facebook</span>
-                                </a>
-                                <a href="https://github.com/chocolatey" target="_blank" rel="noreferrer">
-                                    <i aria-hidden="true" class="fab fa-github mr-2 h3"></i>
-                                    <span class="sr-only">Find Chocolatey Software on GitHub</span>
-                                </a>
-                                <a href="https://www.youtube.com/chocolateysoftware" target="_blank" rel="noreferrer">
-                                    <i aria-hidden="true" class="fab fa-youtube h3"></i>
-                                    <span class="sr-only">Subscribe to Chocolatey Software on YouTube</span>
-                                </a>
+                            <li class="pt-3 list-unstyled">
+                                @Html.Partial("~/Views/GlobalPartials/_socialmedia.cshtml")
                             </li>
                         </ul>
                     </div>

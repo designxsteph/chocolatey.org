@@ -1,28 +1,28 @@
 ﻿@{
     ViewBag.Title = "Solutions | Self-Service Anywhere";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 @section ExtraHeaders {
     <meta property="og:description" content="Chocolatey provides a unique approach to managing your end-user software (desktops / laptops) and can be combined with your existing solutions. Chocolatey for Business (C4B) enables better security, enhanced visibility with centralized reporting, and a self-service GUI. Self-Service Anywhere allows non-administrators to easily access and manage IT approved software from the office, from home, or anywhere they have an internet connection." />
     <meta property="description" content="Chocolatey provides a unique approach to managing your end-user software (desktops / laptops) and can be combined with your existing solutions. Chocolatey for Business (C4B) enables better security, enhanced visibility with centralized reporting, and a self-service GUI. Self-Service Anywhere allows non-administrators to easily access and manage IT approved software from the office, from home, or anywhere they have an internet connection." />
 }
 
-<div id="header" class="bg-medium-dark">
+<div class="bg-theme-primary">
     <section class="py-3 py-lg-5">
         <div class="container py-3">
             <h3 class="text-uppercase">Self-Service Anywhere</h3>
             <h1 class="mb-0">Empower Your Remote Users While Maintaining Security Policies</h1>
         </div>
     </section>
-    <div class="shape-border shape-border-bottom"></div>
+    <div class="curve curve-bottom curve-bg-theme"></div>
 </div>
 <section class="pb-3 pb-lg-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 order-2 order-lg-1 video-story resource-list">
+            <div class="col-lg-4 order-2 order-lg-1 video-story">
                 <div class="card">
-                    <div class="text-center card-body p-0" data-toggle="modal" data-target="#self-service-1">
+                    <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#self-service-1">
                         <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-0501.jpg")" alt="Chocolatey for Business Self-Service and Chocolatey GUI Part: 1" title="Chocolatey for Business Self-Service and Chocolatey GUI Part: 1" />
                     </div>
                     <div class="card-footer">
@@ -33,13 +33,13 @@
                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="fas fa-times"></span>
                                 </button>
                             </div>
                             <div class="modal-body p-0">
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/Thw9GpQaZ6M?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <div class="ratio ratio-16x9">
+                                    <iframe data-src="https://www.youtube.com/embed/Thw9GpQaZ6M?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                         <br />
                         How do you ensure your teams have the most up to date software deployed to their desktops / laptops?
                     </p>
-                    <p class="font-weight-bold">
+                    <p class="fw-bold">
                         Chocolatey provides a unique approach to managing your end-user software (desktops / laptops) and can be combined with your existing solutions. Chocolatey for Business (C4B) enables better security, enhanced visibility with centralized reporting, and a self-service GUI. 
                         Self-Service Anywhere allows non-administrators to easily access and manage IT approved software from the office, from home, or anywhere they have an internet connection.
                     </p>
@@ -69,7 +69,7 @@
         </div>
     </div>
 </section>
-<section class="bg-white pt-3 pt-lg-5">
+<section class="bg-theme-light pt-3 pt-lg-5">
     <div class="container">
         <h2 class="text-center mb-3">7 Common Challenges & Considerations When Enabling a Remote Workforce</h2>
         <div class="row align-items-center">
@@ -86,23 +86,23 @@
             </div>
             <div class="col-lg-6">
                 <div class="text-center">
-                    <img class="lazy img-fluid" width="400" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/remote-work.png")" alt="Remote Work" title="Remote Work" />
+                    <img class="lazy" width="400" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/remote-work.png")" alt="Remote Work" title="Remote Work" />
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section id="business-trusted" class="bg-white">
-    <div class="bg-primary">
-        <div class="shape-border shape-border-top"></div>
+<section id="business-trusted" class="bg-theme-light">
+    <div class="bg-theme-primary">
+        <div class="curve curve-top curve-bg-theme-light"></div>
         <div class="container pt-3 pt-lg-5 carousel-section1">
             <h2 class="text-center">Customers Who Trust This Solution</h2>
         </div>
-        <div class="shape-border shape-border-bottom shape-border-white"></div>
+        <div class="curve curve-bottom curve-bg-theme-light"></div>
     </div>
     <div class="carousel-section2">
         <div class="container">
-            <div id="testimonialCarousel" class="carousel slide carousel-fade text-dark testimonial-carousel carousel-dark" data-ride="carousel" data-touch="true">
+            <div id="testimonialCarousel" class="carousel slide carousel-fade testimonial-carousel" data-bs-ride="carousel" data-bs-touch="true">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="card">
@@ -118,7 +118,7 @@
                                     </div>
                                     <div class="col-xl-8">
                                         <div class="row">
-                                            <div class="col-12 order-xl-2 text-center text-xl-left">
+                                            <div class="col-12 order-xl-2 text-center text-xl-start">
                                                 <h3 class="mt-2 mb-0 text-primary"><small>Ryan de Temple</small></h3>
                                                 <p><small><i>Client Platform Manager at Yelp</i></small></p>
                                             </div>
@@ -135,7 +135,7 @@
                         <div class="card">
                             <div class="card-body px-xl-5 py-xl-3">
                                 <div class="text-center">
-                                    <img class="lazy img-fluid" style="max-width: 250px;" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/TheSageColleges-sm.png")" alt="The Sage Colleges" />
+                                    <img class="lazy" style="max-width: 250px;" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/businesses/TheSageColleges-sm.png")" alt="The Sage Colleges" />
                                     <noscript>
                                         <img class="img-fluid" src="@Url.Content("~/content/images/businesses/TheSageColleges-sm.png")" alt="The Sage Colleges" />
                                     </noscript>
@@ -156,19 +156,19 @@
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev d-none d-md-flex" href="#testimonialCarousel" role="button" data-slide="prev">
+                <a class="carousel-control-prev d-none d-md-flex" href="#testimonialCarousel" role="button" data-bs-slide="prev">
                     <span class="fas fa-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                    <span class="visually-hidden">Previous</span>
                 </a>
-                <a class="carousel-control-next d-none d-md-flex" href="#testimonialCarousel" role="button" data-slide="next">
+                <a class="carousel-control-next d-none d-md-flex" href="#testimonialCarousel" role="button" data-bs-slide="next">
                     <span class="fas fa-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                    <span class="visually-hidden">Next</span>
                 </a>
             </div>
         </div>
     </div>
 </section>
-<section class="pt-3 pt-lg-5 bg-white">
+<section class="pt-3 pt-lg-5 bg-theme-light">
     <div class="container">
         <h2 class="text-center mb-3">Enable Self-Service Installations for Non-Adminstrators</h2>
         <div class="row align-items-center">
@@ -188,17 +188,17 @@
         </div>
     </div>
 </section>
-<div class="bg-medium-dark border-0">
-    <div class="shape-border shape-border-top"></div>
+<div class="bg-primary-900 border-0">
+    <div class="curve curve-top curve-bg-theme-light"></div>
     <section class="py-3 py-lg-5">
         <div class="container text-center text-white">
             <h2><strong>Contact us today to get started with your free Chocolatey for Business trial!</strong></h2>
             <h3>Begin managing your software in a better way.</h3>
-            <a class="btn btn-lg btn-outline-light mt-3" href="@Url.RouteUrl(RouteName.ContactQuickDeployment)">Schedule a Demo</a>
+            <a class="btn btn-lg btn-outline-theme mt-3" href="@Url.RouteUrl(RouteName.ContactQuickDeployment)">Schedule a Demo</a>
             <a class="btn btn-lg btn-primary mt-3" href="@Url.RouteUrl(RouteName.Pricing)">Get Started</a>
         </div>
     </section>
-    <div class="shape-border shape-border-bottom"></div>
+    <div class="curve curve-bottom curve-bg-theme"></div>
 </div>
 <section class="pb-3 pb-lg-5">
     <div class="container">

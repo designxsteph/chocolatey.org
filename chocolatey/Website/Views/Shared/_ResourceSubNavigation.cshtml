@@ -1,40 +1,38 @@
-﻿<nav id="secondaryNav" class="navbar bg-white border-bottom d-none d-sm-flex">
-    <ul>
-        <li>
-            <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">
-                <span class="fas fa-play" alt="Videos"></span>
-                <span>Videos</span>
-            </a>
-        </li>
-        <li>
-            <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "features"})">
-                <span class="fas fa-star" alt="Featured Video Series"></span>
-                <span>Featured Series</span>
-            </a>
-        </li>
-        <li>
-            <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">
-                <span class="fas fa-trophy" alt="Customer Success Stories"></span>
-                <span>Success Stories</span>
-            </a>
-        </li>
-        <li>
-            <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">
-                <span class="fas fa-briefcase" alt="Case Studies"></span>
-                <span>Case Studies</span>
-            </a>
-        </li>
-        <li>
-            <a href="https://docs.chocolatey.org/en-us/">
-                <span class="fas fa-file" alt="Documentation"></span>
-                <span>Docs</span>
-            </a>
-        </li>
-        <li>
-            <a href="https://blog.chocolatey.org/">
-                <span class="fas fa-rss" alt="Blog"></span>
-                <span>Blog</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+﻿<ul class="nav fw-bold justify-content-center align-items-center text-center border-bottom d-none d-sm-flex small lh-sm">
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">
+            <span class="fas fa-play" alt="Videos"></span>
+            <p class="mb-0">Videos</p>
+        </a>
+    </li>
+    <li class="nav-item d-none d-md-flex">
+        <a class="nav-link" href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "features"})">
+            <span class="fas fa-star" alt="Featured Video Series"></span>
+            <p class="mb-0">Featured Series</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">
+            <span class="fas fa-trophy" alt="Customer Success Stories"></span>
+            <p class="mb-0">Success Stories</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">
+            <span class="fas fa-briefcase" alt="Case Studies"></span>
+            <p class="mb-0">Case Studies</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="https://docs.chocolatey.org/en-us/">
+            <span class="fas fa-file" alt="Documentation"></span>
+            <p class="mb-0">Docs</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="https://blog.chocolatey.org/">
+            <span class="fas fa-rss" alt="Blog"></span>
+            <p class="mb-0">Blog</p>
+        </a>
+    </li>
+</ul>

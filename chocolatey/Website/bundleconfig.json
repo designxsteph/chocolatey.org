@@ -1,0 +1,81 @@
+[
+  {
+    "outputFileName": "Content/css/chocolatey.bundle.css",
+    "inputFiles": [
+      "node_modules/easymde/dist/easymde.min.css",
+      "Content/css/chocolatey.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/packages/chocolatey-packages.bundle.js",
+    "inputFiles": [
+      "node_modules/easymde/dist/easymde.min.js",
+      "node_modules/choco-theme/js/chocolatey-packages.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/courses/chocolatey-courses.js",
+    "inputFiles": [
+      "node_modules/choco-theme/js/chocolatey-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/knockout/knockout-latest.js",
+    "inputFiles": [
+      "node_modules/knockout/build/output/knockout-latest.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/events/chocolatey-events.bundle.js",
+    "inputFiles": [
+      "node_modules/jquery.countdown/jquery.countdown.js",
+      "node_modules/choco-theme/js/chocolatey-countdown.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/stats/chocolatey-stats.js",
+    "inputFiles": [
+      "node_modules/choco-theme/js/chocolatey-stats.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/main/chocolatey.bundle.js",
+    "inputFiles": [
+      "node_modules/jquery/dist/jquery.js",
+      "node_modules/choco-theme/js/chocolatey-loader.js",
+      "node_modules/bootstrap/js/dist/dom/data.js",
+      "node_modules/bootstrap/js/dist/dom/event-handler.js",
+      "node_modules/bootstrap/js/dist/dom/manipulator.js",
+      "node_modules/bootstrap/js/dist/dom/selector-engine.js",
+      "node_modules/bootstrap/js/dist/alert.js",
+      "node_modules/bootstrap/js/dist/button.js",
+      "node_modules/bootstrap/js/dist/collapse.js",
+      "node_modules/bootstrap/js/dist/tab.js",
+      "node_modules/bootstrap/js/dist/carousel.js",
+      "node_modules/bootstrap/js/dist/modal.js",
+      "node_modules/clipboard/dist/clipboard.min.js",
+      "node_modules/choco-theme/js/prism.min.js",
+      "node_modules/mousetrap/mousetrap.js",
+      "node_modules/choco-theme/js/chocolatey-theme-toggle.js",
+      "node_modules/choco-theme/js/chocolatey-functions.js",
+      "node_modules/choco-theme/js/chocolatey-authentication.js",
+      "node_modules/choco-theme/js/chocolatey-lazyload.js",
+      "node_modules/choco-theme/js/chocolatey-alerts.js",
+      "node_modules/choco-theme/js/chocolatey-collapse-y-height.js",
+      "node_modules/choco-theme/js/chocolatey-collapse-nested.js",
+      "node_modules/choco-theme/js/chocolatey-collapse-responsive.js",
+      "node_modules/choco-theme/js/chocolatey-announcements.js",
+      "node_modules/choco-theme/js/chocolatey-code.js",
+      "node_modules/choco-theme/js/chocolatey-markdown.js",
+      "node_modules/choco-theme/js/chocolatey-search.js",
+      "node_modules/choco-theme/js/chocolatey-shuffle.js",
+      "node_modules/choco-theme/js/chocolatey-scrollspy.js",
+      "node_modules/choco-theme/js/chocolatey-terminal.js",
+      "node_modules/choco-theme/js/chocolatey-clipboard.js",
+      "node_modules/choco-theme/js/chocolatey-show-hide.js",
+      "node_modules/choco-theme/js/chocolatey-internal-url.js",
+      "node_modules/choco-theme/js/chocolatey-collapse-topnav.js",
+      "node_modules/choco-theme/js/chocolatey-org.js"
+    ]
+  }
+]

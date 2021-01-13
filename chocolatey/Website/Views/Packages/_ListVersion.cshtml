@@ -49,26 +49,26 @@
             switch (Model.Package.SubmittedStatus)
             {
                 case PackageSubmittedStatusType.Pending:
-                    <td><span class="badge badge-pill badge-warning">Pending Automated Review</span></td>
+                    <td><span class="badge rounded-pill bg-warning text-dark">Pending Automated Review</span></td>
                     break;
                 case PackageSubmittedStatusType.Ready:
-                    <td><span class="badge badge-pill badge-success">Ready</span></td>
+                    <td><span class="badge rounded-pill bg-success">Ready</span></td>
                     break;
                 case PackageSubmittedStatusType.Updated:
                     <td class="d-flex align-items-center">
-                        <span class="badge badge-pill badge-orange mr-1">Updated</span>
+                        <span class="badge rounded-pill bg-orange text-dark me-1">Updated</span>
                         @ViewHelpers.OwnersGravatarListPackages(Model.Package.Owners, 24, Url)   
                     </td>
                     break;
                 case PackageSubmittedStatusType.Responded:
                     <td class="d-flex align-items-center">
-                    <span class="badge badge-pill badge-purple mr-1">Responded</span>
+                    <span class="badge rounded-pill bg-purple me-1">Responded</span>
                         @ViewHelpers.OwnersGravatarListPackages(Model.Package.Owners, 24, Url)
                     </td>
                     break;
                 default:
                     <td class="d-flex align-items-center">
-                        <span class="badge badge-pill badge-danger mr-1">Waiting for Maintainer</span>
+                        <span class="badge rounded-pill bg-danger me-1">Waiting for Maintainer</span>
                         @if (!string.IsNullOrWhiteSpace(Model.Package.ReviewerEmailAddress))
                         {
                             <a href="@Url.Action(MVC.Users.Profiles(Model.Package.ReviewerUserName))">@ViewHelpers.GravatarImage(Model.Package.ReviewerEmailAddress, Model.Package.ReviewerUserName, 24)</a>
@@ -96,7 +96,7 @@
             <td>
                 @if (!string.IsNullOrWhiteSpace(Model.Package.ReviewComments))
                 {
-                    <button type="button" data-toggle="collapse" data-target="#@divVersionId" aria-expanded="false" aria-controls="@divVersionId" class="btn btn-sm btn-secondary mr-2 ">Show</button>
+                    <button type="button" data-bs-toggle="collapse" data-bs-target="#@divVersionId" aria-expanded="false" aria-controls="@divVersionId" class="btn btn-sm btn-secondary btn-show-hide me-2 ">Show</button>
                 }
             </td>
         }

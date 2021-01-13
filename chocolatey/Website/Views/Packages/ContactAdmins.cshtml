@@ -1,9 +1,8 @@
 ﻿@model ContactAdminsViewModel
 @{
     ViewBag.Tab = "Packages";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
     Bundles.Reference("Scripts/validation");
 }
 @section TopScripts {
@@ -15,13 +14,11 @@
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 }
 
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-</section>
-<section class="container py-3 py-xl-5" id="account">
+@Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
+<section class="container py-3 py-xl-5">
     <div class="row">
         <div class="col-xl-10 mx-auto">
-            <h2 class="text-center text-xl-left">Contact Website Administrators about <a href="@Url.Package(Model.PackageId,  null)">@Model.PackageId</a></h2>
+            <h2 class="text-center text-xl-start">Contact Website Administrators about <a href="@Url.Package(Model.PackageId,  null)">@Model.PackageId</a></h2>
             <hr />
             <div class="callout callout-secondary">
                 <p>
@@ -44,42 +41,39 @@
                 <fieldset class="form">
                     <legend class="d-none">Contact Admins</legend>
                     @Html.AntiForgeryToken()
-                    <div class="form-field">
+                    <div class="mt-3">
                         @if (!Model.ConfirmedUser)
                         {
-                            @Html.LabelFor(m => m.Email) <span class="fas fa-asterisk"></span>
-                            @Html.EditorFor(m => m.Email)
-                            <span class="field-hint-message">Provide your email address so we can follow up with you.</span>
+                            @Html.LabelFor(m => m.Email) <span class="fas fa-asterisk text-primary small"></span>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control mt-2" })
+                            <div class="form-text">Provide your email address so we can follow up with you.</div>
                             @Html.ValidationMessageFor(m => m.Email)
                         }
                         else
                         {
-                            <input type="hidden" name="Email" value="test@example.com" />
+                            <input class="form-control" type="hidden" name="Email" value="test@example.com" />
                         }
                     </div>
-                    <div class="form-field mt-3">
-                        @Html.LabelFor(m => m.Message) <span class="fas fa-asterisk"></span>
-                        @Html.TextAreaFor(m => m.Message, new { @rows = 5 })
+                    <div class="mt-3">
+                        @Html.LabelFor(m => m.Message) <span class="fas fa-asterisk text-primary small"></span>
+                        @Html.TextAreaFor(m => m.Message, new { @rows = 5, @class = "form-control mt-2" })
                         @Html.ValidationMessageFor(m => m.Message)
                     </div>
-                    <div class="form-field my-3">
-                        <label class="for-checkbox checkbox">
-                            @Html.CheckBoxFor(m => m.CopySender, new { @class = "check-box" })
-                            Send me a copy
-                            <span class="checkmark"></span>
-                        </label>
+                    <div class="form-check my-3">
+                        @Html.CheckBoxFor(m => m.CopySender, new { @class = "form-check-input" })
+                        <label class="form-check-label" for="CopySender">Send me a copy</label>
                     </div>
-                    @if(ViewData.ModelState["SpamValidationResponse"] != null)
+                    @if (ViewData.ModelState["SpamValidationResponse"] != null)
                     {
                         <ul class="list-unstyled callout callout-danger">
                             <li><strong>reCAPTCHA Error(s):</strong></li>
-                            @foreach(var error in ViewData.ModelState["SpamValidationResponse"].Errors)
+                            @foreach (var error in ViewData.ModelState["SpamValidationResponse"].Errors)
                             {
                                 <li class="field-validation-error">@Html.Raw(error.ErrorMessage)</li>
                             }
                         </ul>
                     }
-                    <p class="mt-3"><small>Fields marked with</small> <span class="fas fa-asterisk"></span> <small>are required.</small></p>
+                    <p class="mt-3"><small>Fields marked with</small> <span class="fas fa-asterisk text-primary small"></span> <small>are required.</small></p>
                     <input class="btn btn-primary g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["reCAPTCHA::PublicKey"]" data-callback="onSubmit" data-badge="bottomleft" data-action="Form_ContactAdmins" data-type="form" type="submit" value="Send Message" title="Contact Admins about '@Model.PackageId'" />
                 </fieldset>
             }

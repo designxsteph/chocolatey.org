@@ -1,20 +1,19 @@
 ﻿@{
     ViewBag.Title = "Chocolatey for Business";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
-<section id="secondaryNav" class="sticky-top c4b-nav">
+<section class="sticky-top">
     @Html.Partial("~/Views/Shared/_C4BSubNavigation.cshtml")
 </section>
-<div id="header" class="c4b-header">
+<div class="bg-img-cover bg-desk">
     <section class="py-3 py-lg-5">
-        <div class="container text-center text-white">
-            <h1 class="mb-4">Modern Software Automation</h1>
-            <h4>Chocolatey for Business</h4>
-            <h5>Automate your entire Windows Software Lifecycle</h5>
-            <div class="row mt-lg-5 pb-lg-3 text-dark">
+        <div class="container text-center">
+            <h1 class="mb-4 text-dark">Modern Software Automation</h1>
+            <h4 class="text-dark">Chocolatey for Business</h4>
+            <h5 class="text-dark">Automate your entire Windows Software Lifecycle</h5>
+            <div class="row mt-lg-5 pb-lg-3">
                 <div class="col-lg-10 mx-auto">
                     <div class="row card-row">
                         <div class="col-md-4 mb-4">
@@ -44,29 +43,29 @@
                     </div>
                 </div>
             </div>
-            <a class="btn btn-outline-light btn-lg" href="#benefits">Learn More</a>
-            <a class="btn btn-light btn-lg" href="#pricing">Purchase</a>
+            <a class="btn btn-outline-theme btn-lg" href="#benefits">Learn More</a>
+            <a class="btn btn-theme btn-lg" href="#pricing">Purchase</a>
         </div>
     </section>
 </div>
-<section id="benefits" class="bg-white py-3 py-lg-5">
+<section id="benefits" class="bg-theme-light py-3 py-lg-5">
     <div class="container">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="benifit-1-tab" data-toggle="tab" href="#benifit-1" role="tab" aria-controls="benifit-1" aria-selected="true">Simplify Complex Processes</a>
+                <a class="nav-link active" id="benifit-1-tab" data-bs-toggle="tab" href="#benifit-1" role="tab" aria-controls="benifit-1" aria-selected="true">Simplify Complex Processes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="benifit-2-tab" data-toggle="tab" href="#benifit-2" role="tab" aria-controls="benifit-2" aria-selected="false">Save Time & Effort</a>
+                <a class="nav-link" id="benifit-2-tab" data-bs-toggle="tab" href="#benifit-2" role="tab" aria-controls="benifit-2" aria-selected="false">Save Time & Effort</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="benifit-3-tab" data-toggle="tab" href="#benifit-3" role="tab" aria-controls="benifit-3" aria-selected="false">Improve Visiblity, Control, & Security</a>
+                <a class="nav-link" id="benifit-3-tab" data-bs-toggle="tab" href="#benifit-3" role="tab" aria-controls="benifit-3" aria-selected="false">Improve Visiblity, Control, & Security</a>
             </li>
         </ul>
         <div class="tab-content p-3">
             <div class="tab-pane fade show active" id="benifit-1" role="tabpanel" aria-labelledby="benifit-1-tab">
                 <div class="row align-items-center">
                     <div class="col-lg-6 text-center">
-                        <img class="lazy img-fluid" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/tangled-arrows.png")" style="max-width:300px" alt="Simplify Complex Processes" title="Simplify Complex Processes" />
+                        <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/tangled-arrows.png")" style="max-width:300px" alt="Simplify Complex Processes" title="Simplify Complex Processes" />
                     </div>
                     <div class="col-lg-6">
                         <p>There are a lot of different installer formats and multiple approaches to deploying Windows software. Deploying software without package management on Windows can be complicated and time-consuming.</p>
@@ -81,7 +80,7 @@
             <div class="tab-pane fade" id="benifit-2" role="tabpanel" aria-labelledby="benifit-2-tab">
                 <div class="row align-items-center">
                     <div class="col-lg-6 text-center">
-                        <img class="lazy img-fluid" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/sync-watch.png")" style="max-width:300px" alt="Save Time & Effort" title="Save Time & Effort" />
+                        <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/sync-watch.png")" style="max-width:300px" alt="Save Time & Effort" title="Save Time & Effort" />
                     </div>
                     <div class="col-lg-6">
                         <p>
@@ -115,13 +114,13 @@
 </section>
 <section class="pt-3 pt-lg-5">
     <div class="container">
-        <div id="informationCarousel" class="carousel slide carousel-fade information-carousel" data-ride="carousel" data-touch="true" data-interval="10000">
+        <div id="informationCarousel" class="carousel slide carousel-fade information-carousel" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="10000">
             <ol class="carousel-indicators">
-                <li data-target="#informationCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#informationCarousel" data-slide-to="1"></li>
-                <li data-target="#informationCarousel" data-slide-to="2"></li>
-                <li data-target="#informationCarousel" data-slide-to="3"></li>
-                <li data-target="#informationCarousel" data-slide-to="4"></li>
+                <li data-bs-target="#informationCarousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#informationCarousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#informationCarousel" data-bs-slide-to="2"></li>
+                <li data-bs-target="#informationCarousel" data-bs-slide-to="3"></li>
+                <li data-bs-target="#informationCarousel" data-bs-slide-to="4"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -137,7 +136,7 @@
                         </div>
                         <div class="col-lg-6 text-center video-story resource-list d-none d-sm-block">
                             <div class="card w-75 mx-auto">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-3-video-1">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-3-video-1">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-07.jpg")" alt="Chocolatey for Business - Chocolatey Central Management" title="Chocolatey for Business - Chocolatey Central Management" />
                                 </div>
                                 <div class="card-footer">
@@ -206,7 +205,7 @@
                         </div>
                         <div class="col-lg-6 text-center video-story resource-list d-none d-sm-block">
                             <div class="card w-75 mx-auto">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-4-video-1">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-4-video-1">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-0501.jpg")" alt="Chocolatey for Business Self-Service and Chocolatey GUI Part: 1" title="Chocolatey for Business Self-Service and Chocolatey GUI Part: 1" />
                                 </div>
                                 <div class="card-footer">
@@ -217,28 +216,28 @@
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#informationCarousel" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#informationCarousel" role="button" data-bs-slide="prev">
                 <span class="fas fa-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
+                <span class="visually-hidden">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#informationCarousel" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#informationCarousel" role="button" data-bs-slide="next">
                 <span class="fas fa-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+                <span class="visually-hidden">Next</span>
             </a>
         </div>
     </div>
 </section>
-<section id="business-trusted" class="shape-border-light">
+<section id="business-trusted" class="curve-bg-theme">
     @Html.Partial("~/Views/Pages/_TrustedBusinessCarousel.cshtml")
 </section>
 <section id="features">
-    <div class="bg-medium-dark">
-        <div class="shape-border shape-border-top shape-border-light"></div>
+    <div class="bg-primary-900 text-theme">
+        <div class="curve curve-top curve-bg-theme"></div>
         <div class="container py-3 py-lg-5">
-            <div class="bg-white shadow p-2">
-                <a class="h4 font-weight-bold collapse show" data-toggle="collapse" href="#feature-1" role="button" aria-expanded="true" aria-controls="feature-1" title="Package Builder">Package Builder</a>
+            <div class="bg-theme-primary-light border p-3">
+                <a class="h4 fw-bold btn-collapse mb-0" data-bs-toggle="collapse" href="#feature-1" role="button" aria-expanded="true" aria-controls="feature-1" title="Package Builder">Package Builder</a>
             </div>
-            <div class="collapse show bg-white text-dark shadow border-top" id="feature-1">
+            <div class="collapse show bg-theme-light-2 shadow border-top" id="feature-1">
                 <div class="p-3">
                     <h3>Generate Software Deployment Packages in Seconds</h3>
                     <ul>
@@ -250,7 +249,7 @@
                     <div class="row video-story resource-list">
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-1-video-1">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-1-video-1">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-0301.jpg")" alt="Chocolatey for Business Package Builder Part: 1" title="Chocolatey for Business Package Builder Part: 1" />
                                 </div>
                                 <div class="card-footer">
@@ -260,7 +259,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-1-video-2">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-1-video-2">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-0302.jpg")" alt="Chocolatey for Business Package Builder Part: 2" title="Chocolatey for Business Package Builder Part: 2" />
                                 </div>
                                 <div class="card-footer">
@@ -271,10 +270,10 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white shadow p-2 mt-3">
-                <a class="h4 font-weight-bold collapsed" data-toggle="collapse" href="#feature-2" role="button" aria-expanded="false" aria-controls="feature-2" title="Package Internalizer">Package Internalizer</a>
+            <div class="bg-theme-primary-light border p-3 mt-3">
+                <a class="h4 fw-bold btn-collapse collapsed" data-bs-toggle="collapse" href="#feature-2" role="button" aria-expanded="false" aria-controls="feature-2" title="Package Internalizer">Package Internalizer</a>
             </div>
-            <div class="collapse bg-white text-dark shadow border-top" id="feature-2">
+            <div class="collapse bg-theme-light-2 shadow border-top" id="feature-2">
                 <div class="p-3">
                     <h3>Convert Community Packages to 100% Offline & Reliable Use</h3>
                     <ul>
@@ -286,7 +285,7 @@
                     <div class="row video-story resource-list">
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-2-video-1">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-2-video-1">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-0401.jpg")" alt="Chocolatey for Business Package Internalizer Part: 1" title="Chocolatey for Business Package Internalizer Part: 1" />
                                 </div>
                                 <div class="card-footer">
@@ -296,7 +295,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-2-video-2">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-2-video-2">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-0402.jpg")" alt="Chocolatey for Business Package Internalizer Part: 2" title="Chocolatey for Business Package Internalizer Part: 2" />
                                 </div>
                                 <div class="card-footer">
@@ -307,10 +306,10 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white shadow p-2 mt-3">
-                <a class="h4 font-weight-bold collapsed" data-toggle="collapse" href="#feature-3" role="button" aria-expanded="false" aria-controls="feature-3" title="Chocolatey Central Management (CCM)">Chocolatey Central Management (CCM)</a>
+            <div class="bg-theme-primary-light border p-3 mt-3">
+                <a class="h4 fw-bold btn-collapse collapsed" data-bs-toggle="collapse" href="#feature-3" role="button" aria-expanded="false" aria-controls="feature-3" title="Chocolatey Central Management (CCM)">Chocolatey Central Management (CCM)</a>
             </div>
-            <div class="collapse bg-white text-dark shadow border-top" id="feature-3">
+            <div class="collapse bg-theme-light-2 border-top" id="feature-3">
                 <div class="p-3">
                     <h3>Real-Time Insights</h3>
                     <ul>
@@ -326,7 +325,7 @@
                     <div class="row video-story resource-list">
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-3-video-1">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-3-video-1">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-07.jpg")" alt="Chocolatey for Business - Chocolatey Central Management" title="Chocolatey for Business - Chocolatey Central Management" />
                                 </div>
                                 <div class="card-footer">
@@ -337,10 +336,10 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white shadow p-2 mt-3">
-                <a class="h4 font-weight-bold collapsed" data-toggle="collapse" href="#feature-4" role="button" aria-expanded="false" aria-controls="feature-4" title="Self-Service Anywhere">Self-Service Anywhere</a>
+            <div class="bg-theme-primary-light border p-3 mt-3">
+                <a class="h4 fw-bold btn-collapse collapsed" data-bs-toggle="collapse" href="#feature-4" role="button" aria-expanded="false" aria-controls="feature-4" title="Self-Service Anywhere">Self-Service Anywhere</a>
             </div>
-            <div class="collapse bg-white text-dark shadow border-top" id="feature-4">
+            <div class="collapse bg-theme-light-2 shadow border-top" id="feature-4">
                 <div class="p-3">
                     <h3>Empower Your User Base While Maintaining Security Policies</h3>
                     <ul>
@@ -353,7 +352,7 @@
                     <div class="row video-story resource-list">
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-4-video-1">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-4-video-1">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-0501.jpg")" alt="Chocolatey for Business Self-Service and Chocolatey GUI Part: 1" title="Chocolatey for Business Self-Service and Chocolatey GUI Part: 1" />
                                 </div>
                                 <div class="card-footer">
@@ -363,7 +362,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-4-video-2">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-4-video-2">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-0502.jpg")" alt="Chocolatey for Business Self-Service and Chocolatey GUI Part: 2" title="Chocolatey for Business Self-Service and Chocolatey GUI Part: 2" />
                                 </div>
                                 <div class="card-footer">
@@ -374,10 +373,10 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white shadow p-2 mt-3">
-                <a class="h4 font-weight-bold collapsed" data-toggle="collapse" href="#feature-5" role="button" aria-expanded="false" aria-controls="feature-5" title="Package Synchronizer">Package Synchronizer</a>
+            <div class="bg-theme-primary-light border p-3 mt-3">
+                <a class="h4 fw-bold btn-collapse collapsed" data-bs-toggle="collapse" href="#feature-5" role="button" aria-expanded="false" aria-controls="feature-5" title="Package Synchronizer">Package Synchronizer</a>
             </div>
-            <div class="collapse bg-white text-dark shadow border-top" id="feature-5">
+            <div class="collapse bg-theme-light-2 shadow border-top" id="feature-5">
                 <div class="p-3">
                     <h3>Improve Accuracy & Simplify Software Management</h3>
                     <ul>
@@ -392,7 +391,7 @@
                     <div class="row video-story resource-list">
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="text-center card-body p-0" data-toggle="modal" data-target="#feature-5-video-1">
+                                <div class="text-center card-body p-0" data-bs-toggle="modal" data-bs-target="#feature-5-video-1">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/videos/04-06.jpg")" alt="Chocolatey for Business - Package Synchronizer" title="Chocolatey for Business - Package Synchronizer" />
                                 </div>
                                 <div class="card-footer">
@@ -403,10 +402,10 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white shadow p-2 mt-3">
-                <a class="h4 font-weight-bold collapsed" data-toggle="collapse" href="#feature-6" role="button" aria-expanded="false" aria-controls="feature-6" title="Package Audit">Package Audit</a>
+            <div class="bg-theme-primary-light border p-3 mt-3">
+                <a class="h4 fw-bold btn-collapse collapsed" data-bs-toggle="collapse" href="#feature-6" role="button" aria-expanded="false" aria-controls="feature-6" title="Package Audit">Package Audit</a>
             </div>
-            <div class="collapse bg-white text-dark shadow border-top" id="feature-6">
+            <div class="collapse bg-theme-light-2 shadow border-top" id="feature-6">
                 <div class="p-3">
                     <h3>Inventory - Comprehensive Software Audit</h3>
                     <ul>
@@ -416,11 +415,10 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="bg-white shadow p-2 mt-3">
-                <a class="h4 font-weight-bold collapsed" data-toggle="collapse" href="#feature-7" role="button" aria-expanded="false" aria-controls="feature-7" title="Package Reducer">Package Reducer</a>
+            <div class="bg-theme-primary-light border p-3 mt-3">
+                <a class="h4 fw-bold btn-collapse collapsed" data-bs-toggle="collapse" href="#feature-7" role="button" aria-expanded="false" aria-controls="feature-7" title="Package Reducer">Package Reducer</a>
             </div>
-            <div class="collapse bg-white text-dark shadow border-top" id="feature-7">
+            <div class="collapse bg-theme-light-2 shadow border-top" id="feature-7">
                 <div class="p-3">
                     <h3>Automatically Optimize Your Deployments</h3>
                     <ul>
@@ -431,7 +429,7 @@
                 </div>
             </div>
         </div>
-        <div class="shape-border shape-border-bottom"></div>
+        <div class="curve curve-bottom curve-bg-theme"></div>
     </div>
 </section>
 <section id="pricing" class="pb-3 pb-lg-5">
@@ -449,14 +447,14 @@
                                 <h1 class="text-center display-4 pt-2"><strong>$16</strong></h1>
                                 <p class="text-center pb-2">/license per year</p>
                             </div>
-                            <div class="card-footer pt-0 text-center bg-white">
+                            <div class="card-footer pt-0 text-center bg-theme-light">
                                 <a href="https://checkout.bluesnap.com/buynow/checkout?sku3343184=1&storeid=269004&quantity=100" rel="noreferrer" title="Secure Online Payments by BlueSnap" alt="Secure Online Payments and Credit Card Processing by BlueSnap" class="btn btn-outline-secondary" target="_blank">Purchase</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 pt-3">
                         <div class="card h-100">
-                            <div class="card-header bg-primary p-0 text-center">
+                            <div class="card-header bg-theme-primary p-0 text-center">
                                 <h3 class="p-3 mb-0"><strong>Medium</strong></h3>
                                 <p class="p-2 mb-0"><strong>500+ Machines</strong></p>
                             </div>
@@ -464,7 +462,7 @@
                                 <h1 class="text-center display-4 pt-2"><strong>$15.60</strong></h1>
                                 <p class="text-center pb-2">/license per year</p>
                             </div>
-                            <div class="card-footer pt-0 text-center bg-white">
+                            <div class="card-footer pt-0 text-center bg-theme-light">
                                 <a href="https://checkout.bluesnap.com/buynow/checkout?sku3343184=1&storeid=269004&quantity=100" rel="noreferrer" title="Secure Online Payments by BlueSnap" alt="Secure Online Payments and Credit Card Processing by BlueSnap" class="btn btn-outline-primary" target="_blank">Purchase</a>
                             </div>
                         </div>
@@ -474,14 +472,14 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="bg-medium-dark mt-4 p-3">
+                <div class="bg-primary-900 mt-4 p-3">
                     <div class="row align-items-center">
                         <div class="col-lg-8">
                             <p class="mb-0">Enterprise 2000+ Machines</p>
                             <p class="mb-lg-0">Education & Non-Profits - Special pricing options</p>
                         </div>
                         <div class="col-lg-4 text-center">
-                            <a href="@Url.RouteUrl(RouteName.ContactSales)" class="btn btn-outline-light ml-lg-4" target="_blank">Contact Us</a>
+                            <a href="@Url.RouteUrl(RouteName.ContactSales)" class="btn btn-outline-theme ms-lg-4" target="_blank">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -489,7 +487,7 @@
         </div>
     </div>
 </section>
-<section class="py-3 bg-primary">
+<section class="py-3 bg-theme-primary">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
@@ -497,7 +495,7 @@
                 <p class="mb-lg-0">Not quite ready to buy? Let our team demo Chocolatey for Business to you.</p>
             </div>
             <div class="col-lg-4 text-center">
-                <a href="@Url.RouteUrl(RouteName.ContactTrial)" class="btn btn-outline-light ml-lg-3" target="_blank">Contact Us</a>
+                <a href="@Url.RouteUrl(RouteName.ContactTrial)" class="btn btn-outline-theme ms-lg-3" target="_blank">Contact Us</a>
             </div>
         </div>
     </div>
@@ -510,13 +508,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fas fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/vR8VQkP4vmk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe data-src="https://www.youtube.com/embed/vR8VQkP4vmk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -526,13 +524,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fas fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/QJ3XIY64WAM?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe data-src="https://www.youtube.com/embed/QJ3XIY64WAM?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -542,13 +540,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fas fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/JCByzPHo0os?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe data-src="https://www.youtube.com/embed/JCByzPHo0os?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -558,13 +556,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fas fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/XxqGyHnqWEk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe data-src="https://www.youtube.com/embed/XxqGyHnqWEk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -574,13 +572,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fas fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/Uft68tnxDEQ?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe data-src="https://www.youtube.com/embed/Uft68tnxDEQ?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -590,13 +588,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fas fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/Thw9GpQaZ6M?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe data-src="https://www.youtube.com/embed/Thw9GpQaZ6M?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -606,13 +604,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fas fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/BnnAwFftUwU?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe data-src="https://www.youtube.com/embed/BnnAwFftUwU?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -622,13 +620,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fas fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/MG98KS__5C8?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="ratio ratio-16x9">
+                        <iframe data-src="https://www.youtube.com/embed/MG98KS__5C8?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>

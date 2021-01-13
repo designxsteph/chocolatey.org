@@ -1,100 +1,73 @@
-﻿<section class="container py-5 text-center text-md-left">
-    <div class="row">
-        <div class="col-md-3 mx-auto">
-            <h3>Overview</h3>
-            <ul class="list-unstyled mb-0">
-                <li><a href="@Url.RouteUrl(RouteName.About)">About</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Courses)">Getting Started Guide</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.WhyChocolatey)">Why Chocolatey</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.HowChocolateyWorks)">How Chocolatey Works</a></li>
-                <li><a href="https://docs.chocolatey.org/en-us/information/security">Security</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Privacy)">Privacy Policy</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Kickstarter)">Kickstarter</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Partner)">Partner</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">Customer Stories</a></li>
-            </ul>
+﻿<section class="bg-theme-primary-light fw-bold border-top py-5 text-center text-md-start">
+    <div class="container">
+        <div class="row row-divider row-md-divider-none ">
+            <div class="col-md-3 pb-3 pb-md-0">
+                <h4>Overview</h4>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@Url.RouteUrl(RouteName.About)">About</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Courses)">Getting Started Guide</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.WhyChocolatey)">Why Chocolatey</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.HowChocolateyWorks)">How Chocolatey Works</a></li>
+                    <li><a href="https://docs.chocolatey.org/en-us/information/security">Security</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Privacy)">Privacy Policy</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Kickstarter)">Kickstarter</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Partner)">Partner</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">Customer Stories</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+                <h4>Product</h4>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@Url.RouteUrl(RouteName.Solutions, new {solutionName = "home"})">Solution: Self-Service Anywhere</a></li>
+                    <li><a href="https://docs.chocolatey.org/en-us/quick-deployment/">Solution: Quick Deployment Environment (QDE)</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Solutions, new {solutionName = "secure-offline-deployments"})">Solution: Secure Offline Deployments</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Products, new {productName = "chocolatey-for-business"})">Chocolatey for Business</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Products, new {productName = "home"})#pro-edition">Pro Edition</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Products, new {productName = "home"})#foss">Open Source</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.ContactTrial)">C4B Trial</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Pricing)">Pricing</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Support)">Support</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.ListPackages)">Community Packages</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Events, new { eventName = "home" })">Events</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+                <h4>Learn</h4>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@Url.RouteUrl(RouteName.Resources)">Resource Library</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Events, new { eventName = "home" })">Events</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Covid19)">COVID-19 Resources</a></li>
+                    <li><a href="https://docs.chocolatey.org/en-us/">Docs</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">Videos</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">Case Studies</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Courses)">Courses</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.MediaKit)">Media Kit</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Sitemap)">Sitemap</a></li>
+                    <li class="d-flex">
+                        <a class="me-2" href="https://blog.chocolatey.org/">Blog</a>
+                        <a href="http://feeds.feedburner.com/ChocolateyBlog" rel="alternate" type="application/rss+xml" target="_blank" aria-label="Connect with Chocolatey on pur Blog RSS feed">
+                            <div class="bg-rss circle circle-sm" aria-hidden="true">
+                                <i class="fas fa-rss"></i>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 pt-3 pt-md-0">
+                <h4>Connect</h4>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@Url.RouteUrl(RouteName.ContactUs)">Contact Us</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Support)">Support</a></li>
+                    <li><a href="http://eepurl.com/4qUJH">Newsletter</a></li>
+                    <li><a href="http://cafepress.com/chocolatey">Shop</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.ReportIssue)">Report a Bug</a></li>
+                    <li><a href="https://status.chocolatey.org">Status</a></li>
+                    <li><a href="@Url.RouteUrl(RouteName.Careers)">Careers</a></li>
+                    <li class="pt-3">
+                        @Html.Partial("~/Views/GlobalPartials/_socialmedia.cshtml")
+                    </li>
+                </ul>
+            </div>
         </div>
-        <hr class="clearfix w-100 d-md-none">
-        <div class="col-md-3 mx-auto">
-            <h3>Product</h3>
-            <ul class="list-unstyled mb-0">
-                <li><a href="@Url.RouteUrl(RouteName.Solutions, new {solutionName = "home"})">Solution: Self-Service Anywhere</a></li>
-                <li><a href="https://docs.chocolatey.org/en-us/quick-deployment/">Solution: Quick Deployment Environment (QDE)</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Solutions, new {solutionName = "secure-offline-deployments"})">Solution: Secure Offline Deployments</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Products, new {productName = "chocolatey-for-business"})">Chocolatey for Business</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Products, new {productName = "home"})#pro-edition">Pro Edition</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Products, new {productName = "home"})#foss">Open Source</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.ContactTrial)">C4B Trial</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Pricing)">Pricing</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Support)">Support</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.ListPackages)">Community Packages</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Events, new { eventName = "home" })">Events</a></li>
-            </ul>
-        </div>
-        <hr class="clearfix w-100 d-md-none">
-        <div class="col-md-3 mx-auto">
-            <h3>Learn</h3>
-            <ul class="list-unstyled mb-0">
-                <li><a href="@Url.RouteUrl(RouteName.Resources)">Resource Library</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Events, new { eventName = "home" })">Events</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Covid19)">COVID-19 Resources</a></li>
-                <li><a href="https://docs.chocolatey.org/en-us/">Docs</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">Videos</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">Case Studies</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Courses)">Courses</a></li>
-                <li><a href="https://blog.chocolatey.org/">Blog</a> <a href="http://feeds.feedburner.com/ChocolateyBlog" rel="alternate" type="application/rss+xml"><img src="//feedburner.google.com/fb/images/pub/feed-icon16x16.png" alt="Chocolatey Blog" style="vertical-align:middle;border:0" /></a></li>
-                <li><a href="@Url.RouteUrl(RouteName.MediaKit)">Media Kit</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Sitemap)">Sitemap</a></li>
-            </ul>
-        </div>
-        <hr class="clearfix w-100 d-md-none">
-        <div class="col-md-3 mx-auto">
-            <h3>Connect</h3>
-            <ul class="list-unstyled mb-0">
-                <li><a href="@Url.RouteUrl(RouteName.ContactUs)">Contact Us</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Support)">Support</a></li>
-                <li><a href="http://eepurl.com/4qUJH">Newsletter</a></li>
-                <li><a href="http://cafepress.com/chocolatey">Shop</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.ReportIssue)">Report a Bug</a></li>
-                <li><a href="https://status.chocolatey.org">Status</a></li>
-                <li><a href="@Url.RouteUrl(RouteName.Careers)">Careers</a></li>
-                <li>
-                    <a href="https://twitter.com/chocolateynuget" target="_blank" rel="noreferrer">
-                        <i aria-hidden="true" class="fab fa-twitter mr-2 h3"></i>
-                        <span class="sr-only">Follow Chocolatey Software on Twitter</span>
-                    </a>
-                    <a href="https://facebook.com/ChocolateySoftware" target="_blank" rel="noreferrer">
-                        <i aria-hidden="true" class="fab fa-facebook mr-2 h3"></i>
-                        <span class="sr-only">Follow Chocolatey Software on Facebook</span>
-                    </a>
-                    <a href="https://github.com/chocolatey" target="_blank" rel="noreferrer">
-                        <i aria-hidden="true" class="fab fa-github mr-2 h3"></i>
-                        <span class="sr-only">Find Chocolatey Software on GitHub</span>
-                    </a>
-                    <a href="https://www.youtube.com/chocolateysoftware" target="_blank" rel="noreferrer">
-                        <i aria-hidden="true" class="fab fa-youtube h3"></i>
-                        <span class="sr-only">Subscribe to Chocolatey Software on YouTube</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        @*<hr class="clearfix w-100 d-md-none">
-        <div class="col-md-3 mx-auto">
-            <ul class="list-unstyled mb-0">
-                <li>
-                    <p class="mb-0">Site made possible by the following sponsors</p>
-                    <a href="#">
-                        <img class="mr-2" width="70" alt="RealDimensions Software, LLC Logo" title="RealDimensions Software, LLC - the makers of Chocolatey!" src="@Url.Content("~/content/images/rd_logo.png")" />
-                    </a>
-                    <a href="https://turbo.net/" target="_blank" rel="noreferrer">
-                        <img class="mr-2" width="40" alt="Turbo.Net Logo" title="Turbo" src="@Url.Content("~/content/images/turbo_logo.png")" />
-                    </a>
-                    <a href="https://appharbor.com/" target="_blank" rel="noreferrer">
-                        <img width="50" alt="AppHarbor Logo" title="AppHarbor" src="@Url.Content("~/content/images/appharbor_logo.png")" />
-                    </a>
-                </li>
-            </ul>
-        </div>*@
     </div>
 </section>
-@Html.Partial("~/Views/Shared/_CopyrightNavigation.cshtml")

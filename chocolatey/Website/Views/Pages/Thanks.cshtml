@@ -1,10 +1,10 @@
 ﻿@{
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
 
-<section id="account" class="container py-3 py-md-5">
+<section class="container py-3 py-md-5">
     <div class="row">
         <div class="col-sm-9 col-lg-6 m-auto">
             <div class="card">
@@ -15,8 +15,8 @@
                     @TempData["Message"]
                     @if (Request.IsLocal)
                     {
-                        <div class="callout-warning mt-3">
-                            <p class="pl-3">Pssst! I see you're running this in a development environment. <strong>Check the <em>\App_Data\Mail</em> folder for the email</strong>.</p>
+                        <div class="callout callout-warning shadow-none mt-3">
+                            <p class="ps-3">Pssst! I see you're running this in a development environment. <strong>Check the <em>\App_Data\Mail</em> folder for the email</strong>.</p>
                         </div>
                     }
                 </div>

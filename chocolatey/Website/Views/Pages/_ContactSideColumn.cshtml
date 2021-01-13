@@ -18,28 +18,28 @@
             @if (Request.RawUrl == Url.RouteUrl(RouteName.ContactPartner))
             {
                 <div class="col-md-6 my-4 text-center">
-                    <a href="https://puppet.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Puppet" data-toggle="tooltip" title="Puppet" /></a>
+                    <a href="https://puppet.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Puppet" data-bs-toggle="tooltip" title="Puppet" /></a>
                 </div>
                 <div class="col-md-6 text-center">
-                    <a href="https://chef.io" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Chef Software" data-toggle="tooltip" title="Chef Software" /></a>
+                    <a href="https://chef.io" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Chef Software" data-bs-toggle="tooltip" title="Chef Software" /></a>
                 </div>
                 <div class="col-md-6 my-4 text-center">
-                    <a href="https://www.ansible.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="80" src="@Url.Content("~/content/images/businesses/Ansible-red-sm.png")" alt="Ansible" data-toggle="tooltip" title="Ansible" /></a>
+                    <a href="https://www.ansible.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="80" src="@Url.Content("~/content/images/businesses/Ansible-red-sm.png")" alt="Ansible" data-bs-toggle="tooltip" title="Ansible" /></a>
                 </div>
                 <div class="col-md-6 my-4 text-center">
-                    <a href="https://www.saltstack.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Saltstack-sm.png")" alt="SaltStack" data-toggle="tooltip" title="SaltStack" /></a>
+                    <a href="https://www.saltstack.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Saltstack-sm.png")" alt="SaltStack" data-bs-toggle="tooltip" title="SaltStack" /></a>
                 </div>
                 <div class="col-md-6 my-4 text-center">
-                    <a href="https://inedo.com/otter" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Otter-sm.png")" alt="Otter" data-toggle="tooltip" title="Otter" /></a>
+                    <a href="https://inedo.com/otter" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Otter-sm.png")" alt="Otter" data-bs-toggle="tooltip" title="Otter" /></a>
                 </div>
                 <div class="col-md-6 my-4 text-center">
-                    <img class="img-fluid" width="80" src="@Url.Content("~/content/images/businesses/Powershell-sm.png")" alt="Microsoft Powershell DSC" data-toggle="tooltip" title="Microsoft Powershell DSC" />
+                    <img class="img-fluid" width="80" src="@Url.Content("~/content/images/businesses/Powershell-sm.png")" alt="Microsoft Powershell DSC" data-bs-toggle="tooltip" title="Microsoft Powershell DSC" />
                 </div>
                 <div class="col-md-6 my-4 text-center">
-                    <a href="https://octopus.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/OctopusDeploy-Dark-sm.png")" alt="Octopus Deploy" data-toggle="tooltip" title="Octopus Deploy" /></a>
+                    <a href="https://octopus.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/OctopusDeploy-Dark-sm.png")" alt="Octopus Deploy" data-bs-toggle="tooltip" title="Octopus Deploy" /></a>
                 </div>
                 <div class="col-md-6 mt-4 mb-md-4 text-center">
-                    <a href="https://www.ivanti.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/ivanti-sm.png")" alt="ivanti" data-toggle="tooltip" title="ivanti" /></a>
+                    <a href="https://www.ivanti.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/ivanti-sm.png")" alt="ivanti" data-bs-toggle="tooltip" title="ivanti" /></a>
                 </div>
             }
             else
@@ -70,23 +70,32 @@
                 </div>
             }
         </div>
-        <div id="informationCarousel" class="carousel slide carousel-fade information-carousel d-none d-md-block" data-ride="carousel" data-touch="true" data-interval="8000" style="height: auto;">
-            <div class="carousel-inner" style="height: auto;">
+        <div id="informationCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+            <div class="position-relative w-100 overflow-hidden">
                 <div class="carousel-item active">
-                    <div class="card bg-primary mb-0">
+                    <div class="card bg-theme-primary mb-0">
                         <div class="card-body text-center">
                             <h3>Resources</h3>
-                            <p>Watch videos, case studies, read documentation, and hear Chocolatey success stories from companies you trust.</p>
-                            <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "home"})" class="btn btn-light">View Resources</a>
+                            <p>Watch videos, read documentation, and hear Chocolatey success stories from companies you trust.</p>
+                            <a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "home"})" class="btn btn-theme btn-width">View Resources</a>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="card bg-medium-dark mb-0">
+                    <div class="card bg-success text-white mb-0">
+                        <div class="card-body text-center">
+                            <h3>Events</h3>
+                            <p>Find past and upcoming webinars, workshops, and conferences. New events have recently been added!</p>
+                            <a href="@Url.RouteUrl(RouteName.Events, new { eventName = "home" })" class="btn btn-theme btn-width">View Events</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card bg-primary-900 mb-0">
                         <div class="card-body text-center">
                             <h3>Courses</h3>
                             <p>Step-by-step guides for all things Chocolatey! Earn badges as you learn through interactive digital courses.</p>
-                            <a href="@Url.RouteUrl(RouteName.Courses)" class="btn btn-light">View Courses</a>
+                            <a href="@Url.RouteUrl(RouteName.Courses)" class="btn btn-theme btn-width">View Courses</a>
                         </div>
                     </div>
                 </div>

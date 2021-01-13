@@ -2,9 +2,8 @@
 @model DiscountViewModel
 @{
     ViewBag.Title = "Student Discount";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
     Bundles.Reference("Scripts/validation");
 }
 @section TopScripts {
@@ -16,7 +15,7 @@
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 }
 
-<section id="account">
+<section>
     <div class="container py-3 py-lg-5">
         <div class="row">
             <div class="col-xl-6 mx-auto">
@@ -29,35 +28,35 @@
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
-                        <div class="form-field d-none">
-                            @Html.DropDownListFor(m => m.DiscountType, Model.DiscountTypeItems, new { Value = "StudentDiscount" })
+                        <div class="d-none">
+                            @Html.DropDownListFor(m => m.DiscountType, Model.DiscountTypeItems, new { Value = "StudentDiscount", @class = "form-select" })
                         </div>
-                        <div class="form-field">
-                            @Html.LabelFor(m => m.FirstName) <span class="fas fa-asterisk"></span>
-                            @Html.EditorFor(m => m.FirstName)
+                        <div class="mt-3">
+                            @Html.LabelFor(m => m.FirstName) <span class="fas fa-asterisk text-primary small"></span>
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control mt-2" })
                             @Html.ValidationMessageFor(m => m.FirstName)
                         </div>
-                        <div class="form-field">
-                            @Html.LabelFor(m => m.LastName) <span class="fas fa-asterisk"></span>
-                            @Html.EditorFor(m => m.LastName)
+                        <div class="mt-3">
+                            @Html.LabelFor(m => m.LastName) <span class="fas fa-asterisk text-primary small"></span>
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control mt-2" })
                             @Html.ValidationMessageFor(m => m.LastName)
                         </div>
-                        <div class="form-field">
-                            @Html.LabelFor(m => m.Email) <span class="fas fa-asterisk"></span>
-                            @Html.EditorFor(m => m.Email)
+                        <div class="mt-3">
+                            @Html.LabelFor(m => m.Email) <span class="fas fa-asterisk text-primary small"></span>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control mt-2" })
                             @Html.ValidationMessageFor(m => m.Email)
                         </div>
                         @if(ViewData.ModelState["SpamValidationResponse"] != null)
                         {
-                            <ul class="list-unstyled callout callout-danger">
+                            <ul class="list-unstyled callout callout-danger shadow-none mt-3">
                                 <li><strong>reCAPTCHA Error(s):</strong></li>
                                 @foreach(var error in ViewData.ModelState["SpamValidationResponse"].Errors)
                                 {
-                                    <li class="field-validation-error">@Html.Raw(error.ErrorMessage)</li>
+                                    <li>@Html.Raw(error.ErrorMessage)</li>
                                 }
                             </ul>
                         }
-                        <p class="mb-0 mt-3"><small>Fields marked with</small> <span class="fas fa-asterisk"></span> <small>are required.</small></p>
+                        <p class="mb-0 mt-3"><small>Fields marked with</small> <span class="fas fa-asterisk text-primary small"></span> <small>are required.</small></p>
                         <input class="btn btn-primary mt-3 g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["reCAPTCHA::PublicKey"]" data-callback="onSubmit" data-badge="bottomleft" data-action="Form_Discount" type="submit" value="Send" title="Send us a message. We'll be in touch soon!" />
                     </fieldset>
                 }

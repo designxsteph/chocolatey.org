@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "Kickstarter";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
 <section class="py-3 py-lg-5">
@@ -45,7 +44,7 @@
         </div>
     </div>
 </section>
-<div class="bg-white" id="sponsors">
+<div class="bg-theme-light" id="sponsors">
     <section class="py-3 py-lg-5">
         <div class="container">
             <div class="row">
@@ -60,7 +59,7 @@
                         <div class="card-body d-flex align-items-center justify-content-center" style="background: #222;">
                             <a href="https://puppet.com" rel="noreferrer" title="Puppet, Inc" target="_blank"><img src="@Url.Content("~/content/images/businesses/Puppet.png")" alt="Logo for Puppet, Inc" /></a>
                         </div>
-                        <div class="card-footer text-center bg-white">
+                        <div class="card-footer text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$1,200 Level</strong></h4>
                         </div>
                     </div>
@@ -70,7 +69,7 @@
                         <div class="card-body d-flex align-items-center justify-content-center" style="background: #323232;">
                             <a href="https://chef.io" rel="noreferrer" title="Chef Software, Inc" target="_blank"><img src="@Url.Content("~/content/images/businesses/Chef.png")" alt="Logo for Chef Software, Inc" /></a>
                         </div>
-                        <div class="card-footer text-center bg-white">
+                        <div class="card-footer text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$999 Level</strong></h4>
                         </div>
                     </div>
@@ -80,7 +79,7 @@
                         <div class="card-body d-flex align-items-center justify-content-center" style="background: #005571;">
                             <a href="https://www.elastic.co" rel="noreferrer" title="Elasticsearch BV" target="_blank"><img src="@Url.Content("~/content/images/businesses/Elastic.png")" alt="Logo for Elastic" /></a>
                         </div>
-                        <div class="card-footer text-center bg-white">
+                        <div class="card-footer text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$999 Level</strong></h4>
                         </div>
                     </div>
@@ -90,7 +89,7 @@
                         <div class="card-body d-flex align-items-center justify-content-center" style="background: #e60278;">
                             <a href="https://www.seek.com.au/" rel="noreferrer" title="SEEK - Australia's number one jobs site" target="_blank"><img src="@Url.Content("~/content/images/businesses/SEEK.png")" alt="Logo for SEEK" /></a>
                         </div>
-                        <div class="card-footer text-center bg-white">
+                        <div class="card-footer text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$999 Level</strong></h4>
                         </div>
                     </div>
@@ -100,7 +99,7 @@
                         <div class="card-body d-flex align-items-center justify-content-center">
                             <a href="https://www.ise.com/" rel="noreferrer" title="Integrated Securities Exchange Holdings, Inc" target="_blank"><img src="@Url.Content("~/content/images/businesses/ISE.png")" alt="Logo for Integrated Securities Exchange Holdings, Inc" /></a>
                         </div>
-                        <div class="card-footer border-top text-center bg-white">
+                        <div class="card-footer border-top text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$750 Level</strong></h4>
                         </div>
                     </div>
@@ -110,7 +109,7 @@
                         <div class="card-body d-flex align-items-center justify-content-center" style="background: #0495dc;">
                             <a href="https://www.myget.org/" rel="noreferrer" title="MyGet Ltd" target="_blank"><img src="@Url.Content("~/content/images/businesses/MyGet.png")" alt="Logo for MyGet" /></a>
                         </div>
-                        <div class="card-footer text-center bg-white">
+                        <div class="card-footer text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$750 Level</strong></h4>
                         </div>
                     </div>
@@ -120,7 +119,7 @@
                         <div class="card-body d-flex align-items-center justify-content-center" style="background: #0F2535;">
                             <a href="https://octopus.com/" rel="noreferrer" title="Octopus Deploy" target="_blank"><img src="@Url.Content("~/content/images/businesses/OctopusDeploy.png")" alt="Logo for Octopus Deploy" /></a>
                         </div>
-                        <div class="card-footer text-center bg-white">
+                        <div class="card-footer text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$750 Level</strong></h4>
                         </div>
                     </div>
@@ -130,27 +129,27 @@
                         <div class="card-body d-flex align-items-center justify-content-center">
                             <a href="http://inedo.com/proget?utm_source=choco&utm_medium=txt&utm_campaign=chocospon" rel="noreferrer" title="ProGet is from Inedo Software, Inc" target="_blank"><img src="@Url.Content("~/content/images/businesses/ProGet.png")" alt="Logo for ProGet" /></a>
                         </div>
-                        <div class="card-footer border-top text-center bg-white">
+                        <div class="card-footer border-top text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$750 Level</strong></h4>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3 mb-4 ml-xl-auto">
+                <div class="col-sm-6 col-xl-3 mb-4 ms-xl-auto">
                     <div class="card h-100">
                         <div class="card-body d-flex align-items-center justify-content-center">
                             <a class="text-center" href="https://www.sharebylink.com/" rel="noreferrer" title="ShareByLink.com Open-Source File Sharing" target="_blank"><img src="@Url.Content("~/content/images/businesses/ShareByLink.png")" alt="Logo for ShareByLink" /> <br /><span>ShareByLink</span></a>
                         </div>
-                        <div class="card-footer border-top text-center bg-white">
+                        <div class="card-footer border-top text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$750 Level</strong></h4>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3 mb-4 mr-xl-auto">
+                <div class="col-sm-6 col-xl-3 mb-4 me-xl-auto">
                     <div class="card h-100">
                         <div class="card-body d-flex align-items-center justify-content-center" style="background: #222;">
                             <a href="https://velocity.silverlakesoftware.com" rel="noreferrer" title="Velocity by Silverlake Software LLC" target="_blank"><img src="@Url.Content("~/content/images/businesses/Velocity.png")" alt="Logo for Velocity" /></a>
                         </div>
-                        <div class="card-footer text-center bg-white">
+                        <div class="card-footer text-center bg-theme-light">
                             <h4 class="mb-0"><strong>$750 Level</strong></h4>
                         </div>
                     </div>

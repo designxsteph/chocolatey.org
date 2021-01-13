@@ -1,18 +1,15 @@
 ﻿@model DisplayPackageViewModel
 @{
     ViewBag.Tab = "Packages";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-</section>
-<section class="container py-3 py-xl-5" id="account">
+@Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
+<section class="container py-3 py-xl-5">
     <div class="row">
         <div class="col-xl-10 mx-auto">
-            <h2 class="text-center text-xl-left"><em>@Model.Title @Model.Version</em> Listing</h2>
+            <h2 class="text-center text-xl-start"><em>@Model.Title @Model.Version</em> Listing</h2>
             <hr />
             <p><strong>Permanently deleting packages is not supported, but you can control how they are listed.</strong></p>
             <p>
@@ -37,12 +34,9 @@
                                 <fieldset class="form" id="unlist-form">
                                     <legend class="d-none">Edit @Model.Title Package</legend>
                                     @Html.AntiForgeryToken()
-                                    <div class="form-field my-1 d-flex justify-content-center">
-                                        <label for="Listed" class="checkbox">
-                                            @Html.EditorFor(package => package.Listed)
-                                            List @Model.Title @Model.Version in search results.
-                                            <span class="checkmark"></span>
-                                        </label>
+                                    <div class="form-check my-3">
+                                        @Html.CheckBoxFor(package => package.Listed, new { @class = "form-check-input" })
+                                        <label class="form-check-label" for="Listed">List @Model.Title @Model.Version in search results.</label>
                                     </div>
                                     <p>
                                         Unchecking this box means your package cannot be installed directly and it will

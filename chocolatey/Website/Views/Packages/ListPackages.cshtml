@@ -8,50 +8,46 @@
     var moderationCount = Model.ModerationUpdatedPackageCount + Model.ModerationSubmittedPackageCount + Model.ModerationWaitingPackageCount + Model.ModerationRespondedPackageCount;
     var moderationReadyPackageCount = Model.ModerationSubmittedPackageCount - Model.ModerationPendingAutoReviewPackageCount;
     var moderationRole = User != null && User.IsInAnyModerationRole();
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/packages.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/package-list");
-    Bundles.Reference("Scripts/closeable");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
+    Bundles.Reference("Scripts/packages");
 
     var currentUrl = Request.Url.AbsoluteUri;
     var FullHref = Request.Url.GetLeftPart(UriPartial.Path);
     var packageWarning = Request.Cookies["chocolatey_hide_packages_warning"] == null;
 }
 
-<section id="secondaryNav">
-    <div class="bg-primary">
-        <div class="container py-2">
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    @Html.Partial("~/Views/Shared/_SearchBox.cshtml")
-                </div>
+<div class="bg-theme-primary">
+    <div class="container py-2 ps-0 pe-3">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                @Html.Partial("~/Views/Shared/_SearchBox.cshtml")
             </div>
         </div>
     </div>
-    @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-    @Html.Partial("~/Views/Shared/_PackageStatusSubNavigation.cshtml")
-</section>
-<section id="package" class="container-fluid body-tabs">
+</div>
+@Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
+@Html.Partial("~/Views/Shared/_PackageStatusSubNavigation.cshtml")
+<section id="package" class="container-fluid">
     <div class="row">
-        <div class="d-none d-xxxl-block col-xxxl-2"></div>
-        <div class="col-md-8 col-xl-9 col-xxxl-8 py-3 py-xl-5 pr-xxxl-5">
+        <div class="d-none d-xxl-block col-xxl-2"></div>
+        <div class="col-md-8 col-xl-9 col-xxl-8 py-3 py-xl-5 pe-xxl-5">
             @if (!User.Identity.IsAuthenticated)
             {
-                <div id="callout-package-warning" class="callout callout-warning py-2">
-                    <div class="d-md-flex justify-content-md-between align-items-md-center">
-                        <h5 class="mb-0 font-weight-bold"><span class="fas fa-exclamation-triangle text-warning"></span> Community Package Repository Notification</h5>
-                        <div class="mt-2 mt-md-0">
-                            <a class="@if(packageWarning){<text>collapse show</text>}else{<text>collapsed</text>} btn btn-sm btn-secondary" data-toggle="collapse" href="#package-warning" role="button" aria-expanded="true" aria-controls="package-warning" title="Package Warning">
-                                @if(packageWarning){<text>Hide</text>}else{<text>Show</text>} Notification
-                            </a>
+                <div class="user-unauthenticated">
+                    <div id="callout-package-warning" class="callout callout-warning py-2">
+                        <div class="d-md-flex justify-content-md-between align-items-md-center">
+                            <h5 class="mb-0 fw-bold"><span class="fas fa-exclamation-triangle text-warning"></span> Community Package Repository Notification</h5>
+                            <div class="mt-2 mt-md-0">
+                                <a class="btn btn-sm btn-secondary btn-collapse btn-show-hide" data-bs-toggle="collapse" href="#package-warning" role="button" aria-expanded="true" aria-controls="package-warning" title="Package Warning">Hide Notification</a>
+                            </div>
+                        </div>
+                        <div class="collapse mt-2 show" id="package-warning">
+                            <p>Your use of the packages on this site means you understand they are not supported or guaranteed in any way. Due to the nature of a public repository and unreliability due to distribution rights, these packages should not be used as is for organizational purposes either. <a href="https://docs.chocolatey.org/en-us/community-repository/community-packages-disclaimer">Learn more</a>.</p>
                         </div>
                     </div>
-                    <div class="collapse mt-2 @if(packageWarning){<text>show</text>}" id="package-warning">
-                        <p>Your use of the packages on this site means you understand they are not supported or guaranteed in any way. Due to the nature of a public repository and unreliability due to distribution rights, these packages should not be used as is for organizational purposes either. <a href="https://docs.chocolatey.org/en-us/community-repository/community-packages-disclaimer">Learn more</a>.</p>
-                    </div>
+                    @Html.Partial("~/Views/Packages/_CommunityInfoDisclaimer.cshtml")
                 </div>
-                @Html.Partial("~/Views/Packages/_CommunityInfoDisclaimer.cshtml")
             }
             <div class="d-lg-flex align-items-lg-center justify-content-lg-between">
                 <div>
@@ -103,17 +99,17 @@
                                     <fieldset class="form search mb-0">
                                         <input type="hidden" name="q" value="@Model.SearchTerm" />
                                         <input type="hidden" name="moderatorQueue" value="true" />
-                                        <button type="submit" name="moderationStatus" value="@Constants.UpdatedModerationStatus" class="bg-transparent border-0 btn-link text-dark">@Model.ModerationUpdatedPackageCount Updated</button>
+                                        <button type="submit" name="moderationStatus" value="@Constants.UpdatedModerationStatus" class="bg-transparent border-0 btn-link text-reset">@Model.ModerationUpdatedPackageCount Updated</button>
                                         <span>|</span>
-                                        <button type="submit" name="moderationStatus" value="@Constants.RespondedModerationStatus" class="bg-transparent border-0 btn-link text-dark">@Model.ModerationRespondedPackageCount Responded</button>
+                                        <button type="submit" name="moderationStatus" value="@Constants.RespondedModerationStatus" class="bg-transparent border-0 btn-link text-reset">@Model.ModerationRespondedPackageCount Responded</button>
                                         <span>|</span>
-                                        <button type="submit" name="moderationStatus" value="@Constants.SubmittedModerationStatus" class="bg-transparent border-0 btn-link text-dark">@Model.ModerationSubmittedPackageCount Submitted</button>
+                                        <button type="submit" name="moderationStatus" value="@Constants.SubmittedModerationStatus" class="bg-transparent border-0 btn-link text-reset">@Model.ModerationSubmittedPackageCount Submitted</button>
                                         <span>|</span>
-                                        <button type="submit" name="moderationStatus" value="@Constants.WaitingModerationStatus" class="bg-transparent border-0 btn-link text-dark">@Model.ModerationWaitingPackageCount Waiting</button>
+                                        <button type="submit" name="moderationStatus" value="@Constants.WaitingModerationStatus" class="bg-transparent border-0 btn-link text-reset">@Model.ModerationWaitingPackageCount Waiting</button>
                                         <span>|</span>
-                                        <button type="submit" name="moderationStatus" value="@Constants.ReadyModerationStatus" class="bg-transparent border-0 btn-link text-dark">@moderationReadyPackageCount Ready</button>
+                                        <button type="submit" name="moderationStatus" value="@Constants.ReadyModerationStatus" class="bg-transparent border-0 btn-link text-reset">@moderationReadyPackageCount Ready</button>
                                         <span>|</span>
-                                        <button type="submit" name="moderationStatus" value="@Constants.PendingModerationStatus" class="bg-transparent border-0 btn-link text-dark">@Model.ModerationPendingAutoReviewPackageCount Pending</button>
+                                        <button type="submit" name="moderationStatus" value="@Constants.PendingModerationStatus" class="bg-transparent border-0 btn-link text-reset">@Model.ModerationPendingAutoReviewPackageCount Pending</button>
                                         <input type="hidden" name="prerelease" value="false" />
                                         <input type="hidden" name="sortOrder" value="@Model.SortOrder" />
                                     </fieldset>
@@ -131,32 +127,32 @@
                     {
                         <p class="mb-0 mb-lg-2">Displaying Results @Model.FirstResultIndex - @Model.LastResultIndex of @Model.TotalCount</p>
                     }
-                    <button class="btn btn-primary my-2 mb-sm-0 mt-lg-0" data-toggle="modal" data-target="#package-preferences">Manage Package Preferences</button>
+                    <button class="btn btn-primary btn-width my-2 mb-sm-0 mt-lg-0" data-bs-toggle="modal" data-bs-target="#package-preferences">Manage Package Preferences</button>
                     <div class="modal fade" id="package-preferences" tabindex="-1" role="dialog" aria-labelledby="Manage Package Preferences" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="mb-0">Manage Package Preferences</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true" class="fas fa-times"></span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="preferenceGridView">
-                                        <label class="custom-control-label" for="preferenceGridView">Make grid view your default view?</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="preferenceGridView">
+                                        <label class="form-check-label" for="preferenceGridView">Make grid view your default view?</label>
                                     </div>
                                     @if (moderationRole)
                                     {
-                                        <div class="custom-control custom-switch mt-3">
-                                            <input type="checkbox" class="custom-control-input" id="preferenceModView">
-                                            <label class="custom-control-label" for="preferenceModView">Make the Moderator Queue your default view?</label>
+                                        <div class="form-check form-switch mt-3">
+                                            <input type="checkbox" class="form-check-input" id="preferenceModView">
+                                            <label class="form-check-label" for="preferenceModView">Make the Moderator Queue your default view?</label>
                                         </div>
                                     }
                                 </div>
-                                <div class="modal-footer text-right">
+                                <div class="modal-footer">
                                     <button class="btn btn-success btn-preferences">Save Preferences</button>
-                                    <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                    <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -165,21 +161,21 @@
             </div>
             <hr class="d-none d-sm-block" />
             <nav class="navbar navbar-expand-sm p-0">
-                <button class="btn btn-primary w-100 d-sm-none" type="button" data-toggle="collapse" data-target="#search-filters" aria-controls="search filters" aria-expanded="false" aria-label="Toggle Search Filters">View Search Filters</button>
+                <button class="btn btn-primary w-100 d-sm-none" type="button" data-bs-toggle="collapse" data-bs-target="#search-filters" aria-controls="search filters" aria-expanded="false" aria-label="Toggle Search Filters">View Search Filters</button>
                 <div class="collapse navbar-collapse" id="search-filters">
                     <div class="navbar-nav d-block w-100 mt-2 mt-sm-0">
                         <form method="get" action="">
                             <fieldset class="form search">
                                 <input type="hidden" name="q" value="@Model.SearchTerm" />
-                                <div class="form-row align-items-center">
+                                <div class="row align-items-center">
                                     <div class="col-sm mb-2 mb-sm-0">
-                                        <select class="form-control" name="moderatorQueue" id="moderatorQueue" aria-label="Sort by Normal View or Moderator Queue">
+                                        <select class="form-select" name="moderatorQueue" id="moderatorQueue" aria-label="Sort by Normal View or Moderator Queue">
                                             @ViewHelpers.Option("", "Normal View", Model.ModeratorQueue)
                                             @ViewHelpers.Option("true", "Moderator Queue", Model.ModeratorQueue)
                                         </select>
                                     </div>
                                     <div class="col-sm mb-2 mb-sm-0 @if (!moderationQueue){<text>d-none</text>}">
-                                        <select class="form-control" name="moderationStatus" id="moderationStatus" aria-label="Moderation Sort Order">
+                                        <select class="form-select" name="moderationStatus" id="moderationStatus" aria-label="Moderation Sort Order">
                                             @ViewHelpers.Option(Constants.AllModerationStatuses, "All Moderation Statuses", Model.ModerationStatus)
                                             @ViewHelpers.Option(Constants.SubmittedModerationStatus, "Submitted", Model.ModerationStatus)
                                             @ViewHelpers.Option(Constants.UpdatedModerationStatus, "Updated", Model.ModerationStatus)
@@ -190,13 +186,13 @@
                                         </select>
                                     </div>
                                     <div class="col-sm mb-2 mb-sm-0">
-                                        <select class="form-control" name="prerelease" id="prerelease" aria-label="Sort by the inclusion of Prerelease Packages">
+                                        <select class="form-select" name="prerelease" id="prerelease" aria-label="Sort by the inclusion of Prerelease Packages">
                                             @ViewHelpers.Option("false", "Stable Only", Model.IncludePrerelease)
                                             @ViewHelpers.Option("true", "Include Prerelease", Model.IncludePrerelease)
                                         </select>
                                     </div>
                                     <div class="col-sm mb-2 mb-sm-0">
-                                        <select class="form-control" name="sortOrder" id="sortOrder" aria-label="Sort Order">
+                                        <select class="form-select" name="sortOrder" id="sortOrder" aria-label="Sort Order">
                                             @if (!Model.SearchTerm.IsEmpty())
                                             {
                                                 @ViewHelpers.Option(Constants.RelevanceSortOrder, "Relevance", Model.SortOrder)
@@ -206,8 +202,8 @@
                                             @ViewHelpers.Option(Constants.RecentSortOrder, "Recent", Model.SortOrder)
                                         </select>
                                     </div>
-                                    <div class="col-12 col-sm text-right">
-                                        <a href="@if(@FullHref.Contains("/packages")){<text>@Url.RouteUrl(RouteName.ListPackages)</text>}else{<text>@Url.RouteUrl(RouteName.SearchResults)</text>}" class="btn btn-outline-primary"><span class="fas fa-sync"></span><span class="d-sm-none d-md-inline-block ml-2 ml-sm-0 ml-md-2">Reset Filters</span></a>
+                                    <div class="col-12 col-sm text-end">
+                                        <a href="@if(@FullHref.Contains("/packages")){<text>@Url.RouteUrl(RouteName.ListPackages)</text>}else{<text>@Url.RouteUrl(RouteName.SearchResults)</text>}" class="btn btn-outline-primary"><span class="fas fa-sync"></span><span class="d-sm-none d-lg-inline-block ms-2 ms-sm-0 ms-lg-2">Reset Filters</span></a>
                                     </div>
                                 </div>
                             </fieldset>
@@ -242,7 +238,7 @@
 
             @ViewHelpers.PreviousNextPager(Model.Pager)
         </div>
-        <div class="d-none d-md-block col-md-4 col-xl-3 col-xxxl-2 border-left p-3">
+        <div class="d-none d-md-block col-md-4 col-xl-3 col-xxl-2 border-start p-3">
             @Html.Partial("~/Views/Pages/_CollapsingRightSidebarContent.cshtml")
         </div>
     </div>
@@ -253,6 +249,8 @@
         ((window.gitter = {}).chat = {}).options = {
             room: 'chocolatey/chocolatey.org'
         };
+
+        
     </script>
     <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 }

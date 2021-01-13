@@ -1,17 +1,17 @@
 ﻿@{
     ViewBag.Tab = "About";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
-<div id="header" class="bg-medium-dark team-header">
+<div class="bg-theme-primary">
     <section class="py-3 py-lg-5">
         <div class="container py-3 py-lg-5 text-center">
             <h1 class="display-3">Chocolatey Software</h1>
             <h1><strong>The Sane Way to Manage Software on Windows</strong></h1>
         </div>
     </section>
-    <div class="shape-border shape-border-bottom"></div>
+    <div class="curve curve-bottom curve-bg-theme"></div>
 </div>
 <section class="pb-3 pb-lg-5">
     <div class="container">
@@ -28,18 +28,18 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
                         <div class="video-story">
-                            <div class="text-center" data-toggle="modal" data-target="#chocolatey-story"><img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="What is Chocolatey" title="What is Chocolatey" /></div>
+                            <div class="text-center" data-bs-toggle="modal" data-bs-target="#chocolatey-story"><img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="What is Chocolatey" title="What is Chocolatey" /></div>
                             <div class="modal fade" id="chocolatey-story" tabindex="-1" role="dialog" aria-labelledby="What is Chocolatey Video" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                                            <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true" class="fas fa-times"></span>
                                             </button>
                                         </div>
                                         <div class="modal-body p-0">
-                                            <div class="embed-responsive embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/Z8olEnt65bk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            <div class="ratio ratio-16x9">
+                                                <iframe data-src="https://www.youtube.com/embed/Z8olEnt65bk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
         </div>
     </div>
 </section>
-<section class="pt-3 pt-lg-5 bg-white">
+<section class="pt-3 pt-lg-5 bg-theme-light">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 text-center">
@@ -94,13 +94,13 @@
                                 <div class="card-body position-relative p-0">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/team/mukesh-sq.jpg")" alt="Mukesh Sharma, COO of Chocolatey" title="Mukesh Sharma, COO of Chocolatey" />
                                     <div class="card-overlay">
-                                        <p class="btn btn-light font-weight-bold">View Blog Post</p>
+                                        <p class="btn btn-theme fw-bold">View Blog Post</p>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <h5 class="mb-0">Mukesh Sharma</h5>
                                     <p class="mb-md-0">Chief Operating Officer</p>
-                                    <p class="btn btn-primary btn-sm font-weight-bold d-md-none text-white">View Blog Post</p>
+                                    <p class="btn btn-primary btn-sm fw-bold d-md-none text-white">View Blog Post</p>
                                 </div>
                             </div>
                         </a>
@@ -111,13 +111,13 @@
                                 <div class="card-body position-relative p-0">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/team/gary-sq.jpg")" alt="Gary Ewan Park, Senior Software Engineer" title="Gary Ewan Park, Senior Software Engineer" />
                                     <div class="card-overlay">
-                                        <p class="btn btn-light font-weight-bold">View Blog Post</p>
+                                        <p class="btn btn-theme fw-bold">View Blog Post</p>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <h5 class="mb-0">Gary Ewan Park</h5>
                                     <p class="mb-md-0">Senior Software Engineer</p>
-                                    <p class="btn btn-primary btn-sm font-weight-bold d-md-none text-white">View Blog Post</p>
+                                    <p class="btn btn-primary btn-sm fw-bold d-md-none text-white">View Blog Post</p>
                                 </div>
                             </div>
                         </a>
@@ -128,13 +128,13 @@
                                 <div class="card-body position-relative p-0">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/team/paul-sq.jpg")" alt="Paul Broadwith, Senior Technical Engineer" title="Paul Broadwith, Senior Software Engineer" />
                                     <div class="card-overlay">
-                                        <p class="btn btn-light font-weight-bold">View Blog Post</p>
+                                        <p class="btn btn-theme fw-bold">View Blog Post</p>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <h5 class="mb-0">Paul Broadwith</h5>
                                     <p class="mb-md-0">Senior Technical Engineer</p>
-                                    <p class="btn btn-primary btn-sm font-weight-bold d-md-none text-white">View Blog Post</p>
+                                    <p class="btn btn-primary btn-sm fw-bold d-md-none text-white">View Blog Post</p>
                                 </div>
                             </div>
                         </a>
@@ -145,13 +145,13 @@
                                 <div class="card-body position-relative p-0">
                                     <img class="img-fluid" src="@Url.Content("~/content/images/team/stephanie-sq.jpg")" alt="Stephanie Burrows, Front-End Web Developer" title="Stephanie Burrows, Front-End Web Developer" />
                                     <div class="card-overlay">
-                                        <p class="btn btn-light font-weight-bold">View Blog Post</p>
+                                        <p class="btn btn-theme fw-bold">View Blog Post</p>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <h5 class="mb-0">Stephanie Hays</h5>
                                     <p class="mb-md-0">Front-End Web Developer</p>
-                                    <p class="btn btn-primary btn-sm font-weight-bold d-md-none text-white">View Blog Post</p>
+                                    <p class="btn btn-primary btn-sm fw-bold d-md-none text-white">View Blog Post</p>
                                 </div>
                             </div>
                         </a>

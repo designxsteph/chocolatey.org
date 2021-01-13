@@ -4,37 +4,108 @@
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "Chocolatey - The package manager for Windows";
     ViewBag.Tab = "Home";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/home");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
+    Bundles.Reference("Scripts/stats");
 
     // Set to True to show callout. False to hide callout if not relevent.
     var callout = true;
 }
 
-<div class="bg-primary">
-    <section class="py-3 @if(callout == true){<text>pb-sm-0</text>}">
-        <div class="container-fluid pt-lg-5 text-center">
-            <h1 class="display-3 font-weight-bold">The Package Manager for Windows</h1>
-            <h1>Modern Software Automation</h1>
-            <a class="btn btn-lg btn-outline-light mt-2" href="@Url.RouteUrl(RouteName.WhyChocolatey)">Why Chocolatey</a>
-            <a class="btn btn-lg btn-light mt-2" href="@Url.RouteUrl(RouteName.Install)">Get Started</a>
-            <a class="btn btn-lg btn-light mt-2" href="@Url.RouteUrl(RouteName.ListPackages)">Find Packages</a>
+<div class="bg-theme-primary position-relative">
+    <section class="py-3 py-lg-5">
+        <div class="container-fluid text-center">
+            <h1 class="display-3 fw-bold">The Package Manager for Windows</h1>
+            <h1 class="mt-0 display-4 text-capitalize">Modern Software Automation</h1>
+            <a class="btn btn-lg btn-outline-theme btn-width mt-2" href="@Url.RouteUrl(RouteName.WhyChocolatey)">Why Chocolatey</a>
+            <a class="btn btn-lg btn-theme btn-width mt-2" href="@Url.RouteUrl(RouteName.Install)">Get Started</a>
+            <a class="btn btn-lg btn-theme btn-width mt-2" href="@Url.RouteUrl(RouteName.ListPackages)">Find Packages</a>
         </div>
     </section>
+    <div class="curve curve-bottom curve-bg-theme"></div>
+    <svg class="position-absolute bottom-0 end-0 h-100" viewBox="0 0 723 946">
+        <use fill="url(#bg-gradient-primary-theme)" xlink:href="@Url.Content("~/content/images/global-shared/use.svg#bg-sharp-corner")"></use>
+    </svg>
 </div>
-@if (callout == true)
+<div class="position-relative overflow-hidden">
+    <section class="py-3 py-lg-5 mt-n3 mt-lg-n5 position-relative z-index-1">
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">Introducing Dark Mode</h1>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card h-100" style="border-top: 3px solid #36bc98;">
+                        <div class="card-body d-flex flex-column align-items-center text-center p-0">
+                            <div class="carousel carousel-fade slide" data-bs-ride="carousel" data-bs-interval="3000">
+                                <div class="position-relative w-100 overflow-hidden">
+                                    <div class="carousel-item active d-inline-block">
+                                        <img class="d-block w-100" src="@Url.Content("~/content/images/docs-screenshot-light.jpg")" alt="Chocolatey Docs Light Mode" />
+                                    </div>
+                                    <div class="carousel-item d-inline-block">
+                                        <img class="d-block w-100" src="@Url.Content("~/content/images/docs-screenshot-dark.jpg")" alt="Chocolatey Docs Dark Mode" />
+                                    </div>
+                                    <div class="carousel-item d-inline-block">
+                                        <img class="d-block w-100" src="@Url.Content("~/content/images/blog-screenshot-light.jpg")" alt="Chocolatey Blog Light Mode" />
+                                    </div>
+                                    <div class="carousel-item d-inline-block">
+                                        <img class="d-block w-100" src="@Url.Content("~/content/images/blog-screenshot-dark.jpg")" alt="Chocolatey Blog Dark Mode" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <h5><strong>New Docs and Blog</strong></h5>
+                                <p>Our revamped documentation features advanced search optimizations, better organized articles, and Dark Mode!</p>
+                                <a class="btn btn-link" href="https://blog.chocolatey.org/"><strong>Read the Blog</strong></a>
+                                <a class="btn btn-link" href="https://docs.chocolatey.org/en-us/"><strong>Visit Docs</strong></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card h-100" style="border-top: 3px solid #36bc98;">
+                        <div class="card-body d-flex flex-column align-items-center text-center p-0">
+                            <img class="img-fluid" src="@Url.Content("~/content/images/events/01-06.jpg")" alt="12 Days of Chocolatey" title="12 Days of Chocolatey">
+                            <div class="p-3">
+                                <h5><strong>12 Days of Chocolatey</strong></h5>
+                                <p>The 12 Days of Chocolatey livestream event may be over, but we've archived all the videos for you to watch again!</p>
+                                <a class="btn btn-link" href="@Url.RouteUrl(RouteName.Events, new { eventName= "12-days-of-chocolatey" })#schedule"><strong>Watch On-Demand</strong></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100" style="border-top: 3px solid #36bc98;">
+                        <div class="card-body d-flex flex-column align-items-center text-center p-0">
+                            <img class="img-fluid" src="@Url.Content("~/content/images/events/01-05.jpg")" alt="Chocolatey Central Managements Deployments Scheduling, Semi-Connected Environments, and API" title="Chocolatey Central Managements Deployments Scheduling, Semi-Connected Environments, and API">
+                            <div class="p-3">
+                                <h5><strong>Chocolatey Central Management</strong></h5>
+                                <p>Learn about Chocolatey Central Management Deployment schedules, semi-connected environments, and API.</p>
+                                <a class="btn btn-link" href="https://chocolatey.zoom.us/webinar/register/3516056467398/WN__AtcpeIbQnGACco6PE2QbA" target="_blank" rel="noreferrer"><strong>Watch the Webinar</strong></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <svg class="position-absolute top-0 start-0 h-90" viewBox="0 0 1000 1000">
+        <use fill="url(#bg-gradient-primary-theme)" xlink:href="@Url.Content("~/content/images/global-shared/use.svg#bg-rounded-corner")"></use>
+    </svg>
+    <svg class="position-absolute top-0 end-0 h-90 rotate-180" viewBox="0 0 1000 1000">
+        <use fill="url(#bg-gradient-primary-theme)" xlink:href="@Url.Content("~/content/images/global-shared/use.svg#bg-rounded-corner")"></use>
+    </svg>
+</div>
+@*@if (callout == true)
 {
-    <div class="bg-medium-dark">
-        <div class="shape-border shape-border-top shape-border-primary"></div>
+    <div class="bg-primary-900">
+        <div class="curve curve-top curve-primary"></div>
         <div class="container">
             <div class="position-relative d-none d-sm-block my-5 mb-md-n5" style="z-index: 9;">
-                <div class="row text-dark">
+                <div class="row">
                     <div class="col-md-4 mb-3 mb-md-0">
                         <div class="card h-100" style="border-top: 3px solid #36bc98;">
                             <div class="card-body d-flex flex-column align-items-center text-center p-0">
-                                <div class="carousel carousel-fade slide" data-ride="carousel" data-interval="3000" style="height:auto;">
-                                    <div class="carousel-inner">
+                                <div class="carousel carousel-fade slide" data-bs-ride="carousel" data-bs-interval="3000">
+                                    <div class="position-relative w-100 overflow-hidden">
                                         <div class="carousel-item active d-inline-block">
                                             <img class="d-block w-100" src="@Url.Content("~/content/images/docs-screenshot-light.jpg")" alt="Chocolatey Docs Light Mode" />
                                         </div>
@@ -85,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <div class="shape-border shape-border-bottom shape-border-white"></div>
+        <div class="curve curve-bottom curve-bg-theme-light"></div>
     </div>
 }
 else
@@ -111,23 +182,24 @@ else
                 </div>
             </div>
         </div>
-        <div class="shape-border shape-border-bottom shape-border-white"></div>
+        <div class="curve curve-bottom curve-bg-theme-light"></div>
     </section>
-}
-<section class="bg-white">
-    <div class="container pt-md-3">
-        <div id="informationCarousel" class="carousel slide carousel-fade information-carousel" data-ride="carousel" data-touch="true" data-interval="12000">
+}*@
+<div class="position-relative">
+<section class="pt-3 pt-lg-5">
+    <div class="container">
+        <div id="informationCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="12000">
             <ol class="carousel-indicators">
-                <li data-target="#informationCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#informationCarousel" data-slide-to="1"></li>
-                <li data-target="#informationCarousel" data-slide-to="2"></li>
+                <li data-bs-target="#informationCarousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#informationCarousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#informationCarousel" data-bs-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="row align-items-center">
                         <div class="col-12 text-center mb-3">
+                            <h1>Choose from Thousands of Community Packages</h1>
                             <img class="img-fluid" src="@Url.Content("~/content/images/community-mockup.gif")" alt="Chocolatey Community" />
-                            <h1 class="py-3">Choose from Thousands of Community Packages</h1>
                         </div>
                         <div class="col-lg-6">
                             <p>Chocolatey has the largest online registry of Windows packages. Chocolatey packages encapsulate everything required to manage a particular piece of software into one deployment artifact by wrapping installers, executables, zips, and/or scripts into a compiled package file.</p>
@@ -136,7 +208,7 @@ else
                                 <a class="btn btn-primary" href="@Url.RouteUrl(RouteName.ListPackages)">Search Chocolatey Packages</a>
                             </div>
                         </div>
-                        <div class="col-lg-6 text-dark text-center">
+                        <div class="col-lg-6 text-center">
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h1><span id="UniquePackages" class="num" title="This includes packages that may only have prereleases"></span>/<span id="TotalPackages" class="num" title="This is the total number of package versions - one for every version of a package"></span></h1>
@@ -160,12 +232,12 @@ else
                 </div>
                 <div class="carousel-item">
                     <div class="row align-items-center">
-                        <div class="col-12 text-center">
-                            <img class="lazy img-fluid" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/ccm-mockup.jpg")" alt="Chocolatey Central Management" />
+                        <div class="col-12 text-center mb-3">
+                            <h1>Chocolatey for Business (C4B)</h1>
+                            <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/ccm-mockup.jpg")" alt="Chocolatey Central Management" />
                             <noscript>
                                 <img class="img-fluid" src="@Url.Content("~/content/images/ccm-mockup.jpg")" alt="Chocolatey Central Management" />
                             </noscript>
-                            <h1 class="py-3">Chocolatey for Business (C4B)</h1>
                         </div>
                         <div class="col-lg-6">
                             <p>Chocolatey for Business (C4B) is Complete Software Management focused on three value-added areas - improved security, enhanced productivity features, and enabling more visibility. C4B is also backed with dedicated support, services, and roadmap.</p>
@@ -184,28 +256,10 @@ else
                         <div class="col-lg-6 text-center">
                             <div class="row">
                                 <div class="col-lg-10 mx-auto">
-                                    <div class="video-story">
-                                        <div class="text-center" data-toggle="modal" data-target="#qualcomm-story"><img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/videos/01-03.jpg")" alt="Dwight Bragdon at Qualcomm" title="Dwight Bragdon at Qualcomm" /></div>
-                                        <div class="modal fade" id="qualcomm-story" tabindex="-1" role="dialog" aria-labelledby="Dwight Bragdon at Qualcomm" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body p-0">
-                                                        <div class="embed-responsive embed-responsive-16by9">
-                                                            <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/R9OClPwBpdk?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <q class="h5 text-muted text-italic">The two things I love the most are Package Builder and Package Internalizer. Both have saved us time and effort to bring the tools in to a non-interconnected area.</q>
-                                        <h3 class="text-primary">Qualcomm</h3>
-                                        <p class="text-center">Dwight Bragdon, Senior Staff IT Engineer</p>
-                                    </div>
+                                    <div class="text-center" data-bs-toggle="modal" data-bs-target="#qualcomm-story"><img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/videos/01-03.jpg")" alt="Dwight Bragdon at Qualcomm" title="Dwight Bragdon at Qualcomm" /></div>
+                                    <q class="h5 text-muted text-italic">The two things I love the most are Package Builder and Package Internalizer. Both have saved us time and effort to bring the tools in to a non-interconnected area.</q>
+                                    <h3 class="text-primary">Qualcomm</h3>
+                                    <p class="text-center">Dwight Bragdon, Senior Staff IT Engineer</p>
                                 </div>
                             </div>
                         </div>
@@ -214,11 +268,11 @@ else
                 <div class="carousel-item">
                     <div class="row align-items-center">
                         <div class="col-12 text-center mb-3">
-                            <img class="lazy img-fluid" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/integrations-mockup.jpg")" alt="Chocolatey Integrations" />
+                            <h1>The <i>Sane</i> Way to Manage Software on Windows</h1>
+                            <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/integrations-mockup.jpg")" alt="Chocolatey Integrations" />
                             <noscript>
                                 <img class="img-fluid" src="@Url.Content("~/content/images/integrations-mockup.jpg")" alt="Chocolatey Integrations" />
                             </noscript>
-                            <h1 class="py-3">The <i>Sane</i> Way to Manage Software on Windows</h1>
                         </div>
                         <div class="col-lg-6">
                             <p>System engineers spend hours deploying & configuring Windows software manually. Traditional tools are not built for modern automation and a DevOps approach, which can make achieving consistency and gaining insights across your environment difficult.</p>
@@ -229,95 +283,87 @@ else
                                 <a class="btn btn-primary" href="https://docs.chocolatey.org/en-us/features/integrations">See Integrations</a>
                             </div>
                         </div>
-                        <div class="col-lg-6 text-center">
-                            <div id="terminal" class="shadow" style="max-height: 500px;">
-                                <div class="d-flex flex-row-reverse align-items-center bg-white p-2">
-                                    <h3 class="mb-0">&times</h3>
-                                    <div class="maximize mx-3"></div>
-                                    <h3 class="mb-0">-</h3>
-                                </div>
-                                <div class="terminal-body bg-dark text-white p-3 h3 mb-0 text-left">
-                                    > choco <span data-animate="install docker-desktop,upgrade nodejs,uninstall flashplayer,search nodejs --id-starts-with,info docker-desktop">install docker-desktop</span><span class="terminal-cursor"></span>
-                                </div>
-                            </div>
+                        <div class="col-lg-6">
+                            @Html.Partial("~/Views/Shared/_Terminal.cshtml")
                         </div>
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#informationCarousel" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#informationCarousel" role="button" data-bs-slide="prev">
                 <span class="fas fa-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
+                <span class="visually-hidden">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#informationCarousel" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#informationCarousel" role="button" data-bs-slide="next">
                 <span class="fas fa-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+                <span class="visually-hidden">Next</span>
             </a>
         </div>
     </div>
 </section>
+<svg class="position-absolute top-0 start-0 h-90" viewBox="0 0 1000 1000">
+    <use fill="url(#bg-gradient-primary-theme)" xlink:href="@Url.Content("~/content/images/global-shared/use.svg#bg-rounded-corner")"></use>
+</svg>
+<svg class="position-absolute top-0 end-0 h-90 rotate-180" viewBox="0 0 1000 1000">
+    <use fill="url(#bg-gradient-primary-theme)" xlink:href="@Url.Content("~/content/images/global-shared/use.svg#bg-rounded-corner")"></use>
+</svg>
+</div>
 <section id="business-trusted">
     @Html.Partial("~/Views/Pages/_TrustedBusinessCarousel.cshtml")
 </section>
 <section>
-    <div class="bg-medium-dark">
-        <div class="shape-border shape-border-top shape-border-light"></div>
+    <div class="bg-primary-900">
+        <div class="curve curve-top curve-bg-theme"></div>
         <div class="container py-3 py-lg-5">
-            <h1 class="text-center mb-5"><strong>Keep Up with the Latest Chocolatey Resources</strong></h1>
-            <div class="row resource-list home-resources">
+            <h1 class="text-center"><strong>Keep Up with the Latest Chocolatey Resources</strong></h1>
+            <div class="row card-row">
                 <div class="col-lg-4 col-sm-6 mb-4">
-                    <a href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "case-studies", resourceName = "automated-managing-windows-desktop-software" })">
-                        <div class="card h-100">
-                            <div class="card-header font-weight-bold bg-medium-light text-center">
+                    <a class="text-reset" href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "case-studies", resourceName = "automated-managing-windows-desktop-software" })">
+                        <div class="card h-100 card-body p-0">
+                            <div class="bg-medium-light fw-bold text-center px-3 py-2">
                                 <span class="fas fa-briefcase" alt="Case Studies"></span>
                                 <span>Case Study</span>
                             </div>
-                            <div class="card-body p-0">
-                                <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/videos/02-01.jpg")" alt="How I Completely Automated Managing Windows Desktop Software...Forever" title="How I Completely Automated Managing Windows Desktop Software...Forever">
-                                <noscript>
-                                    <img src="@Url.Content("~/content/images/videos/02-01.jpg")" alt="How I Completely Automated Managing Windows Desktop Software...Forever" title="How I Completely Automated Managing Windows Desktop Software...Forever">
-                                </noscript>
-                            </div>
-                            <div class="card-footer">
-                                <h5>How I Completely Automated Managing Windows Desktop Software...Forever</h5>
+                            <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/videos/02-01.jpg")" alt="How I Completely Automated Managing Windows Desktop Software...Forever" title="How I Completely Automated Managing Windows Desktop Software...Forever">
+                            <noscript>
+                                <img src="@Url.Content("~/content/images/videos/02-01.jpg")" alt="How I Completely Automated Managing Windows Desktop Software...Forever" title="How I Completely Automated Managing Windows Desktop Software...Forever">
+                            </noscript>
+                            <div class="d-flex flex-fill align-items-center justify-content-center text-center p-3">
+                                <h5 class="mb-0 link-primary">How I Completely Automated Managing Windows Desktop Software...Forever</h5>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6 mb-4">
-                    <a href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "videos", resourceName = "what-is-chocolatey" })">
-                        <div class="card h-100">
-                            <div class="card-header font-weight-bold bg-medium-light text-center">
-                                <span class="fas fa-play" alt="Video"></span>
+                    <a class="text-reset" href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "videos", resourceName = "what-is-chocolatey" })">
+                        <div class="card h-100 card-body p-0">
+                            <div class="bg-medium-light fw-bold text-center px-3 py-2">
+                                <span class="fas fa-play" alt="Videos"></span>
                                 <span>Video</span>
                             </div>
-                            <div class="card-body p-0">
-                                <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="What is Chocolatey" title="What is Chocolatey">
-                                <noscript>
-                                    <img src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="What is Chocolatey" title="What is Chocolatey">
-                                </noscript>
-                            </div>
-                            <div class="card-footer">
-                                <h5>What is Chocolatey?</h5>
+                            <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="What is Chocolatey" title="What is Chocolatey">
+                            <noscript>
+                                <img src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="What is Chocolatey" title="What is Chocolatey">
+                            </noscript>
+                            <div class="d-flex flex-fill align-items-center justify-content-center text-center p-3">
+                                <h5 class="mb-0 link-primary">What is Chocolatey?</h5>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6 mb-4">
-                    <a href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "success-stories", resourceName = "puppet-customer-success-story" })">
-                        <div class="card h-100">
-                            <div class="card-header font-weight-bold bg-medium-light text-center">
+                    <a class="text-reset" href="@Url.RouteUrl(RouteName.ResourceName, new { resourceType= "success-stories", resourceName = "puppet-customer-success-story" })">
+                        <div class="card h-100 card-body p-0">
+                            <div class="bg-medium-light fw-bold text-center px-3 py-2">
                                 <span class="fas fa-trophy" alt="Customer Success Stories"></span>
                                 <span>Customer Success Story</span>
                             </div>
-                            <div class="card-body p-0">
-                                <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/videos/01-02.jpg")" alt="Mike Lombardi at Puppet" title="Mike Lombardi at Puppet">
-                                <noscript>
-                                    <img src="@Url.Content("~/content/images/videos/01-02.jpg")" alt="Mike Lombardi at Puppet" title="Mike Lombardi at Puppet">
-                                </noscript>
-                            </div>
-                            <div class="card-footer">
-                                <h5>Puppet</h5>
-                                <p><small><i>Mike Lombardi, Software Engineer</i></small></p>
+                            <img class="lazy" src="@Links.Content.Images.blankImage" data-src="@Url.Content("~/content/images/videos/01-02.jpg")" alt="Mike Lombardi at Puppet" title="Mike Lombardi at Puppet">
+                            <noscript>
+                                <img src="@Url.Content("~/content/images/videos/01-02.jpg")" alt="Mike Lombardi at Puppet" title="Mike Lombardi at Puppet">
+                            </noscript>
+                            <div class="d-flex flex-fill flex-column align-items-center justify-content-center text-center p-3">
+                                <h5 class="mb-0 link-primary">Puppet</h5>
+                                <p class="mb-0 link-primary"><small><i>Mike Lombardi, Software Engineer</i></small></p>
                             </div>
                         </div>
                     </a>
@@ -327,16 +373,9 @@ else
                 <a class="btn btn-primary text-center" href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "home"})">View All Resources</a>
             </div>
         </div>
-        <div class="shape-border shape-border-bottom"></div>
+        <div class="curve curve-bottom curve-bg-theme"></div>
     </div>
 </section>
 <section class="pb-3 pb-lg-5">
     @Html.Partial("~/Views/Pages/_Courses.cshtml")
 </section>
-
-@section BottomScripts
-{
-    <script type="text/javascript" language="javascript">
-        $(getStats);
-    </script>
-}

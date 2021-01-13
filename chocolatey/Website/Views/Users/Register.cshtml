@@ -2,9 +2,8 @@
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/MinimalLayout.cshtml";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/account.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
     Bundles.Reference("Scripts/validation");
 }
 @section TopScripts {
@@ -16,49 +15,49 @@
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 }
 <h3 class="text-center">Create a New Account</h3>
-<p class="text-center"><small>Already have an account? <a href="@Url.LogOn()">Log On.</a></small></p>
-<hr class="mb-0" />
+<p class="text-center mb-0"><small>Already have an account? <a href="@Url.LogOn()">Log On.</a></small></p>
+<hr class="mb-0"/>
 @using (Html.BeginForm("Register", "Users", FormMethod.Post, new { id = "i-recaptcha" }))
 {
     <fieldset class="form">
         <legend class="d-none">Register Form</legend>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        <div class="form-field">
-            @Html.LabelFor(m => m.EmailAddress) <span class="fas fa-asterisk"></span>
-            @Html.EditorFor(m => m.EmailAddress)
-            <span class="field-hint-message">Your email will not be public unless you choose to disclose it. It is required to verify your registration and for password retrieval, important notifications, etc.</span>
+        <div class="mt-3">
+            @Html.LabelFor(m => m.EmailAddress) <span class="fas fa-asterisk text-primary small"></span>
+            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control mt-2" })
+            <div class="form-text">Your email will not be public unless you choose to disclose it. It is required to verify your registration and for password retrieval, important notifications, etc.</div>
             @Html.ValidationMessageFor(m => m.EmailAddress)
         </div>
-        <div class="form-field">
-            @Html.LabelFor(m => m.Username) <span class="fas fa-asterisk"></span>
-            @Html.EditorFor(m => m.Username)
-            <span class="field-hint-message">Choose something unique so others will know which contributions are yours.</span>
+        <div class="mt-3">
+            @Html.LabelFor(m => m.Username) <span class="fas fa-asterisk text-primary small"></span>
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control mt-2" })
+            <div class="form-text">Choose something unique so others will know which contributions are yours.</div>
             @Html.ValidationMessageFor(m => m.Username)
         </div>
-        <div class="form-field">
-            @Html.LabelFor(m => m.Password) <span class="fas fa-asterisk"></span>
-            @Html.EditorFor(m => m.Password)
-            <span class="field-hint-message">Passwords must be at least 7 characters long.</span>
+        <div class="mt-3">
+            @Html.LabelFor(m => m.Password) <span class="fas fa-asterisk text-primary small"></span>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control mt-2" })
+            <div class="form-text">Passwords must be at least 7 characters long.</div>
             @Html.ValidationMessageFor(m => m.Password)
         </div>
-        <div class="form-field">
-            @Html.LabelFor(m => m.ConfirmPassword) <span class="fas fa-asterisk"></span>
-            @Html.EditorFor(m => m.ConfirmPassword)
-            <span class="field-hint-message">Please reenter your password and ensure that it matches the one above.</span>
+        <div class="mt-3">
+            @Html.LabelFor(m => m.ConfirmPassword) <span class="fas fa-asterisk text-primary small"></span>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control mt-2" })
+            <div class="form-text">Please reenter your password and ensure that it matches the one above.</div>
             @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
         @if(ViewData.ModelState["SpamValidationResponse"] != null)
         {
-            <ul class="list-unstyled callout callout-danger">
+            <ul class="list-unstyled callout callout-danger shadow-none mt-3">
                 <li><strong>reCAPTCHA Error(s):</strong></li>
                 @foreach(var error in ViewData.ModelState["SpamValidationResponse"].Errors)
                 {
-                    <li class="field-validation-error">@Html.Raw(error.ErrorMessage)</li>
+                    <li>@Html.Raw(error.ErrorMessage)</li>
                 }
             </ul>
         }
-        <p class="mb-0 mt-3"><small>Fields marked with</small> <span class="fas fa-asterisk"></span> <small>are required.</small></p>
+        <p class="mb-0 mt-3"><small>Fields marked with</small> <span class="fas fa-asterisk text-primary small"></span> <small>are required.</small></p>
         <input class="btn btn-primary mx-auto mt-3 d-block g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["reCAPTCHA::PublicKey"]" data-callback="onSubmit" data-badge="bottomleft" data-action="Form_Register" type="submit" value="Register" title="Register" />
         <p class="mb-0 mt-2 text-center"><small><a class="cancel" href="@Url.LogOn()" title="Cancel Changes and go back.">Cancel</a></small></p>
     </fieldset>

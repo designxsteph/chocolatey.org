@@ -12,6 +12,13 @@ App_Data
 /chocolatey/Website/Content/dist
 /chocolatey/Website/node_modules
 /chocolatey/Website/chocolatey-styleguide.zip
+/chocolatey/Website/Content/css/
+/chocolatey/Website/Scripts
+/chocolatey/Website/Content/fonts/
+/chocolatey/Website/Content/images/global-shared/
+/chocolatey/Website/Views/GlobalPartials/
+apple-touch-*.png
+favicon.ico
 snags/
 _AzurePackage
 *.sln.docstates

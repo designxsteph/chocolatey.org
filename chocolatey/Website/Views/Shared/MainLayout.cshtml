@@ -14,14 +14,16 @@
     @RenderSection("TopScripts", required: false)
 }
 
-<body>
+<body class="chocolatey-org">
     @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
     <main class="mb-auto">
         @Html.Partial("~/Views/Shared/_Modals.cshtml")
         @RenderBody()
     </main>
-    <footer>
+    <footer class="flex-shrink-0">
         @Html.Partial("~/Views/Shared/_BottomNavigation.cshtml")
+        @Html.Partial("~/Views/Shared/_CopyrightNavigation.cshtml")
+        @Html.Partial("~/Views/Shared/_CookiePolicy.cshtml")
     </footer>
     @RenderPage("_CookiePolicy.cshtml")
 

@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<EventViewModel>
 @{
     ViewBag.Title = "12 Days of Chocolatey";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/jquery-countdown");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
+    Bundles.Reference("Scripts/events");
 
     var description = "We'll have a live daily event for an hour - every weekday from Dec 1 - Dec 16. While registration is optional, it is strongly encouraged as we plan to have prizes and giveaways and other fun things.";
 }
@@ -17,29 +17,29 @@
 {
     if (post.Title.Equals("12 Days of Chocolatey"))
     {
-        <div id="countdown-header" class="bg-medium-dark text-white border-top-dark text-center bg-snowflake countdown-multi-event">
+        <div id="countdown-header" class="bg-primary-900 text-white text-center bg-snowflake countdown-multi-event">
             <section class="pt-3 pt-lg-5 pb-5">
                 <div class="container-fluid pt-lg-3">
                     <div class="d-md-flex align-items-md-center justify-content-md-center">
-                        <img class="img-fluid mr-5 d-none d-md-flex" width="150" height="143" src="@Url.Content("~/content/images/chocolatey-holiday-icon.svg")" />
+                        <img class="img-fluid me-5 d-none d-md-flex" width="150" height="143" src="@Url.Content("~/content/images/chocolatey-holiday-icon.svg")" />
                         <img class="img-fluid" width="450" height="214" src="@Url.Content("~/content/images/12-days-logo-light.svg")" />
                     </div>
                     <h5 class="countdown-date my-4 mb-md-5">
-                        <span class="mr-lg-4 mb-3 mb-lg-0 d-inline-block"><i class="fas fa-calendar"></i> @post.EventDateRange</span>
+                        <span class="me-lg-4 mb-3 mb-lg-0 d-inline-block"><i class="fas fa-calendar"></i> @post.EventDateRange</span>
                         <br class="d-lg-none" />
                         <span><i class="fas fa-clock"></i> Daily at 4-5 PM GMT / 8-9 AM PST / 10-11 AM CST / 11-12 AM EST</span>
                     </h5>
-                    <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-success btn-not-on-demand btn-lg mb-4 mb-md-5"><span class="h2 font-weight-bold">Reserve My Spot Now</span></a>
+                    <a href="@post.RegisterLink" target="_blank" rel="noreferrer" class="btn btn-success btn-not-on-demand btn-lg mb-4 mb-md-5"><span class="h2 fw-bold">Reserve My Spot Now</span></a>
                 </div>
             </section>
             <div class="position-relative"><div class="countdown-container countdown-container-blocks countdown-container-absolute-center countdown-container-success"></div></div>
-            <div class="shape-border shape-border-bottom"></div>
+            <div class="curve curve-bottom curve-bg-theme"></div>
         </div>
         <section class="pb-3 pb-lg-5">
             <div class="container">
                 <div class="mb-4 d-flex">
-                    <div><img class="mr-1 img-berry" src="@Url.Content("~/content/images/holly.svg")" alt="Holiday Holly" /></div>
-                    <h1 class="mb-0">12 Days - 1 Topic, 1 Hour, Each Day</h1>
+                    <div><img class="me-1 img-berry" src="@Url.Content("~/content/images/holly.svg")" alt="Holiday Holly" /></div>
+                    <h1 class="my-0">12 Days - 1 Topic, 1 Hour, Each Day</h1>
                 </div>
                 <div class="row align-items-center">
                     <div class="col-lg-6">
@@ -105,11 +105,11 @@
                 </div>
             </div>
         </section>
-        <section id="schedule" class="py-3 py-lg-5 bg-white">
+        <section id="schedule" class="py-3 py-lg-5 bg-theme-light">
             <div class="container">
                 <div class="mb-4 d-flex">
-                    <div><img class="mr-1 img-berry" src="@Url.Content("~/content/images/holly.svg")" alt="Holiday Holly" /></div>
-                    <h1 class="mb-0">Event Replay Archive</h1>
+                    <div><img class="me-1 img-berry" src="@Url.Content("~/content/images/holly.svg")" alt="Holiday Holly" /></div>
+                    <h1 class="my-0">Event Replay Archive</h1>
                 </div>
                 <div class="mb-3">
                     <input class="countdown-date-time" type="hidden" value="2020/12/01 16:00:00 UTC" />
@@ -122,9 +122,9 @@
                         <div class="col-md-9">
                             <h5>Keynote - "The Power of Simple"</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speaker: Rob Reynolds</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speaker: Rob Reynolds</span>
                             </p>
                             <p>
                                 Join us as Rob talks about the elegance and power of simple to kick off the 12 Days of Chocolatey.
@@ -146,9 +146,9 @@
                         <div class="col-md-9">
                             <h5>Redefining Chocolatey</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Rob Reynolds, Adil Leghari</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Rob Reynolds, Adil Leghari</span>
                             </p>
                             <p>
                                 You likely have a picture in your mind of what Chocolatey is to you. Come prepared to have your mind blown.
@@ -169,9 +169,9 @@
                         <div class="col-md-9">
                             <h5>Chocolatey Central Managements Deployments Scheduling, Semi-Connected Environments, and API</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-success d-inline-block mb-2 mb-md-0 mr-md-3">Webinar</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-success d-inline-block mb-2 mb-md-0 me-md-3">Webinar</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Gary Ewan Park, Joel (Sallow) Francis</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Gary Ewan Park, Joel (Sallow) Francis</span>
                             </p>
                             <p>
                                 Chocolatey Central Management's premiere feature of Deployments now can work with schedules, semi-connected environments, and CCM (Chocolatey Central Management) overall has a published API so you can accomplish more, much more.
@@ -193,9 +193,9 @@
                         <div class="col-md-9">
                             <h5>Chocolatey in the Organization</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Gary Ewan Park</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Gary Ewan Park</span>
                             </p>
                             <p>
                                 Come discover the best practices for setting up and configuring Chocolatey in an Organization. We’ll show you how to better leverage the Chocolatey Community Repository for packages updates,
@@ -217,9 +217,9 @@
                         <div class="col-md-9">
                             <h5>Building Packages (Open Source and C4B)</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Adil Leghari, Stephen Valdinger</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Adil Leghari, Stephen Valdinger</span>
                             </p>
                             <p>
                                 Building Chocolatey packages from scratch can take time and effort. We’ll show you some tips and tricks to help get you started,
@@ -241,9 +241,9 @@
                         <div class="col-md-9">
                             <h5>Exploring Quick Deployment Environment (QDE) & Offline / Internal Environments</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Stephen Valdinger</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Stephen Valdinger</span>
                             </p>
                             <p>
                                 This appliance allows you to have all the infrastructure required to use Chocolatey successfully in an organization,
@@ -265,9 +265,9 @@
                         <div class="col-md-9">
                             <h5 class="text-break">Choco CCM Module (Deployments / Integrations / Reporting)</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Stephen Valdinger, Joel (Sallow) Francis</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Stephen Valdinger, Joel (Sallow) Francis</span>
                             </p>
                             <p>
                                 PowerShell loves APIs, and so do we! So we wrote a PowerShell module to interact with the API behind Central Management.
@@ -289,9 +289,9 @@
                         <div class="col-md-9">
                             <h5>Accelerate Automation of Windows with Ansible + Chocolatey</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-success d-inline-block mb-2 mb-md-0 mr-md-3">Webinar</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-success d-inline-block mb-2 mb-md-0 me-md-3">Webinar</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Adil Leghari, Paul Broadwith, George James</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Adil Leghari, Paul Broadwith, George James</span>
                             </p>
                             <p>
                                 Together, Ansible and Chocolatey bring faster and more secure deployments to your Windows environments. Use Chocolatey for software/package management and Ansible to automate and guarantee the desired state of your Windows infrastructure,
@@ -313,9 +313,9 @@
                         <div class="col-md-9">
                             <h5>Chocolatey Integrations Discussion (including SCCM & Intune)</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Chocolatey Team</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Chocolatey Team</span>
                             </p>
                             <p>
                                 Are you using Configuration Management platforms like Puppet, SCCM, or Intune? Good news! Chocolatey can integrate with all these tools as well!
@@ -337,9 +337,9 @@
                         <div class="col-md-9">
                             <h5>Exploring Self-Service Anywhere</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Paul Broadwith</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Paul Broadwith</span>
                             </p>
                             <p>
                                 Join Paul and discover how Chocolatey can empower your users to manage software on their computers, freeing up your IT team and other resources by harnessing the power of Chocolatey GUI and Chocolatey For Business.
@@ -360,9 +360,9 @@
                         <div class="col-md-9">
                             <h5>R&D Show and Tell</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Rob Reynolds, Stephen Valdinger</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Rob Reynolds, Stephen Valdinger</span>
                             </p>
                             <p>
                                 Our R&D team and especially Stephen is always coming up with some really cool concepts, but not all of them make it into the product.
@@ -383,9 +383,9 @@
                         <div class="col-md-9">
                             <h5>Q&A Panel Session & Wrap</h5>
                             <p>
-                                <span class="badge badge-pill text-right text-capitalize badge-secondary d-inline-block mb-2 mb-md-0 mr-md-3">Livestream</span>
+                                <span class="badge rounded-pill text-end text-capitalize bg-secondary d-inline-block mb-2 mb-md-0 me-md-3">Livestream</span>
                                 <br class="d-md-none" />
-                                <span><i class="fas fa-microphone text-secondary mr-1"></i>Speakers: Chocolatey Team</span>
+                                <span><i class="fas fa-microphone text-secondary me-1"></i>Speakers: Chocolatey Team</span>
                             </p>
                             <p>
                                 We’ll take live questions from the Chocolatey Community here, to be submitted via the chat. If we have time, we’ll cover some common questions posed by Organizations we’ve helped.
@@ -399,152 +399,152 @@
         <section class="py-3 py-lg-5 pb-lg-0">
             <div class="container">
                 <div class="mb-4 d-flex">
-                    <div><img class="mr-1 img-berry" src="@Url.Content("~/content/images/holly.svg")" alt="Holiday Holly" /></div>
-                    <h1 class="mb-0">Event Speakers</h1>
+                    <div><img class="me-1 img-berry" src="@Url.Content("~/content/images/holly.svg")" alt="Holiday Holly" /></div>
+                    <h1 class="my-0">Event Speakers</h1>
                 </div>
                 <div class="row">
-                    <div id="rob-reynolds" class="col-md-6 col-xl-4 mb-3 mb-md-5">
-                        <div class="event-speaker">
+                    <div id="rob-reynolds" class="col-md-6 col-xl-4 mb-4 mb-md-5">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/rob-reynolds.jpg")" alt="Rob Reynolds" title="Rob Reynolds" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-success mb-0">Rob Reynolds</h5>
+                                    <h5 class="fw-bold text-success mb-0">Rob Reynolds</h5>
                                     <p class="mb-0"><strong>Chocolatey Founder</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/robreynolds" target="_blank" rel="noreferrer" title="View more about Rob Reynolds on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/ferventcoder" target="_blank" rel="noreferrer" title="View more about Rob Reynolds on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/robreynolds" target="_blank" rel="noreferrer" title="View more about Rob Reynolds on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/ferventcoder" target="_blank" rel="noreferrer" title="View more about Rob Reynolds on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
                             <p class="mb-0">Rob is a developer turned founder with 14+ years experience in infrastructure automation and modern automation approaches. He excels in taking hard concepts and making them approachable and easy.</p>
                         </div>
                     </div>
-                    <div id="paul-broadwith" class="col-md-6 col-xl-4 mb-3 mb-md-5">
-                        <div class="event-speaker">
+                    <div id="paul-broadwith" class="col-md-6 col-xl-4 mb-4 mb-md-5">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/paul-broadwith.jpg")" alt="Paul Broadwith" title="Paul Broadwith" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-success mb-0">Paul Broadwith</h5>
+                                    <h5 class="fw-bold text-success mb-0">Paul Broadwith</h5>
                                     <p class="mb-0"><strong>Senior Technical Engineer at Chocolatey Software</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/paulbroadwith" target="_blank" rel="noreferrer" title="View more about Paul Broadwith on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/pauby" target="_blank" rel="noreferrer" title="View more about Paul Broadwith on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/paulbroadwith" target="_blank" rel="noreferrer" title="View more about Paul Broadwith on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/pauby" target="_blank" rel="noreferrer" title="View more about Paul Broadwith on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
                             <p class="mb-0">Paul Broadwith of Glasgow Scotland has 25+ years in IT in financial, government, manufacturing and services sectors. He is the Lead Engineer on Boxstarter and cChoco DSC Resource.</p>
                         </div>
                     </div>
-                    <div id="gary-ewan-park" class="col-md-6 col-xl-4 mb-3 mb-md-5">
-                        <div class="event-speaker">
+                    <div id="gary-ewan-park" class="col-md-6 col-xl-4 mb-4 mb-md-5">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/gary-ewan-park.jpg")" alt="Gary Ewan Park" title="Gary Ewan Park" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-success mb-0">Gary Ewan Park</h5>
+                                    <h5 class="fw-bold text-success mb-0">Gary Ewan Park</h5>
                                     <p class="mb-0"><strong>Senior Software Engineer at Chocolatey Software</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/gep13" target="_blank" rel="noreferrer" title="View more about Gary Ewan Park on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/gep13" target="_blank" rel="noreferrer" title="View more about Gary Ewan Park on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/gep13" target="_blank" rel="noreferrer" title="View more about Gary Ewan Park on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/gep13" target="_blank" rel="noreferrer" title="View more about Gary Ewan Park on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
                             <p class="mb-0">Gary Ewan Park has 10+ years working as a developer in the Oil and Gas Industry. He is the primary maintainer on the Chocolatey GUI project and the lead automation expert on Chocolatey Central Management.</p>
                         </div>
                     </div>
-                    <div id="joel-sallow-francis" class="col-md-6 col-xl-4 mb-3 mb-md-5">
-                        <div class="event-speaker">
+                    <div id="joel-sallow-francis" class="col-md-6 col-xl-4 mb-4 mb-md-5">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/joel-sallow-francis.jpg")" alt="Joel (Sallow) Francis" title="Joel (Sallow) Francis" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-success mb-0">Joel (Sallow) Francis</h5>
+                                    <h5 class="fw-bold text-success mb-0">Joel (Sallow) Francis</h5>
                                     <p class="mb-0"><strong>Software Engineer at Chocolatey Software</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/joel-francis-356539128" target="_blank" rel="noreferrer" title="View more about Joel (Sallow) Francis on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/vexx32" target="_blank" rel="noreferrer" title="View more about Joel (Sallow) Francis on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/joel-francis-356539128" target="_blank" rel="noreferrer" title="View more about Joel (Sallow) Francis on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/vexx32" target="_blank" rel="noreferrer" title="View more about Joel (Sallow) Francis on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
                             <p class="mb-0">Joel is a PowerShell and C# developer, creator of PSKoans & always looking to learn more. Originally from Australia, hanging out in Florida, typically tinkering with something fun.</p>
                         </div>
                     </div>
-                    <div id="adil-leghari" class="col-md-6 col-xl-4 mb-3 mb-md-5">
+                    <div id="adil-leghari" class="col-md-6 col-xl-4 mb-4 mb-md-5">
                         <div class="d-flex mb-2 align-items-center">
-                            <div class="mr-3">
+                            <div class="me-3">
                                 <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/adil-leghari.jpg")" alt="Adil Leghari" title="Adil Leghari" />
                             </div>
                             <div>
-                                <h5 class="font-weight-bold text-success mb-0">Adil Leghari</h5>
+                                <h5 class="fw-bold text-success mb-0">Adil Leghari</h5>
                                 <p class="mb-0"><strong>Senior Solutions Engineer at Chocolatey Software</strong></p>
                             </div>
                         </div>
                         <div class="d-flex my-3">
-                            <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/adilio" target="_blank" rel="noreferrer" title="View more about Adil Leghari on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                            <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/adilio" target="_blank" rel="noreferrer" title="View more about Adil Leghari on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/adilio" target="_blank" rel="noreferrer" title="View more about Adil Leghari on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                            <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/adilio" target="_blank" rel="noreferrer" title="View more about Adil Leghari on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                         </div>
                         <p class="mb-0">Adil Leghari is a 15-year Sysadmin who is super-passionate about PowerShell and automation. He is a co-founder of the Pacific Northwest PowerShell User Group and a co-host of BridgeConf. When not working at Chocolatey, he enjoys long walks on the beach, candlelit dinners, and designing stickers.</p>
                     </div>
                     <div id="stephen-valdinger" class="col-md-6 col-xl-4">
-                        <div class="event-speaker">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/stephen-valdinger.jpg")" alt="Stephen Valdinger" title="Stephen Valdinger" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-success mb-0">Stephen Valdinger</h5>
+                                    <h5 class="fw-bold text-success mb-0">Stephen Valdinger</h5>
                                     <p class="mb-0"><strong>Solutions Engineer at Chocolatey Software</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin mr-2" href="https://www.linkedin.com/in/stephenvaldinger" target="_blank" rel="noreferrer" title="View more about Stephen Valdinger on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
-                                <a class="btn btn-sm btn-secondary btn-twitter" href="https://twitter.com/steviecoaster" target="_blank" rel="noreferrer" title="View more about Stephen Valdinger on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a class="btn btn-sm bg-linkedin text-white me-2" href="https://www.linkedin.com/in/stephenvaldinger" target="_blank" rel="noreferrer" title="View more about Stephen Valdinger on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-twitter  text-white" href="https://twitter.com/steviecoaster" target="_blank" rel="noreferrer" title="View more about Stephen Valdinger on Twitter"><i class="fab fa-twitter"></i> Twitter</a>
                             </div>
                             <p class="mb-0">Stephen has been messing with technology professionally since 2007, after a childhood of tearing apart anything that plugged into a wall to the chagrin of his parents. He's focused on PowerShell and automation the last 5 years, and always looks for creative ways to solve complex problems.</p>
                         </div>
                     </div>
                 </div>
                 <div class="my-4 mt-md-0 d-flex">
-                    <div><img class="mr-1 img-berry" src="@Url.Content("~/content/images/holly.svg")" alt="Holiday Holly" /></div>
-                    <h1 class="mb-0">Featuring Appearances From</h1>
+                    <div><img class="me-1 img-berry" src="@Url.Content("~/content/images/holly.svg")" alt="Holiday Holly" /></div>
+                    <h1 class="my-0">Featuring Appearances From</h1>
                 </div>
                 <div class="row">
-                    <div id="mukesh-sharma" class="col-md-6 col-xl-4 mb-3 mb-md-5">
-                        <div class="event-speaker">
+                    <div id="mukesh-sharma" class="col-md-6 col-xl-4 mb-4 mb-md-5">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/mukesh-sharma.jpg")" alt="Mukesh Sharma" title="Mukesh Sharma" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-success mb-0">Mukesh Sharma</h5>
+                                    <h5 class="fw-bold text-success mb-0">Mukesh Sharma</h5>
                                     <p class="mb-0"><strong>Co-Founder & COO of Chocolatey</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin" href="https://www.linkedin.com/in/mukeshs" target="_blank" rel="noreferrer" title="View more about Mukesh Sharma on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-linkedin text-white" href="https://www.linkedin.com/in/mukeshs" target="_blank" rel="noreferrer" title="View more about Mukesh Sharma on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
                             </div>
                             <p class="mb-0">Mukesh is passionate about helping our customers on the Windows Automation journey. He has spent 20+ years helping various organizations adopt new disruptive technologies rapidly and consistently; from virtualization, cloud, data analytics to DevOps/WinOps. He is always seeking out opportunities to offer the customer a better experience than they expect.</p>
                         </div>
                     </div>
-                    <div id="george-james" class="col-md-6 col-xl-4 mb-3 mb-md-5">
-                        <div class="event-speaker">
+                    <div id="george-james" class="col-md-6 col-xl-4 mb-md-5">
+                        <div>
                             <div class="d-flex mb-2 align-items-center">
-                                <div class="mr-3">
+                                <div class="me-3">
                                     <img class="rounded shadow" width="75" src="@Url.Content("~/content/images/speakers/george-james.jpg")" alt="George James" title="George James" />
                                 </div>
                                 <div>
-                                    <h5 class="font-weight-bold text-success mb-0">George James</h5>
+                                    <h5 class="fw-bold text-success mb-0">George James</h5>
                                     <p class="mb-0"><strong>Solutions Architect (Global Partner, Solutions Architecture) at Red Hat</strong></p>
                                 </div>
                             </div>
                             <div class="d-flex my-3">
-                                <a class="btn btn-sm btn-secondary btn-linkedin" href="https://www.linkedin.com/in/george-james-171696168" target="_blank" rel="noreferrer" title="View more about George James on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
+                                <a class="btn btn-sm bg-linkedin text-white" href="https://www.linkedin.com/in/george-james-171696168" target="_blank" rel="noreferrer" title="View more about George James on LinkedIn">Linked <i class="fab fa-linkedin"></i></a>
                             </div>
                             <p class="mb-0">George is a Solutions Architect for Red Hat (Global Partner, Solution Architecture). He has over 20 years experience in IT for a large financial services company. George Specializes in Network and Windows Automation with Ansible.</p>
                         </div>

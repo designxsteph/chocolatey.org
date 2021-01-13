@@ -1,0 +1,360 @@
+﻿<div class="collapse d-md-none" id="navLinks" data-bs-parent=".navbar-nested-collapse">
+    <div class="card card-body p-0">
+        <div class="d-sm-none">
+            @Html.Partial("~/Views/GlobalPartials/_globalnavigation.cshtml")
+        </div>
+        <ul class="navbar-nav">
+            @Html.Partial("~/Views/Shared/_TopNavigationLinks.cshtml")
+        </ul>
+        <a class="btn btn-primary mx-3 mb-3" role="button" href="@Url.RouteUrl(RouteName.Install)">Install</a>
+    </div>
+</div>
+<div class="collapse" id="navOverview" data-bs-parent=".navbar-nested-collapse">
+    <div class="card card-body px-0 pt-0 pt-md-3">
+        <div class="container-fluid px-3 d-md-none">
+            <div class="row align-items-center border-bottom mb-3">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <p class="mb-0">Overview</p>
+                </div>
+                <div class="col text-end">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-divider row-md-divider">
+                <div class="col-md-4 pb-3 pb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.WhyChocolatey)">Why Chocolatey?</a>
+                            <p class="d-none d-md-block">
+                                Chocolatey is a software management solution unlike anything else you've ever experienced on Windows.
+                                Chocolatey brings the concepts of true package management to allow you to version things, manage dependencies and installation order, better inventory management, and other features.
+                            </p>
+                        </li>
+                        <li><a href="@Url.RouteUrl(RouteName.HowChocolateyWorks)">How Chocolatey Works</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 py-3 py-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.UseCases)">Use Cases</a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.UseCases)#server">Server</a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.UseCases)#desktop">Desktop</a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.UseCases)#cloud">Cloud / Containers</a></li>
+                        <li><a href="@Url.RouteUrl(RouteName.UseCases)#integrations">Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 pt-3 pt-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "success-stories"})">Customer Stories</a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.ResourceName, new {resourceType = "success-stories", resourceName = "puppet-customer-success-story"})">Puppet<span class="fas fa-angle-right ms-2"></span></a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.ResourceName, new {resourceType = "success-stories", resourceName = "yelp-customer-success-story"})">Yelp<span class="fas fa-angle-right ms-2"></span></a></li>
+                        <li><a href="@Url.RouteUrl(RouteName.ResourceName, new {resourceType = "success-stories", resourceName = "cme-group-customer-success-story"})">CME Group<span class="fas fa-angle-right ms-2"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="collapse" id="navProducts" data-bs-parent=".navbar-nested-collapse">
+    <div class="card card-body px-0 pt-0 pt-md-3">
+        <div class="container-fluid px-3 d-md-none">
+            <div class="row align-items-center border-bottom mb-3">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <p class="mb-0">Products</p>
+                </div>
+                <div class="col text-end">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-divider row-md-divider">
+                <div class="col-md-4 pb-3 pb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.Products, new {productName = "chocolatey-for-business"})">Chocolatey for Business</a>
+                            <p class="d-none d-md-block">
+                                Chocolatey for Business (C4B) is the enterprise offering that enables companies to adopt a DevOps approach to managing their Windows environment, allowing you to deliver applications to your users more reliably and faster.
+                            </p>
+                        </li>
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.Products, new {productName = "home"})#pro-edition">Pro Edition</a>
+                            <p class="d-none d-md-block">
+                                Pro is a personal, named license that grants having licensed versions of Chocolatey on up to 8 machines and provides the ultimate Chocolatey experience!
+                            </p>
+                        </li>
+                        <li>
+                            <a href="@Url.RouteUrl(RouteName.Products, new {productName = "home"})#foss">Open Source</a>
+                            <p class="d-none d-md-block mb-0">
+                                Chocolatey has the largest online registry of Windows packages. Learn how Open Source Chocolatey can support your next project.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 py-3 py-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.Compare)">Compare Editions</a>
+                            <p class="d-none d-md-block">
+                                Learn the difference between the Chocolatey Editions and what will fit your needs the best.
+                            </p>
+                        </li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Pricing)">Pricing</a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.ContactTrial)">Try Chocolatey for Business Free</a></li>
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.Pricing)">Purchase</a>
+                            <p class="d-none d-md-block">
+                                I'm ready to get started now!
+                            </p>
+                        </li>
+                        <li><a href="@Url.RouteUrl(RouteName.Support)">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 pt-3 pt-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="@Url.RouteUrl(RouteName.Events, new {eventName = "home"})">Events</a>
+                            <p class="d-none d-md-block mb-0">
+                                Find past and upcoming webinars, workshops, and conferences.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="collapse" id="navSolutions" data-bs-parent=".navbar-nested-collapse">
+    <div class="card card-body px-0 pt-0 pt-md-3">
+        <div class="container-fluid px-3 d-md-none">
+            <div class="row align-items-center border-bottom mb-3">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <p class="mb-0">Solutions</p>
+                </div>
+                <div class="col text-end">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-divider row-md-divider">
+                <div class="col-md-4 pb-3 pb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="@Url.RouteUrl(RouteName.Products, new {productName = "chocolatey-for-business"})">Chocolatey for Business</a>
+                            <p class="d-none d-md-block mb-0">
+                                Chocolatey for Business (C4B) is the enterprise offering that enables companies to adopt a DevOps approach to managing their Windows environment, allowing you to deliver applications to your users more reliably and faster.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 py-3 py-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="@Url.RouteUrl(RouteName.Solutions, new {solutionName = "home"})">Self-Service Anywhere</a>
+                            <p class="d-none d-md-block mb-0">
+                                Chocolatey provides a unique approach to managing your end-user software (desktops / laptops) and can be combined with your existing solutions. Chocolatey for Business (C4B) enables better security, enhanced visibility with centralized reporting, and a self-service GUI. Self-Service Anywhere allows non-administrators to easily access and manage IT approved software from the office, from home, or anywhere they have an internet connection.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 pt-3 pt-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3 mb-md-0">
+                            <a href="https://docs.chocolatey.org/en-us/quick-deployment/">Quick Deployment Environment (QDE)</a>
+                            <p class="d-none d-md-block">
+                                The Quick Deployment Environment (QDE) provides a single virtual machine appliance to be imported into your hypervisor-of-choice, which contains most of the various components of a Chocolatey organizational solution. Deploy recommended architecture in 2-3 hours.
+                            </p>
+                        </li>
+                        <li><a href="@Url.RouteUrl(RouteName.Solutions, new {solutionName = "secure-offline-deployments"})">Secure Offline Deployments</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="collapse" id="navCommunity" data-bs-parent=".navbar-nested-collapse">
+    <div class="card card-body px-0 pt-0 pt-md-3">
+        <div class="container-fluid px-3 d-md-none">
+            <div class="row align-items-center border-bottom mb-3">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <p class="mb-0">Community</p>
+                </div>
+                <div class="col text-end">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-divider row-md-divider">
+                <div class="col-md-4 pb-3 pb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="@Url.RouteUrl(RouteName.ListPackages)">Community Packages</a>
+                            <p class="d-none d-md-block mb-0">
+                                Search the largest online registry of Windows packages. Chocolatey packages encapsulate everything required to manage a particular piece of software into one deployment artifact by wrapping installers, executables, zips, and scripts into a compiled package file.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 py-3 py-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Community)">Community Resources</a></li>
+                        <li class="mb-3"><a href="https://github.com/chocolatey" target="_blank" rel="noreferrer">Chocolatey on GitHub</a></li>
+                        <li><a href="https://blog.chocolatey.org/">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 pt-3 pt-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="@Url.RouteUrl(RouteName.Events, new {eventName = "home"})">Events</a>
+                            <p class="d-none d-md-block mb-0">
+                                Find past and upcoming webinars, workshops, and conferences.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="collapse" id="navLearn" data-bs-parent=".navbar-nested-collapse">
+    <div class="card card-body px-0 pt-0 pt-md-3">
+        <div class="container-fluid px-3 d-md-none">
+            <div class="row align-items-center border-bottom mb-3">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <p class="mb-0">Learn</p>
+                </div>
+                <div class="col text-end">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-divider row-md-divider">
+                <div class="col-md-4 pb-3 pb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.Install)">Install Chocolatey</a>
+                            <p class="d-none d-md-block">
+                                Get step-by-step instructions on how to install Chocolatey.
+                            </p>
+                        </li>
+                        <li>
+                            <a href="@Url.RouteUrl(RouteName.Courses)">Getting Started Course</a>
+                            <p class="d-none d-md-block mb-0">
+                                New to Chocolatey? Learn the requirements and how to get Chocolatey up and running in no time!
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 py-3 py-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "home"})">Resource Library</a></li>
+                        <li class="mb-3"><a href="https://docs.chocolatey.org/en-us/">Docs</a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "videos"})">Videos</a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Resources, new {resourceType = "case-studies"})">Case Studies</a></li>
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Courses)">Courses</a></li>
+                        <li><a href="@Url.RouteUrl(RouteName.MediaKit)">Media Kit</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 pt-3 pt-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.Events, new {eventName = "home"})">Events</a>
+                            <p class="d-none d-md-block">
+                                Find past and upcoming webinars, workshops, and conferences.
+                            </p>
+                        </li>
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.Covid19)">COVID-19 Resources</a>
+                            <p class="d-none d-md-block">
+                                Chocolatey Software is working harder than ever to provide solutions and resources for our customers and community. We'll continue to add to this area so check back often.
+                            </p>
+                        </li>
+                        <li class="mb-3 mb-md-0">
+                            <a href="@Url.RouteUrl(RouteName.Support)">Support</a>
+                            <p class="d-none d-md-block">
+                                Need help? Read our Support FAQ to find out the next steps.
+                            </p>
+                        </li>
+                        <li class="mb-3"><a href="https://blog.chocolatey.org/">Blog</a></li>
+                        <li><a href="http://eepurl.com/4qUJH" target="_blank" rel="noreferrer">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="collapse" id="navPartners" data-bs-parent=".navbar-nested-collapse">
+    <div class="card card-body px-0 pt-0 pt-md-3">
+        <div class="container-fluid px-3 d-md-none">
+            <div class="row align-items-center border-bottom mb-3">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <p class="mb-0">Partners</p>
+                </div>
+                <div class="col text-end">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-divider row-md-divider">
+                <div class="col-md-6 pb-3 pb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Partner)">Overview</a></li>
+                        <li><a href="@Url.RouteUrl(RouteName.ContactPartner)">Become a Partner</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 pt-3 pt-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Partner)#technology">Technology Partners</a></li>
+                        <li><a href="@Url.RouteUrl(RouteName.Partner)#resellers">Resellers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="collapse" id="navAbout" data-bs-parent=".navbar-nested-collapse">
+    <div class="card card-body px-0 pt-0 pt-md-3">
+        <div class="container-fluid px-3 d-md-none">
+            <div class="row align-items-center border-bottom mb-3">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <p class="mb-0">About</p>
+                </div>
+                <div class="col text-end">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-divider row-md-divider">
+                <div class="col-md-6 pb-3 pb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="@Url.RouteUrl(RouteName.About)">About Chocolatey</a>
+                            <p class="d-none d-md-block mb-0">
+                                Chocolatey Software is focused on helping our community, customers, and partners with solutions that help fill the gaps that are often ignored. We offer a simple, pragmatic, and open approach to software management.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 pt-3 pt-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3"><a href="@Url.RouteUrl(RouteName.Careers)">Careers</a></li>
+                        <li><a href="@Url.RouteUrl(RouteName.ContactUs)">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

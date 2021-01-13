@@ -2,25 +2,24 @@
 @{
     Layout = "~/Views/Shared/NewsletterLayout.cshtml";
     ViewBag.Title = "Courses";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
+    Bundles.Reference("Scripts/courses");
 }
 
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-</section>
-<div id="header" class="course-header bg-primary">
-  <section class="py-3 py-lg-5">
-    <div class="container text-center">
-        <h1 class="display-3">Chocolatey Courses</h1>
-        <h1>Step-by-Step Guides for All Things Chocolatey!</h1>
-        <a class="btn btn-outline-light" href="#additional-courses">View More Courses</a>
-        <a class="btn btn-light" href="#getting-started">Get Started</a>
-    </div>
-  </section>
-  <div class="shape-border shape-border-bottom shape-border-white"></div>
+@Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
+<div class="bg-theme-primary">
+    <section class="py-3 py-lg-5">
+        <div class="container text-center">
+            <h1 class="display-3">Chocolatey Courses</h1>
+            <h1>Step-by-Step Guides for All Things Chocolatey!</h1>
+            <a class="btn btn-outline-theme" href="#additional-courses">View More Courses</a>
+            <a class="btn btn-theme" href="#getting-started">Get Started</a>
+        </div>
+    </section>
+    <div class="curve curve-bottom curve-bg-theme-light"></div>
 </div>
-<section id="getting-started" class="pb-3 pb-lg-5 bg-white">
+<section id="getting-started" class="pb-3 pb-lg-5 bg-theme-light">
   @Html.Partial("~/Views/Courses/GettingStarted/_CourseDescription.cshtml", new CourseViewModel()
   {
       CourseKey = CourseConstants.GetCourseKey(CourseNameType.GettingStartedWithChocolatey),
@@ -29,8 +28,6 @@
       CourseModules = Model.CourseModules.OrEmptyListIfNull().ToList(),
       UserCourseAchievements = Model.UserCourseAchievements.OrEmptyListIfNull().ToList()
   })
-
-
 </section>
 @Html.Partial("~/Views/Courses/_AllCourses.cshtml", Model)
 

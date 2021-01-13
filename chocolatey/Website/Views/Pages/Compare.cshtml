@@ -1,13 +1,12 @@
 ﻿@{
     ViewBag.Title = "Compare";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/pages.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
 <section class="container py-3 py-lg-5" id="compare">
     <h1 class="text-center pb-3 pb-lg-5">Compare Chocolatey Editions</h1>
-    <table class="table table-bordered border-0">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr class="sticky-top">
                 <th class="border-0 d-none d-md-table-cell" scope="col"></th>
@@ -20,197 +19,197 @@
         <tbody>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/create/create-packages">Create Packages</a> (even offline) / <a href="https://docs.chocolatey.org/en-us/guides/create/create-custom-package-templates">Customize Packaging Templates</a></th>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/host-packages">Host Your Own Package Repository</a> - Chocolatey supports <a href="https://docs.chocolatey.org/en-us/choco/commands/sources">multiple package sources</a> including your own internal (private and/or authenticated) feeds!</th>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/integrations">Integration with other tools</a> - Chocolatey works with all infrastructure management and RMM tools!</th>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/shim">Package Shims</a> - Adds exes to known PATH, use immediately after installing!</th>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/choco/commands/upgrade">Upgrade all software with one command</a> - it's like Windows Update, but for all your internal and 3rd party software!</th>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/create/functions/">30+ built-in PowerShell functions</a> - turns complex software management tasks into one line function calls!</th>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/extensions">Package Extensions</a> - Extend Chocolatey with your own PowerShell Modules (extensions)!</th>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row">Enhanced functionality, additional PowerShell functions - giving you more control, reliability, smoother usage, and covering more scenarios that make sense for organizations!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
               <th scope="row"><a href="https://docs.chocolatey.org/en-us/guides/create/recompile-packages">Manually Internalize Packages</a> - Take existing community packages and convert for offline use.</th>
-              <td><span class="fas fa-check"></span></td>
-              <td><span class="fas fa-check"></span></td>
-              <td><span class="fas fa-check"></span></td>
-              <td><span class="fas fa-check"></span></td>
+              <td><span class="fas fa-check text-success"></span></td>
+              <td><span class="fas fa-check text-success"></span></td>
+              <td><span class="fas fa-check text-success"></span></td>
+              <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-internalizer">Package Internalizer</a> - Convert existing community packages for complete offline / reliable use (removes need for internet access from community packages) with one command that can be <a href="https://docs.chocolatey.org/en-us/guides/organizations/automate-package-internalization">automated/scheduled</a>!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-builder">Package Builder</a> - Detect and create full software deployments in 5-10 seconds!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row">Direct Installer (aka Package-less Install) - Install and upgrade directly from exe/msi files!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-builder">Generate Packages from Programs and Features</a> - create packages for all current installs in under 60 seconds?!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/self-service-anywhere">Background Mode / Self-Service Installer</a> - Chocolatey as a background service so admins and non-admins alike can manage software!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/central-management/">Chocolatey Central Management</a> - Reporting and management of software for your entire organization from one location!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span> Reporting / Deployments</td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span> Reporting / Deployments</td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/quick-deployment/">Quick Deployment Environment (QDE)</a> - All recommended infrastructure ready to go in a VM!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-builder">Package Builder UI</a> - A visual interface to create packages!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-synchronization/packages-to-programs">Package Synchronizer - Automatic Sync</a> - keep installed packages synced up with software they are tracking when upgrades and uninstalls are performed outside of Chocolatey!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-synchronization/packages-to-programs#sync-command">Package Synchronizer - Sync Command</a> - create packages out of Programs and Features and bring existing software installations under Chocolatey management!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-audit">Package Audit</a> - see who installed what/when!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-reducer">Package Reducer</a> - reduce the size of your package directories automatically!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/package-throttle">Package Throttle</a> - reduce download speeds for low bandwidth environments!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/install-directory-override">Install Directory Override</a> - one switch for all installers!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/private-cdn">Download CDN Cache</a> - no more 404s!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/features/virus-check">Runtime Malware/Virus Protection</a> - stay protected!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="https://docs.chocolatey.org/en-us/choco/commands/download">Package Downloader</a> - download existing packages with an easy command!</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row">Priorization of Bugs and Features</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row">Packaging Support Services - You upload your troublesome installers, we provide you fully automated packages</th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
                 <td>Cost Per Use at Any Time</td>
                 <td>Cost Per Use at Any Time</td>
             </tr>
@@ -223,16 +222,16 @@
             </tr>
             <tr>
                 <th scope="row"><a href="@Url.RouteUrl(RouteName.Support)">Email Support</a></th>
-                <td><span class="fas fa-ban"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
                 <td>8 Incidents Annually</td>
-                <td><span class="fas fa-check"></span></td>
-                <td><span class="fas fa-check"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
+                <td><span class="fas fa-check text-success"></span></td>
             </tr>
             <tr>
                 <th scope="row"><a href="@Url.RouteUrl(RouteName.Support)">Phone Support</a></th>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
-                <td><span class="fas fa-ban"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
+                <td><span class="fas fa-ban text-danger"></span></td>
                 <td>Available add-on w/Premium Support</td>
             </tr>
             <tr>

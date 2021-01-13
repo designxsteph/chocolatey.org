@@ -6,16 +6,17 @@
     var submittedStatus = Model.SubmittedStatus;
     var packageImage = Url.ImageUrl(Model.Id, Model.Version, Model.IconUrl);
     var gridView = Request.Cookies["preferenceGridView"] != null;
+    var copyId = "id-" + @Model.Id.ToLower().Replace(".", "") + "-" + @Model.Version.Replace(".", "");
 }
 
 <div class="@if (gridView){<text>card-body pb-2</text>}">
-    <div class="media">
+    <div class="d-flex">
         <div class="mx-auto package-image-header">
             <a href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" title="Learn more about @Model.Title" aria-label="Learn more about @Model.Title">
                 <img class="align-self-start img-fluid" src="@(Url.Content(packageImage ?? @Links.Content.Images.packageDefaultIcon_50x50_png))" alt="@Model.Id icon" onerror="this.src='@Links.Content.Images.packageDefaultIcon_50x50_png';">
             </a>
         </div>
-        <div class="media-body ml-3">
+        <div class="flex-fill ms-3">
             @*Title and Type*@
             <div class="d-flex @if(!gridView){<text>align-items-sm-center</text>}">
                 <div class="d-flex mt-1 @if(!gridView){<text>mt-sm-0</text>}">
@@ -24,39 +25,39 @@
                     	<span class="@Model.PackageTestResultsStatus"></span>
                     </a>
                 </div>
-                <a href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" title="Learn more about @Model.Title" aria-label="Learn more about @Model.Title" class="h5 font-weight-bold text-dark mb-0 btn-link text-break">@Model.Title <span class="@if(gridView){<text>d-block small</text>}">@Model.Version</span></a>
+                <a class="h5 fw-bold mb-0 btn-link text-break text-reset" href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" title="Learn more about @Model.Title" aria-label="Learn more about @Model.Title">@Model.Title <span class="@if(gridView){<text>d-block small</text>}">@Model.Version</span></a>
             </div>
             @*Badges*@
-            <div class="@if(gridView){<text>mt-1</text>} d-flex align-items-center">
-                <span class="badge badge-pill badge-outline-primary mr-1">@Model.TotalDownloadCount.ToString("n0") @if(Model.TotalDownloadCount != 1){<text> Downloads</text>}else{<text> Download</text>}</span>
+            <div class="mt-2 d-flex align-items-center flex-wrap">
+                <span class="badge rounded-pill bg-outline-primary text-primary me-1 mb-1">@Model.TotalDownloadCount.ToString("n0") @if(Model.TotalDownloadCount != 1){<text> Downloads</text>}else{<text> Download</text>}</span>
                 @if (Model.IsOwner(User))
                 {
-                    <span class="badge badge-pill badge-dark mr-1"><span class="fas fa-star text-warning small"></span> My Package</span>
+                    <span class="badge rounded-pill bg-theme-light-2 text-theme border me-1 mb-1"><span class="fas fa-star text-warning small"></span> My Package</span>
                 }
                 @if (Model.Status == PackageStatusType.Unknown)
                 {
-                    <span class="badge badge-pill badge-secondary mr-1">Unknown Status</span>
+                    <span class="badge rounded-pill bg-secondary me-1 mb-1">Unknown Status</span>
                 }
                 @if (isSubmitted)
                 {
                     switch (submittedStatus)
                     {
                         case PackageSubmittedStatusType.Pending:
-                            <span class="badge badge-pill badge-warning">Pending Automated Review</span>
+                            <span class="badge rounded-pill bg-warning text-dark mb-1">Pending Automated Review</span>
                             break;
                         case PackageSubmittedStatusType.Ready:
-                            <span class="badge badge-pill badge-success">Ready</span>
+                            <span class="badge rounded-pill bg-success mb-1">Ready</span>
                             break;
                         case PackageSubmittedStatusType.Updated:
-                            <span class="badge badge-pill badge-orange mr-1">Updated</span>
+                            <span class="badge rounded-pill bg-orange text-dark me-1 mb-1">Updated</span>
                             @ViewHelpers.OwnersGravatarListPackages(Model.Owners, 25, Url)
                             break;
                         case PackageSubmittedStatusType.Responded:
-                            <span class="badge badge-pill badge-purple mr-1">Responded</span>
+                            <span class="badge rounded-pill bg-purple me-1 mb-1">Responded</span>
                             @ViewHelpers.OwnersGravatarListPackages(Model.Owners, 25, Url)
                             break;
                         default:
-                            <span class="badge badge-pill badge-danger mr-1">Waiting for Maintainer</span>
+                            <span class="badge rounded-pill bg-danger me-1 mb-1">Waiting for Maintainer</span>
                             if (!string.IsNullOrWhiteSpace(Model.ReviewerEmailAddress))
                             {
                                 <a href="@Url.Action(MVC.Users.Profiles(Model.ReviewerUserName))">@ViewHelpers.GravatarImage(Model.ReviewerEmailAddress, Model.ReviewerUserName, 25)</a>
@@ -77,26 +78,26 @@
             }
             else
             {
-                @Model.Summary.Substring(0, 138)<text>... </text><a class="font-weight-normal" href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" aria-label="Continue reading about @Model.Title">Keep Reading</a>
+                @Model.Summary.Substring(0, 138)<text>... </text><a class="fw-normal" href="@Url.Package(Model.Id, Model.UseVersion ? Model.Version : null)" aria-label="Continue reading about @Model.Title">Keep Reading</a>
             }
         </p>
     }
 </div>
-<div class="@if (!gridView){<text>row mt-2 package-list-align</text>}else{<text>card-footer bg-white pt-0</text>}">
+<div class="@if (!gridView){<text>row mt-2 package-list-align</text>}else{<text>card-footer bg-theme-light pt-0</text>}">
     <div class="@if(!gridView && !isSubmitted){<text>col-lg-6</text>}else if(!gridView && isSubmitted){<text>col-12</text>}">
         @*Package By*@
         <ul class="list-unstyled list-inline mb-0 small">
-            <li class="list-inline-item mr-0"><strong>By: </strong></li>
+            <li class="list-inline-item me-0"><strong>By: </strong></li>
             @foreach (var owner in Model.Owners)
             {
-                <li class="list-inline-item mr-1"><a href="@Url.Action(MVC.Users.Profiles(owner.Username))" title="@owner.Username">@owner.Username</a></li>
+                <li class="list-inline-item me-1"><a href="@Url.Action(MVC.Users.Profiles(owner.Username))" title="@owner.Username">@owner.Username</a></li>
             }
             @if (isSubmitted)
             {
-                <li class="list-inline-item mr-1"><strong>Published: </strong>@Model.PublishedDate.ToString("dd MMM yyyy")</li>
+                <li class="list-inline-item me-1"><strong>Published: </strong>@Model.PublishedDate.ToString("dd MMM yyyy")</li>
                 if (Model.ReviewedDate.HasValue)
                 {
-                    <li class="list-inline-item mr-0"><strong>Reviewed: </strong>@Model.ReviewedDate.GetValueOrDefault().ToString("dd MMM yyyy") @if(!string.IsNullOrWhiteSpace(Model.ReviewerUserName)){<text> by <a href="@Url.Action(MVC.Users.Profiles(Model.ReviewerUserName))">@Model.ReviewerUserName</a></text>}</li>
+                    <li class="list-inline-item me-0"><strong>Reviewed: </strong>@Model.ReviewedDate.GetValueOrDefault().ToString("dd MMM yyyy") @if(!string.IsNullOrWhiteSpace(Model.ReviewerUserName)){<text> by <a href="@Url.Action(MVC.Users.Profiles(Model.ReviewerUserName))">@Model.ReviewerUserName</a></text>}</li>
                 }
             }
         </ul>
@@ -104,10 +105,10 @@
         @if (@Model.Tags.AnySafe())
         {
             <ul class="list-unstyled list-inline mb-0 small">
-                <li class="list-inline-item mr-0"><strong>Tags: </strong></li>
+                <li class="list-inline-item me-0"><strong>Tags: </strong></li>
                 @foreach (var tag in Model.Tags)
                 {
-                    <li class="list-inline-item mr-1"><a href="@Url.Search("tag:" + tag)" title="Search for @tag">@tag</a></li>
+                    <li class="list-inline-item me-1"><a href="@Url.Search("tag:" + tag)" title="Search for @tag">@tag</a></li>
                 }
             </ul>
         }
@@ -116,34 +117,15 @@
         @*Command*@
         @if (Model.Title != "Chocolatey" && !isSubmitted)
         {
-            <div class="d-sm-flex">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">></div>
-                    </div>
-                    <input type="text" class="form-control"
-                            value="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version @Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}"
-                            aria-label="Install @Model.Title command"
-                            readonly>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary tt"
-                                aria-label="Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version @Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>} to Clipboard"
-                                data-toggle="tooltip"
-                                title="Copy to Clipboard"
-                                data-clipboard-text="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version @Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}">
-                            <i class="fas fa-clipboard" aria-hidden="true">
-                                <span class="sr-only">Copy @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed)
-                                {<text> --version @Model.Version</text>} @if (Model.Prerelease)
-                                {<text> --pre </text>} to Clipboard</span>
-                            </i>
-                        </button>
-                    </div>
-                </div>
+            <div class="input-group">
+                <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                <input type="text" id="@copyId" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Install @Model.Title command" value="choco install @Model.Id.ToLower() @if ((!Model.LatestVersion && !Model.LatestStableVersion) || !Model.Listed) {<text> --version @Model.Version</text>} @if (Model.Prerelease) {<text> --pre </text>}" readonly>
+                <button data-clipboard-target="#@copyId" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
             </div>
         }
         else if (Model.Title == "Chocolatey")
         {
-            <div class="text-right">
+            <div class="text-end">
                 <a class="btn btn-primary" href="@Url.RouteUrl(RouteName.Install)" title="Learn how to install @Model.Title" aria-label="Learn how to install @Model.Title">Install Now</a>
             </div>
         }

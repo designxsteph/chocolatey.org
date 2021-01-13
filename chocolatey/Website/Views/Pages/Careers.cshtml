@@ -1,17 +1,17 @@
 ﻿@{
     ViewBag.Title = "Careers";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Scripts");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
-<div id="header" class="bg-medium-dark team-header">
+<div class="bg-theme-primary">
     <section class="py-3 py-lg-5">
         <div class="container py-lg-5 text-center">
             <h1 class="display-3">Working at Chocolatey Software</h1>
-            <a class="btn btn-light btn-lg mt-3" href="https://www.indeedjobs.com/chocolatey-software/" target="_blank" rel="noreferrer">Search All Open Positions</a>
+            <a class="btn btn-theme btn-lg mt-3" href="https://www.indeedjobs.com/chocolatey-software/" target="_blank" rel="noreferrer">Search All Open Positions</a>
         </div>
     </section>
-    <div class="shape-border shape-border-bottom"></div>
+    <div class="curve curve-bottom curve-bg-theme"></div>
 </div>
 <section class="pb-3 pb-lg-5">
     <div class="container">
@@ -30,7 +30,7 @@
         </div>
     </div>
 </section>
-<section class="py-3 py-lg-5 bg-white">
+<section class="py-3 py-lg-5 bg-theme-light">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 px-xl-5 d-none d-lg-block">
@@ -40,7 +40,7 @@
                             <img class="img-fluid" src="@Url.Content("~/content/images/choco-ps-summit.jpg")" />
                         </div>
                     </div>
-                    <div class="col-4 d-flex bg-medium-dark">
+                    <div class="col-4 d-flex bg-primary-900">
                         <div class="px-3 my-auto">
                             <p class="mb-0 text-center h5">Learn and Grow with Chocolatey</p>
                         </div>
@@ -50,12 +50,12 @@
                             <img class="img-fluid" src="@Url.Content("~/content/images/choco-chefconf.jpg")" />
                         </div>
                     </div>
-                    <div class="col-4 d-flex bg-primary">
+                    <div class="col-4 d-flex bg-theme-primary">
                         <div class="px-3 my-auto">
                             <p class="mb-0 text-center h5">Bring New Ideas Forward</p>
                         </div>
                     </div>
-                    <div class="col-4 d-flex bg-dark">
+                    <div class="col-4 d-flex bg-primary-900">
                         <div class="m-auto py-5">
                             <img class="img-fluid my-xl-3" style="height: 100px;" alt="Chocolatey Software" src="@Url.Content("~/content/images/logo_small.svg")" />
                         </div>
@@ -96,18 +96,18 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
                         <div class="video-story">
-                            <div class="text-center" data-toggle="modal" data-target="#chocolatey-story"><img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="The Future of Windows Automation" title="The Future of Windows Automation" /></div>
+                            <div class="text-center" data-bs-toggle="modal" data-bs-target="#chocolatey-story"><img class="img-fluid shadow mb-3" src="@Url.Content("~/content/images/videos/03-13.jpg")" alt="The Future of Windows Automation" title="The Future of Windows Automation" /></div>
                             <div class="modal fade" id="chocolatey-story" tabindex="-1" role="dialog" aria-labelledby="The Future of Windows Automation" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                                            <button type="button" class="btn-close pt-0" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true" class="fas fa-times"></span>
                                             </button>
                                         </div>
                                         <div class="modal-body p-0">
-                                            <div class="embed-responsive embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item" data-src="https://www.youtube.com/embed/6PnzlONRYmg?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            <div class="ratio ratio-16x9">
+                                                <iframe data-src="https://www.youtube.com/embed/6PnzlONRYmg?autoplay=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             </div>
                                         </div>
                                     </div>

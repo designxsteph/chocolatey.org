@@ -17,8 +17,7 @@
   //css
   
   //js
-  Bundles.Reference("Scripts");
-  Bundles.Reference("Scripts/header", "header");
+  Bundles.Reference("Scripts/main");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +55,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="@Url.Content("~/apple-touch-icon-180x180.png")" />
     <link rel="nuget" type="application/atom+xml" title="Chocolatey" href="http://www.chocolatey.org/api/v2" />
     <link rel="search" type="application/opensearchdescription+xml" href="@Url.Content("~/opensearch.xml")" title="Chocolatey Search" />
+    <script>
+        if (!/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+            const theme = localStorage.getItem('theme'), html = document.getElementsByTagName("html")[0];
+            if (theme) { if (theme == 'dark') { html.setAttribute("data-user-color-scheme", "dark"); } else { html.setAttribute("data-user-color-scheme", "light"); } }
+        }
+    </script>
     @Bundles.RenderScripts("header")
     @MiniProfiler.RenderIncludes()
     @{

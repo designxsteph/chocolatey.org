@@ -7,7 +7,7 @@
     @Html.Partial("~/Views/Courses/_LeftSideColumn.cshtml", new CourseLeftViewModel() { CourseNameType = Model.CourseNameType, CourseModules = Model.CourseModules, UserCourseAchievements = Model.UserCourseAchievements })
 }
 @section RightSideColumn {
-    <li><a href="#internationalization-localization">Internationalization and Localization of Packages</a></li>
+    <li class="nav-item"><a class="nav-link" href="#internationalization-localization">Internationalization and Localization of Packages</a></li>
 }
 
 <h2 id="internationalization-localization" class="mb-3">Internationalization and Localization of Packages</h2>
@@ -29,7 +29,7 @@
     else
     {
         @Html.ValidationSummary(true)
-        using (Html.BeginForm())
+        using (Html.BeginForm("CourseName", "Courses", FormMethod.Post, new { id = "quiz" }))
         {
             @Html.AntiForgeryToken()
             <fieldset class="form @if (Model.UserCourseAchievements != null)
@@ -48,14 +48,14 @@
                 @Html.HiddenFor(m => m.CourseName)
                 @Html.HiddenFor(m => m.CourseKey)
                 @Html.HiddenFor(m => m.CourseModuleKey)
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>Is there a standard mechanism for integrating internationalization/localization of software into Chocolatey Packages?</h5>
                     @Html.RadioButtonFor(m => m.QuestionOne, "0", new { id = "QuestOneOptionOne" })
                     <label for="QuestOneOptionOne">Yes</label><br />
                     @Html.RadioButtonFor(m => m.QuestionOne, "1", new { id = "QuestOneOptionTwo" })
                     <label for="QuestOneOptionTwo">No</label>
                 </div>
-                <div class="form-field mt-3">
+                <div class="mt-3">
                     <h5>What is a common way to tell a package the language to install?</h5>
                     @Html.RadioButtonFor(m => m.QuestionTwo, "0", new { id = "QuestTwoOptionOne" })
                     <label for="QuestTwoOptionOne">Installer parameters</label><br />
@@ -64,7 +64,7 @@
                     @Html.RadioButtonFor(m => m.QuestionTwo, "1", new { id = "QuestTwoOptionThree" })
                     <label for="QuestTwoOptionThree">Both of the above</label>
                 </div>
-                <input class="btn btn-primary mt-3 disabled" data-toggle="modal" data-target="#quiz-modal" type="submit" value="Check Answers" title="Check Answers" />
+                <input class="btn btn-primary mt-3 disabled" type="submit" value="Check Answers" title="Check Answers" />
             </fieldset>
         }
 

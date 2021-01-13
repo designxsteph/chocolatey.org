@@ -1,21 +1,17 @@
 ﻿@model AccountViewModel
 @{
     ViewBag.Tab = "Contribute";
-    Bundles.Reference("Content/dist/chocolatey.slim.css");
-    Bundles.Reference("Content/prism/prism.css");
-    Bundles.Reference("Scripts");
-    Bundles.Reference("Scripts/prism");
+    Bundles.Reference("content/css/chocolatey.bundle.min.css");
+    Bundles.Reference("Scripts/main");
 }
 
-<section id="secondaryNav">
-    @Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
-</section>
+@Html.Partial("~/Views/Shared/_AuthenticationSubNavigation.cshtml")
 <section class="container py-3 py-xl-5">
     <div class="row align-items-center">
-        <div class="col-xl-7 h-100 text-center text-xl-left mb-3 mb-xl-0">
+        <div class="col-xl-7 h-100 text-center text-xl-start mb-3 mb-xl-0">
             <h2 class="mb-0">My Account (@Model.UserName)</h2>
         </div>
-        <div class="col-xl-5 h-100 text-center text-xl-right">
+        <div class="col-xl-5 h-100 text-center text-xl-end">
             <a href="@Url.Action(MVC.Users.Edit())" class="btn btn-primary">Edit Profile</a>
             <a href="@Url.Action(MVC.Users.ChangePassword())" class="btn btn-primary">Change Password</a>
         </div>
@@ -23,7 +19,7 @@
     <hr />
     <div class="row" id="actions">
         <div class="col-lg-6 mb-3 mb-lg-0">
-            <div class="card border-0 rounded-0 shadow h-100">
+            <div class="card h-100">
                 <div class="card-body">
                     <h3 class="text-center"><i class="fas fa-upload" alt="Upload"></i> Upload Package</h3>
                     <p class="mb-0">
@@ -32,18 +28,18 @@
                         is different.
                     </p>
                 </div>
-                <div class="card-footer bg-white pt-0 pb-4 border-0 text-center">
+                <div class="card-footer bg-theme-light pt-0 pb-4 border-0 text-center">
                     <a href="@Url.UploadPackage()" class="btn btn-primary">Upload Package</a>
                 </div>
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card border-0 rounded-0 shadow h-100">
+            <div class="card h-100">
                 <div class="card-body">
                     <h3 class="text-center"><i class="fas fa-cogs" alt="Manage"></i> Manage My Packages</h3>
                     <p class="mb-0">Edit package details or Remove packages that you have previously uploaded.</p>
                 </div>
-                <div class="card-footer bg-white pt-0 pb-4 border-0 text-center">
+                <div class="card-footer bg-theme-light pt-0 pb-4 border-0 text-center">
                     <a href="@Url.Action(MVC.Users.Packages())" class="btn btn-primary">Manage Packages</a>
                 </div>
             </div>
@@ -74,28 +70,14 @@
                 Keep this a secret. You can always regenerate your key at any time (invalidating
                 previous keys) if your token is accidentally revealed.
             </p>
-            <p class="text-danger font-weight-bold">Your key is hidden for privacy, click to show.</p>
+            <p class="text-danger fw-bold">Your key is hidden for privacy, click to show.</p>
             <button type="button" class="btn btn-secondary">Show API Key</button>
             <div id="generateKey" class="d-none">
                 <h3 class="mt-4">Your API key is:</h3>
-                <div class="input-group copyBox">
-                    <input type="text" class="form-control"
-                            value="@Model.ApiKey"
-                            aria-label="Your custom API key"
-                            readonly>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary tt"
-                                aria-label="Copy API Key to Clipboard"
-                                data-toggle="tooltip"
-                                title="Copy to Clipboard"
-                                data-clipboard-text="@Model.ApiKey">
-                                <i class="fas fa-clipboard" aria-hidden="true">
-                                    <span class="sr-only">
-                                        Copy API Key to Clipboard
-                                    </span>
-                                </i>
-                        </button>
-                    </div>
+                <div class="input-group w-50">
+                    <span class="input-group-text bg-theme-light text-theme pe-0">></span>
+                    <input type="text" id="id-key" class="form-control bg-theme-light user-select-all border-start-0 ps-1" aria-label="Copy API Key to Clipboard" value="@Model.ApiKey" readonly>
+                    <button data-clipboard-target="#id-key" class="btn btn-primary btn-copy tt tt-top" type="button" data-bs-toggle="button" data-tooltip-text="Copy" data-tooltip-text-active="Copied!"><i class="fas fa-clipboard" aria-hidden="true"></i></button>
                 </div>
                 <fieldset class="form mt-2">
                     <legend class="d-none">Generate New API Key</legend>
@@ -120,7 +102,7 @@
     </script>
     <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
     <script type="text/javascript">
-        $('#apiKey .btn-secondary').click(function() {
+        $('#apiKey .btn-secondary').click(function () {
             $('#apiKey .btn-secondary').addClass('d-none');
             $('#apiKey .text-danger').addClass('d-none');
             $('#generateKey').removeClass('d-none').addClass('d-block');
