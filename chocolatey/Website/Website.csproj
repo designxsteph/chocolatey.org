@@ -1053,9 +1053,6 @@
     <Content Include="apple-touch-icon.png" />
     <Content Include="cloudflare-ratelimited.html" />
     <Content Include="Content\css\chocolatey.bundle.min.css" />
-    <Content Include="Content\dist\chocolatey.slim.css" />
-    <Content Include="Content\fonts\fa-brands-400.svg" />
-    <Content Include="Content\fonts\fa-solid-900.svg" />
     <Content Include="Content\Images\12-days-logo-light.svg" />
     <Content Include="Content\Images\404.png" />
     <Content Include="Content\Images\404.svg" />
@@ -1275,14 +1272,6 @@
     <Content Include="bundleconfig.json" />
     <None Include="Cassette.targets" />
     <Content Include="chocolatey-media-kit.zip" />
-    <Content Include="Content\fonts\fa-brands-400.eot" />
-    <Content Include="Content\fonts\fa-brands-400.ttf" />
-    <Content Include="Content\fonts\fa-brands-400.woff" />
-    <Content Include="Content\fonts\fa-brands-400.woff2" />
-    <Content Include="Content\fonts\fa-solid-900.eot" />
-    <Content Include="Content\fonts\fa-solid-900.ttf" />
-    <Content Include="Content\fonts\fa-solid-900.woff" />
-    <Content Include="Content\fonts\fa-solid-900.woff2" />
     <Content Include="Import-QuickDeployCertificate.ps1" />
     <Content Include="Content\calendars\12DaysOfChocolatey-01December2020.ics" />
     <Content Include="Content\calendars\12DaysOfChocolatey-02December2020.ics" />
