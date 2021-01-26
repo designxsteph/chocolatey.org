@@ -77,7 +77,7 @@
                     </div>
                     @if(ViewData.ModelState["SpamValidationResponse"] != null)
                     {
-                        <ul class="list-unstyled callout callout-danger">
+                        <ul class="list-unstyled callout callout-danger mt-3">
                             <li><strong>reCAPTCHA Error(s):</strong></li>
                             @foreach(var error in ViewData.ModelState["SpamValidationResponse"].Errors)
                             {

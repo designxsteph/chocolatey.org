@@ -1112,7 +1112,7 @@
     <Content Include="Content\Images\businesses\Yelp-Stroke.png" />
     <Content Include="Content\Images\businesses\Yelp.png" />
     <Content Include="Content\Images\ccm-computer-white.jpg" />
-    <Content Include="Content\Images\ccm-mockup.jpg" />
+    <Content Include="Content\Images\ccm-mockup.png" />
     <Content Include="Content\Images\ccm\CCM_Mockup_ReportEdit.png" />
     <Content Include="Content\Images\ccm\central-management-logo.png" />
     <Content Include="Content\Images\changePassword.png" />
@@ -1178,7 +1178,7 @@
     <Content Include="Content\Images\icons\arrow-watch.png" />
     <Content Include="Content\Images\icon_slogan.png" />
     <Content Include="Content\Images\inputBackground.png" />
-    <Content Include="Content\Images\integrations-mockup.jpg" />
+    <Content Include="Content\Images\integrations-mockup.png" />
     <Content Include="Content\Images\integration_points-dark.png" />
     <Content Include="Content\Images\invalidBG.png" />
     <Content Include="Content\Images\just-type-logo.svg" />
@@ -1251,7 +1251,7 @@
     <Content Include="Content\Images\Turbo-on-Red.png" />
     <Content Include="Content\Images\turbo_logo.png" />
     <Content Include="Content\Images\twitter.png" />
-    <Content Include="Content\Images\upgrade-steps-vertical.jpg" />
+    <Content Include="Content\Images\upgrade-steps-vertical.png" />
     <Content Include="Content\Images\uploadPackage.png" />
     <Content Include="Content\Images\userGraphic.png" />
     <Content Include="Content\Images\userIcon.png" />

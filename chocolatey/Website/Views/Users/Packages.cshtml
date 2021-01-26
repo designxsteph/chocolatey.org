@@ -11,36 +11,25 @@
     <hr />
     @if (Model.Packages.Any())
     {
-        <div class="row">
-            <div class="col-12">
-                <h3 class="mb-4">
-                    Published Packages <i class="fas fa-question-circle h4" alt="Save" data-bs-toggle="tooltip" data-placement="top" title="These packages are currently published for the world to see."></i>
-                </h3>
-                @PrintPublishedPackages(Model.Packages.Where(p => p.Listed), unlisted: false)
-            </div>
-        </div>
+        <h3 class="mb-4">
+            Published Packages <i class="fas fa-question-circle h4" alt="Save" data-bs-toggle="tooltip" data-placement="top" title="These packages are currently published for the world to see."></i>
+        </h3>
+        @PrintPublishedPackages(Model.Packages.Where(p => p.Listed), unlisted: false)
+
         var unlistedPackages = Model.Packages.Where(p => !p.Listed);
         if (unlistedPackages.Any())
         {
             <hr class="mt-4 mb-3 my-xl-5 border-0" />
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="mb-4">
-                        Unlisted Packages <i class="fas fa-question-circle h4" alt="Save" data-bs-toggle="tooltip" data-placement="top" title="These packages are currently unlisted."></i>
-                    </h3>
-                    @PrintPublishedPackages(unlistedPackages, unlisted: true)
-                </div>
-            </div>
+            <h3 class="mb-4">
+                Unlisted Packages <i class="fas fa-question-circle h4" alt="Save" data-bs-toggle="tooltip" data-placement="top" title="These packages are currently unlisted."></i>
+            </h3>
+            @PrintPublishedPackages(unlistedPackages, unlisted: true)
         }
     }
     else
     {
-        <div class="row">
-            <div class="col-12">
-                <h3>No Packages!</h3>
-                <p>You don't have any packages. Maybe now is a good time to <a href="@Url.UploadPackage()">upload a package</a>.</p>
-            </div>
-        </div>
+        <h3>No Packages!</h3>
+        <p>You don't have any packages. Maybe now is a good time to <a href="@Url.UploadPackage()">upload a package</a>.</p>
     }
 </section>
 @helper PrintPublishedPackages(IEnumerable<PackageViewModel> packages, bool unlisted)

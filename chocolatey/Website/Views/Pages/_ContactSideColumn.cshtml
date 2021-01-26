@@ -8,65 +8,141 @@
         <img class="img-fluid mb-3" src="@Url.Content("~/content/images/chocolateyHeadquarters.jpg")" alt="Chocolatey Software" />
         @if (Request.RawUrl == Url.RouteUrl(RouteName.ContactPartner))
         {
-            <p class="text-center mb-0"><small><strong>Some of Our Partners Include:</strong></small></p>
+            <p class="text-center"><small><strong>Some of Our Partners Include:</strong></small></p>
         }
         else
         {
-            <p class="text-center mb-0"><small><strong>Businesses Trust Chocolatey Software:</strong></small></p>
+            <p class="text-center"><small><strong>Businesses Trust Chocolatey Software:</strong></small></p>
         }
         <div class="row align-items-center trusted-by">
+            <div class="col-md-6 mb-3 text-center">
+                <a href="https://puppet.com" rel="noreferrer" target="_blank">
+                    <div class="ratio ratio-16x9">
+                        <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                            <img src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Puppet" title="Puppet" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 text-center mb-3">
+                <a href="https://chef.io" rel="noreferrer" target="_blank">
+                    <div class="ratio ratio-16x9">
+                        <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                            <img src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Chef Software" title="Chef Software" />
+                        </div>
+                    </div>
+                </a>
+            </div>
             @if (Request.RawUrl == Url.RouteUrl(RouteName.ContactPartner))
             {
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://puppet.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Puppet" data-bs-toggle="tooltip" title="Puppet" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.ansible.com" rel="noreferrer" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img class="h-100" src="@Url.Content("~/content/images/businesses/Ansible-red-sm.png")" alt="Ansible" title="Ansible" />
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 text-center">
-                    <a href="https://chef.io" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Chef Software" data-bs-toggle="tooltip" title="Chef Software" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.saltstack.com" rel="noreferrer" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/Saltstack-sm.png")" alt="SaltStack" title="SaltStack" />
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://www.ansible.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="80" src="@Url.Content("~/content/images/businesses/Ansible-red-sm.png")" alt="Ansible" data-bs-toggle="tooltip" title="Ansible" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://inedo.com/otter" rel="noreferrer" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/Otter-sm.png")" alt="Otter" title="Otter" />
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://www.saltstack.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Saltstack-sm.png")" alt="SaltStack" data-bs-toggle="tooltip" title="SaltStack" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <div class="ratio ratio-16x9">
+                        <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                            <img class="h-100" src="@Url.Content("~/content/images/businesses/Powershell-sm.png")" alt="Microsoft Powershell DSC" title="Microsoft Powershell DSC" />
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://inedo.com/otter" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Otter-sm.png")" alt="Otter" data-bs-toggle="tooltip" title="Otter" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://octopus.com" rel="noreferrer" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/OctopusDeploy-Dark-sm.png")" alt="Octopus Deploy" title="Octopus Deploy" />
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 my-4 text-center">
-                    <img class="img-fluid" width="80" src="@Url.Content("~/content/images/businesses/Powershell-sm.png")" alt="Microsoft Powershell DSC" data-bs-toggle="tooltip" title="Microsoft Powershell DSC" />
-                </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://octopus.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/OctopusDeploy-Dark-sm.png")" alt="Octopus Deploy" data-bs-toggle="tooltip" title="Octopus Deploy" /></a>
-                </div>
-                <div class="col-md-6 mt-4 mb-md-4 text-center">
-                    <a href="https://www.ivanti.com" rel="noreferrer" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/ivanti-sm.png")" alt="ivanti" data-bs-toggle="tooltip" title="ivanti" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.ivanti.com" rel="noreferrer" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/ivanti-sm.png")" alt="ivanti" title="ivanti" />
+                            </div>
+                        </div>
+                    </a>
                 </div>
             }
             else
             {
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://puppet.com" rel="noreferrer" title="Puppet, Inc" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Puppet-Dark.png")" alt="Logo for Puppet, Inc" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.seek.com.au" rel="noreferrer" title="SEEK - Australia's number one jobs site" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/SEEK.png")" alt="Logo for SEEK" title="SEEK" />
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 text-center">
-                    <a href="https://chef.io" rel="noreferrer" title="Chef Software, Inc" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Chef-Dark.png")" alt="Logo for Chef Software, Inc" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.hulu.com" rel="noreferrer" title="Hulu" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/Hulu.png")" alt="Logo for Hulu" />
+                            </div>
+                        </div>
+                    </a>                
                 </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://www.seek.com.au" rel="noreferrer" title="SEEK - Australia's number one jobs site" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/SEEK.png")" alt="Logo for SEEK" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.tricore.be" rel="noreferrer" title="Tricore" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/Tricore-sm.png")" alt="Logo for Tricore" />
+                            </div>
+                        </div>
+                    </a>                
                 </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://www.hulu.com" rel="noreferrer" title="Hulu" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Hulu.png")" alt="Logo for Hulu" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.yelp.com" rel="noreferrer" title="Yelp" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/Yelp-Stroke.png")" alt="Yelp" title="Yelp" />
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="#" rel="noreferrer" title="Tricore" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Tricore-sm.png")" alt="Logo for Tricore" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.sage.edu/" rel="noreferrer" title="The Sage Colleges" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/TheSageColleges-sm.png")" alt="Logo for The Sage Colleges" />
+                            </div>
+                        </div>
+                    </a>                
                 </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://www.yelp.com" rel="noreferrer" title="Yelp" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/Yelp-Stroke.png")" alt="Logo for Yelp" /></a>
-                </div>
-                <div class="col-md-6 my-4 text-center">
-                    <a href="https://www.sage.edu/" rel="noreferrer" title="The Sage Colleges" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/TheSageColleges-sm.png")" alt="Logo for The Sage Colleges" /></a>
-                </div>
-                <div class="col-md-6 mt-4 mb-md-4 text-center">
-                    <a href="https://www.swissre.com" rel="noreferrer" title="Swiss Re Group" target="_blank"><img class="img-fluid" width="100" src="@Url.Content("~/content/images/businesses/SwissRe.png")" alt="Logo for Swiss Re Group" /></a>
+                <div class="col-md-6 mb-3 text-center">
+                    <a href="https://www.swissre.com" rel="noreferrer" title="Swiss Re Group" target="_blank">
+                        <div class="ratio ratio-16x9">
+                            <div class="d-flex flex-fill align-items-center justify-content-center p-3 bg-light border">
+                                <img src="@Url.Content("~/content/images/businesses/SwissRe.png")" alt="Logo for Swiss Re Group" />
+                            </div>
+                        </div>
+                    </a>                
                 </div>
             }
         </div>
@@ -95,7 +171,7 @@
                         <div class="card-body text-center">
                             <h3>Courses</h3>
                             <p>Step-by-step guides for all things Chocolatey! Earn badges as you learn through interactive digital courses.</p>
-                            <a href="@Url.RouteUrl(RouteName.Courses)" class="btn btn-theme btn-width">View Courses</a>
+                            <a href="@Url.RouteUrl(RouteName.Courses)" class="btn btn-primary btn-width">View Courses</a>
                         </div>
                     </div>
                 </div>

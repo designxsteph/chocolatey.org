@@ -1324,7 +1324,7 @@ chalk@^2.0.0, chalk@^2.3.0:
 
 "choco-theme@github:designxsteph/choco-theme#org":
   version "0.1.0"
-  resolved "https://codeload.github.com/designxsteph/choco-theme/tar.gz/a889ccef460fa92cbd929e9a0b85e13ea915e7d5"
+  resolved "https://codeload.github.com/designxsteph/choco-theme/tar.gz/0e02e8ac5484c4b5a2af5c1d9c3d7ec185453149"
   dependencies:
     "@babel/core" "^7.12.3"
     "@babel/preset-env" "^7.12.1"

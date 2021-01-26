@@ -69,7 +69,7 @@
                             <li><strong>reCAPTCHA Error(s):</strong></li>
                             @foreach (var error in ViewData.ModelState["SpamValidationResponse"].Errors)
                             {
-                                <li class="field-validation-error">@Html.Raw(error.ErrorMessage)</li>
+                                <li>@Html.Raw(error.ErrorMessage)</li>
                             }
                         </ul>
                     }
